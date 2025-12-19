@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>File Structure Guidelines</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+
+  <body>
+    <div class="bg-gradient"></div>
+
+    <div class="app-shell">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar__header">
+          <div class="sidebar__logo">G</div>
+          <div class="sidebar__title">
+            <span class="sidebar__company">Guideline</span>
+            <span class="sidebar__subtitle">File Structure</span>
+          </div>
+        </div>
+
+        <nav class="sidebar__nav">
+          <a href="index.html" class="nav-link">← Back to main</a>
+          <a href="#overview" class="nav-link">Overview</a>
+          <a href="#basic-structure" class="nav-link">Basic structure</a>
+          <a href="#assets" class="nav-link">Assets</a>
+          <a href="#components" class="nav-link">Components</a>
+          <a href="#images" class="nav-link">Images & media</a>
+          <a href="#naming" class="nav-link">Folder naming</a>
+        </nav>
+
+        <div class="sidebar__footer">
+          <span class="sidebar__version">v1.0</span>
+          <span class="sidebar__lang">EN</span>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <main class="main">
+        <header class="topbar">
+          <h1 class="topbar__title">File Structure</h1>
+        </header>
+
+        <div class="content">
+          <!-- Overview -->
+          <section class="section" id="overview">
+            <h2>Overview</h2>
+            <p>
+              A consistent file structure is required for all projects. It
+              simplifies onboarding, maintenance, and deployment. This document
+              defines how to organize HTML pages, CSS/JS assets, images, and
+              components for multi-page sites.
+            </p>
+
+            <div class="card callout">
+              <h3>Key principles</h3>
+              <ul>
+                <li>One shared <code>assets/</code> folder per project.</li>
+                <li>
+                  Page-specific files live next to the page or in page folders.
+                </li>
+                <li>Global styles/scripts are reused across all pages.</li>
+                <li>
+                  File names are lowercase, use <strong>kebab-case</strong>, and
+                  English identifiers.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Basic structure -->
+          <section class="section" id="basic-structure">
+            <h2>Basic project structure (static site)</h2>
+            <p>
+              Default structure for a static multi-page project without a build
+              system (plain HTML/CSS/JS).
+            </p>
+
+            <div class="card">
+              <pre><code>project-root/
+  index.html
+  about.html
+  guidelines.html
+  file-structure.html
+  vscode.html
+
+  assets/
+    css/
+      base.css
+      layout.css
+      components.css
+      pages/
+        home.css
+        about.css
+    js/
+      main.js
+      slider.js
+      forms.js
+      vendor/
+        swiper-bundle.min.js
+    images/
+      global/
+      pages/
+        home/
+        about/
+        guidelines/
+      icons/
+      logos/
+    fonts/</code></pre>
+              <ul>
+                <li>
+                  <code>assets/css</code> — global styles, plus
+                  <code>pages/</code> for page-specific overrides.
+                </li>
+                <li>
+                  <code>assets/js</code> — <code>main.js</code> and
+                  component-specific scripts.
+                </li>
+                <li>
+                  <code>assets/images</code> — shared images, plus per-page
+                  folders.
+                </li>
+              </ul>
+              <a href="#modal-full-structure" class="btn btn--primary"
+                >Full structure example</a
+              >
+            </div>
+          </section>
+
+          <!-- Assets -->
+          <section class="section" id="assets">
+            <h2>Assets organization</h2>
+            <p>
+              CSS and JS assets must be grouped by responsibility: base, layout,
+              components, pages. Vendor libraries are always isolated.
+            </p>
+
+            <div class="card">
+              <h3>CSS structure</h3>
+              <pre><code>assets/css/
+  base.css          /* resets, typography, colors, root vars */
+  layout.css        /* grid, containers, layout blocks */
+  components.css    /* buttons, cards, modals, sliders */
+  utilities.css     /* helper classes (u-*) */
+  pages/
+    home.css
+    about.css
+    guidelines.css</code></pre>
+              <ul>
+                <li><code>base.css</code> — reset + global design tokens.</li>
+                <li><code>layout.css</code> — page shell, header, footer.</li>
+                <li><code>components.css</code> — BEM components.</li>
+                <li>
+                  <code>pages/*.css</code> — page-specific tweaks (minimize
+                  usage).
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>JavaScript structure</h3>
+              <pre><code>assets/js/
+  main.js          /* global init: menus, header, shared UX */
+  slider.js        /* sliders / swiper initialization */
+  forms.js         /* validation, form handlers */
+  vendor/
+    swiper-bundle.min.js</code></pre>
+              <ul>
+                <li>
+                  <code>main.js</code> must only initialize components and bind
+                  global events.
+                </li>
+                <li>
+                  Component-specific logic (sliders, modals) lives in separate
+                  files.
+                </li>
+                <li>
+                  Third-party libraries are stored in <code>vendor/</code> and
+                  never modified directly.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Components -->
+          <section class="section" id="components">
+            <h2>Components & partials</h2>
+            <p>
+              If the project uses templates or includes (e.g., via server-side
+              includes, build tools, or static site generator), keep shared
+              blocks in a dedicated folder.
+            </p>
+
+            <div class="card">
+              <pre><code>project-root/
+  components/
+    header.html
+    footer.html
+    nav-main.html
+    slider-hero.html
+    product-card.html
+    news-item.html</code></pre>
+              <ul>
+                <li>
+                  Each file contains <strong>one</strong> logical component.
+                </li>
+                <li>
+                  Component filenames match BEM blocks:
+                  <code>product-card.html</code> → <code>.product-card</code>.
+                </li>
+                <li>
+                  When using a templating engine, this folder may be under
+                  <code>src/components/</code>.
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Recommended pattern</h3>
+              <pre><code>src/
+  components/
+    header/
+      header.html
+      header.css
+      header.js
+    slider/
+      slider.html
+      slider.css
+      slider.js</code></pre>
+              <p class="test-note">
+                For projects with a build step, group component assets by
+                component inside <code>src/components/</code>, and compile into
+                a flat <code>assets/</code> folder for production.
+              </p>
+            </div>
+          </section>
+
+          <!-- Images & media -->
+          <section class="section" id="images">
+            <h2>Images & media folders</h2>
+            <p>
+              Images follow the same pattern across all projects to keep
+              references predictable and reusable.
+            </p>
+
+            <div class="card">
+              <pre><code>assets/images/
+  global/
+    bg-texture.webp
+    placeholder.webp
+  logos/
+    company-logo.svg
+    brand-mark.svg
+  icons/
+    icon-menu.svg
+    icon-close.svg
+    icon-arrow-right.svg
+  ui/
+    btn-gradient.webp
+    card-bg.webp
+  pages/
+    home/
+      hero-main.webp
+      hero-mobile.webp
+      feature-01.webp
+    about/
+      team-01.webp
+      office-01.webp
+    guidelines/
+      slider-example.webp
+      gallery-example.webp</code></pre>
+              <ul>
+                <li>
+                  <code>global/</code> — shared backgrounds, placeholders,
+                  generic visuals.
+                </li>
+                <li>
+                  <code>logos/</code> — brand assets, always SVG if possible.
+                </li>
+                <li><code>icons/</code> — UI icons, mostly SVG.</li>
+                <li>
+                  <code>pages/&lt;page&gt;/</code> — page-specific images, named
+                  according to context (hero, section, feature).
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Image naming rules</h3>
+              <ul>
+                <li>Use English, lowercase, kebab-case.</li>
+                <li>
+                  Include type or usage:
+                  <code>hero-main.webp</code>, <code>section-team.webp</code>,
+                  <code>card-feature-01.webp</code>.
+                </li>
+                <li>
+                  For responsive variants, add suffix:
+                  <code>hero-main@2x.webp</code>,
+                  <code>hero-main-mobile.webp</code>.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Folder naming -->
+          <section class="section" id="naming">
+            <h2>Folder naming rules</h2>
+            <p>
+              Folder names must be short, descriptive, and stable across
+              projects.
+            </p>
+
+            <div class="card">
+              <h3>Rules</h3>
+              <ul>
+                <li>Use <strong>English</strong> for all folder names.</li>
+                <li>
+                  Use <strong>kebab-case</strong> (<code>product-list</code>).
+                </li>
+                <li>No spaces, no uppercase, no special characters.</li>
+                <li>
+                  Use plural for collections:
+                  <code>assets</code>, <code>images</code>,
+                  <code>components</code>.
+                </li>
+                <li>
+                  Avoid deep nesting (&gt; 4 levels) unless necessary (e.g.
+                  component-based <code>src/components/...)</code>.
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Examples: good vs bad</h3>
+              <pre><code>Good:
+  assets/images/pages/home/
+  assets/js/vendor/
+  components/product-card/
+
+Bad:
+  img/
+  JSFiles/
+  components/newDesign2/
+  画像/</code></pre>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal: full structure example -->
+    <div id="modal-full-structure" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">
+            Full project structure (design system)
+          </h3>
+          <a
+            href="#basic-structure"
+            class="preview-modal__close"
+            aria-label="Close structure preview"
+          >
+            ✕
+          </a>
+        </header>
+
+        <p class="preview-modal__description">
+          Example of a complete layout for a design system / guideline site with
+          multiple pages and shared assets.
+        </p>
+
+        <div class="card preview-modal__code">
+          <pre><code>project-root/
+  index.html              /* main guideline overview */
+  performance.html        /* performance rules */
+  testing.html            /* testing & QA */
+  units.html              /* units & sizing */
+  file-structure.html     /* this page */
+  vscode.html             /* VS Code setup */
+
+  components/
+    header.html
+    footer.html
+    nav-main.html
+
+  assets/
+    css/
+      base.css
+      layout.css
+      components.css
+      utilities.css
+      pages/
+        index.css
+        performance.css
+        testing.css
+    js/
+      main.js
+      slider.js
+      modal.js
+      vendor/
+        swiper-bundle.min.js
+    images/
+      global/
+      logos/
+      icons/
+      ui/
+      pages/
+        index/
+        performance/
+        testing/
+    fonts/</code></pre>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

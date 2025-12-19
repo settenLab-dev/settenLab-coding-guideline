@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+  <html lang="en">
+    <head>
+      <!-- =====================================
+       Basic meta
+       ===================================== -->
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="format-detection" content="telephone=no" />
+
+      <!-- =====================================
+       SEO & OpenGraph
+       ===================================== -->
+      <meta name="description" content="Guideline: HEAD best practices" />
+      <meta property="og:title" content="HEAD Guidelines" />
+      <meta
+        property="og:description"
+        content="Modern recommendations for HTML head structure, preload strategy, fonts, SEO and performance."
+      />
+      <meta property="og:type" content="website" />
+
+      <!-- =====================================
+       Icons
+       ===================================== -->
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+      <!-- =====================================
+       Preload: font (beautiful modern font)
+       ===================================== -->
+
+      <!-- Variable font Outfit (local) -->
+      <link
+        rel="preload"
+        as="font"
+        type="font/woff2"
+        href="/assets/fonts/Outfit-Variable.woff2"
+        crossorigin
+      />
+
+      <!-- =====================================
+       Main Styles
+       ===================================== -->
+      <link rel="stylesheet" href="assets/css/base.css" />
+      <link rel="stylesheet" href="assets/css/layout.css" />
+      <link rel="stylesheet" href="assets/css/components.css" />
+      <link rel="stylesheet" href="assets/css/utilities.css" />
+
+      <title>SettenLab coding guide</title>
+    </head>
+
+    <body>
+      <div class="bg-gradient"></div>
+
+      <div class="app-shell">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+          <div class="sidebar__header">
+            <div class="sidebar__logo">S</div>
+            <div class="sidebar__title">
+              <span class="sidebar__company">Coding Guideline</span>
+              <span class="sidebar__subtitle">Frontend</span>
+            </div>
+          </div>
+
+          <nav class="sidebar__nav sidebar-nav">
+            <ul class="sidebar-nav__list">
+              <li class="sidebar-nav__item">
+                <a
+                  href="index.html#intro"
+                  class="sidebar-nav__link nav-link active"
+                  data-target="intro"
+                >
+                  Overview
+                </a>
+              </li>
+
+              <li class="sidebar-nav__item">
+                <a
+                  href="file-structure.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  File structure
+                </a>
+              </li>
+
+              <li class="sidebar-nav__item">
+                <a
+                  href="html-standarts.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  HTML standards
+                </a>
+              </li>
+
+              <li class="sidebar-nav__item">
+                <a href="css-naming.html" class="sidebar-nav__link nav-link">
+                  CSS &amp; Naming
+                </a>
+              </li>
+
+              <li class="sidebar-nav__item">
+                <a href="components.html" class="sidebar-nav__link nav-link">
+                  Components
+                </a>
+              </li>
+
+              <li class="sidebar-nav__item">
+                <a
+                  href="components.html#animations"
+                  class="sidebar-nav__link nav-link"
+                >
+                  Animations
+                </a>
+              </li>
+
+              <li class="sidebar-nav__item">
+                <a href="performance.html" class="sidebar-nav__link nav-link">
+                  Performance
+                </a>
+              </li>
+
+              <li class="sidebar-nav__item">
+                <a href="testing.html" class="sidebar-nav__link nav-link">
+                  Testing
+                </a>
+              </li>
+
+              <li class="sidebar-nav__item">
+                <a href="formatting.html" class="sidebar-nav__link nav-link">
+                  VS Code setup
+                </a>
+              </li>
+
+              <li class="sidebar-nav__item">
+                <a href="glossary.html" class="sidebar-nav__link nav-link">
+                  Glossary
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="sidebar__footer">
+            <span class="sidebar__version">v1.0.0</span>
+            <span class="sidebar__lang">EN</span>
+          </div>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main">
+          <header class="topbar">
+            <h1 class="topbar__title">Frontend Guidelines – Overview</h1>
+          </header>
+
+          <div class="content">
+            <!-- INTRO / HERO -->
+            <section class="section" id="intro">
+              <h2>Introduction</h2>
+              <p>
+                This guideline defines how we build and maintain front-end code
+                across projects: from HTML and CSS standards, BEM naming and
+                components, to performance, testing, and development environment
+                setup. The goal is to keep our codebase predictable,
+                maintainable, and easy to scale across teams and locations.
+              </p>
+
+              <div class="card callout">
+                <h3>When to use this guide</h3>
+                <ul>
+                  <li>Starting a new project or landing page.</li>
+                  <li>Refactoring an existing layout or component.</li>
+                  <li>Onboarding new developers into the team.</li>
+                  <li>Reviewing pull requests for HTML/CSS/JS quality.</li>
+                </ul>
+              </div>
+            </section>
+
+            <!-- PRINCIPLES -->
+            <section class="section" id="principles">
+              <h2>Core Principles</h2>
+              <p>
+                All rules in this guideline are built on a few core principles.
+                These should be respected even if a specific rule is not covered
+                explicitly.
+              </p>
+
+              <div class="component-grid">
+                <article class="component-card">
+                  <h3 class="component-card__title">01. Mobile-first</h3>
+                  <p class="component-card__text">
+                    Layouts are designed from 375px up. Media queries extend
+                    from
+                    <code>min-width: 768px</code> for tablet and desktop. No
+                    desktop-only layouts.
+                  </p>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">02. BEM &amp; semantics</h3>
+                  <p class="component-card__text">
+                    We use semantic HTML and BEM for class naming. Behavior is
+                    driven by <code>data-*</code> attributes, not CSS classes.
+                  </p>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">03. Components first</h3>
+                  <p class="component-card__text">
+                    UI is built from reusable components: buttons, cards,
+                    sliders, media blocks, forms. No one-off styling for
+                    isolated pages.
+                  </p>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">
+                    04. Performance by default
+                  </h3>
+                  <p class="component-card__text">
+                    Images, fonts, and scripts follow performance rules by
+                    default. Lighthouse performance and CLS are first-class
+                    metrics.
+                  </p>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">
+                    05. Predictable structure
+                  </h3>
+                  <p class="component-card__text">
+                    Every project follows the same file structure and naming
+                    rules: <code>assets/</code>, <code>components/</code>,
+                    <code>pages/</code>.
+                  </p>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">06. Tooling alignment</h3>
+                  <p class="component-card__text">
+                    VS Code, formatters, and linters are configured to enforce
+                    the same rules locally and in CI.
+                  </p>
+                </article>
+              </div>
+            </section>
+
+            <!-- MAP OF SECTIONS -->
+            <section class="section" id="sections">
+              <h2>Guideline Sections</h2>
+              <p>
+                Each topic has its own dedicated page. Use this overview as a
+                starting point and navigate to specific sections for details,
+                patterns, and code examples.
+              </p>
+
+              <div class="component-grid">
+                <!-- Structure group -->
+                <article class="component-card">
+                  <h3 class="component-card__title">File structure</h3>
+                  <p class="component-card__text">
+                    Project folders, assets organization, page-level CSS/JS, and
+                    image folder conventions.
+                  </p>
+                  <a href="file-structure.html" class="component-card__btn"
+                    >Open File structure</a
+                  >
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">HTML standards</h3>
+                  <p class="component-card__text">
+                    Semantic HTML rules, accessibility basics, and markup
+                    patterns for common blocks.
+                  </p>
+                  <a href="html-standarts.html" class="component-card__btn"
+                    >Open HTML standards</a
+                  >
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">CSS &amp; Naming</h3>
+                  <p class="component-card__text">
+                    BEM naming, units and sizing, utilities policy, and CSS
+                    architecture guidelines.
+                  </p>
+                  <a href="css-naming.html" class="component-card__btn"
+                    >Open CSS &amp; Naming</a
+                  >
+                </article>
+
+                <!-- Components group -->
+                <article class="component-card">
+                  <h3 class="component-card__title">Components</h3>
+                  <p class="component-card__text">
+                    Standard components: buttons, cards, sliders, galleries,
+                    modals, accordions, navigation.
+                  </p>
+                  <a href="components.html" class="component-card__btn"
+                    >Open Components</a
+                  >
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">Animations</h3>
+                  <p class="component-card__text">
+                    Rules for motion, transitions, and micro-interactions with
+                    performance constraints.
+                  </p>
+                  <a
+                    href="components.html#animations"
+                    class="component-card__btn"
+                    >Open Animations</a
+                  >
+                </article>
+
+                <!-- Engineering group -->
+                <article class="component-card">
+                  <h3 class="component-card__title">Performance</h3>
+                  <p class="component-card__text">
+                    Lighthouse targets, image optimization, loading strategies,
+                    CLS, and layout stability.
+                  </p>
+                  <a href="performance.html" class="component-card__btn"
+                    >Open Performance</a
+                  >
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">Testing</h3>
+                  <p class="component-card__text">
+                    Manual checks in DevTools, responsive testing, and basic
+                    accessibility checks.
+                  </p>
+                  <a href="testing.html" class="component-card__btn"
+                    >Open Testing</a
+                  >
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">VS Code setup</h3>
+                  <p class="component-card__text">
+                    Extensions, formatter and linter configuration, editor
+                    settings for consistent experience.
+                  </p>
+                  <a href="formatting.html" class="component-card__btn"
+                    >Open VS Code setup</a
+                  >
+                </article>
+              </div>
+            </section>
+
+            <!-- HOW TO USE -->
+            <section class="section" id="how-to-use">
+              <h2>How to use this guideline</h2>
+              <p>
+                For new and existing projects, follow these steps to ensure the
+                codebase stays aligned with our standards.
+              </p>
+
+              <div class="component-grid">
+                <article class="component-card">
+                  <h3 class="component-card__title">Step 1 – Structure</h3>
+                  <p class="component-card__text">
+                    Start by creating the project structure based on
+                    <strong>File structure</strong>. Configure folders for
+                    <code>assets/</code>, <code>components/</code>, and per-page
+                    CSS/JS.
+                  </p>
+                  <a href="file-structure.html" class="component-card__btn"
+                    >Go to File structure</a
+                  >
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">
+                    Step 2 – Markup &amp; styles
+                  </h3>
+                  <p class="component-card__text">
+                    Use <strong>HTML standards</strong> and
+                    <strong>CSS &amp; Naming</strong> to build semantic
+                    components with BEM and correct units.
+                  </p>
+                  <a href="html-standarts.html" class="component-card__btn"
+                    >HTML &amp; CSS rules</a
+                  >
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">
+                    Step 3 – Components & QA
+                  </h3>
+                  <p class="component-card__text">
+                    Implement UI components following the patterns in
+                    <strong>Components</strong>, then validate using
+                    <strong>Performance</strong> and <strong>Testing</strong>
+                    sections.
+                  </p>
+                  <a href="components.html" class="component-card__btn"
+                    >Go to Components</a
+                  >
+                </article>
+              </div>
+            </section>
+
+            <!-- CHANGELOG -->
+            <section class="section" id="changelog">
+              <h2>Changelog</h2>
+              <p>
+                This section summarizes major updates to the guideline. For each
+                change, update version and date.
+              </p>
+
+              <div class="card">
+                <h3>v1.0.0</h3>
+                <ul>
+                  <li>Initial guideline structure created.</li>
+                  <li>HTML, CSS &amp; Naming, Components sections added.</li>
+                  <li>Performance, Testing, VS Code setup pages added.</li>
+                  <li>File structure and attribute naming patterns defined.</li>
+                </ul>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+
+      <script src="assets/js/main.js"></script>
+    </body>
+  </html>
+</html>

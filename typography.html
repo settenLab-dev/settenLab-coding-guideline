@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Typography & Font Loading</title>
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+
+  <body>
+    <div class="bg-gradient"></div>
+
+    <div class="app-shell">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar__header">
+          <div class="sidebar__logo">G</div>
+          <div class="sidebar__title">
+            <span class="sidebar__company">Guideline</span>
+            <span class="sidebar__subtitle">Typography</span>
+          </div>
+        </div>
+
+        <nav class="sidebar__nav sidebar-nav">
+          <ul class="sidebar-nav__list">
+            <li class="sidebar-nav__item">
+              <a
+                href="index.html#intro"
+                class="sidebar-nav__link nav-link"
+                data-target="intro"
+              >
+                Overview
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a href="file-structure.html" class="sidebar-nav__link nav-link">
+                File structure
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a href="html-standarts.html" class="sidebar-nav__link nav-link">
+                HTML standards
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a href="css-naming.html" class="sidebar-nav__link nav-link">
+                CSS &amp; Naming
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a href="components.html" class="sidebar-nav__link nav-link">
+                Components
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a
+                href="components.html#animations"
+                class="sidebar-nav__link nav-link"
+              >
+                Animations
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a
+                href="typography.html"
+                class="sidebar-nav__link nav-link active"
+              >
+                Typography &amp; Fonts
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a href="performance.html" class="sidebar-nav__link nav-link">
+                Performance
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a href="testing.html" class="sidebar-nav__link nav-link">
+                Testing
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a href="formatting.html" class="sidebar-nav__link nav-link">
+                VS Code setup
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar__footer">
+          <span class="sidebar__version">v1.0.0</span>
+          <span class="sidebar__lang">EN</span>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main">
+        <header class="topbar">
+          <h1 class="topbar__title">Typography &amp; Font Loading</h1>
+        </header>
+
+        <div class="content">
+          <!-- OVERVIEW -->
+          <section class="section" id="overview">
+            <h2>Overview</h2>
+            <p>
+              Typography is a core part of our visual identity. This page
+              defines how we choose font stacks, structure font files, and load
+              them efficiently in the browser. The goal is to keep text
+              readable, predictable, and performant across devices.
+            </p>
+
+            <div class="card callout">
+              <h3>Goals</h3>
+              <ul class="list--custom">
+                <li>
+                  Use a small, consistent font family set across projects.
+                </li>
+                <li>Load fonts without blocking rendering or causing CLS.</li>
+                <li>Prefer local <code>.woff2</code> over external CDNs.</li>
+                <li>
+                  Base typography on <code>rem</code> with a predictable scale.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- FONT STACK -->
+          <section class="section" id="stack">
+            <h2>Font stack &amp; fallbacks</h2>
+            <p>
+              We use a primary UI font with a robust fallback stack. This
+              ensures good rendering on all platforms, even when custom fonts
+              fail to load.
+            </p>
+
+            <div class="card">
+              <h3>Primary stack</h3>
+              <p>
+                Recommended base stack for UI and body text (used in
+                <code>body</code>):
+              </p>
+
+              <pre><code>body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}</code></pre>
+
+              <ul>
+                <li><strong>"Inter"</strong> — primary UI font.</li>
+                <li>
+                  <strong>system-ui</strong> fallbacks — consistent look on each
+                  OS.
+                </li>
+                <li>
+                  If custom fonts fail, the layout still looks stable and
+                  readable.
+                </li>
+              </ul>
+
+              <h3>Code &amp; monospace text</h3>
+              <pre><code>code, pre, kbd {
+  font-family: "JetBrains Mono", "SF Mono", Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+}</code></pre>
+            </div>
+          </section>
+
+          <!-- FORMATS & FOLDER STRUCTURE -->
+          <section class="section" id="formats">
+            <h2>Font formats &amp; folder structure</h2>
+            <p>
+              Projects must use only modern, compressed formats for custom
+              fonts. Legacy formats are not allowed in new projects.
+            </p>
+
+            <div class="card">
+              <h3>Allowed formats</h3>
+              <ul class="list--custom">
+                <li>
+                  <strong>woff2</strong> – required, default for all custom
+                  fonts.
+                </li>
+              </ul>
+
+              <h3>Not allowed</h3>
+              <ul>
+                <li>
+                  <code>.ttf</code>, <code>.otf</code> – large and inefficient.
+                </li>
+                <li>
+                  <code>.eot</code>, <code>.svg</code>, <code>.woff</code> –
+                  legacy formats.
+                </li>
+              </ul>
+
+              <h3>Folder structure</h3>
+              <pre><code>assets/fonts/
+  inter-regular.woff2
+  inter-semibold.woff2
+  jetbrains-mono-regular.woff2</code></pre>
+              <p>
+                Font files are named in English with lowercase and
+                <strong>kebab-case</strong>, including family and weight.
+              </p>
+            </div>
+          </section>
+
+          <!-- LOADING STRATEGY -->
+          <section class="section" id="loading">
+            <h2>Font loading strategy</h2>
+            <p>
+              Fonts must be loaded in a way that does not block rendering and
+              does not cause layout shifts when they appear.
+            </p>
+
+            <div class="card">
+              <h3>Recommended pattern</h3>
+              <p>
+                We load only the required weights as <code>.woff2</code> with
+                <code>font-display: swap</code>.
+              </p>
+
+              <pre><code>&lt;!-- In &lt;head&gt;: preload critical fonts --&gt;
+&lt;link
+  rel="preload"
+  href="assets/fonts/inter-regular.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/&gt;
+
+&lt;link
+  rel="preload"
+  href="assets/fonts/inter-semibold.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/&gt;</code></pre>
+
+              <pre><code>/* In CSS: define @font-face */
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}</code></pre>
+
+              <a href="#modal-font-loading" class="btn btn--primary">
+                View font loading patterns
+              </a>
+            </div>
+          </section>
+
+          <!-- LOCAL VS CDN -->
+          <section class="section" id="local-vs-cdn">
+            <h2>Local fonts vs CDN</h2>
+            <p>
+              For production projects, we prefer local font hosting. CDNs (e.g.
+              Google Fonts) are allowed only for prototypes or non-critical
+              marketing pages.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Local fonts (recommended)</h3>
+                <p class="component-card__text">
+                  Full control, no external dependencies, predictable caching
+                  and performance.
+                </p>
+                <ul class="component-card__list list--custom">
+                  <li>
+                    Only <code>.woff2</code> files in
+                    <code>assets/fonts/</code>.
+                  </li>
+                  <li>Preload critical weights (regular, semibold).</li>
+                  <li>Use <code>font-display: swap</code>.</li>
+                </ul>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">CDN fonts (optional)</h3>
+                <p class="component-card__text">
+                  May be used for prototypes or temporary pages, but can add
+                  latency and complexity.
+                </p>
+                <ul class="component-card__list">
+                  <li>Requires <code>preconnect</code> to host domain.</li>
+                  <li>Less control over caching and availability.</li>
+                  <li>Only for non-critical projects.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="card">
+              <h3>CDN example (for prototypes only)</h3>
+              <pre><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap"
+  rel="stylesheet"
+/&gt;</code></pre>
+            </div>
+          </section>
+
+          <!-- PERFORMANCE & CLS -->
+          <section class="section" id="performance">
+            <h2>Performance &amp; CLS</h2>
+            <p>
+              Font loading directly affects performance metrics such as Largest
+              Contentful Paint (LCP) and Cumulative Layout Shift (CLS).
+            </p>
+
+            <div class="card">
+              <h3>Rules</h3>
+              <ul class="list--custom">
+                <li>
+                  Use minimum number of weights per family (usually 400 and
+                  600).
+                </li>
+                <li>
+                  Always set <code>font-display: swap</code> (or
+                  <code>optional</code> for highly performance-sensitive pages).
+                </li>
+                <li>
+                  Do not load italics or extra weights unless they are required
+                  by design.
+                </li>
+                <li>
+                  Use system fonts for small UI elements (labels, helper text)
+                  when appropriate.
+                </li>
+              </ul>
+
+              <h3>font-display options</h3>
+              <pre><code>/* Default and recommended */
+font-display: swap;      /* text appears immediately with fallback */
+
+/* For extreme performance-sensitive pages */
+font-display: optional;  /* do not block, may never swap if too slow */</code></pre>
+            </div>
+          </section>
+
+          <!-- TYPOGRAPHY SCALE -->
+          <section class="section" id="usage">
+            <h2>Typography scale &amp; usage</h2>
+            <p>
+              We use a <code>rem</code>-based scale for font sizes to keep text
+              responsive and consistent. Root font-size remains at
+              <code>16px</code> (browser default).
+            </p>
+
+            <div class="card">
+              <h3>Base scale</h3>
+              <pre><code>html {
+  font-size: 16px; /* do not change */
+}
+
+body {
+  font-size: 1rem; /* 16px */
+}
+
+h1 {
+  font-size: 2rem;      /* 32px */
+}
+
+h2 {
+  font-size: 1.75rem;   /* 28px */
+}
+
+h3 {
+  font-size: 1.5rem;    /* 24px */
+}
+
+.small-text {
+  font-size: 0.875rem;  /* 14px */
+}</code></pre>
+
+              <h3>Responsive adjustments</h3>
+              <p>
+                For larger screens (from <code>768px</code>), we can slightly
+                increase heading sizes:
+              </p>
+
+              <pre><code>@media (min-width: 768px) {
+  h1 {
+    font-size: 2.25rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+}</code></pre>
+            </div>
+          </section>
+
+          <!-- ======================================
+     TYPOGRAPHY: DESIGN SOURCE OF TRUTH
+     ====================================== -->
+          <section class="section" id="design-source">
+            <h2>Typography Sizes &amp; Design Source of Truth</h2>
+
+            <p>
+              Typography sizes are always defined by the design. The guideline
+              provides a unified method of implementation (units, scaling,
+              responsiveness), but it does not enforce fixed font-size values
+              across projects. Each product, page, or component must use the
+              exact sizes specified in the design source (Figma/Sketch).
+            </p>
+
+            <div class="card callout">
+              <h3>Key Principles</h3>
+              <ul class="list--custom">
+                <li>
+                  <strong>Design is the single source of truth.</strong>
+                  All font sizes, weights, letter spacing, and line heights must
+                  match the provided design.
+                </li>
+                <li>
+                  <strong
+                    >Developers implement the typography system, not the size
+                    values.</strong
+                  >
+                  Use <code>rem</code>, consistent scaling, and mobile-first
+                  responsive rules.
+                </li>
+                <li>
+                  <strong
+                    >Fallback sizes exist only for development without ready
+                    design.</strong
+                  >
+                  They must be replaced before release.
+                </li>
+                <li>
+                  <strong>Do not modify root font-size.</strong>
+                  <code>html { font-size: 16px; }</code> remains default to
+                  avoid accessibility issues.
+                </li>
+                <li>
+                  <strong>Do not invent new text styles in code.</strong>
+                  Only use what's defined in the design system.
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Why sizes depend on the design</h3>
+              <ul>
+                <li>
+                  Different projects require different hierarchy (promo vs
+                  dashboard).
+                </li>
+                <li>
+                  Visual rhythm and spacing come from design, not from code
+                  templates.
+                </li>
+                <li>
+                  Text contrast, weight distribution, and balance vary depending
+                  on branding.
+                </li>
+                <li>
+                  Developers should not “guess” typographic scaling — only
+                  implement it.
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Fallback scale (use only when design is missing)</h3>
+              <p>
+                These values are temporary and must be replaced with
+                designer-provided sizes once they are available.
+              </p>
+
+              <pre><code>html {
+  font-size: 16px;
+}
+
+body {
+  font-size: 1rem;      /* 16px */
+}
+
+h1 { font-size: 2rem; }     /* 32px */
+h2 { font-size: 1.75rem; }  /* 28px */
+h3 { font-size: 1.5rem; }   /* 24px */
+
+.small-text {
+  font-size: 0.875rem;  /* 14px */
+}
+
+/* Optional: desktop enhancements */
+@media (min-width: 768px) {
+  h1 { font-size: 2.25rem; }
+  h2 { font-size: 2rem; }
+}
+</code></pre>
+
+              <a href="#modal-type-preview" class="btn btn--primary"
+                >Preview text styles</a
+              >
+            </div>
+          </section>
+
+          <!-- ======================================
+     MODAL: TYPOGRAPHY PREVIEW
+     ====================================== -->
+          <div id="modal-type-preview" class="preview-modal">
+            <div class="preview-modal__dialog">
+              <header class="preview-modal__header">
+                <h3 class="preview-modal__title">Typography Preview</h3>
+                <a href="#design-source" class="preview-modal__close">✕</a>
+              </header>
+
+              <p class="preview-modal__description">
+                Visual preview of fallback text styles. Use these only when
+                design values are not yet provided.
+              </p>
+
+              <div class="preview-media-block">
+                <div class="preview-media-block__content">
+                  <h1 style="margin-bottom: 8px">Heading H1 — 2rem</h1>
+                  <h2 style="margin-bottom: 8px">Heading H2 — 1.75rem</h2>
+                  <h3 style="margin-bottom: 8px">Heading H3 — 1.5rem</h3>
+
+                  <p style="margin-bottom: 12px">
+                    Body text (1rem). Lorem ipsum dolor sit amet, consectetur
+                    adipiscing elit. Donec bibendum varius sem, ut tempor magna
+                    feugiat vitae.
+                  </p>
+
+                  <p class="small-text" style="margin-bottom: 6px">
+                    Small text (0.875rem). Useful for captions or metadata.
+                  </p>
+                </div>
+              </div>
+
+              <div class="card preview-modal__code">
+                <pre><code>&lt;h1&gt;Heading H1&lt;/h1&gt;
+&lt;h2&gt;Heading H2&lt;/h2&gt;
+&lt;h3&gt;Heading H3&lt;/h3&gt;
+&lt;p&gt;Body text&lt;/p&gt;
+&lt;p class="small-text"&gt;Small text&lt;/p&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- MODAL: FONT LOADING PATTERNS -->
+    <div id="modal-font-loading" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Font loading patterns</h3>
+          <a
+            href="#loading"
+            class="preview-modal__close"
+            aria-label="Close font loading modal"
+          >
+            ✕
+          </a>
+        </header>
+
+        <p class="preview-modal__description">
+          Comparison of common font loading patterns and our recommended
+          approach for new projects.
+        </p>
+
+        <div class="preview-vh">
+          <div class="preview-vh__block">
+            <h4 class="preview-vh__label">Bad: no preload, external only</h4>
+            <div class="preview-vh__example preview-vh__example--bad">
+              <span>Render-blocking CSS from Google Fonts, no control.</span>
+            </div>
+            <p class="preview-vh__text">
+              The page waits for external CSS. On slow networks, text may be
+              invisible or shift when fonts load.
+            </p>
+          </div>
+
+          <div class="preview-vh__block">
+            <h4 class="preview-vh__label">Good: local woff2 + preload</h4>
+            <div class="preview-vh__example preview-vh__example--good">
+              <span>Local fonts, preloaded, swap behavior.</span>
+            </div>
+            <p class="preview-vh__text">
+              Fonts are loaded from <code>assets/fonts/</code>, preloaded for
+              first paint, and do not block rendering.
+            </p>
+          </div>
+
+          <div class="preview-vh__block">
+            <h4 class="preview-vh__label">Advanced: partial loading</h4>
+            <div class="preview-vh__example preview-vh__example--neutral">
+              <span>Only critical weights are preloaded.</span>
+            </div>
+            <p class="preview-vh__text">
+              On performance-critical pages, load only base weights on first
+              view, and lazy-load others if needed.
+            </p>
+          </div>
+        </div>
+
+        <div class="card preview-modal__code">
+          <pre><code>&lt;!-- Recommended baseline --&gt;
+&lt;link
+  rel="preload"
+  href="assets/fonts/inter-regular.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/&gt;
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

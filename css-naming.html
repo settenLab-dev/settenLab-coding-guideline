@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Frontend Guidelines</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/vendor/swiper/swiper-bundle.min.css" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/layout.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/utilities.css" />
+  </head>
+  <body>
+    <div class="bg-gradient"></div>
+
+    <div class="app-shell">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__header">
+          <div class="sidebar__logo"></div>
+          <div class="sidebar__title">
+            <span class="sidebar__company">SettenLab株式会社</span>
+            <span class="sidebar__subtitle">Frontend Guidelines</span>
+          </div>
+        </div>
+
+        <nav class="sidebar__nav sidebar-nav">
+          <ul class="sidebar-nav__list">
+            <li class="sidebar-nav__item">
+              <a
+                href="index.html#intro"
+                class="sidebar-nav__link nav-link"
+                data-target="intro"
+              >
+                Introduction
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a href="file-structure.html" class="sidebar-nav__link nav-link">
+                File structure
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a href="html-standarts.html" class="sidebar-nav__link nav-link">
+                HTML standards
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a href="css-naming.html" class="sidebar-nav__link nav-link">
+                CSS &amp; Naming
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a href="components.html" class="sidebar-nav__link nav-link">
+                Components
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a
+                href="components.html#animations"
+                class="sidebar-nav__link nav-link"
+              >
+                Animations
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a href="performance.html" class="sidebar-nav__link nav-link">
+                Performance
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a href="testing.html" class="sidebar-nav__link nav-link">
+                Testing
+              </a>
+            </li>
+
+            <li class="sidebar-nav__item">
+              <a href="formatting.html" class="sidebar-nav__link nav-link">
+                VS Code setup
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar__footer">
+          <span class="sidebar__version">v1.0.0</span>
+          <span class="sidebar__lang">EN</span>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <div class="main">
+        <!-- Top bar -->
+        <header class="topbar">
+          <button
+            class="topbar__menu-btn"
+            id="menuToggle"
+            aria-label="Toggle navigation"
+          >
+            <!-- simple burger icon -->
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <h1 class="topbar__title">Frontend Guidelines</h1>
+
+          <div class="topbar__actions">
+            <!-- Theme toggle placeholder -->
+            <button
+              class="topbar__action-btn"
+              id="themeToggle"
+              aria-label="Toggle theme"
+            >
+              🌗
+            </button>
+          </div>
+        </header>
+
+        <!-- Content area -->
+        <main class="content">
+          <!-- Intro -->
+          <section class="section" id="intro">
+            <h2>Introduction</h2>
+            <p>
+              This website defines the official frontend guidelines for our
+              company. It is used by all frontend developers in Japan and
+              Uzbekistan to keep HTML, CSS, and JavaScript consistent across
+              projects.
+            </p>
+            <div class="card callout">
+              <h3>Goals</h3>
+              <ul>
+                <li>Ensure consistent code style and structure.</li>
+                <li>Make onboarding new developers easier.</li>
+                <li>
+                  Share reusable patterns for components, sliders, and
+                  animations.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="section" id="naming">
+            <h2>Naming – BEM Class Guidelines</h2>
+            <p>
+              We follow a BEM-inspired naming convention for all components.
+              Class names must be predictable, readable, and consistent across
+              projects. The table below lists recommended block, element, and
+              modifier names for common UI patterns.
+            </p>
+
+            <div class="card">
+              <div class="naming-table-wrapper">
+                <table class="naming-table">
+                  <thead>
+                    <tr>
+                      <th>Component type</th>
+                      <th>Block</th>
+                      <th>Elements (examples)</th>
+                      <th>Modifiers (examples)</th>
+                      <th>Notes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Layout / Page -->
+                    <tr>
+                      <td>Page / Layout</td>
+                      <td><code>page</code></td>
+                      <td>
+                        <code>page__header</code>,<br />
+                        <code>page__content</code>,<br />
+                        <code>page__footer</code>
+                      </td>
+                      <td>
+                        <code>page--has-sidebar</code>,<br />
+                        <code>page--dark</code>
+                      </td>
+                      <td>Top-level layout wrapper per page.</td>
+                    </tr>
+
+                    <!-- Site header -->
+                    <tr>
+                      <td>Site header</td>
+                      <td><code>site-header</code></td>
+                      <td>
+                        <code>site-header__inner</code>,<br />
+                        <code>site-header__logo</code>,<br />
+                        <code>site-header__nav</code>,<br />
+                        <code>site-header__actions</code>,<br />
+                        <code>site-header__burger</code>
+                      </td>
+                      <td>
+                        <code>site-header--sticky</code>,<br />
+                        <code>site-header--transparent</code>
+                      </td>
+                      <td>Main global header used across the site.</td>
+                    </tr>
+
+                    <!-- Site footer -->
+                    <tr>
+                      <td>Footer</td>
+                      <td><code>site-footer</code></td>
+                      <td>
+                        <code>site-footer__top</code>,<br />
+                        <code>site-footer__col</code>,<br />
+                        <code>site-footer__title</code>,<br />
+                        <code>site-footer__link</code>,<br />
+                        <code>site-footer__social</code>,<br />
+                        <code>site-footer__bottom</code>,<br />
+                        <code>site-footer__copyright</code>
+                      </td>
+                      <td>
+                        <code>site-footer--dark</code>,<br />
+                        <code>site-footer--minimal</code>
+                      </td>
+                      <td>Global footer with reusable column structure.</td>
+                    </tr>
+
+                    <!-- Main navigation -->
+                    <tr>
+                      <td>Main navigation</td>
+                      <td><code>nav-main</code></td>
+                      <td>
+                        <code>nav-main__list</code>,<br />
+                        <code>nav-main__item</code>,<br />
+                        <code>nav-main__link</code>
+                      </td>
+                      <td>
+                        <code>nav-main__item--active</code>,<br />
+                        <code>nav-main--vertical</code>
+                      </td>
+                      <td>Use <code>__item--active</code> for current page.</td>
+                    </tr>
+
+                    <!-- Mobile nav / hamburger -->
+                    <tr>
+                      <td>Mobile navigation / Hamburger</td>
+                      <td><code>mobile-nav</code></td>
+                      <td>
+                        <code>mobile-nav__overlay</code>,<br />
+                        <code>mobile-nav__panel</code>,<br />
+                        <code>mobile-nav__list</code>,<br />
+                        <code>mobile-nav__item</code>,<br />
+                        <code>mobile-nav__link</code>,<br />
+                        <code>hamburger</code>,<br />
+                        <code>hamburger__line</code>
+                      </td>
+                      <td>
+                        <code>mobile-nav--open</code>,<br />
+                        <code>hamburger--active</code>
+                      </td>
+                      <td>
+                        <code>hamburger</code> is a visual control; state
+                        controlled via <code>--active</code>.
+                      </td>
+                    </tr>
+
+                    <!-- Button -->
+                    <tr>
+                      <td>Button</td>
+                      <td><code>btn</code></td>
+                      <td>
+                        <code>btn__icon</code>,<br />
+                        <code>btn__label</code>
+                      </td>
+                      <td>
+                        <code>btn--primary</code>,<br />
+                        <code>btn--ghost</code>,<br />
+                        <code>btn--outline</code>,<br />
+                        <code>btn--sm</code>,<br />
+                        <code>btn--lg</code>,<br />
+                        <code>btn--full</code>
+                      </td>
+                      <td>Global shared button component.</td>
+                    </tr>
+
+                    <!-- Card (generic) -->
+                    <tr>
+                      <td>Content card</td>
+                      <td><code>card</code></td>
+                      <td>
+                        <code>card__header</code>,<br />
+                        <code>card__title</code>,<br />
+                        <code>card__body</code>,<br />
+                        <code>card__footer</code>,<br />
+                        <code>card__meta</code>
+                      </td>
+                      <td>
+                        <code>card--highlight</code>,<br />
+                        <code>card--outlined</code>,<br />
+                        <code>card--horizontal</code>
+                      </td>
+                      <td>Base block for multiple card-based components.</td>
+                    </tr>
+
+                    <!-- Slider / carousel -->
+                    <tr>
+                      <td>Slider / Carousel</td>
+                      <td><code>slider</code></td>
+                      <td>
+                        <code>slider__track</code>,<br />
+                        <code>slider__slide</code>,<br />
+                        <code>slider__image</code>,<br />
+                        <code>slider__content</code>,<br />
+                        <code>slider__nav</code>,<br />
+                        <code>slider__btn</code>,<br />
+                        <code>slider__pagination</code>,<br />
+                        <code>slider__dot</code>
+                      </td>
+                      <td>
+                        <code>slider--hero</code>,<br />
+                        <code>slider--gallery</code>,<br />
+                        <code>slider__dot--active</code>
+                      </td>
+                      <td>
+                        Combine with Swiper classes:
+                        <code>.swiper</code>, <code>.swiper-slide</code>.
+                      </td>
+                    </tr>
+
+                    <!-- Gallery -->
+                    <tr>
+                      <td>Photo gallery</td>
+                      <td><code>gallery</code></td>
+                      <td>
+                        <code>gallery__list</code>,<br />
+                        <code>gallery__item</code>,<br />
+                        <code>gallery__image</code>,<br />
+                        <code>gallery__caption</code>
+                      </td>
+                      <td>
+                        <code>gallery--grid</code>,<br />
+                        <code>gallery--mosaic</code>,<br />
+                        <code>gallery--slider</code>
+                      </td>
+                      <td>Image grid or lightbox gallery.</td>
+                    </tr>
+
+                    <!-- News list -->
+                    <tr>
+                      <td>News list</td>
+                      <td><code>news-list</code></td>
+                      <td>
+                        <code>news-list__item</code>,<br />
+                        <code>news-list__image</code>,<br />
+                        <code>news-list__content</code>,<br />
+                        <code>news-list__title</code>,<br />
+                        <code>news-list__excerpt</code>,<br />
+                        <code>news-list__meta</code>,<br />
+                        <code>news-list__date</code>
+                      </td>
+                      <td>
+                        <code>news-list--compact</code>,<br />
+                        <code>news-list--cards</code>
+                      </td>
+                      <td>Use for blog / news index pages.</td>
+                    </tr>
+
+                    <!-- Instagram post / feed -->
+                    <tr>
+                      <td>Instagram post</td>
+                      <td><code>insta-post</code></td>
+                      <td>
+                        <code>insta-post__image</code>,<br />
+                        <code>insta-post__info</code>,<br />
+                        <code>insta-post__title</code>,<br />
+                        <code>insta-post__date</code>,<br />
+                        <code>insta-post__likes</code>
+                      </td>
+                      <td>
+                        <code>insta-post--square</code>,<br />
+                        <code>insta-post--story</code>
+                      </td>
+                      <td>Used inside Instagram feed/grid components.</td>
+                    </tr>
+
+                    <tr>
+                      <td>Instagram feed</td>
+                      <td><code>insta-feed</code></td>
+                      <td>
+                        <code>insta-feed__list</code>,<br />
+                        <code>insta-feed__item</code>
+                      </td>
+                      <td>
+                        <code>insta-feed--grid</code>,<br />
+                        <code>insta-feed--masonry</code>
+                      </td>
+                      <td>
+                        Each <code>insta-feed__item</code> usually contains
+                        <code>.insta-post</code>.
+                      </td>
+                    </tr>
+
+                    <!-- Product card -->
+                    <tr>
+                      <td>Product card</td>
+                      <td><code>product-card</code></td>
+                      <td>
+                        <code>product-card__image</code>,<br />
+                        <code>product-card__body</code>,<br />
+                        <code>product-card__title</code>,<br />
+                        <code>product-card__price</code>,<br />
+                        <code>product-card__rating</code>,<br />
+                        <code>product-card__badge</code>,<br />
+                        <code>product-card__actions</code>,<br />
+                        <code>product-card__btn</code>
+                      </td>
+                      <td>
+                        <code>product-card--featured</code>,<br />
+                        <code>product-card--sale</code>,<br />
+                        <code>product-card--compact</code>
+                      </td>
+                      <td>Basic pattern for e-commerce grids and listings.</td>
+                    </tr>
+
+                    <!-- Media object -->
+                    <tr>
+                      <td>Media object</td>
+                      <td><code>media</code></td>
+                      <td>
+                        <code>media__image</code>,<br />
+                        <code>media__content</code>,<br />
+                        <code>media__meta</code>
+                      </td>
+                      <td>
+                        <code>media--reversed</code>,<br />
+                        <code>media--compact</code>
+                      </td>
+                      <td>
+                        Generic image + text pattern for multiple use cases.
+                      </td>
+                    </tr>
+
+                    <!-- Breadcrumbs -->
+                    <tr>
+                      <td>Breadcrumbs</td>
+                      <td><code>breadcrumbs</code></td>
+                      <td>
+                        <code>breadcrumbs__list</code>,<br />
+                        <code>breadcrumbs__item</code>,<br />
+                        <code>breadcrumbs__link</code>,<br />
+                        <code>breadcrumbs__separator</code>
+                      </td>
+                      <td>
+                        <code>breadcrumbs__link--current</code>
+                      </td>
+                      <td>Last item is current page and usually not a link.</td>
+                    </tr>
+
+                    <!-- Pagination -->
+                    <tr>
+                      <td>Pagination</td>
+                      <td><code>pagination</code></td>
+                      <td>
+                        <code>pagination__list</code>,<br />
+                        <code>pagination__item</code>,<br />
+                        <code>pagination__link</code>
+                      </td>
+                      <td>
+                        <code>pagination__link--active</code>,<br />
+                        <code>pagination--compact</code>,<br />
+                        <code>pagination--large</code>
+                      </td>
+                      <td>Use for page navigation on index or search pages.</td>
+                    </tr>
+
+                    <!-- Tabs -->
+                    <tr>
+                      <td>Tabs</td>
+                      <td><code>tabs</code></td>
+                      <td>
+                        <code>tabs__nav</code>,<br />
+                        <code>tabs__btn</code>,<br />
+                        <code>tabs__content</code>,<br />
+                        <code>tabs__panel</code>
+                      </td>
+                      <td>
+                        <code>tabs__btn--active</code>,<br />
+                        <code>tabs__panel--active</code>,<br />
+                        <code>tabs--underline</code>,<br />
+                        <code>tabs--pill</code>
+                      </td>
+                      <td>
+                        Each tab button controls corresponding panel by id.
+                      </td>
+                    </tr>
+
+                    <!-- Accordion -->
+                    <tr>
+                      <td>Accordion</td>
+                      <td><code>accordion</code></td>
+                      <td>
+                        <code>accordion__item</code>,<br />
+                        <code>accordion__header</code>,<br />
+                        <code>accordion__body</code>,<br />
+                        <code>accordion__icon</code>
+                      </td>
+                      <td>
+                        <code>accordion__item--open</code>,<br />
+                        <code>accordion--bordered</code>
+                      </td>
+                      <td>Use modifier on item, not on header/body.</td>
+                    </tr>
+
+                    <!-- Form -->
+                    <tr>
+                      <td>Form</td>
+                      <td><code>form</code></td>
+                      <td>
+                        <code>form__group</code>,<br />
+                        <code>form__label</code>,<br />
+                        <code>form__field</code>,<br />
+                        <code>form__input</code>,<br />
+                        <code>form__textarea</code>,<br />
+                        <code>form__message</code>,<br />
+                        <code>form__error</code>,<br />
+                        <code>form__actions</code>
+                      </td>
+                      <td>
+                        <code>form__field--error</code>,<br />
+                        <code>form__field--success</code>,<br />
+                        <code>form--inline</code>
+                      </td>
+                      <td>Consistent naming for validation and messages.</td>
+                    </tr>
+
+                    <!-- Utilities -->
+                    <tr>
+                      <td>Utilities (non-BEM)</td>
+                      <td><code>u-...</code></td>
+                      <td colspan="2">
+                        <code>u-visually-hidden</code>,<br />
+                        <code>u-text-center</code>,<br />
+                        <code>u-mt-sm</code>, <code>u-mb-lg</code>,<br />
+                        <code>u-flex</code>, <code>u-flex-center</code>
+                      </td>
+                      <td>
+                        Utility classes are prefixed with <code>u-</code> and
+                        are not part of BEM. They must be limited and
+                        documented.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="naming-note">
+                Rule: one block per component. Elements (<code>__</code>) never
+                appear without their block. Modifiers (<code>--</code>) must not
+                introduce new DOM structure, only visual or behavioral
+                variations.
+              </p>
+            </div>
+          </section>
+
+          <section class="section" id="attributes">
+            <h2>Attribute Naming Guidelines</h2>
+            <p>
+              Attributes define behavior, state, and accessibility. Class names
+              are used primarily for styling, while <code>data-*</code> and ARIA
+              attributes are used for JavaScript hooks, state, analytics, and
+              a11y. This section defines our standard patterns.
+            </p>
+
+            <!-- Основная таблица по форматам data-* -->
+            <div class="card">
+              <div class="attr-table-wrapper">
+                <table class="attr-table">
+                  <thead>
+                    <tr>
+                      <th>Purpose</th>
+                      <th>Format</th>
+                      <th>Example</th>
+                      <th>Notes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>JS hook</td>
+                      <td><code>data-js-*</code></td>
+                      <td>
+                        <code>data-js-modal-open="contact"</code><br />
+                        <code>data-js-slider="hero"</code>
+                      </td>
+                      <td>
+                        Used only for JavaScript bindings. Never rely on classes
+                        for JS behavior.
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Component ID</td>
+                      <td><code>data-component</code></td>
+                      <td><code>data-component="slider"</code></td>
+                      <td>
+                        Identifies a component root in DOM for initialization
+                        and debugging.
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Component role</td>
+                      <td><code>data-role</code></td>
+                      <td>
+                        <code>data-role="track"</code>,<br />
+                        <code>data-role="slide"</code>,<br />
+                        <code>data-role="close"</code>
+                      </td>
+                      <td>
+                        Internal sub-elements inside a component. Not used for
+                        styling.
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>State</td>
+                      <td><code>data-state</code></td>
+                      <td>
+                        <code>data-state="open"</code>,<br />
+                        <code>data-state="closed"</code>,<br />
+                        <code>data-state="loading"</code>,<br />
+                        <code>data-state="error"</code>
+                      </td>
+                      <td>
+                        Current state of the component. Must be in sync with
+                        ARIA attributes.
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Variant</td>
+                      <td><code>data-variant</code></td>
+                      <td>
+                        <code>data-variant="hero"</code>,<br />
+                        <code>data-variant="compact"</code>
+                      </td>
+                      <td>
+                        Describes a functional variation (type) of component
+                        instance.
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Analytics</td>
+                      <td><code>data-track-*</code></td>
+                      <td>
+                        <code>data-track-click="add_to_cart"</code>,<br />
+                        <code>data-track-view="hero_banner"</code>
+                      </td>
+                      <td>
+                        Used by tracking/analytics only. Must not affect
+                        behavior or styling.
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>API / data binding</td>
+                      <td><code>data-api-*</code></td>
+                      <td>
+                        <code>data-api-id="123"</code>,<br />
+                        <code>data-api-endpoint="/products/123"</code>
+                      </td>
+                      <td>
+                        References to back-end resources or data identifiers
+                        used in JS.
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Accessibility</td>
+                      <td>ARIA attributes</td>
+                      <td>
+                        <code>aria-expanded="false"</code>,<br />
+                        <code>aria-hidden="true"</code>,<br />
+                        <code>aria-controls="menu-panel"</code>
+                      </td>
+                      <td>
+                        Used strictly for accessibility. Always kept consistent
+                        with
+                        <code>data-state</code>.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="attr-note">
+                Rule: classes (<code>.class-name</code>) define visuals.
+                Attributes (<code>data-*</code>, ARIA) define behavior, state,
+                and semantics. Do not mix styling and behavior in the same
+                construct.
+              </p>
+            </div>
+
+            <!-- Примеры паттернов для компонентов -->
+            <div class="card attr-patterns">
+              <h3>Component attribute patterns</h3>
+              <p class="attr-patterns__intro">
+                Standard patterns for frequently used components (modal, slider,
+                accordion). Use these as a reference when adding new behaviors.
+              </p>
+
+              <!-- Modal pattern -->
+              <div class="attr-patterns__block">
+                <h4 class="attr-patterns__title">Modal</h4>
+                <p class="attr-patterns__text">
+                  The trigger button opens a modal identified by
+                  <code>data-js-modal</code>. State is reflected with
+                  <code>data-state</code> and ARIA attributes.
+                </p>
+
+                <pre><code>&lt;button
+  class="btn btn--primary"
+  type="button"
+  data-js-modal-open="contact"
+/&gt;
+
+&lt;div
+  class="modal"
+  data-component="modal"
+  data-js-modal="contact"
+  data-state="closed"
+  aria-hidden="true"
+&gt;
+  &lt;div class="modal__overlay" data-js-modal-close&gt;&lt;/div&gt;
+  &lt;div class="modal__dialog" role="dialog" aria-modal="true"&gt;
+    &lt;header class="modal__header"&gt;
+      &lt;h2 class="modal__title"&gt;Contact us&lt;/h2&gt;
+      &lt;button
+        class="modal__close"
+        type="button"
+        data-js-modal-close
+        aria-label="Close modal"
+      &gt;✕&lt;/button&gt;
+    &lt;/header&gt;
+    &lt;div class="modal__body"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+              </div>
+
+              <!-- Slider pattern -->
+              <div class="attr-patterns__block">
+                <h4 class="attr-patterns__title">Slider / Swiper</h4>
+                <p class="attr-patterns__text">
+                  The slider root is marked with
+                  <code>data-component="slider"</code> and
+                  <code>data-js-slider</code>. Navigation uses dedicated JS
+                  hooks.
+                </p>
+
+                <pre><code>&lt;div
+  class="slider swiper"
+  data-component="slider"
+  data-js-slider="hero"
+  data-variant="hero"
+&gt;
+  &lt;div class="slider__track swiper-wrapper" data-role="track"&gt;
+    &lt;div class="slider__slide swiper-slide" data-role="slide"&gt;...&lt;/div&gt;
+    &lt;div class="slider__slide swiper-slide" data-role="slide"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;button
+    class="slider__btn slider__btn--prev"
+    type="button"
+    data-js-slider-prev="hero"
+    aria-label="Previous slide"
+  &gt;‹&lt;/button&gt;
+
+  &lt;button
+    class="slider__btn slider__btn--next"
+    type="button"
+    data-js-slider-next="hero"
+    aria-label="Next slide"
+  &gt;›&lt;/button&gt;
+
+  &lt;div
+    class="slider__pagination swiper-pagination"
+    data-role="pagination"
+  &gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+              </div>
+
+              <!-- Accordion pattern -->
+              <div class="attr-patterns__block">
+                <h4 class="attr-patterns__title">Accordion</h4>
+                <p class="attr-patterns__text">
+                  Each item tracks its open/closed state via
+                  <code>data-state</code> and <code>aria-expanded</code>. JS
+                  attaches only to <code>data-js-accordion-btn</code>.
+                </p>
+
+                <pre><code>&lt;div class="accordion" data-component="accordion"&gt;
+  &lt;div class="accordion__item" data-state="closed"&gt;
+    &lt;button
+      class="accordion__header"
+      type="button"
+      data-js-accordion-btn
+      aria-expanded="false"
+      aria-controls="acc-panel-1"
+    &gt;
+      &lt;span class="accordion__title"&gt;Question 1&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;div
+      id="acc-panel-1"
+      class="accordion__body"
+      role="region"
+      aria-hidden="true"
+    &gt;
+      &lt;p&gt;Answer content...&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="units">
+            <h2>Units & Sizing</h2>
+            <p>
+              This guide defines when to use <strong>rem</strong>,
+              <strong>em</strong>, and <strong>px</strong>. It follows modern
+              CSS architecture practices used in design systems (Material,
+              Polaris, Primer). Mobile-first, scalable, and predictable sizing
+              rules improve consistency and maintainability.
+            </p>
+
+            <div class="component-grid">
+              <!-- REM card -->
+              <article class="component-card">
+                <h3 class="component-card__title">rem (Root-relative)</h3>
+                <p class="component-card__text">
+                  Primary unit for typography, spacing, component sizing,
+                  layout. Independent from nesting and predictable across the
+                  entire UI. Recommended for 90% of sizing.
+                </p>
+
+                <ul class="component-card__list">
+                  <li>
+                    Use for: font-size, padding, margin, gap, layout widths
+                  </li>
+                  <li>1rem = root font-size (default 16px)</li>
+                  <li>Responsive scaling via root font-size</li>
+                </ul>
+
+                <a href="#modal-units-rem" class="component-card__btn"
+                  >Open rem preview</a
+                >
+              </article>
+
+              <!-- EM card -->
+              <article class="component-card">
+                <h3 class="component-card__title">em (Element-relative)</h3>
+                <p class="component-card__text">
+                  Scales with the font-size of the current element. Useful for
+                  internal component scaling but can cause unexpected growth if
+                  nested.
+                </p>
+
+                <ul class="component-card__list">
+                  <li>Use inside components (padding, icons)</li>
+                  <li>1em = computed font-size of the element</li>
+                  <li>Avoid in layout and spacing outside components</li>
+                </ul>
+
+                <a href="#modal-units-em" class="component-card__btn"
+                  >Open em preview</a
+                >
+              </article>
+
+              <!-- PX card -->
+              <article class="component-card">
+                <h3 class="component-card__title">px (Absolute)</h3>
+                <p class="component-card__text">
+                  Pixel-perfect unit for borders, shadows, and breakpoints. Use
+                  where precision overrides scaling.
+                </p>
+
+                <ul class="component-card__list">
+                  <li>Use for: borders, 1px lines, shadows</li>
+                  <li>Safe for breakpoints</li>
+                  <li>Not scalable</li>
+                </ul>
+
+                <a href="#modal-units-px" class="component-card__btn"
+                  >Open px preview</a
+                >
+              </article>
+
+              <article class="component-card component-card--warning">
+                <h3 class="component-card__title">Warning: Using vw units</h3>
+                <p class="component-card__text">
+                  Viewport width units (<code>vw</code>) can cause severe layout
+                  issues on mobile devices, especially iOS Safari and Chrome
+                  Android. Avoid using <code>vw</code>
+                  for typography and container widths unless you explicitly
+                  control scaling.
+                </p>
+
+                <ul class="component-card__list">
+                  <li>Text becomes unreadable on phones when using vw</li>
+                  <li>iOS hides browser UI → viewport jumps → layout shifts</li>
+                  <li>100vw includes scrollbar → horizontal overflow bugs</li>
+                  <li>
+                    Use <strong>rem</strong> for text, <strong>%</strong> for
+                    layout width
+                  </li>
+                  <li>
+                    vw is acceptable only for: fullscreen hero blocks,
+                    animations, clipping
+                  </li>
+                </ul>
+
+                <a href="#modal-units-vw" class="component-card__btn">
+                  Open vw warning preview
+                </a>
+              </article>
+
+              <article class="component-card component-card--warning">
+                <h3 class="component-card__title">
+                  Warning: vh, svh, lvh, dvh
+                </h3>
+                <p class="component-card__text">
+                  Viewport height units can behave inconsistently on mobile
+                  devices. Historically, <code>100vh</code> caused layout jumps
+                  because mobile browser UI (address bar) resizes the viewport.
+                  Modern units (<code>dvh</code>, <code>svh</code>,
+                  <code>lvh</code>) resolve this, but must be used
+                  intentionally.
+                </p>
+
+                <ul class="component-card__list">
+                  <li><code>vh</code> is unstable on mobile (iOS & Android)</li>
+                  <li>
+                    <code>100vh</code> often cuts content or creates extra space
+                  </li>
+                  <li>
+                    <code>dvh</code> is usually the correct modern replacement
+                  </li>
+                  <li>
+                    <code>svh</code> and <code>lvh</code> provide UI-safe
+                    variants
+                  </li>
+                  <li>
+                    Use for fullscreen sections only — never for main layout
+                    height
+                  </li>
+                </ul>
+
+                <a href="#modal-units-vh" class="component-card__btn">
+                  Open vh / dvh preview
+                </a>
+              </article>
+              <article class="component-card">
+                <h3 class="component-card__title">% (Percent)</h3>
+                <p class="component-card__text">
+                  Percent units define size relative to the parent element. They
+                  are ideal for fluid layouts, flexible widths, and responsive
+                  components. Use % whenever an element must scale with its
+                  container instead of the viewport.
+                </p>
+
+                <ul class="component-card__list">
+                  <li>
+                    Best for fluid width layouts (e.g.,
+                    <code>width: 100%</code>)
+                  </li>
+                  <li>Useful in grids, images, media containers</li>
+                  <li>
+                    Avoid using % for height unless parent has a defined height
+                  </li>
+                  <li>
+                    Combine with <code>max-width</code> for controlled scaling
+                  </li>
+                </ul>
+
+                <a href="#modal-units-percent" class="component-card__btn">
+                  Open % usage preview
+                </a>
+              </article>
+            </div>
+          </section>
+          <div id="modal-units-rem" class="preview-modal">
+            <div class="preview-modal__dialog">
+              <header class="preview-modal__header">
+                <h3 class="preview-modal__title">rem – Scalable Layout</h3>
+                <a href="#units" class="preview-modal__close">✕</a>
+              </header>
+
+              <p class="preview-modal__description">
+                rem units scale with the root font-size. This makes components,
+                typography, and spacing predictable and globally responsive.
+              </p>
+
+              <div class="preview-units">
+                <div class="preview-units__block">
+                  <h4 class="preview-units__label">Root: 16px → 1rem</h4>
+                  <div class="preview-units__box preview-units__box--rem">
+                    <span>padding: 1.5rem</span>
+                  </div>
+                </div>
+
+                <div class="preview-units__block">
+                  <h4 class="preview-units__label">Root: 20px → 1rem</h4>
+                  <div class="preview-units__box preview-units__box--rem-large">
+                    <span>scales automatically</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card preview-modal__code">
+                <pre><code>html {
+  font-size: 16px; /* root */
+}
+
+.card {
+  padding: 1.5rem;   /* scalable */
+  border-radius: 0.75rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 480px) {
+  html { font-size: 14px; } /* shrink whole UI */
+}</code></pre>
+              </div>
+            </div>
+          </div>
+          <div id="modal-units-em" class="preview-modal">
+            <div class="preview-modal__dialog">
+              <header class="preview-modal__header">
+                <h3 class="preview-modal__title">em – Component Scaling</h3>
+                <a href="#units" class="preview-modal__close">✕</a>
+              </header>
+
+              <p class="preview-modal__description">
+                em units scale relative to the element’s own font-size. Useful
+                for internal component responsiveness.
+              </p>
+
+              <div class="preview-units">
+                <div class="preview-units__block">
+                  <h4 class="preview-units__label">Base component</h4>
+
+                  <div class="preview-units__button">
+                    <span>Button</span>
+                  </div>
+                </div>
+
+                <div class="preview-units__block">
+                  <h4 class="preview-units__label">
+                    Button enlarged (font-size: 1.25rem)
+                  </h4>
+
+                  <div
+                    class="preview-units__button preview-units__button--large"
+                  >
+                    <span>Button large</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card preview-modal__code">
+                <pre><code>.btn {
+  font-size: 1rem;
+  padding: 0.5em 1.2em; /* scales with font-size */
+}
+
+.btn--large {
+  font-size: 1.25rem;
+}</code></pre>
+              </div>
+            </div>
+          </div>
+          <div id="modal-units-px" class="preview-modal">
+            <div class="preview-modal__dialog">
+              <header class="preview-modal__header">
+                <h3 class="preview-modal__title">px – Precision Use</h3>
+                <a href="#units" class="preview-modal__close">✕</a>
+              </header>
+
+              <p class="preview-modal__description">
+                Use px for fine details such as borders, shadows, and
+                breakpoints. Pixel values should not be used for scalable
+                layout.
+              </p>
+
+              <div class="preview-units">
+                <div class="preview-units__block">
+                  <div class="preview-units__border-box">
+                    <span>1px border</span>
+                  </div>
+                </div>
+
+                <div class="preview-units__block">
+                  <div class="preview-units__shadow-box">
+                    <span>shadow</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card preview-modal__code">
+                <pre><code>.divider {
+  height: 1px;
+  background-color: rgba(255,255,255,0.2);
+}
+
+@media (min-width: 768px) { /* safe breakpoint */
+  .container { max-width: 720px; }
+}</code></pre>
+              </div>
+            </div>
+          </div>
+          <div id="modal-units-vw" class="preview-modal">
+            <div class="preview-modal__dialog">
+              <header class="preview-modal__header">
+                <h3 class="preview-modal__title">vw – Use With Caution</h3>
+                <a href="#units" class="preview-modal__close">✕</a>
+              </header>
+
+              <p class="preview-modal__description">
+                vw units behave unpredictably on mobile: browser UI bars resize
+                the viewport, and 100vw often includes scrollbar width. This
+                preview demonstrates typical failure cases and correct
+                alternatives.
+              </p>
+
+              <div class="preview-vw">
+                <!-- Example 1 — BAD -->
+                <div class="preview-vw__block">
+                  <h4 class="preview-vw__label">Bad: Text sizing with vw</h4>
+
+                  <div class="preview-vw__example preview-vw__example--bad">
+                    <span style="font-size: 5vw">Text 5vw</span>
+                  </div>
+
+                  <p class="preview-vw__text">
+                    On small screens 5vw becomes too small, on large screens too
+                    big. Also affected by mobile UI shrinking/expanding the
+                    viewport.
+                  </p>
+                </div>
+
+                <!-- Example 2 — BAD width overflow -->
+                <div class="preview-vw__block">
+                  <h4 class="preview-vw__label">Bad: 100vw container</h4>
+
+                  <div
+                    class="preview-vw__example preview-vw__example--overflow"
+                  >
+                    <span>100vw box → scrollbar causes overflow</span>
+                  </div>
+
+                  <p class="preview-vw__text">
+                    Because 100vw includes scrollbar width, layouts get
+                    horizontal scroll even when content fits visually.
+                  </p>
+                </div>
+
+                <!-- Example 3 — GOOD use case -->
+                <div class="preview-vw__block">
+                  <h4 class="preview-vw__label">
+                    Good: Hero section using vw/vh
+                  </h4>
+
+                  <div class="preview-vw__example preview-vw__example--good">
+                    <span>Hero block: width:100%; height:100vh</span>
+                  </div>
+
+                  <p class="preview-vw__text">
+                    vw/vh may be used for fullscreen hero blocks, background
+                    shapes, animations, clipping masks — elements not tied to
+                    content readability.
+                  </p>
+                </div>
+              </div>
+
+              <div class="card preview-modal__code">
+                <pre><code>/* Bad: text with vw */
+.title {
+  font-size: 5vw; /* unpredictable */
+}
+
+/* Bad: layout container */
+.container {
+  width: 100vw; /* causes overflow */
+}
+
+/* Good: hero section */
+.hero {
+  min-height: 100vh;
+  width: 100%;
+}</code></pre>
+              </div>
+            </div>
+          </div>
+          <div id="modal-units-vh" class="preview-modal">
+            <div class="preview-modal__dialog">
+              <header class="preview-modal__header">
+                <h3 class="preview-modal__title">
+                  vh vs dvh – Modern Viewport Units
+                </h3>
+                <a href="#units" class="preview-modal__close">✕</a>
+              </header>
+
+              <p class="preview-modal__description">
+                The classic <code>100vh</code> unit is unreliable on mobile
+                because the browser UI bars change the viewport height. Modern
+                CSS provides <code>dvh</code>, <code>svh</code>, and
+                <code>lvh</code> to fix this. Avoid using 100vh on mobile. Use
+                100dvh for fullscreen, stable height. svh = viewport with
+                browser UI visible. lvh = viewport with UI hidden (expanded).
+                dvh = dynamic, reliable — recommended default.
+              </p>
+
+              <div class="preview-vh">
+                <!-- BAD: classic vh -->
+                <div class="preview-vh__block">
+                  <h4 class="preview-vh__label">Bad: 100vh (mobile jump)</h4>
+
+                  <div class="preview-vh__example preview-vh__example--bad">
+                    <span>100vh</span>
+                  </div>
+
+                  <p class="preview-vh__text">
+                    On iOS Safari, 100vh becomes higher when the address bar
+                    hides, causing layout jumps and clipped content.
+                  </p>
+                </div>
+
+                <!-- GOOD: dvh -->
+                <div class="preview-vh__block">
+                  <h4 class="preview-vh__label">
+                    Good: 100dvh (stable viewport)
+                  </h4>
+
+                  <div class="preview-vh__example preview-vh__example--good">
+                    <span>100dvh</span>
+                  </div>
+
+                  <p class="preview-vh__text">
+                    dvh uses the dynamic viewport height: always accurate,
+                    stable, and recommended for fullscreen blocks.
+                  </p>
+                </div>
+
+                <!-- Other units -->
+                <div class="preview-vh__block">
+                  <h4 class="preview-vh__label">svh / lvh</h4>
+
+                  <div class="preview-vh__example preview-vh__example--neutral">
+                    <span>visual viewport variants</span>
+                  </div>
+
+                  <p class="preview-vh__text">
+                    <code>svh</code> = small viewport height (browser UI
+                    visible)<br />
+                    <code>lvh</code> = large viewport height (UI hidden)<br />
+                    Rarely needed — mostly for advanced layouts.
+                  </p>
+                </div>
+              </div>
+
+              <div class="card preview-modal__code">
+                <pre><code>/* Bad */
+.hero {
+  height: 100vh; /* unstable on mobile */
+}
+
+/* Recommended */
+.hero {
+  height: 100dvh; /* dynamic viewport height */
+}
+
+/* Optional advanced usage */
+.hero--safe {
+  min-height: 100svh; /* UI visible */
+  max-height: 100lvh; /* UI hidden */
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div id="modal-units-percent" class="preview-modal">
+            <div class="preview-modal__dialog">
+              <header class="preview-modal__header">
+                <h3 class="preview-modal__title">% – Relative to Parent</h3>
+                <a href="#units" class="preview-modal__close">✕</a>
+              </header>
+
+              <p class="preview-modal__description">
+                Percent units adapt an element’s width or position based on its
+                parent. They are essential for fluid layout systems and
+                responsive containers. The preview below demonstrates correct
+                and incorrect use cases.
+              </p>
+
+              <div class="preview-percent">
+                <!-- Good: width:100% -->
+                <div class="preview-percent__block">
+                  <h4 class="preview-percent__label">Good: width: 100%</h4>
+                  <div
+                    class="preview-percent__example preview-percent__example--good"
+                  >
+                    <div
+                      class="preview-percent__child preview-percent__child--wide"
+                    ></div>
+                  </div>
+                  <p class="preview-percent__text">
+                    Child expands exactly to the available space of the parent.
+                    Perfect for fluid layouts, responsive grids, and images.
+                  </p>
+                </div>
+
+                <!-- Bad: height with % when parent has no height -->
+                <div class="preview-percent__block">
+                  <h4 class="preview-percent__label">Bad: height: 100%</h4>
+                  <div
+                    class="preview-percent__example preview-percent__example--bad"
+                  >
+                    <div
+                      class="preview-percent__child preview-percent__child--tall"
+                    ></div>
+                  </div>
+                  <p class="preview-percent__text">
+                    height:100% works only if the parent has an explicit height.
+                    Otherwise it collapses or produces unpredictable results.
+                  </p>
+                </div>
+
+                <!-- Good: max-width + % -->
+                <div class="preview-percent__block">
+                  <h4 class="preview-percent__label">Good: max-width + %</h4>
+                  <div
+                    class="preview-percent__example preview-percent__example--neutral"
+                  >
+                    <div
+                      class="preview-percent__child preview-percent__child--controlled"
+                    ></div>
+                  </div>
+                  <p class="preview-percent__text">
+                    Combine % with max-width for controlled fluidity. Ideal for
+                    containers and responsive media.
+                  </p>
+                </div>
+              </div>
+
+              <div class="card preview-modal__code">
+                <pre><code>/* Fluid width */
+.container {
+  width: 100%;
+}
+
+/* Bad: parent needs explicit height */
+.section {
+  height: 100%; /* Only works if parent has height set */
+}
+
+/* Fluid but controlled */
+.media {
+  width: 100%;
+  max-width: 600px;
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <section class="section" id="sass-usage">
+            <h2>Sass / SCSS usage</h2>
+            <p>
+              In our production projects we write styles in SCSS and compile
+              them to CSS using the VS Code extension
+              <strong>“Live Sass Compiler (Glenn Marks)”</strong>. Compiled CSS
+              files must be placed in the dedicated <code>css/</code>
+              directory. This guideline repository on GitHub stores only
+              compiled CSS, not the original SCSS source files.
+            </p>
+
+            <div class="card callout">
+              <h3>Rules for SCSS and compiled CSS</h3>
+              <ul class="list--custom">
+                <li>
+                  <strong>Authoring:</strong> Write styles in
+                  <code>.scss</code> files locally (VS Code).
+                </li>
+                <li>
+                  <strong>Compiler:</strong> Use
+                  <code>Live Sass Compiler (Glenn Marks)</code> extension in VS
+                  Code.
+                </li>
+                <li>
+                  <strong>Output folder:</strong> Configure the compiler so that
+                  compiled CSS is generated into the <code>css/</code> directory
+                  (e.g. <code>/assets/css/</code> or
+                  <code>/css/</code> depending on the project).
+                </li>
+                <li>
+                  <strong>Do not edit compiled CSS manually.</strong> All
+                  changes must be done in SCSS and then recompiled.
+                </li>
+                <li>
+                  <strong>GitHub (guideline repo):</strong> only compiled CSS is
+                  committed. SCSS files are <em>not</em> uploaded to GitHub,
+                  according to our repository policy.
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Note (Japanese)</h3>
+              <p>
+                私たちは VS Code の
+                <strong>「Live Sass Compiler（Glenn Marks版）」</strong>
+                を使⽤してスタイルをコンパイルします。コンパイル後の
+                <code>.css</code> ファイルは、必ずプロジェクト内の
+                <code>css</code>
+                ディレクトリに出⼒されるように設定してください。
+              </p>
+              <ul>
+                <li>
+                  このガイドラインの GitHub リポジトリには、
+                  <strong>コンパイル後の CSS のみ</strong> を含めます。
+                </li>
+                <li>
+                  <code>.scss</code>
+                  ソースファイルはリポジトリにアップロードしません
+                  （社内ルールのため）。
+                </li>
+                <li>
+                  SCSS の変更はローカル環境で⾏い、Live Sass Compiler
+                  で再コンパイルしてから CSS をコミットしてください。
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Example: Live Sass Compiler settings (concept)</h3>
+              <pre><code>// Example idea (not actual JSON):
+// Set "css" output folder for compiled files
+"liveSassCompile.settings.formats": [
+  {
+    "format": "expanded",
+    "extensionName": ".css",
+    "savePath": "/assets/css"
+  }
+]</code></pre>
+              <p>
+                Exact settings can vary by project, but the main rule is:
+                <strong
+                  >compiled CSS must always go into the
+                  <code>css/</code> directory</strong
+                >.
+              </p>
+            </div>
+          </section>
+
+          <!-- Best Practices -->
+          <section class="section" id="best-practices">
+            <h2>Best Practices</h2>
+            <div class="card">
+              <h3>Do</h3>
+              <ul>
+                <li>Write self-explanatory class names.</li>
+                <li>Keep components small and reusable.</li>
+                <li>Document any non-standard behavior.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Don't</h3>
+              <ul>
+                <li>Don’t inline large chunks of CSS or JS into HTML.</li>
+                <li>
+                  Don’t use different libraries for the same task in one
+                  project.
+                </li>
+                <li>Don’t override guidelines without discussion.</li>
+              </ul>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

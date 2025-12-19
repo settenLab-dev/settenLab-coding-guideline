@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Frontend Guidelines – Testing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Font (same as other pages) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main styles -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <div class="bg-gradient"></div>
+
+    <div class="app-shell">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__header">
+          <div class="sidebar__logo">FG</div>
+          <div class="sidebar__title">
+            <span class="sidebar__company">Company Name</span>
+            <span class="sidebar__subtitle">Frontend Guidelines</span>
+          </div>
+        </div>
+
+        <nav class="sidebar__nav">
+          <!-- Global navigation -->
+          <a class="nav-link" href="index.html#intro">Overview</a>
+          <a class="nav-link" href="performance.html#perf-intro">
+            Performance
+          </a>
+
+          <div class="sidebar__divider"></div>
+
+          <!-- Local Testing navigation -->
+          <a
+            class="nav-link active"
+            href="#test-intro"
+            data-target="test-intro"
+          >
+            Testing Intro
+          </a>
+          <a class="nav-link" href="#test-inspect" data-target="test-inspect">
+            Inspect & DevTools
+          </a>
+          <a class="nav-link" href="#test-devices" data-target="test-devices">
+            Devices & Viewports
+          </a>
+          <a class="nav-link" href="#test-browsers" data-target="test-browsers">
+            Browsers
+          </a>
+          <a
+            class="nav-link"
+            href="#test-checklist"
+            data-target="test-checklist"
+          >
+            Testing Checklist
+          </a>
+        </nav>
+
+        <div class="sidebar__footer">
+          <span class="sidebar__version">v1.0.0</span>
+          <span class="sidebar__lang">EN</span>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <div class="main">
+        <!-- Top bar -->
+        <header class="topbar">
+          <button
+            class="topbar__menu-btn"
+            id="menuToggle"
+            aria-label="Toggle navigation"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <h1 class="topbar__title">Testing & QA</h1>
+
+          <div class="topbar__actions">
+            <button
+              class="topbar__action-btn"
+              id="themeToggle"
+              aria-label="Toggle theme"
+            >
+              🌗
+            </button>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <main class="content">
+          <!-- Intro -->
+          <section class="section" id="test-intro">
+            <h2>Testing Guidelines</h2>
+            <p>
+              This page describes our standard testing workflow: how to use
+              browser DevTools (Inspect mode), test layouts on different
+              devices, and verify cross-browser behavior before release.
+            </p>
+
+            <div class="card">
+              <h3>Goals</h3>
+              <ul>
+                <li>
+                  Detect layout and responsive issues early (in DevTools).
+                </li>
+                <li>Test on real and emulated devices before release.</li>
+                <li>
+                  Keep the same testing standard across all team members and
+                  locations.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Inspect & DevTools -->
+          <section class="section" id="test-inspect">
+            <h2>Inspect Mode & DevTools</h2>
+            <p>
+              Always start testing using browser DevTools. All layout issues
+              must be reproducible and debugged in Inspect mode first.
+            </p>
+
+            <div class="perf-grid">
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Basic workflow</h3>
+                  <span class="perf-badge">Required</span>
+                </div>
+                <ul>
+                  <li>
+                    Open DevTools: <strong>F12</strong> or right click →
+                    Inspect.
+                  </li>
+                  <li>
+                    Use the element picker to inspect layout (margin, padding,
+                    fonts, colors).
+                  </li>
+                  <li>
+                    Check computed styles when debugging unexpected spacing or
+                    font sizes.
+                  </li>
+                  <li>
+                    Use temporary inline changes (in Styles tab) before editing
+                    actual CSS.
+                  </li>
+                </ul>
+              </article>
+
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Responsive mode</h3>
+                  <span class="perf-badge perf-badge--green">Required</span>
+                </div>
+                <ul>
+                  <li>
+                    Toggle device toolbar (Chrome): icon “Toggle device toolbar”
+                    or
+                    <strong>Ctrl+Shift+M</strong>/<strong>Cmd+Shift+M</strong>.
+                  </li>
+                  <li>
+                    Test at minimum width <strong>375px</strong> (mobile) and
+                    breakpoint <strong>768px</strong> (tablet/desktop).
+                  </li>
+                  <li>
+                    Use custom sizes for real devices used by our users (see
+                    Devices section).
+                  </li>
+                  <li>
+                    Check scroll behavior, sticky headers, and sliders in both
+                    mobile and desktop modes.
+                  </li>
+                </ul>
+              </article>
+
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Layout debugging tips</h3>
+                  <span class="perf-badge perf-badge--yellow">Recommended</span>
+                </div>
+                <ul>
+                  <li>
+                    Use temporary outline for debugging:
+                    <pre><code>* { outline: 1px solid rgba(90, 200, 250, 0.25); }</code></pre>
+                  </li>
+                  <li>
+                    Check for overflow issues (horizontal scroll) using:
+                    <pre><code>html, body { overflow-x: hidden; }</code></pre>
+                    and then locating the element that causes overflow.
+                  </li>
+                  <li>
+                    Use the “Layers” and “Performance” tabs when debugging
+                    complex animations or repaint issues.
+                  </li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <!-- Devices & Viewports -->
+          <section class="section" id="test-devices">
+            <h2>Devices &amp; Viewports</h2>
+            <p>
+              We follow a mobile-first approach. Layouts must be tested at
+              defined breakpoints and on real devices when possible.
+            </p>
+
+            <div class="card perf-card">
+              <div class="perf-card__header">
+                <h3>Target viewports</h3>
+                <span class="perf-badge">Required</span>
+              </div>
+              <p class="test-note">
+                Use these viewport widths in DevTools “Responsive” mode as a
+                minimum testing set:
+              </p>
+              <ul class="test-device-list">
+                <li>
+                  <strong>375 × 667</strong> – baseline mobile (iPhone SE /
+                  small Android).
+                </li>
+                <li>
+                  <strong>414 × 896</strong> – large mobile (iPhone
+                  11/12/13/14).
+                </li>
+                <li>
+                  <strong>768 × 1024</strong> – tablet portrait (iPad / small
+                  tablets).
+                </li>
+                <li><strong>1024 × 768</strong> – tablet landscape.</li>
+                <li><strong>1280 × 720</strong> – small desktop / laptop.</li>
+                <li>
+                  <strong>1440 × 900</strong> – standard desktop viewport.
+                </li>
+              </ul>
+            </div>
+
+            <div class="card perf-card">
+              <div class="perf-card__header">
+                <h3>Real device testing</h3>
+                <span class="perf-badge perf-badge--green">Recommended</span>
+              </div>
+              <ul>
+                <li>
+                  For every major release, test at least on one iOS and one
+                  Android device (latest OS).
+                </li>
+                <li>
+                  Pay special attention to touch interactions: sliders,
+                  dropdowns, hover states replaced with tap.
+                </li>
+                <li>
+                  Test on low/medium network speed (3G/4G) and check initial
+                  loading time.
+                </li>
+                <li>
+                  Verify that font sizes are readable and hit areas (buttons,
+                  links) are large enough for touch.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Browsers -->
+          <section class="section" id="test-browsers">
+            <h2>Browser Coverage</h2>
+            <p>
+              We do not support all browsers in the world, but we require a
+              minimal set to be tested before any release.
+            </p>
+
+            <div class="perf-grid">
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Desktop</h3>
+                  <span class="perf-badge">Required</span>
+                </div>
+                <ul>
+                  <li>Google Chrome (latest stable).</li>
+                  <li>Microsoft Edge (latest stable).</li>
+                  <li>Firefox (latest stable) for layout sanity checks.</li>
+                </ul>
+              </article>
+
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Mobile</h3>
+                  <span class="perf-badge perf-badge--green">Required</span>
+                </div>
+                <ul>
+                  <li>Safari on iOS (latest stable).</li>
+                  <li>Chrome on Android (latest stable).</li>
+                  <li>
+                    If available, test in WebView containers used by our apps
+                    (if applicable).
+                  </li>
+                </ul>
+              </article>
+
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Notes</h3>
+                  <span class="perf-badge perf-badge--yellow">Recommended</span>
+                </div>
+                <ul>
+                  <li>
+                    Do not optimize specifically for outdated browsers unless
+                    requested by the project owner.
+                  </li>
+                  <li>
+                    For complex features (3D, advanced CSS), always check
+                    browser compatibility (Can I Use).
+                  </li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <!-- Testing Checklist -->
+          <section class="section" id="test-checklist">
+            <h2>Testing Checklist (Pre-release)</h2>
+            <p>
+              Before release, the following testing items must be completed and
+              confirmed.
+            </p>
+
+            <div class="card perf-checklist">
+              <ul class="perf-checklist__list">
+                <li>
+                  ✅ Layout is correct at 375px, 768px, 1024px, and common
+                  desktop widths (no horizontal scroll).
+                </li>
+                <li>
+                  ✅ All interactive elements (buttons, links, sliders) work
+                  correctly on both mouse and touch devices.
+                </li>
+                <li>
+                  ✅ No console errors or unhandled JavaScript exceptions.
+                </li>
+                <li>
+                  ✅ Sliders (Swiper) work correctly on mobile and desktop,
+                  including swiping and navigation.
+                </li>
+                <li>
+                  ✅ Critical pages tested in Chrome, Safari (iOS), and Chrome
+                  (Android).
+                </li>
+                <li>
+                  ✅ Basic accessibility checks: focus states, keyboard
+                  navigation, alt texts for images.
+                </li>
+                <li>
+                  ✅ Lighthouse run shows acceptable scores (see Performance
+                  page).
+                </li>
+              </ul>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- Vendor / app scripts -->
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/js/main.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Frontend Guidelines – Performance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Font (same as index) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main styles -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <div class="bg-gradient"></div>
+
+    <div class="app-shell">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__header">
+          <div class="sidebar__logo">FG</div>
+          <div class="sidebar__title">
+            <span class="sidebar__company">Company Name</span>
+            <span class="sidebar__subtitle">Frontend Guidelines</span>
+          </div>
+        </div>
+
+        <nav class="sidebar__nav">
+          <!-- links back to main guideline page -->
+          <a class="nav-link" href="index.html#intro" data-target="">
+            Overview
+          </a>
+          <a class="nav-link" href="index.html#sliders" data-target="">
+            Sliders (Swiper)
+          </a>
+
+          <div class="sidebar__divider"></div>
+
+          <!-- local performance sections -->
+          <a
+            class="nav-link active"
+            href="#perf-intro"
+            data-target="perf-intro"
+          >
+            Performance Intro
+          </a>
+          <a class="nav-link" href="#perf-images" data-target="perf-images">
+            Images & Media
+          </a>
+
+          <a class="nav-link" href="#perf-js-css" data-target="perf-js-css">
+            JS & CSS
+          </a>
+          <a class="nav-link" href="#perf-network" data-target="perf-network">
+            Network & Caching
+          </a>
+          <a class="nav-link" href="#perf-layout" data-target="perf-images">
+            Layout Stability
+          </a>
+          <a class="nav-link" href="#perf-a11y-seo" data-target="perf-a11y-seo">
+            A11y & SEO
+          </a>
+          <a
+            class="nav-link"
+            href="#perf-checklist"
+            data-target="perf-checklist"
+          >
+            Release Checklist
+          </a>
+        </nav>
+
+        <div class="sidebar__footer">
+          <span class="sidebar__version">v1.0.0</span>
+          <span class="sidebar__lang">EN</span>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <div class="main">
+        <!-- Top bar -->
+        <header class="topbar">
+          <button
+            class="topbar__menu-btn"
+            id="menuToggle"
+            aria-label="Toggle navigation"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <h1 class="topbar__title">Performance & Lighthouse</h1>
+
+          <div class="topbar__actions">
+            <button
+              class="topbar__action-btn"
+              id="themeToggle"
+              aria-label="Toggle theme"
+            >
+              🌗
+            </button>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <main class="content">
+          <!-- Intro -->
+          <section class="section" id="perf-intro">
+            <h2>Performance Guidelines</h2>
+            <p>
+              This page describes our company-wide rules for achieving high
+              Lighthouse scores (Performance, Best Practices, SEO,
+              Accessibility). The goal is to keep all projects fast, stable, and
+              mobile-first.
+            </p>
+
+            <div class="card perf-kpi">
+              <h3>Target KPIs</h3>
+              <div class="perf-kpi__grid">
+                <div class="perf-kpi__item">
+                  <span class="perf-kpi__label">Performance</span>
+                  <span class="perf-kpi__value">90+</span>
+                </div>
+                <div class="perf-kpi__item">
+                  <span class="perf-kpi__label">Best Practices</span>
+                  <span class="perf-kpi__value">95+</span>
+                </div>
+                <div class="perf-kpi__item">
+                  <span class="perf-kpi__label">SEO</span>
+                  <span class="perf-kpi__value">90+</span>
+                </div>
+                <div class="perf-kpi__item">
+                  <span class="perf-kpi__label">Accessibility</span>
+                  <span class="perf-kpi__value">90+</span>
+                </div>
+              </div>
+              <p class="perf-kpi__note">
+                Scores are measured on mobile (simulated slow network / device)
+                in Lighthouse or PageSpeed Insights.
+              </p>
+            </div>
+          </section>
+
+          <!-- Images & Media -->
+          <section class="section" id="perf-images">
+            <h2>Images &amp; Media</h2>
+            <p>
+              Images and media are one of the main reasons for bad performance.
+              Follow these rules for all projects.
+            </p>
+
+            <div class="perf-grid">
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Formats</h3>
+                  <span class="perf-badge">Required</span>
+                </div>
+                <ul>
+                  <li>Use <strong>WebP</strong> (or AVIF) for all photos.</li>
+                  <li>Use <strong>SVG</strong> for logos and icons.</li>
+                  <li>
+                    PNG only when transparency is required and SVG is not
+                    possible.
+                  </li>
+                  <li>
+                    JPEG only when WebP/AVIF is not supported by the system.
+                  </li>
+                </ul>
+              </article>
+
+              <!-- Loading strategy -->
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Loading strategy</h3>
+                  <span class="perf-badge perf-badge--green">Required</span>
+                </div>
+                <ul>
+                  <li>
+                    All non-critical images must use
+                    <code>loading="lazy"</code> and
+                    <code>decoding="async"</code>.
+                  </li>
+                  <li>
+                    LCP (hero) images must use
+                    <code>loading="eager"</code> and
+                    <code>fetchpriority="high"</code>.
+                  </li>
+                  <li>
+                    Always set <code>width</code> and <code>height</code> on
+                    <code>&lt;img&gt;</code> to avoid layout shifts (CLS).
+                  </li>
+                </ul>
+
+                <a href="#modal-loading" class="perf-card__preview-btn">
+                  Open loading strategy preview
+                </a>
+              </article>
+
+              <!-- Video & embeds -->
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Video &amp; embeds</h3>
+                  <span class="perf-badge perf-badge--yellow">Recommended</span>
+                </div>
+                <ul>
+                  <li>Always provide a <code>poster</code> for videos.</li>
+                  <li>Never autoplay video with sound.</li>
+                  <li>
+                    Wrap YouTube/Vimeo iframes in a 16:9 container and use
+                    <code>loading="lazy"</code>.
+                  </li>
+                  <li>
+                    Use placeholders for heavy embeds (maps, 3rd party widgets).
+                  </li>
+                </ul>
+
+                <a href="#modal-video" class="perf-card__preview-btn">
+                  Open video & embeds preview
+                </a>
+              </article>
+            </div>
+          </section>
+
+          <!-- JS & CSS -->
+          <section class="section" id="perf-js-css">
+            <h2>JavaScript &amp; CSS</h2>
+            <p>
+              JavaScript and CSS must be minimal, predictable and non-blocking.
+            </p>
+
+            <div class="card perf-card">
+              <div class="perf-card__header">
+                <h3>JavaScript</h3>
+                <span class="perf-badge">Required</span>
+              </div>
+              <ul>
+                <li>
+                  Load project scripts with <code>defer</code>:
+                  <code>&lt;script src="app.js" defer&gt;&lt;/script&gt;</code>.
+                </li>
+                <li>
+                  Do not use blocking scripts in <code>&lt;head&gt;</code>.
+                </li>
+                <li>
+                  Remove unused libraries and legacy plugins (e.g. old jQuery
+                  sliders).
+                </li>
+                <li>
+                  Swiper is the only approved slider library. Do not mix
+                  multiple slider libraries in one project.
+                </li>
+              </ul>
+            </div>
+
+            <div class="card perf-card">
+              <div class="perf-card__header">
+                <h3>CSS</h3>
+                <span class="perf-badge perf-badge--green">Required</span>
+              </div>
+              <ul>
+                <li>Use mobile-first CSS and avoid deep selector nesting.</li>
+                <li>
+                  Do not include entire frameworks if only a small part is used.
+                </li>
+                <li>Minify CSS in production builds.</li>
+                <li>
+                  Avoid heavy filters and shadows on mobile when not necessary
+                  (they can slow down rendering).
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Network & caching -->
+          <section class="section" id="perf-network">
+            <h2>Network &amp; Caching</h2>
+            <p>
+              Correct caching and compression are required for all public
+              projects.
+            </p>
+
+            <div class="card perf-card">
+              <div class="perf-card__header">
+                <h3>Caching</h3>
+                <span class="perf-badge">Required</span>
+              </div>
+              <ul>
+                <li>
+                  Static assets (CSS, JS, images) must use long-term caching:
+                  <code>Cache-Control: public, max-age=31536000, immutable</code
+                  >.
+                </li>
+                <li>
+                  Use file hashing for versioning (e.g.
+                  <code>app.87ac3d.js</code>).
+                </li>
+                <li>
+                  HTML must not be cached aggressively in production (short
+                  TTL).
+                </li>
+              </ul>
+            </div>
+
+            <div class="card perf-card">
+              <div class="perf-card__header">
+                <h3>Compression</h3>
+                <span class="perf-badge perf-badge--yellow">Recommended</span>
+              </div>
+              <ul>
+                <li>
+                  Enable Brotli compression where available, Gzip as fallback.
+                </li>
+                <li>
+                  Avoid shipping bundles &gt; 200&nbsp;KB uncompressed per
+                  route.
+                </li>
+                <li>
+                  Minimize number of HTTP requests by bundling and code
+                  splitting.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="section" id="perf-layout">
+            <h2>Layout Stability (CLS) & Modern Scrollbar Handling</h2>
+            <p>
+              Layout shifts caused by scrollbars, dynamic content, or
+              inconsistent default browser styles directly impact CLS and
+              overall Lighthouse performance. This section outlines modern
+              CSS-first techniques to ensure a stable, predictable layout across
+              all devices.
+            </p>
+
+            <div class="perf-grid">
+              <!-- Card 1 — Modern scrollbar handling -->
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Modern Scrollbar Handling</h3>
+                  <span class="perf-badge">Required</span>
+                </div>
+
+                <p class="test-note">
+                  We follow a <strong>CSS-first</strong> approach using the
+                  modern property <code>scrollbar-gutter</code>, which prevents
+                  layout shifts when scrollbars appear/disappear — without
+                  JavaScript.
+                </p>
+
+                <ul>
+                  <li>Enable stable scrollbar allocation globally:</li>
+                </ul>
+
+                <pre><code>html {
+  scrollbar-gutter: stable;
+}</code></pre>
+
+                <ul>
+                  <li>
+                    This reserves scrollbar space and eliminates horizontal
+                    jumps.
+                  </li>
+                  <li>
+                    Works perfectly on desktop Chrome/Edge → largest CLS
+                    offenders.
+                  </li>
+                  <li>
+                    On systems with overlay scrollbars (macOS, iOS, Android),
+                    the value is simply ignored with no negative effect.
+                  </li>
+                </ul>
+              </article>
+
+              <!-- Card 2 — Scroll Locking: CSS Best Practice -->
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Scroll Locking (Modal / Drawer)</h3>
+                  <span class="perf-badge perf-badge--green">Recommended</span>
+                </div>
+
+                <p class="test-note">
+                  Instead of hiding the scrollbar with
+                  <code>overflow: hidden;</code>, which causes layout jumps,
+                  adopt the principle:
+                  <strong
+                    >preserve scroll width; disable scrolling, not
+                    scrollbar</strong
+                  >.
+                </p>
+
+                <ul>
+                  <li>Use a scroll lock class that keeps scrollbar space:</li>
+                </ul>
+
+                <pre><code>body.is-locked {
+  overflow-y: scroll; /* NOT hidden */
+}</code></pre>
+
+                <ul>
+                  <li>
+                    This prevents jumping layouts when modals or overlays open.
+                  </li>
+                  <li>
+                    Works on all major browsers without needing JS patches.
+                  </li>
+                  <li>
+                    Important: modal backdrop must block pointer events &
+                    wheel/touch scroll.
+                  </li>
+                </ul>
+              </article>
+
+              <!-- Card 3 — Reset & Baseline Stability -->
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Reset Styles (Baseline Stability)</h3>
+                  <span class="perf-badge">Required</span>
+                </div>
+
+                <p class="test-note">
+                  To ensure consistent rendering across browsers and eliminate
+                  default unpredictable spacing, apply a controlled reset at the
+                  project root.
+                </p>
+
+                <ul>
+                  <li>
+                    Use a modern, minimal reset ensuring layout stability:
+                  </li>
+                </ul>
+
+                <pre><code>/* Base Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  scrollbar-gutter: stable;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Remove default margins */
+h1, h2, h3, h4, h5, h6,
+p, ul, ol {
+  margin: 0;
+  padding: 0;
+}</code></pre>
+
+                <ul>
+                  <li>
+                    <strong
+                      >Never use big CSS frameworks' resets blindly</strong
+                    >
+                    (older Normalize / Bootstrap resets create heavy overrides).
+                  </li>
+                  <li>
+                    A custom, minimal reset ensures predictability and reduces
+                    CLS.
+                  </li>
+                </ul>
+              </article>
+
+              <!-- Card 4 — Dynamic content stability -->
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Dynamic Content Stability</h3>
+                  <span class="perf-badge perf-badge--yellow">Recommended</span>
+                </div>
+
+                <ul>
+                  <li>Reserve space for any dynamically loaded content:</li>
+                </ul>
+
+                <pre><code>.img-wrapper {
+  aspect-ratio: 16 / 9;
+}</code></pre>
+
+                <ul>
+                  <li>
+                    Use <code>aspect-ratio</code> to prevent layout jumps when
+                    images load.
+                  </li>
+                  <li>Predefine heights for banners, cards, and sliders.</li>
+                  <li>
+                    Avoid inserting elements ABOVE existing content after load.
+                  </li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <!-- A11y & SEO -->
+          <section class="section" id="perf-a11y-seo">
+            <h2>Accessibility &amp; SEO Essentials</h2>
+            <p>
+              Accessibility and SEO affect Lighthouse scores and overall UX.
+            </p>
+
+            <div class="perf-grid">
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Accessibility</h3>
+                  <span class="perf-badge">Required</span>
+                </div>
+                <ul>
+                  <li>
+                    All interactive elements must be reachable via keyboard.
+                  </li>
+                  <li>
+                    Buttons must be real <code>&lt;button&gt;</code>, not
+                    generic divs.
+                  </li>
+                  <li>
+                    All images must have <code>alt</code> attributes (or
+                    <code>alt=""</code>
+                    for decorative images).
+                  </li>
+                  <li>Maintain sufficient color contrast (4.5:1 for text).</li>
+                </ul>
+              </article>
+
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>SEO basics</h3>
+                  <span class="perf-badge perf-badge--green">Required</span>
+                </div>
+                <ul>
+                  <li>Exactly one <code>&lt;h1&gt;</code> per page.</li>
+                  <li>Meta description must be present and meaningful.</li>
+                  <li>
+                    Define a canonical URL via
+                    <code>&lt;link rel="canonical" href="..."&gt;</code>.
+                  </li>
+                  <li>Use descriptive, human-readable URLs.</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <!-- Checklist -->
+          <section class="section" id="perf-checklist">
+            <h2>Pre-release Lighthouse Checklist</h2>
+            <p>
+              Before releasing a page, run a Lighthouse audit (mobile). All
+              items below must be checked.
+            </p>
+
+            <div class="card perf-checklist">
+              <ul class="perf-checklist__list">
+                <li>
+                  ✅ LCP image uses <code>loading="eager"</code>,
+                  <code>fetchpriority="high"</code>, and correct dimensions.
+                </li>
+                <li>
+                  ✅ All other images use <code>loading="lazy"</code> and
+                  <code>decoding="async"</code>.
+                </li>
+                <li>✅ No blocking scripts in <code>&lt;head&gt;</code>.</li>
+                <li>✅ No unused large JS/CSS libraries.</li>
+                <li>
+                  ✅ Fonts loaded as <code>woff2</code> with
+                  <code>font-display: swap</code>.
+                </li>
+                <li>✅ Static assets use long-term caching headers.</li>
+                <li>
+                  ✅ All interactive elements are accessible via keyboard.
+                </li>
+                <li>
+                  ✅ Lighthouse scores (mobile): Performance ≥ 90, Best
+                  Practices ≥ 95, SEO ≥ 90.
+                </li>
+              </ul>
+            </div>
+          </section>
+          <!-- Modal: Image loading strategy preview -->
+          <div id="modal-loading" class="preview-modal">
+            <div class="preview-modal__dialog">
+              <header class="preview-modal__header">
+                <h3 class="preview-modal__title">Image Loading Strategy</h3>
+                <a
+                  href="#perf-images"
+                  class="preview-modal__close"
+                  aria-label="Close loading strategy preview"
+                >
+                  ✕
+                </a>
+              </header>
+
+              <p class="preview-modal__description">
+                Visual example of how to treat hero (LCP) images and content
+                images. On mobile, all elements are stacked; from 768px and up
+                the layout is split into hero vs content imagery.
+              </p>
+
+              <div class="preview-loading">
+                <!-- Hero / LCP image side -->
+                <div class="preview-loading__block">
+                  <h4 class="preview-loading__title">Hero (LCP) image</h4>
+                  <div class="preview-loading__hero">
+                    <div class="preview-loading__hero-image">
+                      <span
+                        class="preview-loading__badge preview-loading__badge--primary"
+                      >
+                        LCP • eager • high priority
+                      </span>
+                    </div>
+                    <p class="preview-loading__text">
+                      The first visible hero image should load eagerly and be
+                      prioritized by the browser. Always define width/height and
+                      use modern formats (WebP/AVIF).
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Content / lazy images side -->
+                <div class="preview-loading__block">
+                  <h4 class="preview-loading__title">Content images (lazy)</h4>
+                  <div class="preview-loading__grid">
+                    <div class="preview-loading__thumb">
+                      <span class="preview-loading__badge">lazy + async</span>
+                    </div>
+                    <div class="preview-loading__thumb">
+                      <span class="preview-loading__badge">lazy + async</span>
+                    </div>
+                    <div class="preview-loading__thumb">
+                      <span class="preview-loading__badge">lazy + async</span>
+                    </div>
+                  </div>
+                  <p class="preview-loading__text">
+                    Use lazy loading for all non-critical images below the fold
+                    to improve initial paint and reduce data usage.
+                  </p>
+                </div>
+              </div>
+
+              <div class="card preview-modal__code">
+                <pre><code>&lt;!-- Hero (LCP) image --&gt;
+&lt;img
+  src="/assets/images/hero/home-hero.webp"
+  alt="Main hero visual"
+  width="1600"
+  height="900"
+  loading="eager"
+  fetchpriority="high"
+  decoding="async"
+/&gt;
+
+&lt;!-- Content image (below the fold) --&gt;
+&lt;img
+  src="/assets/images/content/article-01.webp"
+  alt="Dashboard screenshot"
+  width="800"
+  height="600"
+  loading="lazy"
+  decoding="async"
+/&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal: Video & embeds preview -->
+          <div id="modal-video" class="preview-modal">
+            <div class="preview-modal__dialog">
+              <header class="preview-modal__header">
+                <h3 class="preview-modal__title">Video &amp; Embeds</h3>
+                <a
+                  href="#perf-images"
+                  class="preview-modal__close"
+                  aria-label="Close video & embeds preview"
+                >
+                  ✕
+                </a>
+              </header>
+
+              <p class="preview-modal__description">
+                Example of a responsive media block with a local video (using a
+                poster) and a lazy-loaded YouTube embed. Both follow our
+                performance and UX rules.
+              </p>
+
+              <div class="preview-media">
+                <!-- Local video preview -->
+                <div class="preview-media__block">
+                  <h4 class="preview-media__title">Local video</h4>
+                  <div class="preview-media__video">
+                    <div class="preview-media__video-poster">
+                      <span class="preview-media__label"
+                        >poster + muted autoplay</span
+                      >
+                      <span class="preview-media__play">▶</span>
+                    </div>
+                  </div>
+                  <p class="preview-media__text">
+                    Use a <code>poster</code> image and autoplay only when
+                    muted. Provide controls when video is part of main content.
+                  </p>
+                </div>
+
+                <!-- Embed preview -->
+                <div class="preview-media__block">
+                  <h4 class="preview-media__title">YouTube embed</h4>
+                  <div class="embed-wrapper embed-wrapper--preview">
+                    <div class="embed-wrapper__placeholder">
+                      <span class="embed-wrapper__play">▶</span>
+                      <span class="embed-wrapper__label"
+                        >Responsive 16:9 iframe</span
+                      >
+                    </div>
+                  </div>
+                  <p class="preview-media__text">
+                    Always wrap iframe in a fixed aspect-ratio container and use
+                    <code>loading="lazy"</code> for embeds below the fold.
+                  </p>
+                </div>
+              </div>
+
+              <div class="card preview-modal__code">
+                <pre><code>&lt;!-- Local video --&gt;
+&lt;video
+  class="media-video"
+  playsinline
+  muted
+  loop
+  autoplay
+  poster="/assets/images/hero/video-placeholder.webp"
+&gt;
+  &lt;source src="/assets/media/video/hero.webm" type="video/webm" /&gt;
+  &lt;source src="/assets/media/video/hero.mp4" type="video/mp4" /&gt;
+&lt;/video&gt;
+
+&lt;!-- Responsive YouTube embed --&gt;
+&lt;div class="embed-wrapper"&gt;
+  &lt;iframe
+    src="https://www.youtube.com/embed/VIDEO_ID"
+    title="Video title"
+    loading="lazy"
+    allowfullscreen
+    referrerpolicy="strict-origin-when-cross-origin"
+  &gt;&lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/js/main.js" defer></script>
+  </body>
+</html>

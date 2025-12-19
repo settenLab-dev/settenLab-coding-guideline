@@ -1,0 +1,10 @@
+.sidebar__divider {
+  margin: 8px 4px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.component-card--warning {
+  border-left: 3px solid #f39c12;
+  background: rgba(255, 197, 110, 0.05);
+}

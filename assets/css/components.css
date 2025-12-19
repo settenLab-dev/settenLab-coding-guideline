@@ -1,0 +1,1338 @@
+/* 
+===========================================
+  COMPONENTS.CSS
+  TABLE OF CONTENTS
+===========================================
+1. Cards & Callouts
+2. Code Blocks
+3. Buttons
+4. Component Grid & Component Cards
+5. Preview Modal
+6. Slider Preview
+7. Media Block Preview
+8. Embed & Gallery Preview
+9. Performance / KPI / Checklists
+10. Testing Helpers
+11. Performance Modals & Loading Preview
+12. Media (Video & Embeds) Preview
+13. Units (rem / em / px / vw / vh)
+14. Percent Layout Preview
+15. Naming / BEM Table
+16. Attribute Naming & Patterns
+===========================================
+*/
+
+/* =========================================
+   1. Cards & Callouts
+   ========================================= */
+
+.card {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  background: rgba(11, 13, 30, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-soft);
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.card ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+.card li + li {
+  margin-top: 4px;
+}
+
+/* Callout card */
+
+.callout {
+  border-left: 3px solid var(--accent);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* =========================================
+   2. Code Blocks
+   ========================================= */
+
+pre {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: radial-gradient(
+      circle at top left,
+      rgba(90, 200, 250, 0.18),
+      transparent 55%
+    ),
+    rgba(6, 9, 25, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  overflow-x: auto;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =========================================
+   3. Buttons
+   ========================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: radial-gradient(
+      circle at top left,
+      rgba(90, 200, 250, 0.3),
+      transparent 55%
+    ),
+    rgba(15, 17, 35, 0.95);
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Button modifiers */
+
+.btn--primary {
+  border-color: rgba(90, 200, 250, 0.7);
+}
+
+/* =========================================
+   4. Component Grid & Component Cards
+   ========================================= */
+
+.component-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.component-card {
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(10, 12, 30, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.component-card__title {
+  margin: 0;
+  font-size: 16px;
+}
+
+.component-card__text {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.component-card__btn {
+  align-self: flex-start;
+  margin-top: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(90, 200, 250, 0.6);
+  background: radial-gradient(
+      circle at top left,
+      rgba(90, 200, 250, 0.3),
+      transparent 60%
+    ),
+    rgba(12, 14, 32, 0.96);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.component-card__btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.6);
+}
+
+/* =========================================
+   5. Preview Modal (CSS-only via :target)
+   ========================================= */
+
+.preview-modal {
+  position: fixed;
+  inset: 0;
+  padding: 16px;
+  background: radial-gradient(
+      circle at top left,
+      rgba(90, 200, 250, 0.24),
+      transparent 60%
+    ),
+    rgba(2, 4, 18, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-med);
+  z-index: 40;
+}
+
+.preview-modal:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.preview-modal__dialog {
+  width: 100%;
+  max-width: 960px;
+  max-height: calc(100vh - 40px);
+  overflow: auto;
+  border-radius: 22px;
+  padding: 16px 16px 18px;
+  background: rgba(10, 12, 30, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+}
+
+.preview-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.preview-modal__title {
+  margin: 0;
+  font-size: 18px;
+}
+
+.preview-modal__close {
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 4px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(10, 12, 30, 0.96);
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.preview-modal__description {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+}
+
+.preview-modal__code {
+  margin-top: 14px;
+}
+
+/* =========================================
+   6. Slider Preview (Swiper Shell)
+   ========================================= */
+
+.preview-slider {
+  margin-top: 8px;
+}
+
+.preview-slider__frame {
+  position: relative;
+  border-radius: 20px;
+  padding: 12px;
+  background: radial-gradient(
+      circle at top left,
+      rgba(90, 200, 250, 0.16),
+      transparent 60%
+    ),
+    rgba(6, 8, 23, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+}
+
+.preview-slider__track {
+  display: flex;
+}
+
+.preview-slider__slide {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.preview-slider__image {
+  border-radius: 16px;
+  background: linear-gradient(135deg, #5ac8fa, #a85cf9);
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.preview-slider__content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.preview-slider__title {
+  margin: 0;
+  font-size: 15px;
+}
+
+.preview-slider__text {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.preview-slider__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(5, 7, 20, 0.9);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.preview-slider__nav--prev {
+  left: 8px;
+}
+
+.preview-slider__nav--next {
+  right: 8px;
+}
+
+/* Hide default Swiper icons */
+.preview-slider__nav.swiper-button-prev::after,
+.preview-slider__nav.swiper-button-next::after {
+  display: none;
+}
+
+/* Custom pagination dots (Swiper) */
+.preview-slider__dots {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.preview-slider__dots.swiper-pagination {
+  position: static;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.preview-slider__dots .swiper-pagination-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.25);
+  opacity: 1;
+  transition: width var(--transition-fast), background var(--transition-fast);
+}
+
+.preview-slider__dots .swiper-pagination-bullet-active {
+  width: 18px;
+  background: var(--accent);
+}
+
+/* =========================================
+   7. Media Block Preview
+   ========================================= */
+
+.preview-media-block {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.preview-media-block__media,
+.preview-media-block__content {
+  width: 100%;
+}
+
+.preview-media-block__title {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+
+.preview-media-block__text {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.preview-media-block__list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+}
+
+/* =========================================
+   8. Embed & Gallery Preview
+   ========================================= */
+
+/* Embed preview */
+
+.embed-wrapper--preview {
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(6, 8, 23, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.embed-wrapper__placeholder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.embed-wrapper__play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
+  font-size: 20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7);
+}
+
+.embed-wrapper__label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Gallery preview */
+
+.preview-gallery {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.preview-gallery__item {
+  border-radius: 14px;
+  background: radial-gradient(
+      circle at top left,
+      rgba(90, 200, 250, 0.26),
+      transparent 60%
+    ),
+    rgba(6, 8, 23, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  aspect-ratio: 4 / 3;
+}
+
+/* =========================================
+   9. Responsive for Components (768px+)
+   ========================================= */
+
+@media (min-width: 768px) {
+  .component-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .preview-slider__slide {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .preview-slider__frame {
+    max-width: 960px;
+    margin-inline: auto;
+  }
+
+  .preview-slider__image {
+    flex: 0 0 45%;
+    /* aspect-ratio оставляем, высоту не задаём */
+  }
+
+  .preview-slider__content {
+    flex: 1;
+  }
+
+  .preview-media-block {
+    flex-direction: row;
+  }
+
+  .preview-media-block__media {
+    flex: 0 0 52%;
+  }
+
+  .preview-media-block__content {
+    flex: 1;
+  }
+
+  .preview-gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .card {
+    padding: 16px 18px;
+  }
+}
+
+/* =========================================
+   10. Performance / KPI / Checklists
+   ========================================= */
+
+/* KPI card */
+
+.perf-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.perf-kpi__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.perf-kpi__item {
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: radial-gradient(
+      circle at top left,
+      rgba(90, 200, 250, 0.25),
+      transparent 60%
+    ),
+    rgba(8, 10, 26, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.perf-kpi__label {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.perf-kpi__value {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.perf-kpi__note {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Generic performance cards */
+
+.perf-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.perf-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.perf-card__header h3 {
+  margin: 0;
+}
+
+/* Badge base */
+
+.perf-badge {
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Badge modifiers */
+
+.perf-badge--green {
+  border-color: rgba(76, 217, 100, 0.7);
+  background: rgba(76, 217, 100, 0.16);
+}
+
+.perf-badge--yellow {
+  border-color: rgba(255, 204, 0, 0.75);
+  background: rgba(255, 204, 0, 0.16);
+}
+
+/* Checklist */
+
+.perf-checklist__list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+}
+
+.perf-checklist__list li + li {
+  margin-top: 4px;
+}
+
+/* Tablet+ layout for performance blocks */
+
+@media (min-width: 768px) {
+  .perf-kpi__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .perf-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* =========================================
+   11. Testing Helpers
+   ========================================= */
+
+.test-note {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.test-device-list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 13px;
+}
+
+.test-device-list li + li {
+  margin-top: 4px;
+}
+
+/* =========================================
+   12. Performance Modals & Loading Preview
+   ========================================= */
+
+/* "Open preview" button in performance cards */
+
+.perf-card__preview-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(90, 200, 250, 0.6);
+  background: radial-gradient(
+      circle at top left,
+      rgba(90, 200, 250, 0.22),
+      transparent 55%
+    ),
+    rgba(12, 14, 32, 0.96);
+  color: #ffffff;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.perf-card__preview-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.55);
+}
+
+/* Loading strategy preview */
+
+.preview-loading {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.preview-loading__block {
+  width: 100%;
+}
+
+.preview-loading__title {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+.preview-loading__hero {
+  border-radius: 16px;
+  padding: 10px;
+  background: radial-gradient(
+      circle at top left,
+      rgba(90, 200, 250, 0.2),
+      transparent 60%
+    ),
+    rgba(6, 8, 23, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.preview-loading__hero-image {
+  position: relative;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #5ac8fa, #a85cf9);
+  aspect-ratio: 16 / 9;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.preview-loading__badge {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  background: rgba(5, 7, 20, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+}
+
+.preview-loading__badge--primary {
+  background: rgba(90, 200, 250, 0.2);
+  border-color: rgba(90, 200, 250, 0.8);
+}
+
+.preview-loading__text {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.preview-loading__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.preview-loading__thumb {
+  position: relative;
+  border-radius: 10px;
+  background: radial-gradient(
+      circle at top left,
+      rgba(90, 200, 250, 0.18),
+      transparent 60%
+    ),
+    rgba(6, 8, 23, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+/* =========================================
+   13. Media (Video & Embeds) Preview
+   ========================================= */
+
+.preview-media {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.preview-media__block {
+  width: 100%;
+}
+
+.preview-media__title {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+.preview-media__video {
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(6, 8, 23, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.preview-media__video-poster {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #5ac8fa, #a85cf9);
+}
+
+.preview-media__play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #000;
+  font-size: 20px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.7);
+}
+
+.preview-media__label {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  background: rgba(5, 7, 20, 0.92);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+}
+
+.preview-media__text {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Tablet+ media layout */
+
+@media (min-width: 768px) {
+  .preview-loading {
+    flex-direction: row;
+  }
+
+  .preview-loading__block {
+    flex: 1;
+  }
+
+  .preview-media {
+    flex-direction: row;
+  }
+
+  .preview-media__block {
+    flex: 1;
+  }
+}
+
+/* =========================================
+   14. Units (REM / EM / PX / VW / VH)
+   ========================================= */
+
+/* Units preview */
+
+.preview-units {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.preview-units__block {
+  width: 100%;
+}
+
+.preview-units__label {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+/* REM boxes */
+
+.preview-units__box {
+  border-radius: 14px;
+  padding: 1.5rem;
+  background: radial-gradient(
+      circle at top left,
+      rgba(90, 200, 250, 0.22),
+      transparent 55%
+    ),
+    rgba(10, 12, 30, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.preview-units__box--rem-large {
+  padding: calc(1.5rem * 1.25); /* scaled */
+}
+
+/* EM preview button */
+
+.preview-units__button {
+  display: inline-flex;
+  padding: 0.5em 1.2em;
+  border-radius: 999px;
+  background: rgba(90, 200, 250, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 1rem;
+}
+
+.preview-units__button--large {
+  font-size: 1.25rem; /* scaling via em! */
+}
+
+/* PX examples */
+
+.preview-units__border-box,
+.preview-units__shadow-box {
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(10, 12, 30, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.preview-units__border-box {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.preview-units__shadow-box {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Desktop alignment */
+
+@media (min-width: 768px) {
+  .preview-units {
+    flex-direction: row;
+  }
+
+  .preview-units__block {
+    flex: 1;
+  }
+}
+
+/* VW preview layout */
+
+.preview-vw {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.preview-vw__block {
+  width: 100%;
+}
+
+.preview-vw__label {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+.preview-vw__example {
+  border-radius: 14px;
+  padding: 16px;
+  background: rgba(10, 12, 30, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.preview-vw__example--bad {
+  background: radial-gradient(
+      circle at top left,
+      rgba(255, 0, 0, 0.25),
+      transparent 55%
+    ),
+    rgba(10, 12, 30, 0.92);
+  border-color: rgba(255, 0, 0, 0.4);
+}
+
+.preview-vw__example--overflow {
+  background: radial-gradient(
+      circle at top left,
+      rgba(255, 140, 0, 0.25),
+      transparent 55%
+    ),
+    rgba(10, 12, 30, 0.92);
+  border-color: rgba(255, 140, 0, 0.4);
+}
+
+.preview-vw__example--good {
+  background: radial-gradient(
+      circle at top left,
+      rgba(90, 200, 250, 0.3),
+      transparent 55%
+    ),
+    rgba(10, 12, 30, 0.92);
+  border-color: rgba(90, 200, 250, 0.4);
+}
+
+.preview-vw__text {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Desktop alignment */
+
+@media (min-width: 768px) {
+  .preview-vw {
+    flex-direction: row;
+  }
+
+  .preview-vw__block {
+    flex: 1;
+  }
+}
+
+/* VH preview layout */
+
+.preview-vh {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.preview-vh__block {
+  width: 100%;
+}
+
+.preview-vh__label {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+.preview-vh__example {
+  border-radius: 14px;
+  padding: 18px;
+  background: rgba(10, 12, 30, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-vh__example--bad {
+  background: radial-gradient(
+      circle at top left,
+      rgba(255, 0, 0, 0.25),
+      transparent 55%
+    ),
+    rgba(10, 12, 30, 0.92);
+  border-color: rgba(255, 0, 0, 0.38);
+}
+
+.preview-vh__example--good {
+  background: radial-gradient(
+      circle at top left,
+      rgba(90, 200, 250, 0.25),
+      transparent 55%
+    ),
+    rgba(10, 12, 30, 0.92);
+  border-color: rgba(90, 200, 250, 0.5);
+}
+
+.preview-vh__example--neutral {
+  background: radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.15),
+      transparent 55%
+    ),
+    rgba(10, 12, 30, 0.92);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.preview-vh__text {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Desktop */
+
+@media (min-width: 768px) {
+  .preview-vh {
+    flex-direction: row;
+  }
+
+  .preview-vh__block {
+    flex: 1;
+  }
+}
+
+/* =========================================
+   15. Percent Layout Preview
+   ========================================= */
+
+.preview-percent {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.preview-percent__block {
+  width: 100%;
+}
+
+.preview-percent__label {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+.preview-percent__example {
+  border-radius: 14px;
+  padding: 16px;
+  background: rgba(10, 12, 30, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  height: 120px;
+  position: relative;
+}
+
+.preview-percent__child {
+  height: 100%;
+  border-radius: 8px;
+}
+
+/* Good case: width 100% */
+.preview-percent__child--wide {
+  width: 100%;
+  background: rgba(90, 200, 250, 0.45);
+}
+
+/* Bad case: height% confusion */
+.preview-percent__child--tall {
+  width: 40%;
+  height: 100%;
+  background: rgba(255, 0, 0, 0.35);
+}
+
+/* Controlled case */
+.preview-percent__child--controlled {
+  width: 100%;
+  max-width: 250px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.preview-percent__example--bad {
+  border-color: rgba(255, 0, 0, 0.38);
+  background: radial-gradient(
+      circle at top left,
+      rgba(255, 0, 0, 0.18),
+      transparent 60%
+    ),
+    rgba(10, 12, 30, 0.92);
+}
+
+.preview-percent__example--good {
+  border-color: rgba(90, 200, 250, 0.5);
+  background: radial-gradient(
+      circle at top left,
+      rgba(90, 200, 250, 0.2),
+      transparent 60%
+    ),
+    rgba(10, 12, 30, 0.92);
+}
+
+.preview-percent__example--neutral {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.preview-percent__text {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Desktop layout */
+
+@media (min-width: 768px) {
+  .preview-percent {
+    flex-direction: row;
+  }
+
+  .preview-percent__block {
+    flex: 1;
+  }
+}
+
+/* =========================================
+   16. Naming / BEM Table
+   ========================================= */
+
+.naming-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+.naming-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 640px;
+}
+
+.naming-table th,
+.naming-table td {
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.naming-table thead th {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.naming-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.naming-table code {
+  font-size: 12px;
+}
+
+.naming-note {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 767px) {
+  .naming-table {
+    font-size: 12px;
+  }
+
+  .naming-table th,
+  .naming-table td {
+    padding: 6px 8px;
+  }
+}
+
+/* =========================================
+   17. Attribute Naming & Patterns
+   ========================================= */
+
+.attr-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+.attr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 640px;
+}
+
+.attr-table th,
+.attr-table td {
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.attr-table thead th {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.attr-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.attr-table code {
+  font-size: 12px;
+}
+
+.attr-note {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Patterns block */
+
+.attr-patterns {
+  margin-top: 20px;
+}
+
+.attr-patterns__intro {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.attr-patterns__block + .attr-patterns__block {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.attr-patterns__title {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+
+.attr-patterns__text {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 767px) {
+  .attr-table {
+    font-size: 12px;
+  }
+
+  .attr-table th,
+  .attr-table td {
+    padding: 6px 8px;
+  }
+}
