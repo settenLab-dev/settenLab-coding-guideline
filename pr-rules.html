@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="description"
+      content="PR Rules / Review Checklist for web development: UI evidence, performance budgets, accessibility, SEO/analytics, security, and release discipline."
+    />
+    <meta name="theme-color" content="#0b0f1a" />
+
+    <meta
+      property="og:title"
+      content="PR Rules / Review Checklist — Web development — Coding Guideline"
+    />
+    <meta
+      property="og:description"
+      content="Web-focused pull request rules and review checklist: UI states, cross-browser, accessibility, performance budgets, SEO, analytics, and safe releases."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/Outfit-VariableFont.woff2"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <title>PR Rules / Review Checklist — Coding Guideline</title>
+  </head>
+
+  <body>
+    <div class="bg-gradient"></div>
+
+    <div class="app-shell">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="primary-sidebar" aria-label="Primary">
+        <a href="/" class="sidebar__header">
+          <div class="sidebar__logo" aria-hidden="true">S</div>
+          <div class="sidebar__title">
+            <span class="sidebar__company">Coding Guideline</span>
+            <span class="sidebar__subtitle">settenLab</span>
+          </div>
+        </a>
+
+        <nav class="sidebar__nav sidebar-nav" aria-label="Guideline navigation">
+          <!-- START HERE -->
+          <details
+            class="nav-group nav-group--start"
+            data-nav-group="start-here"
+          >
+            <summary class="nav-group__summary">
+              <a href="/" class="nav-group__summary-link">Start here</a>
+            </summary>
+          </details>
+
+          <!-- PROJECT SETUP -->
+          <details class="nav-group" data-nav-group="project-setup">
+            <summary class="nav-group__summary">Project setup</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  href="environment-setup.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  Environment setup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="file-structure.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  File structure
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- UI -->
+          <details class="nav-group" data-nav-group="ui">
+            <summary class="nav-group__summary">UI</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="markup.html" class="sidebar-nav__link nav-link"
+                  >Markup</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="styling.html" class="sidebar-nav__link nav-link"
+                  >Styling</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="components.html" class="sidebar-nav__link nav-link"
+                  >Components</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="typography.html" class="sidebar-nav__link nav-link"
+                  >Typography</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="accessibility.html" class="sidebar-nav__link nav-link">
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- ENGINEERING -->
+          <details class="nav-group" data-nav-group="engineering">
+            <summary class="nav-group__summary">Engineering</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="javascript.html">
+                  Javascript
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="api-and-data-handling.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  API & Data handling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="performance.html" class="sidebar-nav__link nav-link"
+                  >Performance</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="testing.html" class="sidebar-nav__link nav-link"
+                  >Testing</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="security.html" class="sidebar-nav__link nav-link"
+                  >Security</a
+                >
+              </li>
+            </ul>
+          </details>
+
+          <!-- WORKFLOW -->
+          <details class="nav-group" data-nav-group="workflow" open>
+            <summary class="nav-group__summary">Workflow</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="pr-rules.html" class="sidebar-nav__link nav-link">
+                  PR rules / review checklist
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="documentation.html" class="sidebar-nav__link nav-link">
+                  Documentation rules
+                </a>
+              </li>
+            </ul>
+          </details>
+        </nav>
+
+        <div class="sidebar__footer">
+          <a href="changelog.html" class="sidebar__version">v1.0.0</a>
+          <span class="sidebar__lang">EN</span>
+        </div>
+      </aside>
+
+      <div class="sidebar-backdrop js-sidebar-backdrop" hidden></div>
+
+      <!-- MAIN -->
+      <main class="main" id="main-content">
+        <header class="topbar">
+          <button
+            class="topbar__menu-btn js-sidebar-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-controls="primary-sidebar"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <h1 class="topbar__title">
+            PR Rules / Review Checklist (Web development)
+          </h1>
+
+          <div class="topbar__actions">
+            <button
+              class="topbar__action-btn"
+              id="themeToggle"
+              aria-label="Toggle theme"
+              aria-pressed="false"
+            >
+              🌗
+            </button>
+          </div>
+        </header>
+
+        <div class="content">
+          <!-- OVERVIEW -->
+          <section class="section" id="overview">
+            <h2>Overview</h2>
+            <p>
+              Web PRs often fail for the same reasons: missing UI states,
+              accessibility regressions, silent performance hits, and incomplete
+              release notes. These rules focus reviews on
+              <strong>user-visible correctness</strong> and
+              <strong>operational safety</strong>.
+            </p>
+
+            <div class="card callout">
+              <h3>Core Principles</h3>
+              <ul>
+                <li>
+                  <strong>Small and reviewable:</strong> one outcome per PR
+                </li>
+                <li>
+                  <strong>Evidence-driven:</strong> screenshots, videos, test
+                  results, audits
+                </li>
+                <li>
+                  <strong>Web quality gates:</strong> accessibility +
+                  performance + SEO where relevant
+                </li>
+                <li>
+                  <strong>Release-safe:</strong> flags, rollback path, and
+                  monitoring notes for risky changes
+                </li>
+                <li>
+                  <strong>Traceable work:</strong> link the Nulab task and
+                  decision context
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- PR SCOPE -->
+          <section class="section" id="scope">
+            <h2>PR Scope &amp; Structure</h2>
+            <p>
+              Keep PRs focused and predictable. Large web diffs (styling +
+              component changes + routing) are hard to review and easy to
+              regress.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">One goal</h3>
+                <p class="component-card__text">
+                  One feature, one bugfix, one refactor. Avoid “drive-by”
+                  cleanup.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Minimal noise</h3>
+                <p class="component-card__text">
+                  Separate formatting-only changes. Avoid large reordering
+                  unless required.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Clear narrative</h3>
+                <p class="component-card__text">
+                  Problem → approach → tradeoffs → risks → evidence.
+                </p>
+                <a href="#modal-pr-template" class="component-card__btn"
+                  >PR template →</a
+                >
+              </article>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Common “too large” signals</h3>
+              <ul style="margin: 0">
+                <li>UI redesign + major dependency upgrade in one PR</li>
+                <li>
+                  Routing changes + analytics changes + API integration changes
+                  together
+                </li>
+                <li>
+                  Performance “optimizations” mixed with feature changes (hard
+                  to attribute)
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- WEB EVIDENCE -->
+          <section class="section" id="ui-evidence">
+            <h2>UI Evidence (Required for UI changes)</h2>
+            <p>
+              UI changes must show proof. Reviewers should be able to validate
+              behavior without pulling the branch.
+            </p>
+
+            <div class="naming-table-wrapper">
+              <table class="naming-table">
+                <thead>
+                  <tr>
+                    <th>What changed</th>
+                    <th>Required evidence</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Layout / styling</td>
+                    <td>Before/After screenshots</td>
+                    <td>Include mobile + desktop breakpoints</td>
+                  </tr>
+                  <tr>
+                    <td>Interactive UI</td>
+                    <td>Short video or GIF</td>
+                    <td>Show transitions and edge states</td>
+                  </tr>
+                  <tr>
+                    <td>Forms</td>
+                    <td>Screenshots of validation + errors</td>
+                    <td>Loading, disabled, success, failure states</td>
+                  </tr>
+                  <tr>
+                    <td>New route/page</td>
+                    <td>Key states + navigation path</td>
+                    <td>Also document SEO/metadata if applicable</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card">
+              <h3>Minimum UI states to validate</h3>
+              <ul style="margin: 0">
+                <li><strong>Loading</strong> (slow network)</li>
+                <li><strong>Empty</strong> (no data)</li>
+                <li><strong>Error</strong> (API fails)</li>
+                <li>
+                  <strong>Permission denied</strong> (if access control exists)
+                </li>
+                <li><strong>Responsive</strong> (mobile + desktop)</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- WEB QUALITY GATES -->
+          <section class="section" id="quality-gates">
+            <h2>Web Quality Gates</h2>
+            <p>
+              Web projects require extra non-functional checks. If a gate is
+              skipped, explain why in the PR.
+            </p>
+
+            <div class="baseline-accordion">
+              <details class="accordion" open>
+                <summary class="accordion__summary">
+                  Accessibility (a11y)
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Keyboard navigation works (Tab order, focus visible, no
+                      focus traps unless intentional).
+                    </li>
+                    <li>
+                      Interactive controls have accessible names
+                      (labels/aria-label).
+                    </li>
+                    <li>
+                      Semantic HTML used where possible
+                      (buttons/links/headings).
+                    </li>
+                    <li>
+                      Modals/drawers: focus management and aria attributes are
+                      correct.
+                    </li>
+                    <li>
+                      Color contrast and reduced motion behavior are considered.
+                    </li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Performance (web-specific)
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Bundle impact checked when adding dependencies or
+                      expanding route code.
+                    </li>
+                    <li>
+                      Images are responsive and optimized (sizes, formats,
+                      lazy-loading where appropriate).
+                    </li>
+                    <li>
+                      Avoid hydration/render loops; memoize expensive
+                      selectors/components when needed.
+                    </li>
+                    <li>
+                      Web Vitals regression risk is called out (LCP/INP/CLS).
+                    </li>
+                  </ul>
+                  <a
+                    href="#modal-perf-notes"
+                    class="component-card__btn"
+                    style="margin-top: 12px; display: inline-block"
+                    >Perf notes template →</a
+                  >
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  SEO (if public pages)
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>Title/description and canonical URLs are correct.</li>
+                    <li>
+                      Structured data and OpenGraph metadata updated (if used).
+                    </li>
+                    <li>
+                      Redirects and route changes documented to avoid breaking
+                      indexed URLs.
+                    </li>
+                    <li>Sitemap/robots impact considered.</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Analytics (if instrumented)
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Event names/payload schema documented; avoid “mystery
+                      events”.
+                    </li>
+                    <li>No PII is sent; consent/opt-in logic respected.</li>
+                    <li>Third-party tags are gated and have an owner.</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- AUTHOR CHECKLIST -->
+          <section class="section" id="author-checklist">
+            <h2>Author Checklist (Web)</h2>
+            <p>
+              Before requesting review, authors must ensure the change is
+              testable, observable, and safe to release.
+            </p>
+
+            <div class="baseline-accordion">
+              <details class="accordion" open>
+                <summary class="accordion__summary">Must-have</summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>Nulab task linked (or explanation why not).</li>
+                    <li>PR description includes scope, approach, and risks.</li>
+                    <li>
+                      UI evidence included for UI changes (screenshots/video).
+                    </li>
+                    <li>
+                      Tests updated (unit/integration/E2E as appropriate) or
+                      manual steps documented.
+                    </li>
+                    <li>
+                      Docs updated when env vars, routes, behavior, or component
+                      APIs change.
+                    </li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Security &amp; privacy
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      No secrets in code or logs; no tokens in localStorage
+                      unless explicitly approved.
+                    </li>
+                    <li>
+                      Input validation at boundaries; no raw HTML rendering
+                      without sanitization.
+                    </li>
+                    <li>
+                      Error messages are safe (no stack traces or internal
+                      details).
+                    </li>
+                    <li>
+                      Analytics events do not include PII; redaction rules
+                      applied.
+                    </li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Cross-browser / device sanity
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      At minimum: one mobile viewport + one desktop viewport
+                      validated.
+                    </li>
+                    <li>
+                      For critical UI: check iOS Safari behavior (scrolling,
+                      fixed elements, input focus).
+                    </li>
+                    <li>Any known browser quirks documented for reviewers.</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- REVIEWER CHECKLIST -->
+          <section class="section" id="reviewer-checklist">
+            <h2>Reviewer Checklist (Web)</h2>
+            <p>
+              Reviewers validate user experience, correctness, and regression
+              risk. Prefer asking questions over assuming intent; block merges
+              when safety or testability is insufficient.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">UX correctness</h3>
+                <p class="component-card__text">
+                  Are all states handled (loading/empty/error)? Is copy clear?
+                  Are interactions predictable?
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Maintainability</h3>
+                <p class="component-card__text">
+                  Is it consistent with component patterns? Avoids duplication?
+                  Clear boundaries?
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Non-functional</h3>
+                <p class="component-card__text">
+                  Accessibility, performance impact, privacy/analytics, SEO
+                  correctness where relevant.
+                </p>
+                <a href="#risk" class="component-card__btn">Risk rubric →</a>
+              </article>
+            </div>
+
+            <div class="card">
+              <h3>Reviewer “must check” items</h3>
+              <ul style="margin: 0">
+                <li>
+                  Diff readability: naming, separation of concerns, no
+                  accidental churn.
+                </li>
+                <li>
+                  API/error handling: consistent error model, no silent
+                  failures, retries are safe.
+                </li>
+                <li>
+                  A11y basics: semantics + keyboard + focus handling for
+                  interactive components.
+                </li>
+                <li>
+                  Performance: avoid unnecessary renders, large bundle
+                  additions, unbounded lists.
+                </li>
+                <li>
+                  SEO/analytics: metadata/events updated and documented (if
+                  relevant).
+                </li>
+              </ul>
+            </div>
+
+            <div class="card component-card--warning" id="risk">
+              <h3>Risk rubric (web)</h3>
+              <ul style="margin: 0">
+                <li>
+                  <strong>Low:</strong> small CSS tweak, copy change, isolated
+                  component refactor with tests
+                </li>
+                <li>
+                  <strong>Medium:</strong> new API call, routing changes,
+                  caching changes, new shared component
+                </li>
+                <li>
+                  <strong>High:</strong> auth/session changes, analytics
+                  overhaul, SEO-impacting route changes, large dependency
+                  additions
+                </li>
+              </ul>
+              <p
+                style="
+                  margin-top: 12px;
+                  font-size: 13px;
+                  color: var(--text-muted);
+                "
+              >
+                High-risk PRs require stronger evidence: tests, feature flag,
+                rollout plan, and monitoring notes.
+              </p>
+            </div>
+          </section>
+
+          <!-- CI & MERGE -->
+          <section class="section" id="ci-merge">
+            <h2>CI, Approvals &amp; Merge Rules</h2>
+            <p>
+              CI is a hard gate. If checks are flaky, treat it as a defect.
+              Web-specific checks should not be skipped silently (lint,
+              typecheck, unit tests, E2E for critical flows).
+            </p>
+
+            <div class="card">
+              <h3>Minimum merge requirements</h3>
+              <ul style="margin: 0">
+                <li>CI green (lint, typecheck, tests, build).</li>
+                <li>At least one approval (two for high-risk PRs).</li>
+                <li>No unresolved review threads.</li>
+                <li>PR description includes evidence and test notes.</li>
+                <li>Release/rollout notes included when user-facing.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Release safety (recommended)</h3>
+              <ul style="margin: 0">
+                <li>Feature flag for risky UX or new endpoints.</li>
+                <li>Rollback plan (previous release + how to disable).</li>
+                <li>
+                  Monitoring note: what metric/log indicates success/failure.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- SUMMARY -->
+          <section class="section" id="summary">
+            <h2>Best Practices Summary</h2>
+
+            <div class="perf-grid">
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>UI evidence</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Before/After screenshots</li>
+                  <li>Key states included</li>
+                  <li>Mobile + desktop</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Accessibility</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Keyboard + focus</li>
+                  <li>Semantics + labels</li>
+                  <li>Modal behavior correct</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Performance discipline</h3>
+                  <span class="perf-badge perf-badge--yellow">Important</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Bundle impact checked</li>
+                  <li>Image optimization</li>
+                  <li>Vitals risk called out</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>SEO &amp; analytics</h3>
+                  <span class="perf-badge perf-badge--yellow">Important</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Metadata correctness</li>
+                  <li>Events documented</li>
+                  <li>No PII</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>CI gates</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>No merge on red CI</li>
+                  <li>Fix flakes, don’t rerun</li>
+                  <li>Checks remain meaningful</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Release safety</h3>
+                  <span class="perf-badge perf-badge--yellow">Important</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Feature flags</li>
+                  <li>Rollback plan</li>
+                  <li>Monitoring notes</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal: PR Template -->
+    <dialog id="modal-pr-template" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">PR Description Template (Web)</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close PR template preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Copy/paste into the PR description. Keep it short; include links and
+            evidence.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code>## Summary
+What does this change do (user-visible)?
+
+## Nulab task
+Link:
+
+## Context / Problem
+Why is this needed? Links to spec/design.
+
+## Approach
+How does it work? Tradeoffs?
+
+## UI Evidence (if UI)
+- Before/After screenshots:
+- Video/GIF (interaction):
+- States covered: loading / empty / error / permission
+
+## Testing
+- Unit:
+- Integration/E2E:
+- Manual steps:
+
+## Non-functional
+- Accessibility notes:
+- Performance notes (bundle/vitals):
+- SEO impact (if public):
+- Analytics changes (events/schema, no PII):
+
+## Risk / Rollout
+- Risk level: low / medium / high
+- Feature flag:
+- Rollback plan:
+- Monitoring notes:
+
+## Notes for reviewers
+Anything to pay attention to?</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Performance Notes -->
+    <dialog id="modal-perf-notes" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Performance Notes Template</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close performance notes preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Use this when the PR affects bundles, rendering, images, routing, or
+            third-party scripts.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code>## Performance notes
+- Bundle impact:
+  * New deps:
+  * Route chunk changes:
+- Rendering:
+  * Any expensive lists / virtualization?
+  * Avoided unnecessary renders?
+- Images:
+  * Responsive sizes? Modern formats?
+- Web Vitals risk:
+  * LCP:
+  * INP:
+  * CLS:
+- Audit evidence:
+  * Lighthouse / WebPageTest / RUM snapshot (if available)</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

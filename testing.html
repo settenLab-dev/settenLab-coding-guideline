@@ -2,96 +2,194 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Frontend Guidelines – Testing</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Google Font (same as other pages) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="description" content="Guideline: HEAD best practices" />
+    <meta property="og:title" content="HEAD Guidelines" />
+    <meta
+      property="og:description"
+      content="Modern recommendations for HTML head structure, preload strategy, fonts, SEO and performance."
     />
-
-    <!-- Main styles -->
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/Outfit-VariableFont.woff2"
+      crossorigin
+    />
     <link rel="stylesheet" href="assets/css/style.css" />
+
+    <title>SettenLab coding guide</title>
   </head>
   <body>
     <div class="bg-gradient"></div>
 
     <div class="app-shell">
-      <!-- Sidebar -->
-      <aside class="sidebar" id="sidebar">
-        <div class="sidebar__header">
-          <div class="sidebar__logo">FG</div>
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="primary-sidebar" aria-label="Primary">
+        <a href="/" class="sidebar__header">
+          <div class="sidebar__logo" aria-hidden="true">S</div>
           <div class="sidebar__title">
-            <span class="sidebar__company">Company Name</span>
-            <span class="sidebar__subtitle">Frontend Guidelines</span>
+            <span class="sidebar__company">Coding Guideline</span>
+            <span class="sidebar__subtitle">settenLab</span>
           </div>
-        </div>
+        </a>
 
-        <nav class="sidebar__nav">
-          <!-- Global navigation -->
-          <a class="nav-link" href="index.html#intro">Overview</a>
-          <a class="nav-link" href="performance.html#perf-intro">
-            Performance
-          </a>
-
-          <div class="sidebar__divider"></div>
-
-          <!-- Local Testing navigation -->
-          <a
-            class="nav-link active"
-            href="#test-intro"
-            data-target="test-intro"
+        <nav class="sidebar__nav sidebar-nav" aria-label="Guideline navigation">
+          <!-- START HERE -->
+          <details
+            class="nav-group nav-group--start"
+            data-nav-group="start-here"
           >
-            Testing Intro
-          </a>
-          <a class="nav-link" href="#test-inspect" data-target="test-inspect">
-            Inspect & DevTools
-          </a>
-          <a class="nav-link" href="#test-devices" data-target="test-devices">
-            Devices & Viewports
-          </a>
-          <a class="nav-link" href="#test-browsers" data-target="test-browsers">
-            Browsers
-          </a>
-          <a
-            class="nav-link"
-            href="#test-checklist"
-            data-target="test-checklist"
-          >
-            Testing Checklist
-          </a>
+            <summary class="nav-group__summary">
+              <a href="/" class="nav-group__summary-link">Start here</a>
+            </summary>
+          </details>
+
+          <!-- PROJECT SETUP -->
+          <details class="nav-group" data-nav-group="project-setup">
+            <summary class="nav-group__summary">Project setup</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  href="environment-setup.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  Environment setup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="file-structure.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  File structure
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- UI -->
+          <details class="nav-group" data-nav-group="ui">
+            <summary class="nav-group__summary">UI</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="markup.html" class="sidebar-nav__link nav-link">
+                  Markup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="styling.html" class="sidebar-nav__link nav-link">
+                  Styling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="components.html" class="sidebar-nav__link nav-link">
+                  Components
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="typography.html" class="sidebar-nav__link nav-link">
+                  Typography
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="accessibility.html" class="sidebar-nav__link nav-link">
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- ENGINEERING -->
+          <details class="nav-group" data-nav-group="engineering" open>
+            <summary class="nav-group__summary">Engineering</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="javascript.html">
+                  Javascript
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="api-and-data-handling.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  API & Data handling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="performance.html" class="sidebar-nav__link nav-link">
+                  Performance
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="testing.html" class="sidebar-nav__link nav-link">
+                  Testing
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="security.html" class="sidebar-nav__link nav-link">
+                  Security
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- WORKFLOW -->
+          <details class="nav-group" data-nav-group="workflow">
+            <summary class="nav-group__summary">Workflow</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="pr-rules.html" class="sidebar-nav__link nav-link">
+                  PR rules / review checklist
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="documentation.html" class="sidebar-nav__link nav-link">
+                  Documentation rules
+                </a>
+              </li>
+            </ul>
+          </details>
         </nav>
 
         <div class="sidebar__footer">
-          <span class="sidebar__version">v1.0.0</span>
+          <a href="changelog.html" class="sidebar__version">v1.0.0</a>
           <span class="sidebar__lang">EN</span>
         </div>
       </aside>
+
+      <div class="sidebar-backdrop js-sidebar-backdrop" hidden></div>
 
       <!-- Main -->
       <div class="main">
         <!-- Top bar -->
         <header class="topbar">
           <button
-            class="topbar__menu-btn"
-            id="menuToggle"
-            aria-label="Toggle navigation"
+            class="topbar__menu-btn js-sidebar-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-controls="primary-sidebar"
+            aria-expanded="false"
           >
             <span></span>
             <span></span>
             <span></span>
           </button>
 
-          <h1 class="topbar__title">Testing & QA</h1>
+          <h1 class="topbar__title">Testing</h1>
 
           <div class="topbar__actions">
+            <!-- Theme toggle placeholder -->
             <button
               class="topbar__action-btn"
               id="themeToggle"
               aria-label="Toggle theme"
+              aria-pressed="false"
             >
               🌗
             </button>
@@ -136,7 +234,7 @@
               <article class="card perf-card">
                 <div class="perf-card__header">
                   <h3>Basic workflow</h3>
-                  <span class="perf-badge">Required</span>
+                  <span class="perf-badge perf-badge--yellow">Required</span>
                 </div>
                 <ul>
                   <li>
@@ -161,7 +259,7 @@
               <article class="card perf-card">
                 <div class="perf-card__header">
                   <h3>Responsive mode</h3>
-                  <span class="perf-badge perf-badge--green">Required</span>
+                  <span class="perf-badge perf-badge--yellow">Required</span>
                 </div>
                 <ul>
                   <li>
@@ -187,7 +285,7 @@
               <article class="card perf-card">
                 <div class="perf-card__header">
                   <h3>Layout debugging tips</h3>
-                  <span class="perf-badge perf-badge--yellow">Recommended</span>
+                  <span class="perf-badge perf-badge--green">Recommended</span>
                 </div>
                 <ul>
                   <li>
@@ -219,7 +317,7 @@
             <div class="card perf-card">
               <div class="perf-card__header">
                 <h3>Target viewports</h3>
-                <span class="perf-badge">Required</span>
+                <span class="perf-badge perf-badge--yellow">Required</span>
               </div>
               <p class="test-note">
                 Use these viewport widths in DevTools “Responsive” mode as a
@@ -274,53 +372,125 @@
 
           <!-- Browsers -->
           <section class="section" id="test-browsers">
-            <h2>Browser Coverage</h2>
+            <h2>Browser Support &amp; Coverage</h2>
             <p>
-              We do not support all browsers in the world, but we require a
-              minimal set to be tested before any release.
+              We do not support every browser/version combination. For each
+              project we define a target support policy, and every release must
+              be tested against the minimum coverage below.
             </p>
 
             <div class="perf-grid">
               <article class="card perf-card">
                 <div class="perf-card__header">
-                  <h3>Desktop</h3>
-                  <span class="perf-badge">Required</span>
+                  <h3>Support policy (default)</h3>
+                  <span class="perf-badge perf-badge--yellow">Required</span>
                 </div>
                 <ul>
-                  <li>Google Chrome (latest stable).</li>
-                  <li>Microsoft Edge (latest stable).</li>
-                  <li>Firefox (latest stable) for layout sanity checks.</li>
-                </ul>
-              </article>
-
-              <article class="card perf-card">
-                <div class="perf-card__header">
-                  <h3>Mobile</h3>
-                  <span class="perf-badge perf-badge--green">Required</span>
-                </div>
-                <ul>
-                  <li>Safari on iOS (latest stable).</li>
-                  <li>Chrome on Android (latest stable).</li>
                   <li>
-                    If available, test in WebView containers used by our apps
-                    (if applicable).
+                    <strong>Evergreen browsers:</strong> support the
+                    <strong>latest stable</strong> and
+                    <strong>previous major</strong>
+                    version (a.k.a. “last 2 major versions”).
+                  </li>
+                  <li>
+                    <strong>iOS Safari:</strong> support the
+                    <strong>current</strong> and <strong>previous</strong> iOS
+                    major versions.
+                  </li>
+                  <li>
+                    <strong>Android:</strong> support
+                    <strong>Chrome</strong> (latest stable and previous major).
+                    If the product is embedded in an app, test the relevant
+                    <strong>WebView</strong> versions used by that app.
+                  </li>
+                  <li>
+                    If a project requires legacy support (older iOS, kiosk
+                    devices, embedded browsers), the project owner must
+                    explicitly document the required versions in the project
+                    README and QA checklist.
                   </li>
                 </ul>
               </article>
 
               <article class="card perf-card">
                 <div class="perf-card__header">
-                  <h3>Notes</h3>
-                  <span class="perf-badge perf-badge--yellow">Recommended</span>
+                  <h3>Desktop (minimum test set)</h3>
+                  <span class="perf-badge perf-badge--yellow">Required</span>
                 </div>
                 <ul>
                   <li>
-                    Do not optimize specifically for outdated browsers unless
-                    requested by the project owner.
+                    <strong>Chrome</strong> — latest stable + previous major.
                   </li>
                   <li>
-                    For complex features (3D, advanced CSS), always check
-                    browser compatibility (Can I Use).
+                    <strong>Edge</strong> — latest stable + previous major.
+                  </li>
+                  <li>
+                    <strong>Firefox</strong> — latest stable + previous major.
+                  </li>
+                  <li>
+                    <strong>Safari (macOS)</strong> — recommended when the
+                    audience is macOS-heavy.
+                  </li>
+                </ul>
+              </article>
+
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Mobile (minimum test set)</h3>
+                  <span class="perf-badge perf-badge--yellow">Required</span>
+                </div>
+                <ul>
+                  <li>
+                    <strong>Safari (iOS)</strong> — current + previous iOS
+                    major.
+                  </li>
+                  <li>
+                    <strong>Chrome (Android)</strong> — latest stable + previous
+                    major.
+                  </li>
+                  <li>
+                    <strong>In-app / WebView</strong> — test if your product is
+                    opened inside an app container (e.g., a native app, LINE,
+                    etc.).
+                  </li>
+                </ul>
+              </article>
+
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Explicitly not supported</h3>
+                  <span class="perf-badge perf-badge--yellow">Required</span>
+                </div>
+                <ul>
+                  <li><strong>Internet Explorer</strong> — not supported.</li>
+                  <li>
+                    <strong>Outdated browsers</strong> (beyond the policy above)
+                    — not supported unless the project owner requests it in
+                    writing.
+                  </li>
+                </ul>
+              </article>
+
+              <article class="card perf-card">
+                <div class="perf-card__header">
+                  <h3>Compatibility checks</h3>
+                  <span class="perf-badge perf-badge--green">Recommended</span>
+                </div>
+                <ul>
+                  <li>
+                    For advanced CSS/JS features, verify support in a
+                    compatibility database (e.g., “Can I use”).
+                  </li>
+                  <li>
+                    Prefer <strong>progressive enhancement</strong>: ship a
+                    baseline experience for all supported browsers and enhance
+                    when features are available.
+                  </li>
+                  <li>
+                    If your build uses a browser targeting config (e.g.
+                    Browserslist), it should match the policy above and is
+                    considered the
+                    <strong>single source of truth</strong>.
                   </li>
                 </ul>
               </article>

@@ -2,250 +2,526 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>File Structure Guidelines</title>
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="description"
+      content="Project file structure guidelines: organization patterns, naming conventions, and scalability strategies for static sites and modern build systems."
+    />
+    <meta name="theme-color" content="#0b0f1a" />
+
+    <meta property="og:title" content="File Structure — Coding Guideline" />
+    <meta
+      property="og:description"
+      content="Comprehensive guide to organizing project files, assets, and components for maintainability and scalability."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/Outfit-VariableFont.woff2"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <title>File Structure — Coding Guideline</title>
   </head>
 
   <body>
     <div class="bg-gradient"></div>
 
     <div class="app-shell">
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <div class="sidebar__header">
-          <div class="sidebar__logo">G</div>
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="primary-sidebar" aria-label="Primary">
+        <a href="/" class="sidebar__header">
+          <div class="sidebar__logo" aria-hidden="true">S</div>
           <div class="sidebar__title">
-            <span class="sidebar__company">Guideline</span>
-            <span class="sidebar__subtitle">File Structure</span>
+            <span class="sidebar__company">Coding Guideline</span>
+            <span class="sidebar__subtitle">settenLab</span>
           </div>
-        </div>
+        </a>
 
-        <nav class="sidebar__nav">
-          <a href="index.html" class="nav-link">← Back to main</a>
-          <a href="#overview" class="nav-link">Overview</a>
-          <a href="#basic-structure" class="nav-link">Basic structure</a>
-          <a href="#assets" class="nav-link">Assets</a>
-          <a href="#components" class="nav-link">Components</a>
-          <a href="#images" class="nav-link">Images & media</a>
-          <a href="#naming" class="nav-link">Folder naming</a>
+        <nav class="sidebar__nav sidebar-nav" aria-label="Guideline navigation">
+          <!-- START HERE -->
+          <details
+            class="nav-group nav-group--start"
+            data-nav-group="start-here"
+          >
+            <summary class="nav-group__summary">
+              <a href="/" class="nav-group__summary-link">Start here</a>
+            </summary>
+          </details>
+
+          <!-- PROJECT SETUP -->
+          <details class="nav-group" data-nav-group="project-setup" open>
+            <summary class="nav-group__summary">Project setup</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  href="environment-setup.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  Environment setup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="file-structure.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  File structure
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- UI -->
+          <details class="nav-group" data-nav-group="ui">
+            <summary class="nav-group__summary">UI</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="markup.html" class="sidebar-nav__link nav-link">
+                  Markup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="styling.html" class="sidebar-nav__link nav-link">
+                  Styling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="components.html" class="sidebar-nav__link nav-link">
+                  Components
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="typography.html" class="sidebar-nav__link nav-link">
+                  Typography
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="accessibility.html" class="sidebar-nav__link nav-link">
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- ENGINEERING -->
+          <details class="nav-group" data-nav-group="engineering">
+            <summary class="nav-group__summary">Engineering</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="javascript.html">
+                  Javascript
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="api-and-data-handling.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  API & Data handling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="performance.html" class="sidebar-nav__link nav-link">
+                  Performance
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="testing.html" class="sidebar-nav__link nav-link">
+                  Testing
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="security.html" class="sidebar-nav__link nav-link">
+                  Security
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- WORKFLOW -->
+          <details class="nav-group" data-nav-group="workflow">
+            <summary class="nav-group__summary">Workflow</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="pr-rules.html" class="sidebar-nav__link nav-link">
+                  PR rules / review checklist
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="documentation.html" class="sidebar-nav__link nav-link">
+                  Documentation rules
+                </a>
+              </li>
+            </ul>
+          </details>
         </nav>
 
         <div class="sidebar__footer">
-          <span class="sidebar__version">v1.0</span>
+          <a href="changelog.html" class="sidebar__version">v1.0.0</a>
           <span class="sidebar__lang">EN</span>
         </div>
       </aside>
 
-      <!-- Main content -->
-      <main class="main">
+      <div class="sidebar-backdrop js-sidebar-backdrop" hidden></div>
+
+      <!-- MAIN -->
+      <main class="main" id="main-content">
         <header class="topbar">
-          <h1 class="topbar__title">File Structure</h1>
+          <button
+            class="topbar__menu-btn js-sidebar-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-controls="primary-sidebar"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <h1 class="topbar__title">File structure</h1>
+
+          <div class="topbar__actions">
+            <!-- Theme toggle placeholder -->
+            <button
+              class="topbar__action-btn"
+              id="themeToggle"
+              aria-label="Toggle theme"
+              aria-pressed="false"
+            >
+              🌗
+            </button>
+          </div>
         </header>
 
         <div class="content">
-          <!-- Overview -->
+          <!-- OVERVIEW -->
           <section class="section" id="overview">
             <h2>Overview</h2>
             <p>
-              A consistent file structure is required for all projects. It
-              simplifies onboarding, maintenance, and deployment. This document
-              defines how to organize HTML pages, CSS/JS assets, images, and
-              components for multi-page sites.
+              A consistent file structure is essential for maintainability,
+              onboarding, and collaboration. This guide covers organization
+              patterns for projects of different scales—from simple static sites
+              to complex applications with build systems.
             </p>
 
             <div class="card callout">
-              <h3>Key principles</h3>
+              <h3>Core Principles</h3>
               <ul>
-                <li>One shared <code>assets/</code> folder per project.</li>
+                <li>Structure should scale with project complexity</li>
                 <li>
-                  Page-specific files live next to the page or in page folders.
+                  Related files are grouped together (proximity principle)
                 </li>
-                <li>Global styles/scripts are reused across all pages.</li>
                 <li>
-                  File names are lowercase, use <strong>kebab-case</strong>, and
-                  English identifiers.
+                  Global assets are shared; page-specific assets are isolated
+                </li>
+                <li>
+                  File names use <strong>kebab-case</strong>, English, lowercase
+                </li>
+                <li>Naming is predictable and searchable</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- CHOOSING STRUCTURE -->
+          <section class="section" id="choosing">
+            <h2>Choosing the Right Structure</h2>
+            <p>
+              Different projects require different organization strategies.
+              Choose based on project size, tooling, and team needs.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Small Projects</h3>
+                <p class="component-card__text">
+                  < 10 pages, static HTML/CSS/JS
+                </p>
+                <a href="#modal-small-structure" class="component-card__btn"
+                  >View structure →</a
+                >
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Medium Projects</h3>
+                <p class="component-card__text">
+                  10-50 pages, may use build tools
+                </p>
+                <a href="#modal-medium-structure" class="component-card__btn"
+                  >View structure →</a
+                >
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Large Projects</h3>
+                <p class="component-card__text">
+                  50+ pages, build system required
+                </p>
+                <a href="#modal-large-structure" class="component-card__btn"
+                  >View structure →</a
+                >
+              </article>
+            </div>
+
+            <div class="card">
+              <h3>Decision Tree</h3>
+              <ul>
+                <li>
+                  <strong>Plain HTML/CSS/JS?</strong> → Use flat structure (see
+                  Small Projects)
+                </li>
+                <li>
+                  <strong>Using build tools (Webpack/Vite)?</strong> → Use
+                  src/dist separation (see Medium/Large)
+                </li>
+                <li>
+                  <strong>Component library or design system?</strong> → Use
+                  atomic/modular structure
+                </li>
+                <li>
+                  <strong>Framework (React/Vue/Svelte)?</strong> → Follow
+                  framework conventions + our naming rules
                 </li>
               </ul>
             </div>
           </section>
 
-          <!-- Basic structure -->
-          <section class="section" id="basic-structure">
-            <h2>Basic project structure (static site)</h2>
+          <!-- SMALL STRUCTURE -->
+          <section class="section" id="small-structure">
+            <h2>Small Projects Overview</h2>
             <p>
-              Default structure for a static multi-page project without a build
-              system (plain HTML/CSS/JS).
+              For simple multi-page sites without build systems. HTML files at
+              root, shared assets in <code>assets/</code>.
             </p>
 
             <div class="card">
-              <pre><code>project-root/
-  index.html
-  about.html
-  guidelines.html
-  file-structure.html
-  vscode.html
-
-  assets/
-    css/
-      base.css
-      layout.css
-      components.css
-      pages/
-        home.css
-        about.css
-    js/
-      main.js
-      slider.js
-      forms.js
-      vendor/
-        swiper-bundle.min.js
-    images/
-      global/
-      pages/
-        home/
-        about/
-        guidelines/
-      icons/
-      logos/
-    fonts/</code></pre>
+              <h3>When to Use Small Structure</h3>
               <ul>
-                <li>
-                  <code>assets/css</code> — global styles, plus
-                  <code>pages/</code> for page-specific overrides.
-                </li>
-                <li>
-                  <code>assets/js</code> — <code>main.js</code> and
-                  component-specific scripts.
-                </li>
-                <li>
-                  <code>assets/images</code> — shared images, plus per-page
-                  folders.
-                </li>
+                <li>Landing pages, small marketing sites</li>
+                <li>Documentation sites without complex builds</li>
+                <li>Prototypes and quick demos</li>
+                <li>Projects with < 10 pages</li>
               </ul>
-              <a href="#modal-full-structure" class="btn btn--primary"
-                >Full structure example</a
+              <a
+                href="#modal-small-structure"
+                class="btn btn--primary"
+                style="margin-top: 12px"
+                >View full structure →</a
               >
             </div>
-          </section>
 
-          <!-- Assets -->
-          <section class="section" id="assets">
-            <h2>Assets organization</h2>
-            <p>
-              CSS and JS assets must be grouped by responsibility: base, layout,
-              components, pages. Vendor libraries are always isolated.
-            </p>
-
-            <div class="card">
-              <h3>CSS structure</h3>
-              <pre><code>assets/css/
-  base.css          /* resets, typography, colors, root vars */
-  layout.css        /* grid, containers, layout blocks */
-  components.css    /* buttons, cards, modals, sliders */
-  utilities.css     /* helper classes (u-*) */
-  pages/
-    home.css
-    about.css
-    guidelines.css</code></pre>
-              <ul>
-                <li><code>base.css</code> — reset + global design tokens.</li>
-                <li><code>layout.css</code> — page shell, header, footer.</li>
-                <li><code>components.css</code> — BEM components.</li>
-                <li>
-                  <code>pages/*.css</code> — page-specific tweaks (minimize
-                  usage).
-                </li>
-              </ul>
-            </div>
-
-            <div class="card">
-              <h3>JavaScript structure</h3>
-              <pre><code>assets/js/
-  main.js          /* global init: menus, header, shared UX */
-  slider.js        /* sliders / swiper initialization */
-  forms.js         /* validation, form handlers */
-  vendor/
-    swiper-bundle.min.js</code></pre>
-              <ul>
-                <li>
-                  <code>main.js</code> must only initialize components and bind
-                  global events.
-                </li>
-                <li>
-                  Component-specific logic (sliders, modals) lives in separate
-                  files.
-                </li>
-                <li>
-                  Third-party libraries are stored in <code>vendor/</code> and
-                  never modified directly.
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <!-- Components -->
-          <section class="section" id="components">
-            <h2>Components & partials</h2>
-            <p>
-              If the project uses templates or includes (e.g., via server-side
-              includes, build tools, or static site generator), keep shared
-              blocks in a dedicated folder.
-            </p>
-
-            <div class="card">
-              <pre><code>project-root/
-  components/
-    header.html
-    footer.html
-    nav-main.html
-    slider-hero.html
-    product-card.html
-    news-item.html</code></pre>
-              <ul>
-                <li>
-                  Each file contains <strong>one</strong> logical component.
-                </li>
-                <li>
-                  Component filenames match BEM blocks:
-                  <code>product-card.html</code> → <code>.product-card</code>.
-                </li>
-                <li>
-                  When using a templating engine, this folder may be under
-                  <code>src/components/</code>.
-                </li>
-              </ul>
-            </div>
-
-            <div class="card">
-              <h3>Recommended pattern</h3>
-              <pre><code>src/
-  components/
-    header/
-      header.html
-      header.css
-      header.js
-    slider/
-      slider.html
-      slider.css
-      slider.js</code></pre>
-              <p class="test-note">
-                For projects with a build step, group component assets by
-                component inside <code>src/components/</code>, and compile into
-                a flat <code>assets/</code> folder for production.
+            <div class="card component-card--warning">
+              <h3>⚠️ Limitations</h3>
+              <p style="margin-bottom: 0">
+                This structure doesn't scale well beyond 10-15 pages. If your
+                project grows, consider migrating to a medium structure with
+                build tools.
               </p>
             </div>
           </section>
 
-          <!-- Images & media -->
-          <section class="section" id="images">
-            <h2>Images & media folders</h2>
+          <!-- MEDIUM STRUCTURE -->
+          <section class="section" id="medium-structure">
+            <h2>Medium Projects Overview</h2>
             <p>
-              Images follow the same pattern across all projects to keep
-              references predictable and reusable.
+              For projects using build tools (Webpack, Vite, Parcel) or static
+              site generators. Separates source (<code>src/</code>) from output
+              (<code>dist/</code>).
             </p>
 
             <div class="card">
-              <pre><code>assets/images/
+              <h3>Key Differences from Small Projects</h3>
+              <ul>
+                <li><code>src/</code> contains all source files</li>
+                <li>
+                  <code>dist/</code> is the compiled output (not committed to
+                  Git)
+                </li>
+                <li>Components are grouped with their styles and scripts</li>
+                <li>
+                  Build tool handles concatenation, minification, optimization
+                </li>
+              </ul>
+              <a
+                href="#modal-medium-structure"
+                class="btn btn--primary"
+                style="margin-top: 12px"
+                >View full structure →</a
+              >
+            </div>
+
+            <div class="card">
+              <h3>When to Use Medium Structure</h3>
+              <ul>
+                <li>10-50 pages with shared components</li>
+                <li>Need for SCSS, PostCSS, or CSS preprocessing</li>
+                <li>Want to optimize and bundle assets automatically</li>
+                <li>Using modern JavaScript (ES modules, transpilation)</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- LARGE STRUCTURE -->
+          <section class="section" id="large-structure">
+            <h2>Large Projects Overview</h2>
+            <p>
+              For complex applications, design systems, or sites with 50+ pages.
+              Uses feature-based or atomic organization.
+            </p>
+
+            <div class="card">
+              <h3>When to Use Large Structure</h3>
+              <ul>
+                <li>Large applications (50+ pages)</li>
+                <li>Design systems or component libraries</li>
+                <li>Multiple developers working simultaneously</li>
+                <li>Need for clear separation of concerns</li>
+                <li>Reusable components across multiple projects</li>
+              </ul>
+              <a
+                href="#modal-large-structure"
+                class="btn btn--primary"
+                style="margin-top: 12px"
+                >View full structure →</a
+              >
+            </div>
+
+            <div class="card">
+              <h3>Organization Approaches</h3>
+              <ul>
+                <li>
+                  <strong>Feature-based:</strong> Group by features (home/,
+                  product/, blog/)
+                </li>
+                <li>
+                  <strong>Atomic Design:</strong> Group by component complexity
+                  (atoms/, molecules/, organisms/)
+                </li>
+                <li>
+                  <strong>Hybrid:</strong> Combine approaches based on project
+                  needs
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- ASSETS ORGANIZATION -->
+          <section class="section" id="assets">
+            <h2>Assets Organization</h2>
+            <p>
+              CSS, JavaScript, images, and fonts follow consistent patterns
+              across all project sizes.
+            </p>
+
+            <div class="baseline-accordion">
+              <details class="accordion">
+                <summary class="accordion__summary">CSS Structure</summary>
+                <div class="accordion__content">
+                  <h4 style="font-size: 14px; margin: 12px 0 8px">
+                    Small Projects:
+                  </h4>
+                  <pre><code>assets/css/
+  style.css           /* everything in one file */
+OR
+  base.css            /* resets, typography, tokens */
+  components.css      /* all components */
+  utilities.css       /* helper classes */</code></pre>
+
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Medium/Large Projects:
+                  </h4>
+                  <pre><code>src/styles/
+  tokens.css          /* CSS custom properties */
+  reset.css           /* normalization */
+  base.css            /* typography, global styles */
+  layout.css          /* grid, containers */
+  utilities.css       /* u-* helper classes */
+  
+components/           /* component-specific CSS */
+  button/button.css
+  header/header.css</code></pre>
+
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Page-Specific CSS:
+                  </h4>
+                  <p
+                    style="
+                      font-size: 13px;
+                      color: var(--text-muted);
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Minimize page-specific CSS. Use only for:
+                  </p>
+                  <ul style="font-size: 13px">
+                    <li>One-off layout adjustments unique to a page</li>
+                    <li>Temporary overrides (document why)</li>
+                    <li>A/B test variations</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  JavaScript Structure
+                </summary>
+                <div class="accordion__content">
+                  <h4 style="font-size: 14px; margin: 12px 0 8px">
+                    Small Projects:
+                  </h4>
+                  <pre><code>assets/js/
+  main.js             /* initialization, global logic */
+  slider.js           /* feature-specific */
+  forms.js
+  vendor/
+    swiper.min.js     /* third-party, unmodified */</code></pre>
+
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Medium/Large Projects:
+                  </h4>
+                  <pre><code>src/scripts/
+  main.js             /* app entry point */
+  components/
+    slider.js
+    modal.js
+  utils/
+    dom.js            /* DOM helpers */
+    api.js            /* API calls */
+    format.js         /* data formatting */
+  config/
+    constants.js
+  vendor/
+    (rarely used - prefer npm packages)</code></pre>
+
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Key Rules:
+                  </h4>
+                  <ul style="font-size: 13px">
+                    <li>
+                      <code>main.js</code> only initializes, never contains
+                      feature logic
+                    </li>
+                    <li>Feature code lives in separate modules</li>
+                    <li>Vendor libraries: use npm packages > local copies</li>
+                    <li>Never modify vendor files directly</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">Images & Media</summary>
+                <div class="accordion__content">
+                  <pre><code>assets/images/          /* or src/assets/images/ */
   global/
     bg-texture.webp
     placeholder.webp
@@ -255,164 +531,1526 @@
   icons/
     icon-menu.svg
     icon-close.svg
-    icon-arrow-right.svg
-  ui/
+    icon-arrow.svg
+  ui/                   /* UI decoration */
     btn-gradient.webp
     card-bg.webp
   pages/
     home/
       hero-main.webp
-      hero-mobile.webp
-      feature-01.webp
+      hero-main@2x.webp       /* retina */
+      hero-main-mobile.webp   /* responsive */
     about/
-      team-01.webp
-      office-01.webp
-    guidelines/
-      slider-example.webp
-      gallery-example.webp</code></pre>
+    product/</code></pre>
+
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Image Naming Rules:
+                  </h4>
+                  <ul style="font-size: 13px">
+                    <li>English, lowercase, kebab-case</li>
+                    <li>
+                      Include context: <code>hero-main.webp</code>,
+                      <code>section-team.webp</code>
+                    </li>
+                    <li>
+                      Retina: <code>image@2x.webp</code>,
+                      <code>image@3x.webp</code>
+                    </li>
+                    <li>
+                      Responsive: <code>image-mobile.webp</code>,
+                      <code>image-tablet.webp</code>
+                    </li>
+                    <li>Prefer WebP, provide fallbacks if needed</li>
+                  </ul>
+
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Responsive Images Strategy:
+                  </h4>
+                  <pre><code><!-- Naming pattern for srcset -->
+hero-main-320w.webp
+hero-main-640w.webp
+hero-main-960w.webp
+hero-main-1280w.webp
+hero-main-1920w.webp
+
+<!-- Or by device -->
+hero-main-mobile.webp
+hero-main-tablet.webp
+hero-main-desktop.webp</code></pre>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">Fonts</summary>
+                <div class="accordion__content">
+                  <pre><code>assets/fonts/
+  Outfit-VariableFont.woff2
+  Outfit-Regular.woff2
+  Outfit-Bold.woff2
+  JetBrainsMono-Regular.woff2   /* for code blocks */</code></pre>
+
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Best Practices:
+                  </h4>
+                  <ul style="font-size: 13px">
+                    <li>Prefer WOFF2 (best compression + broad support)</li>
+                    <li>
+                      Use variable fonts when possible
+                      (Outfit-VariableFont.woff2)
+                    </li>
+                    <li>Self-host critical fonts for performance</li>
+                    <li>Preload primary fonts in <code>&lt;head&gt;</code></li>
+                    <li>Avoid mixing too many font families (max 2-3)</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- COMPONENTS -->
+          <section class="section" id="components">
+            <h2>Components & Partials</h2>
+            <p>
+              When using templates, includes, or component-based architecture,
+              organize reusable UI elements systematically.
+            </p>
+
+            <div class="card">
+              <h3>Component Structure (Recommended)</h3>
+              <pre><code>components/
+  button/
+    button.html       /* or button.jsx, button.vue */
+    button.css
+    button.js
+    button.test.js    /* if testing */
+    README.md         /* component documentation */
+  
+  header/
+    header.html
+    header.css
+    header.js
+    header.test.js
+  
+  modal/
+    modal.html
+    modal.css
+    modal.js
+    modal.test.js</code></pre>
+              <p
+                style="
+                  margin-top: 12px;
+                  font-size: 13px;
+                  color: var(--text-muted);
+                "
+              >
+                Each component is self-contained: all related files grouped
+                together.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Component Naming Convention</h3>
               <ul>
                 <li>
-                  <code>global/</code> — shared backgrounds, placeholders,
-                  generic visuals.
+                  Folder name matches BEM block: <code>product-card/</code> →
+                  <code>.product-card</code>
                 </li>
                 <li>
-                  <code>logos/</code> — brand assets, always SVG if possible.
+                  Files inside use same base name:
+                  <code>product-card.html</code>, <code>product-card.css</code>
                 </li>
-                <li><code>icons/</code> — UI icons, mostly SVG.</li>
+                <li>Use kebab-case for multi-word components</li>
                 <li>
-                  <code>pages/&lt;page&gt;/</code> — page-specific images, named
-                  according to context (hero, section, feature).
+                  Be specific: <code>nav-main</code> > <code>nav</code>,
+                  <code>button-primary</code> > <code>button1</code>
                 </li>
               </ul>
             </div>
 
             <div class="card">
-              <h3>Image naming rules</h3>
+              <h3>Component Documentation</h3>
+              <p style="margin-bottom: 8px">
+                Each complex component should include a README with:
+              </p>
               <ul>
-                <li>Use English, lowercase, kebab-case.</li>
+                <li>Purpose and usage examples</li>
+                <li>Props/parameters (if applicable)</li>
+                <li>Variants and modifiers</li>
+                <li>Dependencies</li>
+                <li>Known limitations</li>
+              </ul>
+              <pre><code><!-- components/modal/README.md -->
+# Modal Component
+
+## Usage
+```html
+<div class="modal" id="example-modal">
+  <div class="modal__dialog">...</div>
+</div>
+```
+
+## Variants
+- `.modal--large` - Full-width modal
+- `.modal--center` - Centered modal
+
+## Dependencies
+- Requires `modal.js` for open/close functionality</code></pre>
+            </div>
+          </section>
+
+          <!-- CONFIG FILES -->
+          <section class="section" id="config">
+            <h2>Configuration Files</h2>
+            <p>
+              Configuration files live at project root. They define tooling
+              behavior and project standards.
+            </p>
+
+            <div class="naming-table-wrapper">
+              <table class="naming-table">
+                <thead>
+                  <tr>
+                    <th>File</th>
+                    <th>Purpose</th>
+                    <th>Required?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>package.json</code></td>
+                    <td>Dependencies, scripts, project metadata</td>
+                    <td>If using Node.js</td>
+                  </tr>
+                  <tr>
+                    <td><code>.gitignore</code></td>
+                    <td>Files excluded from version control</td>
+                    <td>Always</td>
+                  </tr>
+                  <tr>
+                    <td><code>.editorconfig</code></td>
+                    <td>Editor-agnostic formatting rules</td>
+                    <td>Recommended</td>
+                  </tr>
+                  <tr>
+                    <td><code>.prettierrc</code></td>
+                    <td>Prettier formatting rules</td>
+                    <td>If using Prettier</td>
+                  </tr>
+                  <tr>
+                    <td><code>.eslintrc.js</code></td>
+                    <td>JavaScript linting rules</td>
+                    <td>If using ESLint</td>
+                  </tr>
+                  <tr>
+                    <td><code>.stylelintrc.js</code></td>
+                    <td>CSS linting rules</td>
+                    <td>If using Stylelint</td>
+                  </tr>
+                  <tr>
+                    <td><code>.env.example</code></td>
+                    <td>Environment variable template</td>
+                    <td>If using .env</td>
+                  </tr>
+                  <tr>
+                    <td><code>README.md</code></td>
+                    <td>Project documentation</td>
+                    <td>Always</td>
+                  </tr>
+                  <tr>
+                    <td><code>CHANGELOG.md</code></td>
+                    <td>Version history and changes</td>
+                    <td>Recommended</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card">
+              <h3>Environment Variables (.env)</h3>
+              <p style="margin-bottom: 8px">
+                Never commit <code>.env</code> to Git. Always provide
+                <code>.env.example</code>:
+              </p>
+              <pre><code># .env.example
+API_BASE_URL=https://api.example.com
+GOOGLE_ANALYTICS_ID=UA-XXXXXXXXX-X
+ENVIRONMENT=development</code></pre>
+              <p
+                style="
+                  margin-top: 12px;
+                  font-size: 13px;
+                  color: var(--text-muted);
+                "
+              >
+                Developers copy <code>.env.example</code> to
+                <code>.env</code> and fill in real values locally.
+              </p>
+            </div>
+          </section>
+
+          <!-- NAMING RULES -->
+          <section class="section" id="naming">
+            <h2>Naming Conventions</h2>
+            <p>
+              Consistent naming makes projects searchable and predictable. These
+              rules apply to all files and folders.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Files</h3>
+                <ul class="component-card__list" style="font-size: 12px">
+                  <li>Use <strong>kebab-case</strong></li>
+                  <li>Lowercase only</li>
+                  <li>English language</li>
+                  <li>Descriptive, not abbreviated</li>
+                  <li><code>hero-banner.js</code> ✓</li>
+                  <li><code>HeroBanner.js</code> ✗</li>
+                </ul>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Folders</h3>
+                <ul class="component-card__list" style="font-size: 12px">
+                  <li>Use <strong>kebab-case</strong></li>
+                  <li>Plural for collections</li>
+                  <li>No nesting > 4 levels</li>
+                  <li><code>components/</code> ✓</li>
+                  <li><code>Components/</code> ✗</li>
+                  <li><code>component/</code> ✗</li>
+                </ul>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Assets</h3>
+                <ul class="component-card__list" style="font-size: 12px">
+                  <li>Include context in name</li>
+                  <li>Use hyphens as separators</li>
+                  <li><code>hero-main.webp</code> ✓</li>
+                  <li><code>hero-main@2x.webp</code> ✓</li>
+                  <li><code>img1.jpg</code> ✗</li>
+                  <li><code>hero_main.webp</code> ✗</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="card">
+              <h3>Examples: Good vs Bad</h3>
+              <div
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px"
+              >
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #4cd964; margin-bottom: 8px"
+                  >
+                    ✓ Good
+                  </h4>
+                  <pre><code>components/product-card/
+assets/images/pages/home/
+hero-banner.js
+pricing-section.css
+api-client.js</code></pre>
+                </div>
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #ef4444; margin-bottom: 8px"
+                  >
+                    ✗ Bad
+                  </h4>
+                  <pre><code>Components/ProductCard/
+img/
+HeroBanner.js
+pricing_section.css
+apiClient.js</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Common Mistakes</h3>
+              <ul>
                 <li>
-                  Include type or usage:
-                  <code>hero-main.webp</code>, <code>section-team.webp</code>,
-                  <code>card-feature-01.webp</code>.
+                  <strong>Mixed cases:</strong> <code>myComponent.js</code> +
+                  <code>MyOtherComponent.js</code>
                 </li>
                 <li>
-                  For responsive variants, add suffix:
-                  <code>hero-main@2x.webp</code>,
-                  <code>hero-main-mobile.webp</code>.
+                  <strong>Abbreviations:</strong> <code>btn.js</code>,
+                  <code>hdr.css</code> (use full words)
+                </li>
+                <li>
+                  <strong>Generic names:</strong> <code>file1.js</code>,
+                  <code>temp.css</code>, <code>new-component.js</code>
+                </li>
+                <li>
+                  <strong>Non-English:</strong> Using local language characters
+                  in filenames
+                </li>
+                <li>
+                  <strong>Spaces:</strong> <code>my file.js</code> (breaks on
+                  command line)
                 </li>
               </ul>
             </div>
           </section>
 
-          <!-- Folder naming -->
-          <section class="section" id="naming">
-            <h2>Folder naming rules</h2>
+          <!-- TESTING -->
+          <section class="section" id="testing">
+            <h2>Tests & Documentation</h2>
             <p>
-              Folder names must be short, descriptive, and stable across
-              projects.
+              Tests and documentation are first-class citizens. They need
+              organized homes in your project structure.
             </p>
 
+            <div class="baseline-accordion">
+              <details class="accordion">
+                <summary class="accordion__summary">Test Organization</summary>
+                <div class="accordion__content">
+                  <h4 style="font-size: 14px; margin: 12px 0 8px">
+                    Option 1: Co-located Tests
+                  </h4>
+                  <p
+                    style="
+                      font-size: 13px;
+                      color: var(--text-muted);
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Tests live next to the code they test (recommended for
+                    component libraries):
+                  </p>
+                  <pre><code>components/
+  button/
+    button.js
+    button.css
+    button.test.js    /* unit tests */
+  modal/
+    modal.js
+    modal.css
+    modal.test.js</code></pre>
+
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Option 2: Separate Tests Folder
+                  </h4>
+                  <p
+                    style="
+                      font-size: 13px;
+                      color: var(--text-muted);
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Tests mirror the src/ structure (common for applications):
+                  </p>
+                  <pre><code>src/
+  components/
+    button.js
+    modal.js
+  utils/
+    format.js
+
+tests/              /* or __tests__/ */
+  components/
+    button.test.js
+    modal.test.js
+  utils/
+    format.test.js
+  e2e/
+    homepage.spec.js</code></pre>
+
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Test File Naming:
+                  </h4>
+                  <ul style="font-size: 13px">
+                    <li>
+                      <code>*.test.js</code> - Unit tests (Jest convention)
+                    </li>
+                    <li>
+                      <code>*.spec.js</code> - Unit tests (Mocha/Jasmine
+                      convention)
+                    </li>
+                    <li><code>*.e2e.js</code> - End-to-end tests</li>
+                    <li><code>*.integration.js</code> - Integration tests</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Documentation Structure
+                </summary>
+                <div class="accordion__content">
+                  <pre><code>docs/
+  getting-started.md
+  architecture.md
+  deployment.md
+  api/
+    authentication.md
+    endpoints.md
+  components/
+    button.md
+    modal.md
+  guides/
+    contributing.md
+    code-review.md</code></pre>
+
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Essential Documentation Files:
+                  </h4>
+                  <ul style="font-size: 13px">
+                    <li>
+                      <code>README.md</code> - Project overview, setup
+                      instructions
+                    </li>
+                    <li><code>CHANGELOG.md</code> - Version history</li>
+                    <li>
+                      <code>CONTRIBUTING.md</code> - Contribution guidelines
+                    </li>
+                    <li><code>docs/</code> - Detailed documentation</li>
+                    <li>Component READMEs - Individual component docs</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- MIGRATION -->
+          <section class="section" id="migration">
+            <h2>Migrating Existing Projects</h2>
+            <p>
+              Restructuring a project takes planning. Don't try to do everything
+              at once—prioritize high-impact changes.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Phase 1: Foundation</h3>
+                <p class="component-card__text">
+                  Add missing config files, establish naming conventions for new
+                  files
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Phase 2: Assets</h3>
+                <p class="component-card__text">
+                  Reorganize CSS/JS/images into proper folders, update
+                  references
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Phase 3: Components</h3>
+                <p class="component-card__text">
+                  Extract reusable components, group related files together
+                </p>
+              </article>
+            </div>
+
             <div class="card">
-              <h3>Rules</h3>
-              <ul>
-                <li>Use <strong>English</strong> for all folder names.</li>
+              <h3>Migration Checklist</h3>
+              <ul style="margin: 0">
                 <li>
-                  Use <strong>kebab-case</strong> (<code>product-list</code>).
+                  ✓ Add <code>.gitignore</code>, <code>.editorconfig</code>,
+                  <code>README.md</code>
                 </li>
-                <li>No spaces, no uppercase, no special characters.</li>
+                <li>✓ Create <code>assets/</code> folder structure</li>
+                <li>✓ Establish naming convention (document it in README)</li>
+                <li>✓ Move images to <code>assets/images/</code></li>
                 <li>
-                  Use plural for collections:
-                  <code>assets</code>, <code>images</code>,
-                  <code>components</code>.
+                  ✓ Consolidate CSS files by purpose (base, components,
+                  utilities)
+                </li>
+                <li>✓ Organize JS into logical modules</li>
+                <li>✓ Extract shared components</li>
+                <li>✓ Update all file references in HTML/CSS/JS</li>
+                <li>✓ Test thoroughly after each phase</li>
+              </ul>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Migration Tips</h3>
+              <ul style="margin: 0">
+                <li>
+                  <strong>Work incrementally:</strong> Restructure one section
+                  at a time
                 </li>
                 <li>
-                  Avoid deep nesting (&gt; 4 levels) unless necessary (e.g.
-                  component-based <code>src/components/...)</code>.
+                  <strong>Use Git branches:</strong> Create
+                  <code>refactor/file-structure</code> branch
+                </li>
+                <li>
+                  <strong>Keep backups:</strong> Tag current state before major
+                  changes
+                </li>
+                <li>
+                  <strong>Update references:</strong> Use search/replace for
+                  path changes
+                </li>
+                <li>
+                  <strong>Test continuously:</strong> Don't restructure
+                  everything then test
+                </li>
+                <li>
+                  <strong>Document changes:</strong> Update README with new
+                  structure
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- TROUBLESHOOTING -->
+          <section class="section" id="troubleshooting">
+            <h2>Troubleshooting</h2>
+            <p>
+              Common issues when organizing project files and how to solve them.
+            </p>
+
+            <div class="baseline-accordion">
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Structure is too deep (> 5 levels)
+                </summary>
+                <div class="accordion__content">
+                  <p style="margin-bottom: 8px"><strong>Problem:</strong></p>
+                  <pre><code>src/features/product/components/cards/product/variants/large/...</code></pre>
+
+                  <p style="margin: 12px 0 8px"><strong>Solution:</strong></p>
+                  <ul style="font-size: 13px">
+                    <li>
+                      Flatten the structure by removing intermediate folders
+                    </li>
+                    <li>
+                      Use more descriptive names instead of nesting:
+                      <code>product-card-large/</code>
+                    </li>
+                    <li>Question if deep nesting actually adds clarity</li>
+                  </ul>
+
+                  <pre><code><!-- Better -->
+src/components/product-card-large/</code></pre>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Unclear where to put page-specific code
+                </summary>
+                <div class="accordion__content">
+                  <p style="margin-bottom: 8px"><strong>Guidelines:</strong></p>
+                  <ul style="font-size: 13px">
+                    <li>
+                      <strong>If used only on one page:</strong> Put in
+                      <code>pages/[page-name]/</code>
+                    </li>
+                    <li>
+                      <strong>If used on 2-3 pages:</strong> Still
+                      page-specific, keep in <code>pages/</code>
+                    </li>
+                    <li>
+                      <strong>If used on 3+ pages:</strong> It's shared, move to
+                      <code>components/</code>
+                    </li>
+                    <li>
+                      <strong>When in doubt:</strong> Start in
+                      <code>pages/</code>, refactor when reused
+                    </li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Different developers use different structures
+                </summary>
+                <div class="accordion__content">
+                  <p style="margin-bottom: 8px"><strong>Solution:</strong></p>
+                  <ul style="font-size: 13px">
+                    <li>
+                      Document the agreed structure in <code>README.md</code>
+                    </li>
+                    <li>Use this guideline as the source of truth</li>
+                    <li>Add structure diagrams/examples to project docs</li>
+                    <li>Code review for structure compliance</li>
+                    <li>
+                      Use automated linting for file naming
+                      (eslint-plugin-filename-case)
+                    </li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Build output mixed with source files
+                </summary>
+                <div class="accordion__content">
+                  <p style="margin-bottom: 8px">
+                    <strong>Problem:</strong> Compiled files (.min.js, .min.css)
+                    mixed with source
+                  </p>
+
+                  <p style="margin: 12px 0 8px"><strong>Solution:</strong></p>
+                  <ul style="font-size: 13px">
+                    <li>
+                      Always separate <code>src/</code> from
+                      <code>dist/</code> when using build tools
+                    </li>
+                    <li>Add <code>dist/</code> to <code>.gitignore</code></li>
+                    <li>Only commit source files to version control</li>
+                    <li>Build output is generated, not authored</li>
+                  </ul>
+
+                  <pre><code># .gitignore
+dist/
+build/
+*.min.css
+*.min.js
+*.map</code></pre>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Too many files at root level
+                </summary>
+                <div class="accordion__content">
+                  <p style="margin-bottom: 8px">
+                    <strong>Problem:</strong> 20+ files at project root
+                  </p>
+
+                  <p style="margin: 12px 0 8px">
+                    <strong>What stays at root:</strong>
+                  </p>
+                  <ul style="font-size: 13px">
+                    <li>Config files (.gitignore, package.json, etc.)</li>
+                    <li>Documentation (README.md, CHANGELOG.md)</li>
+                    <li>Main entry HTML files (for small projects)</li>
+                  </ul>
+
+                  <p style="margin: 12px 0 8px">
+                    <strong>What moves into folders:</strong>
+                  </p>
+                  <ul style="font-size: 13px">
+                    <li>All assets → <code>assets/</code></li>
+                    <li>Page HTML files (medium+) → <code>src/pages/</code></li>
+                    <li>
+                      Components → <code>components/</code> or
+                      <code>src/components/</code>
+                    </li>
+                    <li>
+                      Scripts → <code>scripts/</code> (build scripts, not app
+                      code)
+                    </li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Vendor libraries causing issues
+                </summary>
+                <div class="accordion__content">
+                  <p style="margin-bottom: 8px">
+                    <strong>Best Practices:</strong>
+                  </p>
+                  <ul style="font-size: 13px">
+                    <li>
+                      <strong>Prefer npm packages</strong> over local copies
+                    </li>
+                    <li>
+                      If you must use local copies, keep in
+                      <code>assets/js/vendor/</code>
+                    </li>
+                    <li>
+                      Never modify vendor files - creates update nightmares
+                    </li>
+                    <li>
+                      Document vendor file versions in README or package.json
+                    </li>
+                    <li>Update regularly, test after updates</li>
+                  </ul>
+
+                  <pre><code><!-- Better: use npm + bundler -->
+npm install swiper
+
+<!-- Acceptable: CDN for prototypes -->
+&lt;script src="https://cdn.jsdelivr.net/npm/swiper@11/..."&gt;
+
+<!-- Last resort: local copy -->
+assets/js/vendor/swiper-bundle.min.js  /* v11.0.0 */</code></pre>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- BEST PRACTICES -->
+          <section class="section" id="best-practices">
+            <h2>Best Practices Summary</h2>
+
+            <div class="perf-grid">
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Consistency</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Follow one structure pattern project-wide</li>
+                  <li>Use kebab-case everywhere</li>
+                  <li>Document your structure in README</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Proximity</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Related files live together</li>
+                  <li>Component assets stay with component</li>
+                  <li>Reduce "file hunting" time</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Scalability</h3>
+                  <span class="perf-badge perf-badge--yellow">Important</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Start simple, evolve with project needs</li>
+                  <li>Don't over-engineer small projects</li>
+                  <li>Plan for growth when you reach limits</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Separation</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>
+                    Source (<code>src/</code>) ≠ Output (<code>dist/</code>)
+                  </li>
+                  <li>Shared ≠ Page-specific</li>
+                  <li>Code ≠ Config ≠ Documentation</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Naming</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Descriptive, not cryptic</li>
+                  <li>English, lowercase, kebab-case</li>
+                  <li>Searchable and predictable</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Documentation</h3>
+                  <span class="perf-badge perf-badge--yellow">Important</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>README explains structure</li>
+                  <li>Complex components get their own docs</li>
+                  <li>Keep docs next to code</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <!-- FINAL CHECKLIST -->
+          <section class="section" id="checklist">
+            <h2>Implementation Checklist</h2>
+
+            <div class="card">
+              <h3>New Project Setup</h3>
+              <ul style="margin: 0">
+                <li>
+                  Choose structure based on project size (small/medium/large)
+                </li>
+                <li>Create folder structure before writing code</li>
+                <li>
+                  Add all config files (<code>.gitignore</code>,
+                  <code>.editorconfig</code>, etc.)
+                </li>
+                <li>Write initial README with structure explanation</li>
+                <li>Document naming conventions</li>
+                <li>
+                  Set up assets folders (<code>css/</code>, <code>js/</code>,
+                  <code>images/</code>, <code>fonts/</code>)
                 </li>
               </ul>
             </div>
 
             <div class="card">
-              <h3>Examples: good vs bad</h3>
-              <pre><code>Good:
-  assets/images/pages/home/
-  assets/js/vendor/
-  components/product-card/
+              <h3>Ongoing Maintenance</h3>
+              <ul style="margin: 0">
+                <li>Review structure during code reviews</li>
+                <li>Refactor when files used across 3+ pages</li>
+                <li>Keep vendor libraries updated and documented</li>
+                <li>Remove unused files regularly</li>
+                <li>Update README when structure changes</li>
+                <li>Ensure new team members understand structure</li>
+              </ul>
+            </div>
 
-Bad:
-  img/
-  JSFiles/
-  components/newDesign2/
-  画像/</code></pre>
+            <div class="card">
+              <h3>Quality Gates</h3>
+              <ul style="margin: 0">
+                <li>All files follow kebab-case naming</li>
+                <li>No files > 4 levels deep (except node_modules)</li>
+                <li>No orphaned files (unused assets)</li>
+                <li>Build output not committed to Git</li>
+                <li>Each component is self-contained</li>
+                <li>README documents current structure</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- RESOURCES -->
+          <section class="section" id="resources">
+            <h2>Additional Resources</h2>
+
+            <div class="card">
+              <h3>Related Guidelines</h3>
+              <ul>
+                <li>
+                  <a href="environment-setup.html" style="color: var(--accent)"
+                    >Environment Setup</a
+                  >
+                  - Git, editor config, naming conventions
+                </li>
+                <li>
+                  <a href="components.html" style="color: var(--accent)"
+                    >Components</a
+                  >
+                  - BEM methodology, component architecture
+                </li>
+                <li>
+                  <a href="markup.html" style="color: var(--accent)">Markup</a>
+                  - HTML structure and organization
+                </li>
+                <li>
+                  <a href="styling.html" style="color: var(--accent)"
+                    >Styling</a
+                  >
+                  - CSS architecture and organization
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>External Resources</h3>
+              <ul>
+                <li>
+                  <a
+                    href="https://github.com/goldbergyoni/nodebestpractices#1-project-structure-practices"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >Node.js Best Practices - Project Structure</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://bradfrost.com/blog/post/atomic-web-design/"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >Atomic Design by Brad Frost</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://frontendmastery.com/posts/building-future-facing-frontend-architectures/"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >Future-Facing Frontend Architectures</a
+                  >
+                </li>
+              </ul>
             </div>
           </section>
         </div>
       </main>
     </div>
 
-    <!-- Modal: full structure example -->
-    <div id="modal-full-structure" class="preview-modal">
+    <!-- Modal: Small Projects Structure -->
+    <dialog id="modal-small-structure" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Small Projects Structure</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close small structure preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Basic file structure for static sites with < 10 pages. No build
+            system required. HTML files at root, shared assets organized in
+            <code>assets/</code> folder.
+          </p>
+
+          <div class="card preview-modal__code">
+            <h4 style="font-size: 14px; margin: 0 0 8px">
+              Complete Structure:
+            </h4>
+            <pre><code>project-root/
+  index.html
+  about.html
+  contact.html
+  services.html
+  
+  assets/
+    css/
+      style.css         /* single CSS file */
+      /* OR split approach: */
+      base.css          /* resets, typography, tokens */
+      components.css    /* all components */
+      utilities.css     /* helper classes */
+    
+    js/
+      main.js           /* initialization & global logic */
+      slider.js         /* feature-specific */
+      forms.js          /* form validation */
+      vendor/
+        swiper.min.js   /* third-party libraries */
+    
+    images/
+      global/
+        bg-texture.webp
+        placeholder.webp
+      pages/
+        home/
+          hero-main.webp
+          hero-main@2x.webp
+          section-features.webp
+        about/
+          team-photo.webp
+        services/
+          service-01.webp
+      icons/
+        icon-menu.svg
+        icon-close.svg
+        icon-arrow.svg
+      logos/
+        company-logo.svg
+        brand-mark.svg
+    
+    fonts/
+      Outfit-VariableFont.woff2
+      JetBrainsMono-Regular.woff2
+  
+  .editorconfig
+  .gitignore
+  README.md</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4 style="font-size: 14px; margin: 0 0 8px">✓ Best For:</h4>
+            <ul style="margin: 0; font-size: 13px">
+              <li>Landing pages and small marketing sites</li>
+              <li>Portfolio websites</li>
+              <li>Documentation sites (without build complexity)</li>
+              <li>Rapid prototypes and demos</li>
+              <li>Projects with < 10 pages</li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4 style="font-size: 14px; margin: 0 0 8px">⚠️ Limitations:</h4>
+            <ul style="margin: 0; font-size: 13px">
+              <li>No automatic optimization or bundling</li>
+              <li>Manual SCSS compilation if needed</li>
+              <li>Difficult to scale beyond 15 pages</li>
+              <li>No component reusability without server-side includes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Medium Projects Structure -->
+    <dialog id="modal-medium-structure" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Medium Projects Structure</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close medium structure preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Structure for projects using build tools (Webpack, Vite, Parcel).
+            Separates source (<code>src/</code>) from compiled output
+            (<code>dist/</code>). Ideal for 10-50 pages with shared components.
+          </p>
+
+          <div class="card preview-modal__code">
+            <h4 style="font-size: 14px; margin: 0 0 8px">
+              Complete Structure:
+            </h4>
+            <pre><code>project-root/
+  src/
+    pages/
+      index.html              /* homepage */
+      about.html
+      contact.html
+      blog/
+        index.html            /* blog listing */
+        post.html             /* blog post template */
+    
+    components/
+      header/
+        header.html
+        header.css
+        header.js
+      footer/
+        footer.html
+        footer.css
+      nav-main/
+        nav-main.html
+        nav-main.css
+        nav-main.js
+      hero/
+        hero.html
+        hero.css
+      card/
+        card.html
+        card.css
+      button/
+        button.css
+        button.js
+      modal/
+        modal.html
+        modal.css
+        modal.js
+    
+    styles/
+      tokens.css              /* CSS custom properties */
+      reset.css               /* normalization */
+      base.css                /* typography, global styles */
+      layout.css              /* grid, containers */
+      utilities.css           /* u-* helper classes */
+    
+    scripts/
+      main.js                 /* app initialization */
+      components/
+        slider.js
+        form-validation.js
+      utils/
+        dom.js                /* DOM helpers */
+        api.js                /* API calls */
+        format.js             /* data formatting */
+      config/
+        constants.js
+    
+    assets/
+      images/
+        global/
+        logos/
+        icons/
+        pages/
+          home/
+          about/
+          blog/
+      fonts/
+        Outfit-VariableFont.woff2
+  
+  dist/                       /* build output - gitignored */
+    index.html
+    about.html
+    assets/
+      css/
+        main.min.css
+      js/
+        main.min.js
+      images/
+      fonts/
+  
+  node_modules/               /* gitignored */
+  
+  package.json
+  package-lock.json
+  vite.config.js              /* or webpack.config.js */
+  .editorconfig
+  .prettierrc
+  .eslintrc.js
+  .gitignore
+  README.md
+  CHANGELOG.md</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4 style="font-size: 14px; margin: 0 0 8px">✓ Benefits:</h4>
+            <ul style="margin: 0; font-size: 13px">
+              <li>Automatic bundling, minification, optimization</li>
+              <li>SCSS/PostCSS compilation built-in</li>
+              <li>ES modules support with transpilation</li>
+              <li>Components grouped with their assets</li>
+              <li>Hot reload during development</li>
+              <li>Clean separation: source vs compiled output</li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4 style="font-size: 14px; margin: 0 0 8px">✓ Best For:</h4>
+            <ul style="margin: 0; font-size: 13px">
+              <li>10-50 pages with shared components</li>
+              <li>Sites requiring SCSS or PostCSS</li>
+              <li>Modern JavaScript (ES6+, modules)</li>
+              <li>Teams wanting automated optimization</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Large Projects Structure -->
+    <dialog id="modal-large-structure" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Large Projects Structure</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close large structure preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Modular architecture for complex applications and design systems
+            (50+ pages). Uses feature-based or atomic design organization for
+            maximum scalability and maintainability.
+          </p>
+
+          <div class="card preview-modal__code">
+            <h4 style="font-size: 14px; margin: 0 0 8px">
+              Feature-Based Structure:
+            </h4>
+            <pre><code>project-root/
+  src/
+    features/
+      home/
+        home.html
+        home.css
+        home.js
+        components/
+          hero/
+            hero.html
+            hero.css
+            hero.js
+          cta-section/
+            cta-section.html
+            cta-section.css
+        assets/
+          hero-bg.webp
+          cta-image.webp
+      
+      product/
+        product-list.html
+        product-detail.html
+        product.css
+        product.js
+        components/
+          product-card/
+          product-filter/
+          product-gallery/
+        assets/
+          product-placeholder.webp
+      
+      blog/
+        blog-list.html
+        blog-post.html
+        blog.css
+        components/
+          post-card/
+          post-sidebar/
+        assets/
+    
+    shared/
+      components/
+        header/
+          header.html
+          header.css
+          header.js
+        footer/
+        button/
+        modal/
+        form/
+      styles/
+        tokens.css            /* design tokens */
+        reset.css
+        base.css
+        utilities.css
+      scripts/
+        api.js
+        utils.js
+        storage.js
+      assets/
+        images/
+        fonts/
+    
+    config/
+      routes.js
+      constants.js
+      api-config.js
+  
+  dist/                       /* build output */
+  tests/                      /* test files */
+  docs/                       /* documentation */
+  
+  package.json
+  vite.config.js
+  .env.example
+  .gitignore
+  README.md
+  CHANGELOG.md
+  CONTRIBUTING.md</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4 style="font-size: 14px; margin: 0 0 8px">
+              Alternative: Atomic Design:
+            </h4>
+            <pre><code>src/
+  components/
+    atoms/              /* smallest building blocks */
+      button/
+      input/
+      icon/
+      label/
+      link/
+    
+    molecules/          /* simple component combinations */
+      form-field/
+      card-header/
+      nav-item/
+      search-box/
+    
+    organisms/          /* complex, reusable sections */
+      header/
+      footer/
+      product-card/
+      search-form/
+      pricing-table/
+    
+    templates/          /* page-level layouts */
+      main-layout/
+      sidebar-layout/
+      dashboard-layout/
+    
+    pages/              /* specific page instances */
+      home/
+      product/
+      checkout/</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4 style="font-size: 14px; margin: 0 0 8px">✓ Benefits:</h4>
+            <ul style="margin: 0; font-size: 13px">
+              <li>Clear separation of concerns</li>
+              <li>Easy to locate and modify features</li>
+              <li>Multiple developers can work without conflicts</li>
+              <li>Reusable components across projects</li>
+              <li>Scales to hundreds of pages</li>
+              <li>Testable, maintainable architecture</li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4 style="font-size: 14px; margin: 0 0 8px">✓ Best For:</h4>
+            <ul style="margin: 0; font-size: 13px">
+              <li>Large applications (50+ pages)</li>
+              <li>Design systems or component libraries</li>
+              <li>E-commerce platforms</li>
+              <li>SaaS applications</li>
+              <li>Projects with multiple developers</li>
+              <li>Long-term, evolving products</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Full Structure Example (existing) -->
+    <dialog id="modal-full-structure" class="preview-modal">
       <div class="preview-modal__dialog">
         <header class="preview-modal__header">
           <h3 class="preview-modal__title">
-            Full project structure (design system)
+            Complete Medium Project Structure
           </h3>
-          <a
-            href="#basic-structure"
+          <button
             class="preview-modal__close"
             aria-label="Close structure preview"
           >
             ✕
-          </a>
+          </button>
         </header>
 
-        <p class="preview-modal__description">
-          Example of a complete layout for a design system / guideline site with
-          multiple pages and shared assets.
-        </p>
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Example of a complete structure for a marketing site with build
+            tools, multiple pages, and shared components.
+          </p>
 
-        <div class="card preview-modal__code">
-          <pre><code>project-root/
-  index.html              /* main guideline overview */
-  performance.html        /* performance rules */
-  testing.html            /* testing & QA */
-  units.html              /* units & sizing */
-  file-structure.html     /* this page */
-  vscode.html             /* VS Code setup */
+          <div class="card preview-modal__code">
+            <pre><code>project-root/
+  src/
+    pages/
+      index.html              /* homepage */
+      about.html              /* about page */
+      contact.html            /* contact page */
+      blog/
+        index.html            /* blog listing */
+        post.html             /* blog post template */
+    
+    components/
+      header/
+        header.html
+        header.css
+        header.js
+      footer/
+        footer.html
+        footer.css
+      nav-main/
+        nav-main.html
+        nav-main.css
+        nav-main.js
+      hero/
+        hero.html
+        hero.css
+      card/
+        card.html
+        card.css
+      button/
+        button.css
+        button.js
+      modal/
+        modal.html
+        modal.css
+        modal.js
+    
+    styles/
+      tokens.css              /* CSS custom properties */
+      reset.css               /* normalization */
+      base.css                /* typography, global styles */
+      layout.css              /* grid, containers, layout */
+      utilities.css           /* u-* helper classes */
+    
+    scripts/
+      main.js                 /* app initialization */
+      components/
+        slider.js
+        form-validation.js
+      utils/
+        dom.js
+        api.js
+        format.js
+      config/
+        constants.js
+    
+    assets/
+      images/
+        global/
+          bg-texture.webp
+          placeholder.webp
+        logos/
+          company-logo.svg
+          brand-mark.svg
+        icons/
+          icon-menu.svg
+          icon-close.svg
+          icon-arrow.svg
+        pages/
+          home/
+            hero-main.webp
+            hero-main@2x.webp
+            hero-main-mobile.webp
+            section-features.webp
+          about/
+            team-photo.webp
+            office-exterior.webp
+          blog/
+            default-thumbnail.webp
+      fonts/
+        Outfit-VariableFont.woff2
+        JetBrainsMono-Regular.woff2
+  
+  dist/                       /* build output - gitignored */
+    index.html
+    about.html
+    assets/
+      css/
+        main.min.css
+      js/
+        main.min.js
+      images/
+      fonts/
+  
+  tests/
+    components/
+      button.test.js
+      modal.test.js
+    e2e/
+      homepage.spec.js
+  
+  docs/
+    getting-started.md
+    deployment.md
+    components/
+  
+  node_modules/               /* gitignored */
+  
+  .editorconfig
+  .env.example
+  .eslintrc.js
+  .gitignore
+  .prettierrc
+  package.json
+  package-lock.json
+  vite.config.js              /* or webpack.config.js */
+  README.md
+  CHANGELOG.md
+  CONTRIBUTING.md</code></pre>
+          </div>
 
-  components/
-    header.html
-    footer.html
-    nav-main.html
-
-  assets/
-    css/
-      base.css
-      layout.css
-      components.css
-      utilities.css
-      pages/
-        index.css
-        performance.css
-        testing.css
-    js/
-      main.js
-      slider.js
-      modal.js
-      vendor/
-        swiper-bundle.min.js
-    images/
-      global/
-      logos/
-      icons/
-      ui/
-      pages/
-        index/
-        performance/
-        testing/
-    fonts/</code></pre>
+          <div class="card" style="margin-top: 16px">
+            <h4 style="font-size: 14px; margin: 0 0 8px">Key Points:</h4>
+            <ul style="margin: 0; font-size: 13px">
+              <li>
+                <code>src/</code> contains all source files that you author
+              </li>
+              <li>
+                <code>dist/</code> is generated by build tool, never edited
+                manually
+              </li>
+              <li>Components are self-contained with all related files</li>
+              <li>Tests mirror the source structure</li>
+              <li>All config files at root level</li>
+              <li>Documentation has its own folder</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    </dialog>
+
+    <script src="assets/js/main.js"></script>
   </body>
 </html>

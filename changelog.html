@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="description"
+      content="Coding Guideline (Frontend) — Changelog: releases, versioning, and change management."
+    />
+    <meta name="theme-color" content="#0b0f1a" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/Outfit-VariableFont.woff2"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <title>Changelog — Coding Guideline</title>
+  </head>
+
+  <body>
+    <div class="bg-gradient"></div>
+
+    <div class="app-shell">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="primary-sidebar" aria-label="Primary">
+        <a href="/" class="sidebar__header">
+          <div class="sidebar__logo" aria-hidden="true">S</div>
+          <div class="sidebar__title">
+            <span class="sidebar__company">Coding Guideline</span>
+            <span class="sidebar__subtitle">settenLab</span>
+          </div>
+        </a>
+
+        <nav class="sidebar__nav sidebar-nav" aria-label="Guideline navigation">
+          <!-- START HERE -->
+          <details
+            class="nav-group nav-group--start"
+            data-nav-group="start-here"
+          >
+            <summary class="nav-group__summary">
+              <a href="/" class="nav-group__summary-link">Start here</a>
+            </summary>
+          </details>
+
+          <!-- PROJECT SETUP -->
+          <details class="nav-group" data-nav-group="project-setup">
+            <summary class="nav-group__summary">Project setup</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  href="environment-setup.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  Environment setup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="file-structure.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  File structure
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- UI -->
+          <details class="nav-group" data-nav-group="ui">
+            <summary class="nav-group__summary">UI</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="markup.html" class="sidebar-nav__link nav-link">
+                  Markup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="styling.html" class="sidebar-nav__link nav-link">
+                  Styling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="components.html" class="sidebar-nav__link nav-link">
+                  Components
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="typography.html" class="sidebar-nav__link nav-link">
+                  Typography
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="accessibility.html" class="sidebar-nav__link nav-link">
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- ENGINEERING -->
+          <details class="nav-group" data-nav-group="engineering">
+            <summary class="nav-group__summary">Engineering</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="javascript.html">
+                  Javascript
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="api-and-data-handling.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  API & Data handling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="performance.html" class="sidebar-nav__link nav-link">
+                  Performance
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="testing.html" class="sidebar-nav__link nav-link">
+                  Testing
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="security.html" class="sidebar-nav__link nav-link">
+                  Security
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- WORKFLOW -->
+          <details class="nav-group" data-nav-group="workflow">
+            <summary class="nav-group__summary">Workflow</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="pr-rules.html" class="sidebar-nav__link nav-link">
+                  PR rules / review checklist
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="documentation.html" class="sidebar-nav__link nav-link">
+                  Documentation rules
+                </a>
+              </li>
+            </ul>
+          </details>
+        </nav>
+
+        <div class="sidebar__footer sidebar__footer--active">
+          <a href="changelog.html" class="sidebar__version">v1.0.0</a>
+          <span class="sidebar__lang">EN</span>
+        </div>
+      </aside>
+
+      <div class="sidebar-backdrop js-sidebar-backdrop" hidden></div>
+
+      <!-- MAIN -->
+      <main class="main" id="main-content">
+        <header class="topbar">
+          <button
+            class="topbar__menu-btn js-sidebar-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-controls="primary-sidebar"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <h1 class="topbar__title">Changelog</h1>
+
+          <div class="topbar__actions">
+            <!-- Theme toggle placeholder -->
+            <button
+              class="topbar__action-btn"
+              id="themeToggle"
+              aria-label="Toggle theme"
+              aria-pressed="false"
+            >
+              🌗
+            </button>
+          </div>
+        </header>
+
+        <div class="content">
+          <!-- OVERVIEW -->
+          <section class="section" id="overview">
+            <h2>Purpose</h2>
+            <p>
+              This page documents releases of the Coding Guideline itself: what
+              changed, why it changed, and what teams should do (if anything) as
+              a result. Use it as the source of truth when the guideline
+              evolves.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Current version</h3>
+                <p class="component-card__text">
+                  <strong>v1.0.0</strong><br />
+                  Status: stable baseline
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Audience</h3>
+                <p class="component-card__text">
+                  Engineers, reviewers, and maintainers who need to understand
+                  guideline changes and their impact on existing projects.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Update cadence</h3>
+                <p class="component-card__text">
+                  Changes are bundled into releases. “Editorial” fixes may be
+                  released more frequently; breaking policy shifts require a
+                  major version.
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <!-- VERSIONING -->
+          <section class="section" id="versioning">
+            <h2>Versioning policy</h2>
+            <p>
+              The guideline follows <strong>Semantic Versioning</strong>:
+              <code>MAJOR.MINOR.PATCH</code>.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">MAJOR</h3>
+                <p class="component-card__text">
+                  Breaking changes to rules or structure that can require
+                  project updates or rework. Example: renaming required CSS
+                  conventions, changing baseline folder standards, or replacing
+                  default component patterns.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">MINOR</h3>
+                <p class="component-card__text">
+                  Backwards-compatible additions. Example: new section, new
+                  recommended patterns, additional examples, or expanded
+                  checklists that do not invalidate existing projects.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">PATCH</h3>
+                <p class="component-card__text">
+                  Backwards-compatible fixes and clarifications. Example: typos,
+                  wording fixes, corrected code samples, improved explanations,
+                  minor navigation improvements.
+                </p>
+              </article>
+            </div>
+
+            <div class="card">
+              <h3>Pre-release labels</h3>
+              <ul>
+                <li><code>v1.2.0-beta.1</code> — preview for feedback</li>
+                <li><code>v1.2.0-rc.1</code> — release candidate</li>
+              </ul>
+              <p>
+                Use pre-releases when the change set is substantial or needs
+                validation across multiple projects.
+              </p>
+            </div>
+          </section>
+
+          <!-- VERSION MANAGEMENT -->
+          <section class="section" id="management">
+            <h2>How versions are managed</h2>
+            <p>
+              Keep versioning predictable and auditable. The guideline should be
+              updated through pull requests with explicit change notes.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Single source of version</h3>
+                <p class="component-card__text">
+                  Store the current version in one place (recommended:
+                  <code>CHANGELOG.md</code> or a small config file) and mirror
+                  it in the UI footer (<code>.sidebar__version</code>) as part
+                  of the release PR.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Release PR requirements</h3>
+                <ul class="component-card__text component-card__list">
+                  <li>Bump version number</li>
+                  <li>Add changelog entry (date, summary, impact)</li>
+                  <li>Link to PRs/issues (if applicable)</li>
+                  <li>Confirm navigation and anchors still work</li>
+                </ul>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Git tags</h3>
+                <p class="component-card__text">
+                  Tag releases with the version number (e.g.
+                  <code>v1.1.0</code>) to enable quick diffing between releases.
+                </p>
+              </article>
+            </div>
+
+            <div class="card">
+              <h3>Recommended change categories</h3>
+              <ul>
+                <li><strong>Added</strong> — new sections/patterns</li>
+                <li><strong>Changed</strong> — updated recommendations</li>
+                <li>
+                  <strong>Deprecated</strong> — planned removal, migration notes
+                </li>
+                <li><strong>Removed</strong> — deleted rules/patterns</li>
+                <li><strong>Fixed</strong> — corrections</li>
+                <li><strong>Security</strong> — security-related changes</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- CHANGELOG ENTRIES -->
+          <section class="section" id="entries">
+            <h2>Release notes</h2>
+            <p>
+              Each entry should answer: what changed, who it impacts, and
+              whether any action is required.
+            </p>
+
+            <div class="baseline-accordion">
+              <details class="accordion" open>
+                <summary class="accordion__summary">
+                  v1.0.0 — Initial release
+                </summary>
+                <div class="accordion__content">
+                  <ul>
+                    <li>
+                      <strong>Added:</strong> initial site structure and
+                      navigation.
+                    </li>
+                    <li>
+                      <strong>Added:</strong> HTML standards, CSS &amp; Naming,
+                      Components.
+                    </li>
+                    <li>
+                      <strong>Added:</strong> Performance, Testing, VS Code
+                      setup.
+                    </li>
+                    <li>
+                      <strong>Added:</strong> baseline quick references on the
+                      homepage.
+                    </li>
+                  </ul>
+                  <p><strong>Impact:</strong> none (baseline release).</p>
+                  <p><strong>Action required:</strong> none.</p>
+                </div>
+              </details>
+
+              <!-- Template for future entries -->
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  vX.Y.Z — Template (copy for new releases)
+                </summary>
+                <div class="accordion__content">
+                  <ul>
+                    <li><strong>Added:</strong> …</li>
+                    <li><strong>Changed:</strong> …</li>
+                    <li><strong>Fixed:</strong> …</li>
+                  </ul>
+                  <p><strong>Impact:</strong> who is affected and how.</p>
+                  <p>
+                    <strong>Action required:</strong> upgrade steps or “none”.
+                  </p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- GOVERNANCE -->
+          <section class="section" id="governance">
+            <h2>Governance</h2>
+            <p>
+              The guideline is a product. Changes should be reviewed with the
+              same rigor as code, especially when they introduce team-wide
+              obligations.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">What is a breaking change</h3>
+                <ul class="component-card__text component-card__list">
+                  <li>Rule becomes “must” where it used to be optional</li>
+                  <li>Renaming conventions that invalidate existing code</li>
+                  <li>New required tooling or CI checks</li>
+                  <li>Removing a previously recommended approach</li>
+                </ul>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Deprecations</h3>
+                <p class="component-card__text">
+                  Deprecate before removing. A deprecation must include:
+                  rationale, migration guidance, and a planned removal version.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Editorial changes</h3>
+                <p class="component-card__text">
+                  Spelling fixes and clarification-only edits are patch
+                  releases, unless they effectively change interpretation of a
+                  rule.
+                </p>
+              </article>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

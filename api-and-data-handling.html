@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="description"
+      content="API & Data handling guidelines: request architecture, validation, error handling, caching, pagination, and secure data flow patterns."
+    />
+    <meta name="theme-color" content="#0b0f1a" />
+
+    <meta
+      property="og:title"
+      content="API & Data handling — Coding Guideline"
+    />
+    <meta
+      property="og:description"
+      content="Practical patterns for reliable API integration, data validation, caching, pagination, and observability in modern web apps."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/Outfit-VariableFont.woff2"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <title>API & Data handling — Coding Guideline</title>
+  </head>
+
+  <body>
+    <div class="bg-gradient"></div>
+
+    <div class="app-shell">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="primary-sidebar" aria-label="Primary">
+        <a href="/" class="sidebar__header">
+          <div class="sidebar__logo" aria-hidden="true">S</div>
+          <div class="sidebar__title">
+            <span class="sidebar__company">Coding Guideline</span>
+            <span class="sidebar__subtitle">settenLab</span>
+          </div>
+        </a>
+
+        <nav class="sidebar__nav sidebar-nav" aria-label="Guideline navigation">
+          <!-- START HERE -->
+          <details
+            class="nav-group nav-group--start"
+            data-nav-group="start-here"
+          >
+            <summary class="nav-group__summary">
+              <a href="/" class="nav-group__summary-link">Start here</a>
+            </summary>
+          </details>
+
+          <!-- PROJECT SETUP -->
+          <details class="nav-group" data-nav-group="project-setup">
+            <summary class="nav-group__summary">Project setup</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  href="environment-setup.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  Environment setup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="file-structure.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  File structure
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- UI -->
+          <details class="nav-group" data-nav-group="ui">
+            <summary class="nav-group__summary">UI</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="markup.html" class="sidebar-nav__link nav-link"
+                  >Markup</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="styling.html" class="sidebar-nav__link nav-link"
+                  >Styling</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="components.html" class="sidebar-nav__link nav-link"
+                  >Components</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="typography.html" class="sidebar-nav__link nav-link"
+                  >Typography</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="accessibility.html" class="sidebar-nav__link nav-link">
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- ENGINEERING -->
+          <details class="nav-group" data-nav-group="engineering" open>
+            <summary class="nav-group__summary">Engineering</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="javascript.html">
+                  Javascript
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="api-and-data-handling.html"
+                  class="sidebar-nav__link nav-link"
+                  aria-current="page"
+                >
+                  API & Data handling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="performance.html" class="sidebar-nav__link nav-link"
+                  >Performance</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="testing.html" class="sidebar-nav__link nav-link"
+                  >Testing</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="security.html" class="sidebar-nav__link nav-link"
+                  >Security</a
+                >
+              </li>
+            </ul>
+          </details>
+
+          <!-- WORKFLOW -->
+          <details class="nav-group" data-nav-group="workflow">
+            <summary class="nav-group__summary">Workflow</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="pr-rules.html" class="sidebar-nav__link nav-link">
+                  PR rules / review checklist
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="documentation.html" class="sidebar-nav__link nav-link">
+                  Documentation rules
+                </a>
+              </li>
+            </ul>
+          </details>
+        </nav>
+
+        <div class="sidebar__footer">
+          <a href="changelog.html" class="sidebar__version">v1.0.0</a>
+          <span class="sidebar__lang">EN</span>
+        </div>
+      </aside>
+
+      <div class="sidebar-backdrop js-sidebar-backdrop" hidden></div>
+
+      <!-- MAIN -->
+      <main class="main" id="main-content">
+        <header class="topbar">
+          <button
+            class="topbar__menu-btn js-sidebar-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-controls="primary-sidebar"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <h1 class="topbar__title">API &amp; Data handling</h1>
+
+          <div class="topbar__actions">
+            <!-- Theme toggle placeholder -->
+            <button
+              class="topbar__action-btn"
+              id="themeToggle"
+              aria-label="Toggle theme"
+              aria-pressed="false"
+            >
+              🌗
+            </button>
+          </div>
+        </header>
+
+        <div class="content">
+          <!-- OVERVIEW -->
+          <section class="section" id="overview">
+            <h2>Overview</h2>
+            <p>
+              This page defines a <strong>repeatable, predictable</strong> way
+              to work with API requests and data in the browser. The goal is
+              simple: no “special cases” scattered across pages. Requests behave
+              consistently, errors are actionable, and sensitive data is handled
+              safely.
+            </p>
+
+            <div class="card callout">
+              <h3>When this guideline applies</h3>
+              <ul>
+                <li>
+                  You call an API from the browser (<code>fetch</code>, XHR, a
+                  library client).
+                </li>
+                <li>
+                  You submit forms and need consistent success/error handling.
+                </li>
+                <li>
+                  You load lists/search results and must handle
+                  loading/empty/error states.
+                </li>
+              </ul>
+              <p
+                style="
+                  margin-top: 10px;
+                  font-size: 13px;
+                  color: var(--text-muted);
+                "
+              >
+                For purely static pages (no requests, no dynamic data), you can
+                ignore most of this page.
+              </p>
+            </div>
+
+            <div class="card callout">
+              <h3>Core Principles (current standard)</h3>
+              <ul>
+                <li>
+                  <strong>Single source of truth:</strong> one API client
+                  wrapper, one place for request policy (timeouts, retries, auth
+                  handling)
+                </li>
+                <li>
+                  <strong>Consistent errors:</strong> categorize errors so UI
+                  behavior is predictable
+                </li>
+                <li>
+                  <strong>Document data shapes:</strong> define the expected
+                  input/output shape close to the service (JSDoc/types or
+                  lightweight validators)
+                </li>
+                <li>
+                  <strong>Security by default:</strong> avoid risky storage,
+                  redact logs, treat external data as untrusted
+                </li>
+              </ul>
+              <p
+                style="
+                  margin-top: 10px;
+                  font-size: 13px;
+                  color: var(--text-muted);
+                "
+              >
+                Advanced topics (caching strategies, pagination design, deep
+                observability) are included below as optional guidance for
+                data-heavy pages.
+              </p>
+            </div>
+          </section>
+
+          <!-- LAYERS -->
+          <section class="section" id="layers">
+            <h2>Architecture: Data Layer Boundaries</h2>
+            <p>
+              Separate the concerns of networking, data shaping, and UI state.
+              UI code should not know about headers, retries, token refresh, or
+              request parsing rules.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">API Client</h3>
+                <p class="component-card__text">
+                  Transport details: base URL, auth strategy, timeouts, retries,
+                  and error mapping.
+                </p>
+                <a href="#modal-api-client-template" class="component-card__btn"
+                  >View template →</a
+                >
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Domain Services</h3>
+                <p class="component-card__text">
+                  Business operations: <code>getUser()</code>,
+                  <code>updateProfile()</code>, <code>searchProducts()</code>.
+                  No UI rendering logic.
+                </p>
+                <a href="#contracts" class="component-card__btn">Contracts →</a>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">UI Adapters</h3>
+                <p class="component-card__text">
+                  Small modules that connect UI components to services:
+                  loading/empty/error states, debouncing, and rendering updates.
+                </p>
+                <a href="#errors" class="component-card__btn">Error rules →</a>
+              </article>
+            </div>
+
+            <div class="card">
+              <h3>Recommended Folder Placement</h3>
+              <pre><code>src/
+scripts/
+  api/
+    client.js            /* fetch wrapper + policy */
+    endpoints.js         /* base paths, versioning */
+    errors.js            /* error mapping & categories */
+    interceptors.js      /* auth refresh, logging */
+  services/
+    user.service.js
+    catalog.service.js
+    billing.service.js
+  contracts/             /* optional: data shapes / validators */
+    user.contract.js
+    catalog.contract.js</code></pre>
+              <p
+                style="
+                  margin-top: 12px;
+                  font-size: 13px;
+                  color: var(--text-muted);
+                "
+              >
+                Keep one obvious location for API policy and data contracts.
+                Names are examples.
+              </p>
+            </div>
+          </section>
+
+          <!-- REQUEST LIFECYCLE -->
+          <section class="section" id="lifecycle">
+            <h2>Request Lifecycle Standard</h2>
+            <p>
+              Every request follows the same lifecycle. This is how we avoid
+              “one-off” networking behavior sprinkled across components.
+            </p>
+
+            <div class="card">
+              <h3>Lifecycle Steps</h3>
+              <ol style="margin: 0">
+                <li>
+                  <strong>Build request</strong>: URL, method, headers, body,
+                  query params
+                </li>
+                <li>
+                  <strong>Attach auth</strong>: token/header strategy (and
+                  refresh if needed)
+                </li>
+                <li>
+                  <strong>Apply policy</strong>: timeout, retry rules,
+                  idempotency checks
+                </li>
+                <li>
+                  <strong>Parse response</strong>: content-type aware parsing
+                </li>
+                <li>
+                  <strong>Validate &amp; normalize</strong>: lightweight
+                  validation (as needed), key mapping, dedupe
+                </li>
+                <li>
+                  <strong>Cache/emit</strong>: store result, notify observers,
+                  return typed value
+                </li>
+                <li>
+                  <strong>Handle errors</strong>: categorize, attach metadata,
+                  surface actionable message
+                </li>
+              </ol>
+            </div>
+
+            <div class="baseline-accordion">
+              <details class="accordion" open>
+                <summary class="accordion__summary">
+                  Timeouts &amp; Cancellation
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Use a default timeout (e.g., 10–20s) for all requests.
+                    </li>
+                    <li>
+                      Support cancellation (e.g., <code>AbortController</code>)
+                      for route changes and searches.
+                    </li>
+                    <li>
+                      Cancel “stale” requests when inputs change
+                      (search-as-you-type).
+                    </li>
+                  </ul>
+                  <pre><code>// Example (browser fetch)
+const controller = new AbortController();
+const timeoutId = setTimeout(() =&gt; controller.abort(), 15000);
+
+try {
+  const res = await fetch(url, { signal: controller.signal });
+  // ...
+} finally {
+  clearTimeout(timeoutId);
+}</code></pre>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Retries &amp; Backoff
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      <strong>Retry only idempotent requests</strong> by
+                      default: GET, HEAD, OPTIONS.
+                    </li>
+                    <li>
+                      Retry on transient failures: network errors, 408, 429, and
+                      5xx (except some 501/505 cases).
+                    </li>
+                    <li>
+                      Use exponential backoff with jitter; cap maximum delay and
+                      total attempts.
+                    </li>
+                    <li>
+                      Respect <code>Retry-After</code> when present (429/503).
+                    </li>
+                  </ul>
+                  <pre><code>// Policy example
+retries: 2                 // total attempts = 1 + retries
+backoff: "exponential"     // with jitter
+retryOn: [408, 429, 500, 502, 503, 504]</code></pre>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">Response Parsing</summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Prefer JSON responses. Enforce
+                      <code>Accept: application/json</code> when applicable.
+                    </li>
+                    <li>
+                      Detect and parse by <code>Content-Type</code> (JSON, text,
+                      blob).
+                    </li>
+                    <li>
+                      Handle empty responses (<code>204 No Content</code>)
+                      without throwing.
+                    </li>
+                    <li>Never assume error bodies are JSON.</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- CONTRACTS -->
+          <section class="section" id="contracts">
+            <h2>Contracts: Data Shapes &amp; Validation</h2>
+            <p>
+              A “contract” means: the expected request parameters, the response
+              shape, and how we handle missing/invalid fields. For our current
+              workflow, the baseline is to <strong>document shapes</strong> and
+              validate only where it matters.
+            </p>
+
+            <div class="card">
+              <h3>Baseline (recommended for most pages)</h3>
+              <ul style="margin: 0">
+                <li>
+                  Define response shapes using <strong>JSDoc</strong> (or
+                  lightweight TypeScript types if a project already uses TS).
+                </li>
+                <li>
+                  Validate <strong>critical fields</strong> (auth/user
+                  identity/pricing) with small guard functions.
+                </li>
+                <li>
+                  Normalize naming and identifiers (e.g., IDs as strings) to
+                  avoid “sometimes number” bugs.
+                </li>
+              </ul>
+              <pre><code>/**
+ * @typedef {{ userId: string, name: string }} User
+ */
+
+/** @returns {User} */
+export function normalizeUser(api) {
+  return { userId: String(api.user_id), name: String(api.name ?? "") };
+}</code></pre>
+            </div>
+
+            <div class="card">
+              <h3>Optional (data-heavy or high-risk flows)</h3>
+              <ul style="margin: 0">
+                <li>
+                  Add runtime schema validation (e.g., with a schema library)
+                  for endpoints that frequently change or are business-critical.
+                </li>
+                <li>
+                  Version contracts when an API has multiple versions or
+                  unstable fields.
+                </li>
+                <li>
+                  Fail fast on contract breaks and include diagnostic context
+                  (endpoint + requestId) for debugging.
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Normalization Rules</h3>
+              <ul style="margin: 0">
+                <li>
+                  Convert API naming to project convention (e.g.,
+                  <code>snake_case</code> → <code>camelCase</code>).
+                </li>
+                <li>Normalize identifiers: always strings.</li>
+                <li>
+                  Avoid over-normalizing: only reshape data when it simplifies
+                  the UI.
+                </li>
+              </ul>
+              <pre><code>// Example mapping
+api: { user_id: 123, created_at: "2026-01-01T00:00:00Z" }
+app: { userId: "123", createdAt: new Date("2026-01-01T00:00:00Z") }</code></pre>
+            </div>
+          </section>
+
+          <!-- ERRORS -->
+          <section class="section" id="errors">
+            <h2>Error Handling</h2>
+            <p>
+              Errors are part of the API contract. We categorize errors so the
+              UI can respond consistently (retry, show message, redirect to
+              login, etc.).
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Network</h3>
+                <p class="component-card__text">
+                  DNS, offline, CORS, timeouts. Usually retryable if idempotent.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Auth &amp; Permissions</h3>
+                <p class="component-card__text">
+                  401/403. Requires login, token refresh, or access control
+                  message.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Validation</h3>
+                <p class="component-card__text">
+                  400/422. Show field-level errors or mapped server messages.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Rate Limit</h3>
+                <p class="component-card__text">
+                  429. Respect <code>Retry-After</code>. Backoff; avoid tight
+                  loops.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Server</h3>
+                <p class="component-card__text">
+                  5xx. Retry a limited number of times, then provide a stable
+                  fallback.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Contract Break</h3>
+                <p class="component-card__text">
+                  Schema validation fails. Capture diagnostic context; fail
+                  fast.
+                </p>
+                <a href="#modal-error-catalog" class="component-card__btn"
+                  >View catalog →</a
+                >
+              </article>
+            </div>
+
+            <div class="card">
+              <h3>Standard Error Object</h3>
+              <pre><code>{
+  "category": "network | auth | permission | validation | rate_limit | server | contract",
+  "status": 503,
+  "message": "Human-readable summary",
+  "requestId": "from headers when available",
+  "retryAfterMs": 120000,
+  "details": { "fieldErrors": { "email": "Invalid email" } }
+}</code></pre>
+              <p
+                style="
+                  margin-top: 12px;
+                  font-size: 13px;
+                  color: var(--text-muted);
+                "
+              >
+                The UI should branch on <code>category</code>, not on raw status
+                codes.
+              </p>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Logging Rules</h3>
+              <ul style="margin: 0">
+                <li>Never log secrets: tokens, passwords, session IDs.</li>
+                <li>Redact PII where possible (email, phone, address).</li>
+                <li>
+                  Prefer request IDs and error categories over full payload
+                  dumps.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- CACHING -->
+          <section class="section" id="caching">
+            <h2>
+              Caching &amp; Revalidation
+              <span style="color: var(--text-muted)">(optional)</span>
+            </h2>
+            <p>
+              Only introduce client-side caching when it solves a real problem
+              (performance, perceived speed, or reduced server load). If you do
+              cache, make the policy explicit and easy to reason about.
+            </p>
+
+            <div class="card">
+              <h3>When to use caching</h3>
+              <ul style="margin: 0">
+                <li>Repeated reads of the same data during a short session.</li>
+                <li>
+                  Lists/search pages where refetching is expensive or slow.
+                </li>
+                <li>Navigation where showing “last known data” improves UX.</li>
+              </ul>
+              <p
+                style="
+                  margin-top: 10px;
+                  font-size: 13px;
+                  color: var(--text-muted);
+                "
+              >
+                If none of these apply, prefer simple “request → render” without
+                a caching layer.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Cache Key Rules</h3>
+              <ul style="margin: 0">
+                <li>
+                  Cache keys must be deterministic: include endpoint + stable
+                  params.
+                </li>
+                <li>
+                  Do not include non-deterministic values (timestamps, random
+                  IDs).
+                </li>
+                <li>
+                  Segment by identity where required (user-specific data).
+                </li>
+              </ul>
+              <pre><code>// Example cache key convention
+"users:me"
+"catalog:search?q=shoes&amp;page=1"
+"orders:list?status=open"</code></pre>
+            </div>
+
+            <div class="baseline-accordion">
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Simple revalidation rules
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      <strong>Stale-while-revalidate:</strong> render cached
+                      data, refresh in the background.
+                    </li>
+                    <li>
+                      <strong>Invalidate on write:</strong> after
+                      POST/PUT/PATCH/DELETE, invalidate affected keys.
+                    </li>
+                    <li>
+                      <strong>Debounce:</strong> on search-as-you-type, debounce
+                      requests and cancel stale ones.
+                    </li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Common mistakes to avoid
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Hidden caching inside UI components with no documented
+                      keys or TTL.
+                    </li>
+                    <li>
+                      Overly aggressive cache lifetimes for sensitive or
+                      frequently changing data.
+                    </li>
+                    <li>
+                      Trying to “write-through” updates when the response shape
+                      is unstable.
+                    </li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- PAGINATION -->
+          <section class="section" id="pagination">
+            <h2>
+              Pagination &amp; Large Lists
+              <span style="color: var(--text-muted)">(optional)</span>
+            </h2>
+            <p>
+              Use this section when you build large lists, search results, or
+              infinite scrolling pages. If you only ever load small datasets,
+              keep it simple.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Cursor-based</h3>
+                <p class="component-card__text">
+                  Stable under inserts/deletes. Best for feeds and high-churn
+                  lists.
+                </p>
+                <a
+                  href="#modal-pagination-strategies"
+                  class="component-card__btn"
+                  >View strategies →</a
+                >
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Offset / Page</h3>
+                <p class="component-card__text">
+                  Simple and common. Prefer when the dataset is stable and
+                  ordering is predictable.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Infinite scroll</h3>
+                <p class="component-card__text">
+                  Requires careful UX (restore scroll, loading sentinel, error
+                  recovery).
+                </p>
+              </article>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Common Mistakes</h3>
+              <ul style="margin: 0">
+                <li>Not debouncing search/filter requests.</li>
+                <li>
+                  Not persisting pagination state across navigation (causes
+                  “jumping” lists).
+                </li>
+                <li>
+                  Using page-based pagination on rapidly changing feeds without
+                  stable ordering.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- SECURITY -->
+          <section class="section" id="security">
+            <h2>Security Essentials</h2>
+            <p>
+              API &amp; data handling is a major security surface. The safest
+              approach is to centralize sensitive behavior, avoid risky storage,
+              and treat all external data as untrusted.
+            </p>
+
+            <div class="naming-table-wrapper">
+              <table class="naming-table">
+                <thead>
+                  <tr>
+                    <th>Concern</th>
+                    <th>Rule</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Auth tokens</td>
+                    <td>Prefer httpOnly cookies</td>
+                    <td>
+                      Avoid localStorage for long-lived tokens when possible
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>PII</td>
+                    <td>Minimize retention</td>
+                    <td>Don’t cache sensitive responses longer than needed</td>
+                  </tr>
+                  <tr>
+                    <td>Request signing</td>
+                    <td>Server-side only</td>
+                    <td>Do not embed secrets in client apps</td>
+                  </tr>
+                  <tr>
+                    <td>CORS / CSRF</td>
+                    <td>Use correct server policy</td>
+                    <td>Client-side workarounds are anti-patterns</td>
+                  </tr>
+                  <tr>
+                    <td>Error payloads</td>
+                    <td>Redact before logging</td>
+                    <td>Especially for auth and payment flows</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card">
+              <h3>Practical Guidelines</h3>
+              <ul style="margin: 0">
+                <li>Never include secrets in query params.</li>
+                <li>
+                  Use HTTPS always; never “temporarily” disable TLS checks in
+                  production code.
+                </li>
+                <li>
+                  Implement strict allowlists for domains if the app loads
+                  remote data.
+                </li>
+                <li>
+                  Sanitize and encode any server-provided HTML (avoid raw HTML
+                  where possible).
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- OBSERVABILITY -->
+          <section class="section" id="observability">
+            <h2>
+              Observability
+              <span style="color: var(--text-muted)"
+                >(recommended when requests matter)</span
+              >
+            </h2>
+            <p>
+              Observability does not need to be heavy. The baseline is to make
+              failures diagnosable without guessing: capture a request ID when
+              available, categorize errors, and record basic timing.
+            </p>
+
+            <div class="card">
+              <h3>Baseline signals</h3>
+              <ul style="margin: 0">
+                <li>
+                  <strong>Request ID:</strong> capture from response headers
+                  when available.
+                </li>
+                <li>
+                  <strong>Endpoint name:</strong> a stable identifier (not raw
+                  URLs everywhere).
+                </li>
+                <li><strong>Timing:</strong> total duration (ms).</li>
+                <li>
+                  <strong>Error category:</strong>
+                  network/auth/validation/rate_limit/server/contract.
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Optional metrics (data-heavy projects)</h3>
+              <ul style="margin: 0">
+                <li>Success rate by endpoint</li>
+                <li>p50 / p95 latency by endpoint</li>
+                <li>Rate limit incidents (429)</li>
+                <li>Contract validation failures</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- BEST PRACTICES -->
+          <section class="section" id="best-practices">
+            <h2>Best Practices Summary</h2>
+
+            <div class="perf-grid">
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Centralization</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>One API client wrapper</li>
+                  <li>Consistent headers, timeouts, retries</li>
+                  <li>Shared error mapping</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Contracts</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Document response shapes (JSDoc/types)</li>
+                  <li>Validate critical fields</li>
+                  <li>Normalize naming and IDs</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Caching</h3>
+                  <span class="perf-badge perf-badge--yellow">Optional</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Deterministic cache keys</li>
+                  <li>Explicit invalidation on writes</li>
+                  <li>Document freshness windows</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Errors</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>UI branches on categories</li>
+                  <li>Retry only when safe</li>
+                  <li>Actionable messages</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Security</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Safe storage for tokens</li>
+                  <li>Redacted logs</li>
+                  <li>No secrets in client</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Observability</h3>
+                  <span class="perf-badge perf-badge--yellow">Recommended</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Request IDs + timings</li>
+                  <li>Endpoint naming</li>
+                  <li>Error category tracking</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <!-- CHECKLIST -->
+          <section class="section" id="checklist">
+            <h2>Implementation Checklist</h2>
+
+            <div class="card">
+              <h3>New Feature (Reads)</h3>
+              <ul style="margin: 0">
+                <li>Define endpoint contract (params + response shape).</li>
+                <li>
+                  Implement a service function in <code>services/</code> (no UI
+                  code inside).
+                </li>
+                <li>Normalize the response into a stable shape for the UI.</li>
+                <li>
+                  Add a UI adapter module to handle loading/empty/error states.
+                </li>
+                <li>
+                  If needed: add lightweight validation for critical fields.
+                </li>
+                <li>
+                  Ensure failures are diagnosable (endpoint name + requestId
+                  when available).
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>New Feature (Writes)</h3>
+              <ul style="margin: 0">
+                <li>
+                  Validate outgoing payload (at least required fields) before
+                  sending.
+                </li>
+                <li>Map server validation errors to user-facing messages.</li>
+                <li>Confirm behavior for auth/rate-limit/server failures.</li>
+                <li>
+                  If you use caching: invalidate/update relevant cache keys.
+                </li>
+              </ul>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>Quality Gates</h3>
+              <ul style="margin: 0">
+                <li>
+                  No ad-hoc <code>fetch</code>/<code>axios</code> calls inside
+                  UI components.
+                </li>
+                <li>No secrets or PII in logs.</li>
+                <li>
+                  Timeout/cancel rules are consistent (no infinite hanging
+                  requests).
+                </li>
+                <li>
+                  Retry policy is centralized and documented (only idempotent by
+                  default).
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- VITE FUTURE -->
+          <section class="section" id="vite-future">
+            <h2>Vite (Future Direction)</h2>
+            <p>
+              Vite is a build tool and dev server. It does
+              <strong>not</strong> change our JavaScript approach by itself, but
+              it can make API/client code more consistent across projects by
+              standardizing bundling and environments.
+            </p>
+
+            <div class="card">
+              <h3>Potential benefits</h3>
+              <ul style="margin: 0">
+                <li>
+                  Single, reproducible way to build and ship client scripts (no
+                  editor-plugin dependency).
+                </li>
+                <li>
+                  Clear module boundaries
+                  (<code>import</code>/<code>export</code>) and predictable
+                  dependency management.
+                </li>
+                <li>
+                  Better production output (minified assets, cache-friendly
+                  filenames) when needed.
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Trade-offs</h3>
+              <ul style="margin: 0">
+                <li>
+                  Node/npm becomes part of the project baseline (versions and
+                  dependencies must be maintained).
+                </li>
+                <li>
+                  A small learning curve: everyone uses the same
+                  <code>dev</code>/<code>build</code> commands.
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Impact on the current guideline</h3>
+              <ul style="margin: 0">
+                <li>
+                  The architectural boundaries (client → services → UI adapters)
+                  stay the same.
+                </li>
+                <li>
+                  Folder placement becomes more consistent (<code>src/</code> is
+                  the source of truth).
+                </li>
+                <li>
+                  Optional runtime validation/caching becomes easier to package,
+                  but remains optional.
+                </li>
+              </ul>
+            </div>
+          </section>
+          <!-- RESOURCES -->
+          <section class="section" id="resources">
+            <h2>Additional Resources</h2>
+
+            <div class="card">
+              <h3>Related Guidelines</h3>
+              <ul>
+                <li>
+                  <a href="security.html" style="color: var(--accent)"
+                    >Security</a
+                  >
+                  - auth, storage, and safe logging requirements
+                </li>
+                <li>
+                  <a href="performance.html" style="color: var(--accent)"
+                    >Performance</a
+                  >
+                  - caching, batching, and network optimization
+                </li>
+                <li>
+                  <a href="testing.html" style="color: var(--accent)"
+                    >Testing</a
+                  >
+                  - contract tests, mocking, and reliability checks
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>External Resources</h3>
+              <ul>
+                <li>
+                  <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >MDN — Fetch API</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://datatracker.ietf.org/doc/html/rfc7807"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >RFC 7807 — Problem Details for HTTP APIs</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://spec.openapis.org/oas/latest.html"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >OpenAPI Specification</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >MDN — HTTP status codes</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal: API Client Template -->
+    <dialog id="modal-api-client-template" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">API Client Template</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close API client template preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Minimal wrapper structure showing where to keep policy (timeouts,
+            retries), parsing, and error mapping. Adapt to your stack
+            (fetch/axios/etc.).
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code>// src/scripts/api/client.js
+export async function request(path, { method = "GET", headers, body, signal } = {}) {
+  const url = new URL(path, API_BASE_URL);
+
+  const res = await fetch(url, {
+    method,
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      ...headers
+    },
+    body: body ? JSON.stringify(body) : undefined,
+    signal
+  });
+
+  const contentType = res.headers.get("content-type") || "";
+  const isJson = contentType.includes("application/json");
+  const payload = res.status === 204 ? null : (isJson ? await res.json().catch(() =&gt; null) : await res.text());
+
+  if (!res.ok) throw mapError({ res, payload });
+  return payload;
+}
+
+// src/scripts/api/errors.js
+export function mapError({ res, payload }) {
+  const requestId = res.headers.get("x-request-id") || res.headers.get("x-correlation-id");
+  if (res.status === 401) return { category: "auth", status: 401, message: "Authentication required", requestId };
+  if (res.status === 403) return { category: "permission", status: 403, message: "Access denied", requestId };
+  if (res.status === 429) return { category: "rate_limit", status: 429, message: "Too many requests", requestId };
+  if (res.status &gt;= 500) return { category: "server", status: res.status, message: "Server error", requestId };
+  return { category: "validation", status: res.status, message: "Request failed", requestId, details: payload };
+}</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4 style="font-size: 14px; margin: 0 0 8px">Notes</h4>
+            <ul style="margin: 0; font-size: 13px">
+              <li>
+                Timeouts/retries are omitted here for brevity; keep them inside
+                the client wrapper.
+              </li>
+              <li>
+                Always treat error bodies as untrusted and potentially non-JSON.
+              </li>
+              <li>
+                Use request IDs to correlate client failures with server logs.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Pagination Strategies -->
+    <dialog id="modal-pagination-strategies" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Pagination Strategies</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close pagination strategies preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Choose a strategy based on dataset volatility and UX needs. Prefer
+            cursor pagination for changing datasets (feeds, search results).
+          </p>
+
+          <div class="card preview-modal__code">
+            <h4 style="font-size: 14px; margin: 0 0 8px">Cursor-based</h4>
+            <pre><code>GET /items?limit=20&amp;cursor=eyJpZCI6IjEyMyJ9
+Response:
+{
+  "items": [ ... ],
+  "nextCursor": "eyJpZCI6IjE0NCJ9"
+}</code></pre>
+
+            <h4 style="font-size: 14px; margin: 16px 0 8px">Offset/page</h4>
+            <pre><code>GET /items?page=3&amp;pageSize=20
+Response:
+{
+  "items": [ ... ],
+  "page": 3,
+  "totalPages": 42
+}</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4 style="font-size: 14px; margin: 0 0 8px">Decision Hints</h4>
+            <ul style="margin: 0; font-size: 13px">
+              <li><strong>High churn:</strong> cursor</li>
+              <li>
+                <strong>Stable catalog:</strong> page/offset can be acceptable
+              </li>
+              <li>
+                <strong>SEO pages:</strong> page-based with canonical URLs
+              </li>
+              <li>
+                <strong>Infinite scroll:</strong> keep cursor in URL or store
+                for restoration
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Error Catalog -->
+    <dialog id="modal-error-catalog" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Error Catalog</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close error catalog preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Standard categories and typical UI outcomes. Do not branch on raw
+            status codes in UI code.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code>network
+  - show: "Check your connection"
+  - action: retry button (idempotent only)
+
+auth
+  - show: "Please sign in"
+  - action: redirect to login / refresh token
+
+permission
+  - show: "You do not have access"
+  - action: contact admin / request access
+
+validation
+  - show: inline field errors (forms) or "Invalid request"
+  - action: highlight fields; do not retry automatically
+
+rate_limit
+  - show: "Too many requests"
+  - action: disable retries; respect Retry-After
+
+server
+  - show: generic failure + fallback UI
+  - action: limited retries; allow manual retry
+
+contract
+  - show: generic failure (non-technical)
+  - action: report (with requestId); block unsafe rendering</code></pre>
+          </div>
+
+          <div class="card component-card--warning" style="margin-top: 16px">
+            <h4 style="margin: 0 0 8px">Contract Errors</h4>
+            <p style="margin: 0; font-size: 13px">
+              Treat schema failures as high severity: they indicate server drift
+              or incorrect assumptions. Capture context (endpoint name,
+              requestId, schema name), but avoid logging full payloads if
+              sensitive.
+            </p>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

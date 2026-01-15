@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta
+      content="Markup guidelines for modern HTML: semantic structure, accessibility, SEO, forms, and media patterns for maintainable UI."
+      name="description"
+    />
+    <meta content="#0b0f1a" name="theme-color" />
+    <meta content="Markup — Coding Guideline" property="og:title" />
+    <meta
+      content="Modern HTML markup rules: semantics, accessibility, SEO metadata, forms, and media patterns."
+      property="og:description"
+    />
+    <meta content="website" property="og:type" />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="/apple-touch-icon.png" rel="apple-touch-icon" />
+    <link
+      as="font"
+      crossorigin="anonymous"
+      href="/assets/fonts/Outfit-VariableFont.woff2"
+      rel="preload"
+      type="font/woff2"
+    />
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    <title>Markup — Coding Guideline</title>
+  </head>
+  <body>
+    <div class="bg-gradient"></div>
+    <div class="app-shell">
+      <!-- SIDEBAR -->
+      <aside aria-label="Primary" class="sidebar" id="primary-sidebar">
+        <a class="sidebar__header" href="/">
+          <div aria-hidden="true" class="sidebar__logo">S</div>
+          <div class="sidebar__title">
+            <span class="sidebar__company">Coding Guideline</span>
+            <span class="sidebar__subtitle">settenLab</span>
+          </div>
+        </a>
+        <nav aria-label="Guideline navigation" class="sidebar__nav sidebar-nav">
+          <!-- START HERE -->
+          <details
+            class="nav-group nav-group--start"
+            data-nav-group="start-here"
+          >
+            <summary class="nav-group__summary">
+              <a class="nav-group__summary-link" href="/">Start here</a>
+            </summary>
+          </details>
+          <!-- PROJECT SETUP -->
+          <details class="nav-group" data-nav-group="project-setup">
+            <summary class="nav-group__summary">Project setup</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  class="sidebar-nav__link nav-link"
+                  href="environment-setup.html"
+                >
+                  Environment setup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  class="sidebar-nav__link nav-link"
+                  href="file-structure.html"
+                >
+                  File structure
+                </a>
+              </li>
+            </ul>
+          </details>
+          <!-- UI -->
+          <details class="nav-group" data-nav-group="ui" open="">
+            <summary class="nav-group__summary">UI</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  aria-current="page"
+                  class="sidebar-nav__link nav-link nav-link--active"
+                  href="markup.html"
+                >
+                  Markup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="styling.html">
+                  Styling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="components.html">
+                  Components
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="typography.html">
+                  Typography
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="accessibility.html">
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </details>
+          <!-- ENGINEERING -->
+          <details class="nav-group" data-nav-group="engineering">
+            <summary class="nav-group__summary">Engineering</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="javascript.html">
+                  Javascript
+                </a>
+              </li>
+
+              <li class="nav-group__item">
+                <a
+                  class="sidebar-nav__link nav-link"
+                  href="api-and-data-handling.html"
+                >
+                  API & Data handling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="performance.html">
+                  Performance
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="testing.html">
+                  Testing
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="security.html">
+                  Security
+                </a>
+              </li>
+            </ul>
+          </details>
+          <!-- WORKFLOW -->
+          <details class="nav-group" data-nav-group="workflow">
+            <summary class="nav-group__summary">Workflow</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="pr-rules.html">
+                  PR rules / review checklist
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="documentation.html">
+                  Documentation rules
+                </a>
+              </li>
+            </ul>
+          </details>
+        </nav>
+        <div class="sidebar__footer">
+          <a class="sidebar__version" href="changelog.html">v1.0.0</a>
+          <span class="sidebar__lang">EN</span>
+        </div>
+      </aside>
+      <div
+        class="sidebar-backdrop js-sidebar-backdrop"
+        data-sidebar-backdrop="true"
+        hidden=""
+      ></div>
+      <!-- MAIN -->
+      <main class="main" id="main-content">
+        <header class="topbar">
+          <button
+            aria-controls="primary-sidebar"
+            aria-expanded="false"
+            aria-label="Open navigation"
+            class="topbar__menu-btn js-sidebar-toggle"
+            data-sidebar-toggle="true"
+            type="button"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <h1 class="topbar__title">Markup</h1>
+          <div class="topbar__actions">
+            <button
+              aria-label="Toggle theme"
+              aria-pressed="false"
+              class="topbar__action-btn"
+              data-theme-toggle="true"
+              id="themeToggle"
+            >
+              🌗
+            </button>
+          </div>
+        </header>
+        <div class="content">
+          <!-- OVERVIEW -->
+          <section class="section" id="overview">
+            <h2>Overview</h2>
+            <p>
+              This guideline defines how we write HTML for clarity,
+              accessibility, and long-term maintainability. It favors semantic
+              structure, predictable naming, and progressive enhancement.
+            </p>
+            <div class="card callout card--callout">
+              <h3>Core Principles</h3>
+              <ul>
+                <li>
+                  <strong>Semantics first:</strong> choose elements for meaning,
+                  not appearance
+                </li>
+                <li>
+                  <strong>Accessibility by default:</strong> labels, focus,
+                  landmarks, and headings are non-negotiable
+                </li>
+                <li>
+                  <strong>SEO-ready head:</strong> correct metadata, titles, and
+                  social previews
+                </li>
+                <li>
+                  <strong>Progressive enhancement:</strong> core UX works
+                  without JavaScript
+                </li>
+                <li>
+                  <strong>Predictable structure:</strong> consistency across
+                  pages and components
+                </li>
+              </ul>
+            </div>
+          </section>
+          <!-- DOCUMENT SKELETON -->
+          <section class="section" id="document-skeleton">
+            <h2>Document Skeleton</h2>
+            <p>
+              Use HTML5 with a minimal, standards-based head. Prefer evergreen
+              browser support and avoid legacy hacks.
+            </p>
+            <div class="card">
+              <h3>Baseline Template</h3>
+              <pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+
+    &lt;title&gt;Page title — Site name&lt;/title&gt;
+    &lt;meta name="description" content="One-sentence page summary."&gt;
+
+    &lt;link rel="icon" href="/favicon.svg" type="image/svg+xml"&gt;
+    &lt;link rel="stylesheet" href="/assets/css/style.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;a class="skip-link" href="#main-content"&gt;Skip to content&lt;/a&gt;
+
+    &lt;header&gt;...&lt;/header&gt;
+    &lt;main id="main-content"&gt;...&lt;/main&gt;
+    &lt;footer&gt;...&lt;/footer&gt;
+
+    &lt;script type="module" src="/assets/js/main.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+            <div class="card">
+              <h3>Encoding, line breaks, indentation</h3>
+              <ul>
+                <li>
+                  <strong>UTF-8</strong> without BOM; keep files consistent
+                  across the repo
+                </li>
+                <li>
+                  <strong>LF</strong> line endings (configure via
+                  <code>.editorconfig</code>)
+                </li>
+                <li>
+                  Indent with spaces (2 or 4) consistently; do not mix tabs and
+                  spaces within a codebase
+                </li>
+                <li>Never leave trailing whitespace</li>
+              </ul>
+              <p
+                style="
+                  margin: 12px 0 0;
+                  font-size: 13px;
+                  color: var(--text-muted);
+                "
+              >
+                Note: older internal documents used TAB indentation; modern
+                teams typically standardize on spaces to align with tooling
+                (Prettier/ESLint).
+              </p>
+            </div>
+          </section>
+          <!-- HEAD / META -->
+          <section class="section" id="head-meta">
+            <h2>Head &amp; Metadata</h2>
+            <p>
+              Metadata impacts SEO, social previews, and usability. Keep it
+              correct, specific, and page-unique.
+            </p>
+            <div class="baseline-accordion">
+              <details class="accordion" open="">
+                <summary class="accordion__summary">
+                  Title &amp; description
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px">
+                    <li>
+                      <strong>&lt;title&gt;</strong>: concise, unique per page.
+                      Prefer:
+                      <code>Page title — Site name</code>
+                    </li>
+                    <li>
+                      <strong>description</strong>: 1–2 sentences describing the
+                      page content; keep it human-readable
+                    </li>
+                    <li>Do not keyword-stuff; write for humans first</li>
+                  </ul>
+                  <pre><code>&lt;title&gt;Markup — Coding Guideline&lt;/title&gt;
+&lt;meta name="description" content="Modern HTML markup rules: semantics, accessibility, SEO metadata, forms, and media patterns."&gt;</code></pre>
+                </div>
+              </details>
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Open Graph &amp; social cards
+                </summary>
+                <div class="accordion__content">
+                  <p
+                    style="
+                      font-size: 13px;
+                      color: var(--text-muted);
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Add social tags for public pages. Keep the image optimized
+                    and absolute URL in production.
+                  </p>
+                  <pre><code>&lt;meta property="og:title" content="Markup — Coding Guideline"&gt;
+&lt;meta property="og:description" content="Modern HTML markup rules..."&gt;
+&lt;meta property="og:type" content="website"&gt;
+&lt;meta property="og:image" content="https://example.com/og/markup.png"&gt;
+
+&lt;meta name="twitter:card" content="summary_large_image"&gt;</code></pre>
+                </div>
+              </details>
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Canonical, alternates, pagination
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px">
+                    <li>
+                      <strong>canonical</strong> for duplicate content (e.g.,
+                      tracking params)
+                    </li>
+                    <li>
+                      <strong>alternate</strong> for localized pages / language
+                      variants
+                    </li>
+                    <li>
+                      <strong>prev/next</strong> only when paginated series is
+                      truly sequential
+                    </li>
+                  </ul>
+                  <pre><code>&lt;link rel="canonical" href="https://example.com/docs/markup"&gt;
+&lt;link rel="alternate" href="https://example.com/ja/docs/markup" hreflang="ja"&gt;
+&lt;link rel="alternate" href="https://example.com/docs/markup" hreflang="en"&gt;</code></pre>
+                </div>
+              </details>
+            </div>
+          </section>
+          <!-- SEMANTICS & LAYOUT -->
+          <section class="section" id="semantics">
+            <h2>Semantics &amp; Layout</h2>
+            <p>
+              Use landmarks and sectioning elements to create a navigable
+              document outline for assistive technologies.
+            </p>
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Landmarks</h3>
+                <p class="component-card__text">
+                  Use <code>header</code>, <code>nav</code>, <code>main</code>,
+                  <code>aside</code>, <code>footer</code>.
+                </p>
+                <a class="component-card__btn" href="#modal-landmarks"
+                  >View examples →</a
+                >
+              </article>
+              <article class="component-card">
+                <h3 class="component-card__title">Headings</h3>
+                <p class="component-card__text">
+                  One <code>h1</code> per page; headings must be hierarchical.
+                </p>
+                <a class="component-card__btn" href="#modal-headings"
+                  >View rules →</a
+                >
+              </article>
+              <article class="component-card">
+                <h3 class="component-card__title">Sectioning</h3>
+                <p class="component-card__text">
+                  Prefer <code>section</code>/<code>article</code> when they add
+                  meaning.
+                </p>
+                <a class="component-card__btn" href="#modal-sectioning"
+                  >View patterns →</a
+                >
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Page example</h3>
+                <p class="component-card__text">
+                  A minimal, copy‑pasteable page skeleton that demonstrates the
+                  recommended structure, class naming, and JS hooks.
+                </p>
+                <a class="component-card__btn" href="#modal-page-example"
+                  >View example →</a
+                >
+              </article>
+            </div>
+            <div class="card" id="landmarks">
+              <h3>Landmarks</h3>
+              <pre><code>&lt;header class="site-header"&gt;...&lt;/header&gt;
+
+&lt;nav class="nav-main" aria-label="Primary"&gt;
+  &lt;ul&gt;...&lt;/ul&gt;
+&lt;/nav&gt;
+
+&lt;main id="main-content"&gt;
+  ...
+&lt;/main&gt;
+
+&lt;footer class="site-footer"&gt;...&lt;/footer&gt;</code></pre>
+            </div>
+            <div class="card" id="headings">
+              <h3>Headings</h3>
+              <ul>
+                <li>Exactly one <code>h1</code> per page (page title)</li>
+                <li>
+                  Do not skip heading levels (<code>h2</code> →
+                  <code>h3</code> → <code>h4</code>)
+                </li>
+                <li>
+                  Do not use headings for styling only (use classes instead)
+                </li>
+              </ul>
+            </div>
+            <div class="card" id="sectioning">
+              <h3>Sectioning example</h3>
+              <pre><code>&lt;article class="doc-article"&gt;
+  &lt;h1&gt;Markup&lt;/h1&gt;
+
+  &lt;section&gt;
+    &lt;h2&gt;Semantics&lt;/h2&gt;
+    &lt;p&gt;...&lt;/p&gt;
+
+    &lt;section&gt;
+      &lt;h3&gt;Landmarks&lt;/h3&gt;
+      &lt;p&gt;...&lt;/p&gt;
+    &lt;/section&gt;
+  &lt;/section&gt;
+&lt;/article&gt;</code></pre>
+            </div>
+          </section>
+          <!-- NAMING -->
+          <section class="section" id="naming">
+            <h2>Naming &amp; Attributes</h2>
+            <p>
+              Naming must be predictable and searchable. Prefer kebab-case for
+              HTML classes and data attributes.
+            </p>
+            <div class="card">
+              <h3>Classes</h3>
+              <ul>
+                <li>
+                  Use <strong>BEM</strong> for components: <code>.card</code>,
+                  <code>.card__title</code>, <code>.card--featured</code>
+                </li>
+                <li>
+                  Avoid deep descendant selectors; keep markup class hooks
+                  explicit
+                </li>
+                <li>
+                  Do not use presentational names like <code>.red</code> or
+                  <code>.mt-10</code> unless they are part of a documented
+                  utility system
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>IDs</h3>
+              <ul>
+                <li>
+                  Use IDs for <strong>document anchors</strong> (e.g., section
+                  navigation) and <strong>form relationships</strong>
+                </li>
+                <li>Avoid IDs as styling hooks (hard to override and reuse)</li>
+                <li>IDs must be unique per page</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Data attributes for JS</h3>
+              <p style="margin-bottom: 8px">
+                Prefer <code>data-*</code> hooks for JavaScript to decouple
+                behavior from styling.
+              </p>
+              <pre><code>&lt;button class="btn btn--primary" type="button" data-modal-open="example"&gt;
+  Open modal
+&lt;/button&gt;
+
+&lt;dialog class="modal" data-modal="example"&gt;...&lt;/dialog&gt;</code></pre>
+            </div>
+          </section>
+          <!-- LINKS & MEDIA -->
+          <section class="section" id="links-media">
+            <h2>Links, Media, and Assets</h2>
+            <p>
+              Links must be explicit, accessible, and resilient. Media should be
+              responsive and optimized.
+            </p>
+            <div class="baseline-accordion">
+              <details class="accordion">
+                <summary class="accordion__summary">Links</summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px">
+                    <li>Use meaningful link text (avoid “click here”)</li>
+                    <li>
+                      External links: <code>target="_blank"</code> must include
+                      <code>rel="noopener"</code>
+                    </li>
+                    <li>
+                      Use root-relative paths for internal assets when possible
+                    </li>
+                  </ul>
+                  <pre><code>&lt;a href="/docs/markup.html"&gt;Read markup rules&lt;/a&gt;
+&lt;a href="https://example.com" target="_blank" rel="noopener"&gt;External resource&lt;/a&gt;</code></pre>
+                </div>
+              </details>
+              <details class="accordion" open="">
+                <summary class="accordion__summary">Images</summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px">
+                    <li>
+                      Always provide <code>alt</code>. Use empty
+                      <code>alt=""</code> for decorative images
+                    </li>
+                    <li>
+                      Prefer modern formats (WebP/AVIF) with fallbacks when
+                      necessary
+                    </li>
+                    <li>
+                      Use <code>width</code>/<code>height</code> attributes to
+                      reduce layout shift
+                    </li>
+                    <li>
+                      Use <code>loading="lazy"</code> for below-the-fold images
+                    </li>
+                  </ul>
+                  <pre><code>&lt;img
+  src="/assets/images/pages/home/hero-main-960w.webp"
+  srcset="
+    /assets/images/pages/home/hero-main-640w.webp 640w,
+    /assets/images/pages/home/hero-main-960w.webp 960w,
+    /assets/images/pages/home/hero-main-1280w.webp 1280w
+  "
+  sizes="(max-width: 768px) 92vw, 960px"
+  width="960"
+  height="540"
+  alt="Screenshot of the documentation layout"
+  loading="lazy"
+/&gt;</code></pre>
+                </div>
+              </details>
+              <details class="accordion">
+                <summary class="accordion__summary">Icons</summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px">
+                    <li>
+                      Prefer inline SVG for UI icons when you need styling via
+                      CSS
+                    </li>
+                    <li>
+                      Decorative icons must be hidden from screen readers
+                      (<code>aria-hidden="true"</code>)
+                    </li>
+                    <li>
+                      Do not use icon-only buttons without an accessible name
+                    </li>
+                  </ul>
+                  <pre><code>&lt;button class="icon-btn" type="button" aria-label="Open navigation"&gt;
+  &lt;svg aria-hidden="true" ...&gt;...&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+                </div>
+              </details>
+            </div>
+          </section>
+          <!-- FORMS -->
+          <section class="section" id="forms">
+            <h2>Forms</h2>
+            <p>
+              Forms must be accessible and robust. Use correct input types,
+              labels, and validation messaging.
+            </p>
+            <div class="card">
+              <h3>Labels &amp; relationships</h3>
+              <ul>
+                <li>
+                  Every input needs a programmatic label:
+                  <code>&lt;label for&gt;</code> or wrapping
+                  <code>&lt;label&gt;</code>
+                </li>
+                <li>
+                  Group related controls with <code>fieldset</code> +
+                  <code>legend</code>
+                </li>
+                <li>Use <code>aria-describedby</code> for hints and errors</li>
+              </ul>
+              <pre><code>&lt;div class="form-field"&gt;
+  &lt;label class="form-field__label" for="email"&gt;Email&lt;/label&gt;
+  &lt;input class="form-field__input" id="email" name="email" type="email" autocomplete="email" required /&gt;
+  &lt;p class="form-field__hint" id="email-hint"&gt;We will never share your email.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="card">
+              <h3>Buttons</h3>
+              <ul>
+                <li>
+                  Use <code>&lt;button&gt;</code>, not
+                  <code>&lt;input type="submit"&gt;</code>, for easier styling
+                  and richer content
+                </li>
+                <li>
+                  Set explicit <code>type</code> on all buttons
+                  (<code>button</code>, <code>submit</code>, <code>reset</code>)
+                </li>
+              </ul>
+              <pre><code>&lt;button class="btn btn--primary" type="submit"&gt;Send&lt;/button&gt;
+&lt;button class="btn btn--secondary" type="button"&gt;Cancel&lt;/button&gt;</code></pre>
+            </div>
+            <div class="card component-card--warning">
+              <h3>⚠️ Validation</h3>
+              <ul style="margin: 0">
+                <li>
+                  Use native HTML validation where appropriate
+                  (<code>required</code>, <code>type</code>,
+                  <code>minlength</code>)
+                </li>
+                <li>
+                  Client-side validation must not replace server-side validation
+                </li>
+                <li>
+                  Errors must be announced: use an error summary region and
+                  per-field messages
+                </li>
+              </ul>
+            </div>
+          </section>
+          <!-- PAGE EXAMPLE -->
+          <section class="section" id="page-example">
+            <h2>Page Example: News / About / Services</h2>
+            <p>
+              Code-only example. This is sample HTML structure for a page with
+              three sections. The news list is intended to be aligned with CSS
+              Grid + <code>subgrid</code> (date/category columns stay aligned
+              regardless of title length).
+            </p>
+            <div class="card">
+              <h3>Example markup</h3>
+              <pre><code>&lt;main id="main-content"&gt;
+  &lt;!--
+    NEWS LIST ALIGNMENT (CSS Grid + subgrid)
+    - .news-list defines 3 columns: date | category | title
+    - each .news-item uses `grid-template-columns: subgrid`
+  --&gt;
+  &lt;section class="news" aria-labelledby="news-title"&gt;
+    &lt;h2 id="news-title"&gt;News&lt;/h2&gt;
+
+    &lt;ul class="news-list" aria-label="Latest news"&gt;
+      &lt;li class="news-item"&gt;
+        &lt;time class="news-item__date" datetime="2026-01-06"&gt;2026-01-06&lt;/time&gt;
+        &lt;span class="news-item__category"&gt;Release&lt;/span&gt;
+        &lt;a class="news-item__title" href="/news/v1-0-0.html"&gt;
+          v1.0.0 guideline published
+        &lt;/a&gt;
+      &lt;/li&gt;
+
+      &lt;li class="news-item"&gt;
+        &lt;time class="news-item__date" datetime="2025-12-20"&gt;2025-12-20&lt;/time&gt;
+        &lt;span class="news-item__category"&gt;Update&lt;/span&gt;
+        &lt;a class="news-item__title" href="/news/markup-subgrid.html"&gt;
+          Markup rules updated: subgrid example and fallback strategy
+        &lt;/a&gt;
+      &lt;/li&gt;
+
+      &lt;li class="news-item"&gt;
+        &lt;time class="news-item__date" datetime="2025-12-02"&gt;2025-12-02&lt;/time&gt;
+        &lt;span class="news-item__category"&gt;Event&lt;/span&gt;
+        &lt;a class="news-item__title" href="/news/internal-workshop.html"&gt;
+          Internal workshop: accessibility-first UI in product teams
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;a class="link" href="/news/"&gt;All news →&lt;/a&gt;
+  &lt;/section&gt;
+
+  &lt;section class="about" aria-labelledby="about-title"&gt;
+    &lt;h2 id="about-title"&gt;About&lt;/h2&gt;
+
+    &lt;div class="about-card"&gt;
+      &lt;p class="about-card__text"&gt;
+        We build UI systems and front-end implementations for product teams. Our focus is semantic markup,
+        accessibility, and performance—so the interface is maintainable at scale.
+      &lt;/p&gt;
+
+      &lt;figure class="about-card__profile"&gt;
+        &lt;img
+          class="about-card__photo"
+          src="/assets/images/team/director-320w.webp"
+          width="320"
+          height="320"
+          alt="Aiko Tanaka, Managing Director"
+          loading="lazy"
+        /&gt;
+        &lt;figcaption class="about-card__caption"&gt;
+          &lt;span class="about-card__name"&gt;Aiko Tanaka&lt;/span&gt;
+          &lt;span class="about-card__role"&gt;Managing Director&lt;/span&gt;
+        &lt;/figcaption&gt;
+      &lt;/figure&gt;
+    &lt;/div&gt;
+
+    &lt;a class="link" href="/about/"&gt;More about the company →&lt;/a&gt;
+  &lt;/section&gt;
+
+  &lt;section class="services" aria-labelledby="services-title"&gt;
+    &lt;h2 id="services-title"&gt;Services&lt;/h2&gt;
+
+    &lt;ul class="service-grid" aria-label="Services"&gt;
+      &lt;li class="service-card"&gt;
+        &lt;a class="service-card__link" href="/services/web-development/"&gt;
+          &lt;img
+            class="service-card__image"
+            src="/assets/images/services/web-dev-640w.webp"
+            width="640"
+            height="360"
+            alt=""
+            loading="lazy"
+          /&gt;
+          &lt;div class="service-card__body"&gt;
+            &lt;h3 class="service-card__title"&gt;Web development&lt;/h3&gt;
+            &lt;p class="service-card__text"&gt;
+              Accessible, maintainable front-end implementation aligned with your design system.
+            &lt;/p&gt;
+            &lt;span class="service-card__cta"&gt;Learn more →&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+
+      &lt;li class="service-card"&gt;
+        &lt;a class="service-card__link" href="/services/ui-audit/"&gt;
+          &lt;img
+            class="service-card__image"
+            src="/assets/images/services/ui-audit-640w.webp"
+            width="640"
+            height="360"
+            alt=""
+            loading="lazy"
+          /&gt;
+          &lt;div class="service-card__body"&gt;
+            &lt;h3 class="service-card__title"&gt;UI audit&lt;/h3&gt;
+            &lt;p class="service-card__text"&gt;
+              Accessibility, semantics, and performance review with a prioritized remediation plan.
+            &lt;/p&gt;
+            &lt;span class="service-card__cta"&gt;Learn more →&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+
+      &lt;li class="service-card"&gt;
+        &lt;a class="service-card__link" href="/services/documentation/"&gt;
+          &lt;img
+            class="service-card__image"
+            src="/assets/images/services/docs-640w.webp"
+            width="640"
+            height="360"
+            alt=""
+            loading="lazy"
+          /&gt;
+          &lt;div class="service-card__body"&gt;
+            &lt;h3 class="service-card__title"&gt;Documentation&lt;/h3&gt;
+            &lt;p class="service-card__text"&gt;
+              Coding guidelines and component documentation for consistent delivery across teams.
+            &lt;/p&gt;
+            &lt;span class="service-card__cta"&gt;Learn more →&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
+            </div>
+          </section>
+          <!-- ACCESSIBILITY QUICK RULES -->
+          <section class="section" id="a11y">
+            <h2>Accessibility Essentials</h2>
+            <p>
+              Accessibility is a product requirement. Markup must support
+              keyboard, screen readers, and responsive zoom.
+            </p>
+            <div class="naming-table-wrapper">
+              <table class="naming-table">
+                <thead>
+                  <tr>
+                    <th>Topic</th>
+                    <th>Rule</th>
+                    <th>Example</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Keyboard</td>
+                    <td>All interactive elements reachable and operable</td>
+                    <td><code>button</code> over clickable <code>div</code></td>
+                  </tr>
+                  <tr>
+                    <td>Focus</td>
+                    <td>Visible focus indicator must exist</td>
+                    <td><code>:focus-visible</code> styles</td>
+                  </tr>
+                  <tr>
+                    <td>Names</td>
+                    <td>Controls have accessible names</td>
+                    <td><code>aria-label</code> for icon-only buttons</td>
+                  </tr>
+                  <tr>
+                    <td>Headings</td>
+                    <td>Logical heading order supports navigation</td>
+                    <td><code>h2</code> sections under one <code>h1</code></td>
+                  </tr>
+                  <tr>
+                    <td>Images</td>
+                    <td>
+                      Meaningful <code>alt</code> text or decorative
+                      <code>alt=""</code>
+                    </td>
+                    <td>Decorative SVG: <code>aria-hidden="true"</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card">
+              <h3>Preferred patterns</h3>
+              <ul style="margin: 0">
+                <li>Provide “Skip to content” link near the top</li>
+                <li>
+                  Use <code>aria-current="page"</code> for active nav links
+                </li>
+                <li>
+                  Use native elements
+                  (<code>details</code>/<code>summary</code>,
+                  <code>dialog</code>) where possible
+                </li>
+              </ul>
+            </div>
+          </section>
+          <!-- PERFORMANCE -->
+          <section class="section" id="performance">
+            <h2>Markup for Performance</h2>
+            <p>
+              Markup choices directly impact loading speed and UX stability.
+            </p>
+            <div class="component-grid">
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Reduce layout shift</h3>
+                  <span class="perf-badge perf-badge--green">High impact</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Set image dimensions</li>
+                  <li>Avoid injecting content above the fold</li>
+                  <li>Reserve space for ads/embeds</li>
+                </ul>
+              </article>
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Load JS responsibly</h3>
+                  <span class="perf-badge perf-badge--yellow">Important</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Prefer <code>type="module"</code></li>
+                  <li>Defer non-critical scripts</li>
+                  <li>Don’t block rendering with sync scripts</li>
+                </ul>
+              </article>
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Fonts</h3>
+                  <span class="perf-badge perf-badge--yellow">Important</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Preload primary WOFF2 fonts</li>
+                  <li>Use <code>font-display: swap</code></li>
+                  <li>Limit font families (max 2–3)</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+          <!-- CHECKLIST -->
+          <section class="section" id="checklist">
+            <h2>Implementation Checklist</h2>
+            <div class="card">
+              <h3>Before you ship</h3>
+              <ul style="margin: 0">
+                <li>One <code>h1</code> and correct heading hierarchy</li>
+                <li>
+                  Unique <code>&lt;title&gt;</code> and
+                  <code>meta description</code> per page
+                </li>
+                <li>All form controls labeled; errors announced</li>
+                <li>Images have appropriate <code>alt</code> and dimensions</li>
+                <li>
+                  Navigation has <code>aria-current</code> and correct landmarks
+                </li>
+                <li>Interactive UI works with keyboard only</li>
+                <li>No unnecessary wrapper divs; semantics are intentional</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Tooling recommendations</h3>
+              <ul style="margin: 0">
+                <li>Use Prettier for formatting consistency</li>
+                <li>Use HTML validation (W3C validator) for static HTML</li>
+                <li>
+                  Use ESLint rules to prevent anti-patterns (e.g., accessibility
+                  plugins)
+                </li>
+              </ul>
+            </div>
+          </section>
+          <!-- RESOURCES -->
+          <section class="section" id="resources">
+            <h2>Related Guidelines</h2>
+            <div class="card">
+              <ul style="margin: 0">
+                <li>
+                  <a href="styling.html" style="color: var(--accent)"
+                    >Styling</a
+                  >
+                  — CSS architecture and conventions
+                </li>
+                <li>
+                  <a href="components.html" style="color: var(--accent)"
+                    >Components</a
+                  >
+                  — component composition and reuse
+                </li>
+                <li>
+                  <a href="accessibility.html" style="color: var(--accent)"
+                    >Accessibility</a
+                  >
+                  — deeper accessibility rules
+                </li>
+                <li>
+                  <a href="performance.html" style="color: var(--accent)"
+                    >Performance</a
+                  >
+                  — performance budget and audits
+                </li>
+              </ul>
+            </div>
+          </section>
+          <!-- Modal: Landmarks examples -->
+          <dialog
+            aria-labelledby="modal-landmarks-title"
+            class="preview-modal"
+            id="modal-landmarks"
+          >
+            <div class="preview-modal__dialog">
+              <header class="preview-modal__header">
+                <h3 class="preview-modal__title" id="modal-landmarks-title">
+                  Landmarks: Examples
+                </h3>
+                <button
+                  aria-label="Close landmarks examples"
+                  class="preview-modal__close"
+                >
+                  ✕
+                </button>
+              </header>
+              <div class="preview-modal__body">
+                <p class="preview-modal__description">
+                  Landmarks create a reliable page map for assistive
+                  technologies and improve keyboard navigation. Prefer native
+                  landmark elements over generic <code>div</code> wrappers.
+                </p>
+                <div class="card">
+                  <h4 style="font-size: 14px; margin: 0 0 8px">
+                    Recommended structure
+                  </h4>
+                  <pre><code>&lt;body&gt;
+  &lt;a class="skip-link" href="#main-content"&gt;Skip to content&lt;/a&gt;
+
+  &lt;header class="site-header"&gt;...&lt;/header&gt;
+
+  &lt;nav class="nav-main" aria-label="Primary"&gt;...&lt;/nav&gt;
+
+  &lt;main id="main-content"&gt;
+    ...
+  &lt;/main&gt;
+
+  &lt;footer class="site-footer"&gt;...&lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+                </div>
+                <div class="card" style="margin-top: 16px">
+                  <h4 style="font-size: 14px; margin: 0 0 8px">Avoid</h4>
+                  <pre><code>&lt;div class="header"&gt;...&lt;/div&gt;
+&lt;div class="nav"&gt;...&lt;/div&gt;
+&lt;div class="main"&gt;...&lt;/div&gt;</code></pre>
+                  <p
+                    style="
+                      margin: 8px 0 0;
+                      font-size: 13px;
+                      color: var(--text-muted);
+                    "
+                  >
+                    If a wrapper is required, keep it for layout only and still
+                    include the correct landmark element inside.
+                  </p>
+                </div>
+                <div class="card" style="margin-top: 16px">
+                  <h4 style="font-size: 14px; margin: 0 0 8px">
+                    Practical checklist
+                  </h4>
+                  <ul style="margin: 0; font-size: 13px">
+                    <li>One <code>&lt;main&gt;</code> per page</li>
+                    <li>
+                      Navigation has an <code>aria-label</code> when multiple
+                      navs exist
+                    </li>
+                    <li>“Skip to content” link points to the main container</li>
+                    <li>
+                      Don’t nest landmarks unnecessarily (e.g.,
+                      <code>nav</code> inside <code>nav</code>)
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </dialog>
+          <!-- Modal: Headings rules -->
+          <dialog
+            aria-labelledby="modal-headings-title"
+            class="preview-modal"
+            id="modal-headings"
+          >
+            <div class="preview-modal__dialog">
+              <header class="preview-modal__header">
+                <h3 class="preview-modal__title" id="modal-headings-title">
+                  Headings: Rules
+                </h3>
+                <button
+                  aria-label="Close headings rules"
+                  class="preview-modal__close"
+                >
+                  ✕
+                </button>
+              </header>
+              <div class="preview-modal__body">
+                <p class="preview-modal__description">
+                  Headings are the primary navigation mechanism for screen
+                  readers. Maintain a consistent, logical hierarchy.
+                </p>
+                <div class="card">
+                  <h4 style="font-size: 14px; margin: 0 0 8px">
+                    Good hierarchy
+                  </h4>
+                  <pre><code>&lt;h1&gt;Markup&lt;/h1&gt;
+
+&lt;h2&gt;Semantics&lt;/h2&gt;
+&lt;h3&gt;Landmarks&lt;/h3&gt;
+
+&lt;h2&gt;Forms&lt;/h2&gt;
+&lt;h3&gt;Labels&lt;/h3&gt;</code></pre>
+                </div>
+                <div class="card" style="margin-top: 16px">
+                  <h4 style="font-size: 14px; margin: 0 0 8px">
+                    Common mistakes
+                  </h4>
+                  <ul style="margin: 0; font-size: 13px">
+                    <li>
+                      Skipping levels (e.g., <code>h2</code> → <code>h4</code>)
+                    </li>
+                    <li>
+                      Using headings only for styling (“big text”) instead of
+                      meaning
+                    </li>
+                    <li>
+                      Multiple <code>h1</code> for unrelated page sections
+                    </li>
+                  </ul>
+                </div>
+                <div class="card" style="margin-top: 16px">
+                  <h4 style="font-size: 14px; margin: 0 0 8px">
+                    Component rule
+                  </h4>
+                  <p style="margin: 0; font-size: 13px">
+                    Reusable components should not hardcode heading levels
+                    unless the component is a page-level section. Prefer passing
+                    the heading level from the page context (or use a
+                    non-heading element with a class).
+                  </p>
+                </div>
+              </div>
+            </div>
+          </dialog>
+          <!-- Modal: Sectioning patterns -->
+          <dialog
+            aria-labelledby="modal-sectioning-title"
+            class="preview-modal"
+            id="modal-sectioning"
+          >
+            <div class="preview-modal__dialog">
+              <header class="preview-modal__header">
+                <h3 class="preview-modal__title" id="modal-sectioning-title">
+                  Sectioning: Patterns
+                </h3>
+                <button
+                  aria-label="Close sectioning patterns"
+                  class="preview-modal__close"
+                >
+                  ✕
+                </button>
+              </header>
+              <div class="preview-modal__body">
+                <p class="preview-modal__description">
+                  Use <code>section</code> and <code>article</code> when they
+                  add meaning to the document outline. Otherwise, use
+                  <code>div</code> for purely visual wrappers.
+                </p>
+                <div class="card">
+                  <h4 style="font-size: 14px; margin: 0 0 8px">
+                    When to use &lt;article&gt;
+                  </h4>
+                  <p
+                    style="margin: 0; font-size: 13px; color: var(--text-muted)"
+                  >
+                    A self-contained item that can be reused or distributed
+                    independently (blog post, product card, news item).
+                  </p>
+                  <pre><code>&lt;article class="news-card"&gt;
+  &lt;h3&gt;Performance audit results&lt;/h3&gt;
+  &lt;p&gt;...&lt;/p&gt;
+  &lt;a href="/news/perf-audit.html"&gt;Read more&lt;/a&gt;
+&lt;/article&gt;</code></pre>
+                </div>
+                <div class="card" style="margin-top: 16px">
+                  <h4 style="font-size: 14px; margin: 0 0 8px">
+                    When to use &lt;section&gt;
+                  </h4>
+                  <p
+                    style="margin: 0; font-size: 13px; color: var(--text-muted)"
+                  >
+                    A thematic grouping on a page. It should almost always have
+                    a heading.
+                  </p>
+                  <pre><code>&lt;section aria-labelledby="pricing-title"&gt;
+  &lt;h2 id="pricing-title"&gt;Pricing&lt;/h2&gt;
+  ...
+&lt;/section&gt;</code></pre>
+                </div>
+                <div class="card" style="margin-top: 16px">
+                  <h4 style="font-size: 14px; margin: 0 0 8px">
+                    Avoid “section soup”
+                  </h4>
+                  <pre><code>&lt;section&gt;&lt;section&gt;&lt;section&gt;...&lt;/section&gt;&lt;/section&gt;&lt;/section&gt;</code></pre>
+                  <p
+                    style="
+                      margin: 8px 0 0;
+                      font-size: 13px;
+                      color: var(--text-muted);
+                    "
+                  >
+                    Deep nesting usually indicates layout wrappers. Use
+                    <code>div</code> for layout and reserve sectioning elements
+                    for meaning.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </dialog>
+          <dialog
+            aria-labelledby="modal-page-example-title"
+            class="preview-modal"
+            id="modal-page-example"
+          >
+            <div class="preview-modal__dialog">
+              <header class="preview-modal__header">
+                <h3 class="preview-modal__title" id="modal-page-example-title">
+                  Page example: Minimal skeleton
+                </h3>
+                <button
+                  aria-label="Close page example"
+                  class="preview-modal__close"
+                >
+                  ✕
+                </button>
+              </header>
+              <div class="preview-modal__body">
+                <p class="preview-modal__description">
+                  Use this as a starting point. It includes skip-link,
+                  landmarks, a simple navigation, BEM-style class naming, and
+                  data-* JS hooks.
+                </p>
+                <ul class="preview-modal__list">
+                  <li>Blocks: .site-header, .nav-main, .content, .card</li>
+                  <li>Elements: .site-header__inner, .nav-main__list</li>
+                  <li>Modifiers: .nav-link--active, .card--callout</li>
+                  <li>
+                    JS hooks: data-modal-open, data-theme-toggle (avoid styling
+                    by JS hooks)
+                  </li>
+                </ul>
+                <pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+    &lt;title&gt;Page title — Product&lt;/title&gt;
+    &lt;link rel="stylesheet" href="/assets/css/main.css" /&gt;
+  &lt;/head&gt;
+
+  &lt;body class="app"&gt;
+    &lt;a class="skip-link" href="#main-content"&gt;Skip to content&lt;/a&gt;
+
+    &lt;header class="site-header"&gt;
+      &lt;div class="site-header__inner"&gt;
+        &lt;a class="site-header__brand" href="/"&gt;Brand&lt;/a&gt;
+
+        &lt;button
+          class="icon-btn"
+          type="button"
+          data-theme-toggle="true"
+          aria-label="Toggle theme"
+        &gt;
+          &lt;span aria-hidden="true"&gt;🌗&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;nav class="nav-main" aria-label="Primary"&gt;
+      &lt;ul class="nav-main__list"&gt;
+        &lt;li class="nav-main__item"&gt;
+          &lt;a class="nav-link nav-link--active" href="/guide"&gt;Guide&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-main__item"&gt;
+          &lt;a class="nav-link" href="/components"&gt;Components&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+
+    &lt;main id="main-content" class="content"&gt;
+      &lt;h1 class="page-title"&gt;Heading&lt;/h1&gt;
+
+      &lt;section class="section"&gt;
+        &lt;h2 class="section__title"&gt;Example card&lt;/h2&gt;
+
+        &lt;article class="card card--callout"&gt;
+          &lt;h3 class="card__title"&gt;Callout&lt;/h3&gt;
+          &lt;p class="card__text"&gt;Concise guidance or important note.&lt;/p&gt;
+
+          &lt;a class="btn" href="#modal-example" data-modal-open="modal-example"&gt;
+            Open dialog
+          &lt;/a&gt;
+        &lt;/article&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+
+    &lt;footer class="site-footer"&gt;
+      &lt;small class="site-footer__text"&gt;© Company&lt;/small&gt;
+    &lt;/footer&gt;
+
+    &lt;dialog class="preview-modal" id="modal-example" aria-labelledby="modal-example-title"&gt;
+      &lt;div class="preview-modal__dialog"&gt;
+        &lt;header class="preview-modal__header"&gt;
+          &lt;h3 class="preview-modal__title" id="modal-example-title"&gt;Dialog title&lt;/h3&gt;
+          &lt;button class="preview-modal__close" aria-label="Close dialog"&gt;✕&lt;/button&gt;
+        &lt;/header&gt;
+
+        &lt;div class="preview-modal__body"&gt;
+          &lt;p class="preview-modal__description"&gt;Dialog content.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/dialog&gt;
+
+    &lt;script type="module" src="/assets/js/main.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+              </div>
+            </div>
+          </dialog>
+        </div>
+      </main>
+    </div>
+    <script defer="" src="assets/js/main.js"></script>
+  </body>
+</html>

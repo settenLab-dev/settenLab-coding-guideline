@@ -2,9 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Typography & Font Loading</title>
-    <link rel="stylesheet" href="assets/css/base.css" />
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="description" content="Guideline: HEAD best practices" />
+    <meta property="og:title" content="HEAD Guidelines" />
+    <meta
+      property="og:description"
+      content="Modern recommendations for HTML head structure, preload strategy, fonts, SEO and performance."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/Outfit-VariableFont.woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <title>SettenLab coding guide</title>
   </head>
 
   <body>
@@ -12,99 +30,170 @@
 
     <div class="app-shell">
       <!-- SIDEBAR -->
-      <aside class="sidebar">
-        <div class="sidebar__header">
-          <div class="sidebar__logo">G</div>
+      <aside class="sidebar" id="primary-sidebar" aria-label="Primary">
+        <a href="/" class="sidebar__header">
+          <div class="sidebar__logo" aria-hidden="true">S</div>
           <div class="sidebar__title">
-            <span class="sidebar__company">Guideline</span>
-            <span class="sidebar__subtitle">Typography</span>
+            <span class="sidebar__company">Coding Guideline</span>
+            <span class="sidebar__subtitle">settenLab</span>
           </div>
-        </div>
+        </a>
 
-        <nav class="sidebar__nav sidebar-nav">
-          <ul class="sidebar-nav__list">
-            <li class="sidebar-nav__item">
-              <a
-                href="index.html#intro"
-                class="sidebar-nav__link nav-link"
-                data-target="intro"
-              >
-                Overview
-              </a>
-            </li>
+        <nav class="sidebar__nav sidebar-nav" aria-label="Guideline navigation">
+          <!-- START HERE -->
+          <details
+            class="nav-group nav-group--start"
+            data-nav-group="start-here"
+          >
+            <summary class="nav-group__summary">
+              <a href="/" class="nav-group__summary-link">Start here</a>
+            </summary>
+          </details>
 
-            <li class="sidebar-nav__item">
-              <a href="file-structure.html" class="sidebar-nav__link nav-link">
-                File structure
-              </a>
-            </li>
+          <!-- PROJECT SETUP -->
+          <details class="nav-group" data-nav-group="project-setup">
+            <summary class="nav-group__summary">Project setup</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  href="environment-setup.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  Environment setup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="file-structure.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  File structure
+                </a>
+              </li>
+            </ul>
+          </details>
 
-            <li class="sidebar-nav__item">
-              <a href="html-standarts.html" class="sidebar-nav__link nav-link">
-                HTML standards
-              </a>
-            </li>
+          <!-- UI -->
+          <details class="nav-group" data-nav-group="ui" open>
+            <summary class="nav-group__summary">UI</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="markup.html" class="sidebar-nav__link nav-link">
+                  Markup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="styling.html" class="sidebar-nav__link nav-link">
+                  Styling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="components.html" class="sidebar-nav__link nav-link">
+                  Components
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="typography.html" class="sidebar-nav__link nav-link">
+                  Typography
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="accessibility.html" class="sidebar-nav__link nav-link">
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </details>
 
-            <li class="sidebar-nav__item">
-              <a href="css-naming.html" class="sidebar-nav__link nav-link">
-                CSS &amp; Naming
-              </a>
-            </li>
+          <!-- ENGINEERING -->
+          <details class="nav-group" data-nav-group="engineering">
+            <summary class="nav-group__summary">Engineering</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="javascript.html">
+                  Javascript
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="api-and-data-handling.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  API & Data handling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="performance.html" class="sidebar-nav__link nav-link">
+                  Performance
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="testing.html" class="sidebar-nav__link nav-link">
+                  Testing
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="security.html" class="sidebar-nav__link nav-link">
+                  Security
+                </a>
+              </li>
+            </ul>
+          </details>
 
-            <li class="sidebar-nav__item">
-              <a href="components.html" class="sidebar-nav__link nav-link">
-                Components
-              </a>
-            </li>
-
-            <li class="sidebar-nav__item">
-              <a
-                href="components.html#animations"
-                class="sidebar-nav__link nav-link"
-              >
-                Animations
-              </a>
-            </li>
-
-            <li class="sidebar-nav__item">
-              <a
-                href="typography.html"
-                class="sidebar-nav__link nav-link active"
-              >
-                Typography &amp; Fonts
-              </a>
-            </li>
-
-            <li class="sidebar-nav__item">
-              <a href="performance.html" class="sidebar-nav__link nav-link">
-                Performance
-              </a>
-            </li>
-
-            <li class="sidebar-nav__item">
-              <a href="testing.html" class="sidebar-nav__link nav-link">
-                Testing
-              </a>
-            </li>
-
-            <li class="sidebar-nav__item">
-              <a href="formatting.html" class="sidebar-nav__link nav-link">
-                VS Code setup
-              </a>
-            </li>
-          </ul>
+          <!-- WORKFLOW -->
+          <details class="nav-group" data-nav-group="workflow">
+            <summary class="nav-group__summary">Workflow</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="pr-rules.html" class="sidebar-nav__link nav-link">
+                  PR rules / review checklist
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="documentation.html" class="sidebar-nav__link nav-link">
+                  Documentation rules
+                </a>
+              </li>
+            </ul>
+          </details>
         </nav>
 
         <div class="sidebar__footer">
-          <span class="sidebar__version">v1.0.0</span>
+          <a href="changelog.html" class="sidebar__version">v1.0.0</a>
           <span class="sidebar__lang">EN</span>
         </div>
       </aside>
 
+      <div class="sidebar-backdrop js-sidebar-backdrop" hidden></div>
+
       <!-- MAIN -->
       <main class="main">
         <header class="topbar">
+          <button
+            class="topbar__menu-btn js-sidebar-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-controls="primary-sidebar"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
           <h1 class="topbar__title">Typography &amp; Font Loading</h1>
+
+          <div class="topbar__actions">
+            <!-- Theme toggle placeholder -->
+            <button
+              class="topbar__action-btn"
+              id="themeToggle"
+              aria-label="Toggle theme"
+              aria-pressed="false"
+            >
+              🌗
+            </button>
+          </div>
         </header>
 
         <div class="content">
@@ -133,44 +222,168 @@
             </div>
           </section>
 
-          <!-- FONT STACK -->
+          <!-- FONT STACK + JAPANESE TYPOGRAPHY + LINE BREAKING -->
           <section class="section" id="stack">
-            <h2>Font stack &amp; fallbacks</h2>
+            <h2>Font stack, Japanese typography &amp; line breaking</h2>
+
             <p>
-              We use a primary UI font with a robust fallback stack. This
-              ensures good rendering on all platforms, even when custom fonts
-              fail to load.
+              We use Google Fonts widely across projects, but Japanese text
+              requires additional rules. This section defines a token-based font
+              system, how to place YakuHan in the stack, and how to handle safe
+              line breaks.
             </p>
 
-            <div class="card">
-              <h3>Primary stack</h3>
-              <p>
-                Recommended base stack for UI and body text (used in
-                <code>body</code>):
-              </p>
-
-              <pre><code>body {
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
-}</code></pre>
-
-              <ul>
-                <li><strong>"Inter"</strong> — primary UI font.</li>
+            <div class="card callout">
+              <h3>Project rules</h3>
+              <ul class="list--custom">
                 <li>
-                  <strong>system-ui</strong> fallbacks — consistent look on each
-                  OS.
+                  <strong>Use tokens.</strong> Do not hardcode
+                  <code>font-family</code> in components.
                 </li>
                 <li>
-                  If custom fonts fail, the layout still looks stable and
-                  readable.
+                  <strong>Japanese punctuation:</strong> keep
+                  <code>"YakuHanJP"</code> / <code>"YakuHanMP"</code>
+                  <em>first</em> in JP stacks.
+                </li>
+                <li>
+                  Apply JP behavior via <code>:lang(ja)</code> or per-block
+                  <code>lang="ja"</code>.
+                </li>
+                <li>
+                  Use <code>&lt;wbr&gt;</code> only when you intentionally
+                  control breaking points (URLs, long IDs, mixed JP/EN UI
+                  strings).
                 </li>
               </ul>
+            </div>
 
-              <h3>Code &amp; monospace text</h3>
-              <pre><code>code, pre, kbd {
-  font-family: "JetBrains Mono", "SF Mono", Menlo, Monaco,
-    Consolas, "Liberation Mono", "Courier New", monospace;
+            <div class="card">
+              <h3>Single source of truth: typography tokens</h3>
+
+              <pre><code>:root {
+  --sans-font: "YakuHanJP", "Public Sans", sans-serif;
+  --serif-font: "YakuHanMP", "Shippori Mincho B1", serif;
+  --gothic-font: "YakuHanJP", "Zen Kaku Gothic Antique", sans-serif;
+  --garamond: "EB Garamond", serif;
+  --sans-serif-mix: "YakuHanJP", "Public Sans", "Zen Kaku Gothic Antique", sans-serif;
 }</code></pre>
+
+              <p class="small-text">
+                Tokens allow projects to switch font families without rewriting
+                components.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Default usage (recommended)</h3>
+
+              <pre><code>body {
+  font-family: var(--sans-font);
+}
+
+.type-gothic { font-family: var(--gothic-font); }
+.type-serif  { font-family: var(--serif-font); }
+.type-mix    { font-family: var(--sans-serif-mix); }</code></pre>
+
+              <h4>Language scoping</h4>
+              <pre><code>/* Apply JP behavior only where the content is Japanese */
+:lang(ja) {
+  font-family: var(--sans-font);
+}</code></pre>
+
+              <p class="small-text">
+                Best practice: set <code>lang="ja"</code> at page level for JP
+                pages, or per section for mixed-language pages.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Google Fonts (common in projects)</h3>
+              <p>
+                Google Fonts are allowed. For production, prefer self-hosting
+                when possible, but projects may keep Google Fonts for speed of
+                delivery and operational simplicity.
+              </p>
+
+              <h4>Example: preconnect + stylesheet</h4>
+              <pre><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+
+&lt;link
+  href="https://fonts.googleapis.com/css2?
+  family=Public+Sans:wght@400;600;700&amp;
+  family=Zen+Kaku+Gothic+Antique:wght@400;700&amp;
+  family=Shippori+Mincho+B1:wght@400;700&amp;
+  display=swap"
+  rel="stylesheet"
+/&gt;</code></pre>
+
+              <p class="small-text">
+                Keep weights minimal (typically 400 + 700). Avoid loading unused
+                styles.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Japanese punctuation spacing (YakuHan: 約物半角)</h3>
+              <p>
+                YakuHan is a punctuation-only font. It must be placed first in
+                the Japanese stack. Use <code>YakuHanJP</code> for Gothic/sans,
+                and <code>YakuHanMP</code> for Mincho/serif.
+              </p>
+
+              <h4>Example stacks (token form)</h4>
+              <pre><code>--sans-font:  "YakuHanJP", "Public Sans", sans-serif;
+--gothic-font:"YakuHanJP", "Zen Kaku Gothic Antique", sans-serif;
+--serif-font: "YakuHanMP", "Shippori Mincho B1", serif;</code></pre>
+
+              <p class="small-text">
+                If you use a different JP family, keep YakuHan first and replace
+                only the base fonts.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Controlled line breaks with &lt;wbr&gt;</h3>
+              <p>
+                Japanese text does not use spaces, and mixed JP/EN strings often
+                overflow. Insert <code>&lt;wbr&gt;</code> only where breaking is
+                acceptable (URLs, long tokens, product codes, "JP + English"
+                UI).
+              </p>
+
+              <h4>HTML examples</h4>
+              <pre><code>&lt;!-- URL / long token --&gt;
+&lt;p class="u-wbr"&gt;
+  https://example.com/super-long-path&lt;wbr&gt;/with&lt;wbr&gt;/segments
+&lt;/p&gt;
+
+&lt;!-- Mixed UI (JP + EN) --&gt;
+&lt;p lang="ja" class="type-mix u-wbr"&gt;
+  プラン: Enterprise&lt;wbr&gt;Support&lt;wbr&gt;Package
+&lt;/p&gt;</code></pre>
+
+              <h4>CSS rule (apply only when you use wbr)</h4>
+              <pre><code>/* Preferred: auto-detect elements that contain direct child &lt;wbr&gt; */
+.u-wbr:has(> wbr) {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}</code></pre>
+
+              <p class="small-text">
+                Note: <code>:has()</code> is not universal in older browsers.
+                Use the fallback class approach below if you need it.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Important note about rem base</h3>
+              <p>
+                This project uses <code>html { font-size: 62.5%; }</code> which
+                makes <code>1rem = 10px</code>. Keep typography values in
+                <code>rem</code> and avoid mixing with <code>px</code>. Treat
+                the root size as a project-level decision.
+              </p>
             </div>
           </section>
 
@@ -263,9 +476,13 @@
   font-display: swap;
 }</code></pre>
 
-              <a href="#modal-font-loading" class="btn btn--primary">
+              <button
+                type="button"
+                class="component-card__btn"
+                onclick="document.getElementById('modal-font-loading').showModal()"
+              >
                 View font loading patterns
-              </a>
+              </button>
             </div>
           </section>
 
@@ -358,55 +575,130 @@ font-display: optional;  /* do not block, may never swap if too slow */</code></
             </div>
           </section>
 
-          <!-- TYPOGRAPHY SCALE -->
-          <section class="section" id="usage">
-            <h2>Typography scale &amp; usage</h2>
+          <!-- FONT SIZES -->
+          <section class="section" id="font-sizes">
+            <h2>Font sizes &amp; typographic scale</h2>
+
             <p>
-              We use a <code>rem</code>-based scale for font sizes to keep text
-              responsive and consistent. Root font-size remains at
-              <code>16px</code> (browser default).
+              Font sizes must follow design first. These recommendations define
+              a safe baseline scale, accessibility minimums, and responsive
+              rules that work well for Japanese and mixed JP/EN UI.
             </p>
 
+            <div class="card callout">
+              <h3>Rules</h3>
+              <ul class="list--custom">
+                <li>
+                  <strong>Design is the source of truth.</strong> Use the scale
+                  below only when design is missing or for internal
+                  docs/components.
+                </li>
+                <li>
+                  This project uses <code>html { font-size: 62.5%; }</code>, so
+                  <strong>1rem = 10px</strong>. Keep all sizes in
+                  <code>rem</code>.
+                </li>
+                <li>
+                  Prefer <strong>limited set of sizes</strong> (tokens) over
+                  arbitrary values. Avoid "creative" one-off sizes.
+                </li>
+                <li>
+                  For Japanese UI, prefer slightly larger minimums and
+                  comfortable line-height (dense kanji becomes hard to read
+                  quickly).
+                </li>
+              </ul>
+            </div>
+
             <div class="card">
-              <h3>Base scale</h3>
-              <pre><code>html {
-  font-size: 16px; /* do not change */
-}
+              <h3>Recommended baseline scale (1rem = 10px)</h3>
 
-body {
-  font-size: 1rem; /* 16px */
-}
+              <pre><code>/* Text sizes */
+--fs-12: 1.2rem; /* 12px (legal notes only) */
+--fs-14: 1.4rem; /* 14px (secondary, captions) */
+--fs-16: 1.6rem; /* 16px (default body) */
+--fs-18: 1.8rem; /* 18px (comfortable reading / JP-heavy pages) */
 
-h1 {
-  font-size: 2rem;      /* 32px */
-}
+/* Headings */
+--fs-20: 2.0rem; /* 20px */
+--fs-24: 2.4rem; /* 24px */
+--fs-28: 2.8rem; /* 28px */
+--fs-32: 3.2rem; /* 32px */</code></pre>
 
-h2 {
-  font-size: 1.75rem;   /* 28px */
-}
+              <ul class="list--custom">
+                <li><strong>Body default:</strong> 1.6rem (16px).</li>
+                <li>
+                  <strong>Small text minimum:</strong> 1.4rem (14px) for UI
+                  labels/captions.
+                </li>
+                <li>
+                  <strong>12px (1.2rem):</strong> only for legal/disclaimer,
+                  never for core UI.
+                </li>
+              </ul>
+            </div>
 
-h3 {
-  font-size: 1.5rem;    /* 24px */
-}
+            <div class="card">
+              <h3>Recommended line-height</h3>
 
-.small-text {
-  font-size: 0.875rem;  /* 14px */
-}</code></pre>
+              <pre><code>/* Body */
+--lh-body: 1.6;   /* best default */
 
-              <h3>Responsive adjustments</h3>
+/* Dense UI labels/buttons */
+--lh-ui: 1.2;
+
+/* Headings */
+--lh-heading: 1.2; /* 1.15–1.25 depending on font */</code></pre>
+
+              <p class="small-text">
+                For Japanese paragraphs, line-height below 1.5 often feels
+                cramped.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Responsive sizing (preferred pattern)</h3>
               <p>
-                For larger screens (from <code>768px</code>), we can slightly
-                increase heading sizes:
+                Use <code>clamp()</code> for headings to avoid "jumps" and keep
+                proportions stable. Because you use container queries, you may
+                also use <code>cqw</code>.
               </p>
 
-              <pre><code>@media (min-width: 768px) {
-  h1 {
-    font-size: 2.25rem;
-  }
-  h2 {
-    font-size: 2rem;
-  }
+              <pre><code>/* Example: responsive H1 within a container */
+.type-h1 {
+  font-size: clamp(2.6rem, 2.2rem + 1.2cqw, 3.6rem);
+  line-height: var(--lh-heading);
+}
+
+/* Example: responsive H2 */
+.type-h2 {
+  font-size: clamp(2.2rem, 2.0rem + 0.8cqw, 3.0rem);
+  line-height: var(--lh-heading);
 }</code></pre>
+
+              <p class="small-text">
+                Keep body text typically fixed (1.6rem) and scale headings
+                instead.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Usage recommendations</h3>
+
+              <pre><code>&lt;h1 class="type-h1 type-gothic"&gt;見出し / Heading&lt;/h1&gt;
+&lt;p class="type-body"&gt;Body text…&lt;/p&gt;
+&lt;p class="type-small"&gt;Caption / 補足…&lt;/p&gt;</code></pre>
+
+              <ul class="list--custom">
+                <li>
+                  Use <strong>gothic/sans</strong> for headings in JP UI by
+                  default (better clarity).
+                </li>
+                <li>
+                  Use <strong>serif</strong> only for editorial/article blocks
+                  (not buttons/forms).
+                </li>
+              </ul>
             </div>
           </section>
 
@@ -421,7 +713,7 @@ h3 {
               provides a unified method of implementation (units, scaling,
               responsiveness), but it does not enforce fixed font-size values
               across projects. Each product, page, or component must use the
-              exact sizes specified in the design source (Figma/Sketch).
+              exact sizes specified in the design source.
             </p>
 
             <div class="card callout">
@@ -475,7 +767,7 @@ h3 {
                   on branding.
                 </li>
                 <li>
-                  Developers should not “guess” typographic scaling — only
+                  Developers should not "guess" typographic scaling — only
                   implement it.
                 </li>
               </ul>
@@ -511,114 +803,125 @@ h3 { font-size: 1.5rem; }   /* 24px */
 }
 </code></pre>
 
-              <a href="#modal-type-preview" class="btn btn--primary"
-                >Preview text styles</a
+              <button
+                type="button"
+                class="component-card__btn"
+                onclick="document.getElementById('modal-type-preview').showModal()"
               >
+                Preview text styles
+              </button>
             </div>
           </section>
-
-          <!-- ======================================
-     MODAL: TYPOGRAPHY PREVIEW
-     ====================================== -->
-          <div id="modal-type-preview" class="preview-modal">
-            <div class="preview-modal__dialog">
-              <header class="preview-modal__header">
-                <h3 class="preview-modal__title">Typography Preview</h3>
-                <a href="#design-source" class="preview-modal__close">✕</a>
-              </header>
-
-              <p class="preview-modal__description">
-                Visual preview of fallback text styles. Use these only when
-                design values are not yet provided.
-              </p>
-
-              <div class="preview-media-block">
-                <div class="preview-media-block__content">
-                  <h1 style="margin-bottom: 8px">Heading H1 — 2rem</h1>
-                  <h2 style="margin-bottom: 8px">Heading H2 — 1.75rem</h2>
-                  <h3 style="margin-bottom: 8px">Heading H3 — 1.5rem</h3>
-
-                  <p style="margin-bottom: 12px">
-                    Body text (1rem). Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Donec bibendum varius sem, ut tempor magna
-                    feugiat vitae.
-                  </p>
-
-                  <p class="small-text" style="margin-bottom: 6px">
-                    Small text (0.875rem). Useful for captions or metadata.
-                  </p>
-                </div>
-              </div>
-
-              <div class="card preview-modal__code">
-                <pre><code>&lt;h1&gt;Heading H1&lt;/h1&gt;
-&lt;h2&gt;Heading H2&lt;/h2&gt;
-&lt;h3&gt;Heading H3&lt;/h3&gt;
-&lt;p&gt;Body text&lt;/p&gt;
-&lt;p class="small-text"&gt;Small text&lt;/p&gt;</code></pre>
-              </div>
-            </div>
-          </div>
         </div>
       </main>
     </div>
 
+    <!-- MODAL: TYPOGRAPHY PREVIEW -->
+    <dialog id="modal-type-preview" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Typography Preview</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close typography preview"
+            onclick="document.getElementById('modal-type-preview').close()"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Visual preview of fallback text styles. Use these only when design
+            values are not yet provided.
+          </p>
+
+          <div class="preview-media-block">
+            <div class="preview-media-block__content">
+              <h1 style="margin-bottom: 8px">Heading H1 — 2rem</h1>
+              <h2 style="margin-bottom: 8px">Heading H2 — 1.75rem</h2>
+              <h3 style="margin-bottom: 8px">Heading H3 — 1.5rem</h3>
+
+              <p style="margin-bottom: 12px">
+                Body text (1rem). Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit. Donec bibendum varius sem, ut tempor magna
+                feugiat vitae.
+              </p>
+
+              <p class="small-text" style="margin-bottom: 6px">
+                Small text (0.875rem). Useful for captions or metadata.
+              </p>
+            </div>
+          </div>
+
+          <div class="card preview-modal__code">
+            <pre><code>&lt;h1&gt;Heading H1&lt;/h1&gt;
+&lt;h2&gt;Heading H2&lt;/h2&gt;
+&lt;h3&gt;Heading H3&lt;/h3&gt;
+&lt;p&gt;Body text&lt;/p&gt;
+&lt;p class="small-text"&gt;Small text&lt;/p&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
     <!-- MODAL: FONT LOADING PATTERNS -->
-    <div id="modal-font-loading" class="preview-modal">
+    <dialog id="modal-font-loading" class="preview-modal">
       <div class="preview-modal__dialog">
         <header class="preview-modal__header">
           <h3 class="preview-modal__title">Font loading patterns</h3>
-          <a
-            href="#loading"
+          <button
             class="preview-modal__close"
             aria-label="Close font loading modal"
+            onclick="document.getElementById('modal-font-loading').close()"
           >
             ✕
-          </a>
+          </button>
         </header>
 
-        <p class="preview-modal__description">
-          Comparison of common font loading patterns and our recommended
-          approach for new projects.
-        </p>
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Comparison of common font loading patterns and our recommended
+            approach for new projects.
+          </p>
 
-        <div class="preview-vh">
-          <div class="preview-vh__block">
-            <h4 class="preview-vh__label">Bad: no preload, external only</h4>
-            <div class="preview-vh__example preview-vh__example--bad">
-              <span>Render-blocking CSS from Google Fonts, no control.</span>
+          <div class="preview-vh">
+            <div class="preview-vh__block">
+              <h4 class="preview-vh__label">Bad: no preload, external only</h4>
+              <div class="preview-vh__example preview-vh__example--bad">
+                <span>Render-blocking CSS from Google Fonts, no control.</span>
+              </div>
+              <p class="preview-vh__text">
+                The page waits for external CSS. On slow networks, text may be
+                invisible or shift when fonts load.
+              </p>
             </div>
-            <p class="preview-vh__text">
-              The page waits for external CSS. On slow networks, text may be
-              invisible or shift when fonts load.
-            </p>
+
+            <div class="preview-vh__block">
+              <h4 class="preview-vh__label">Good: local woff2 + preload</h4>
+              <div class="preview-vh__example preview-vh__example--good">
+                <span>Local fonts, preloaded, swap behavior.</span>
+              </div>
+              <p class="preview-vh__text">
+                Fonts are loaded from <code>assets/fonts/</code>, preloaded for
+                first paint, and do not block rendering.
+              </p>
+            </div>
+
+            <div class="preview-vh__block">
+              <h4 class="preview-vh__label">Advanced: partial loading</h4>
+              <div class="preview-vh__example preview-vh__example--neutral">
+                <span>Only critical weights are preloaded.</span>
+              </div>
+              <p class="preview-vh__text">
+                On performance-critical pages, load only base weights on first
+                view, and lazy-load others if needed.
+              </p>
+            </div>
           </div>
 
-          <div class="preview-vh__block">
-            <h4 class="preview-vh__label">Good: local woff2 + preload</h4>
-            <div class="preview-vh__example preview-vh__example--good">
-              <span>Local fonts, preloaded, swap behavior.</span>
-            </div>
-            <p class="preview-vh__text">
-              Fonts are loaded from <code>assets/fonts/</code>, preloaded for
-              first paint, and do not block rendering.
-            </p>
-          </div>
-
-          <div class="preview-vh__block">
-            <h4 class="preview-vh__label">Advanced: partial loading</h4>
-            <div class="preview-vh__example preview-vh__example--neutral">
-              <span>Only critical weights are preloaded.</span>
-            </div>
-            <p class="preview-vh__text">
-              On performance-critical pages, load only base weights on first
-              view, and lazy-load others if needed.
-            </p>
-          </div>
-        </div>
-
-        <div class="card preview-modal__code">
-          <pre><code>&lt;!-- Recommended baseline --&gt;
+          <div class="card preview-modal__code">
+            <pre><code>&lt;!-- Recommended baseline --&gt;
 &lt;link
   rel="preload"
   href="assets/fonts/inter-regular.woff2"
@@ -634,9 +937,10 @@ h3 { font-size: 1.5rem; }   /* 24px */
   font-style: normal;
   font-display: swap;
 }</code></pre>
+          </div>
         </div>
       </div>
-    </div>
+    </dialog>
 
     <script src="assets/js/main.js"></script>
   </body>

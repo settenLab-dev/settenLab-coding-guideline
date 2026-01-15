@@ -2,1755 +2,1259 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Frontend Guidelines</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="description"
+      content="Component architecture guidelines: modern patterns, best practices, and implementation strategies for reusable UI components."
     />
-    <link rel="stylesheet" href="assets/vendor/swiper/swiper-bundle.min.css" />
-    <!-- Styles -->
-    <link rel="stylesheet" href="assets/css/base.css" />
-    <link rel="stylesheet" href="assets/css/layout.css" />
-    <link rel="stylesheet" href="assets/css/components.css" />
-    <link rel="stylesheet" href="assets/css/utilities.css" />
+    <meta name="theme-color" content="#0b0f1a" />
+
+    <meta property="og:title" content="Components — Coding Guideline" />
+    <meta
+      property="og:description"
+      content="Comprehensive guide to building scalable, maintainable, and reusable UI components."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/Outfit-VariableFont.woff2"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <title>Components — Coding Guideline</title>
   </head>
+
   <body>
     <div class="bg-gradient"></div>
 
     <div class="app-shell">
-      <!-- Sidebar -->
-      <aside class="sidebar" id="sidebar">
-        <div class="sidebar__header">
-          <div class="sidebar__logo"></div>
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="primary-sidebar" aria-label="Primary">
+        <a href="/" class="sidebar__header">
+          <div class="sidebar__logo" aria-hidden="true">S</div>
           <div class="sidebar__title">
-            <span class="sidebar__company">SettenLab株式会社</span>
-            <span class="sidebar__subtitle">Frontend Guidelines</span>
+            <span class="sidebar__company">Coding Guideline</span>
+            <span class="sidebar__subtitle">settenLab</span>
           </div>
-        </div>
+        </a>
 
-        <nav class="sidebar__nav sidebar-nav">
-          <ul class="sidebar-nav__list">
-            <li class="sidebar-nav__item">
-              <a
-                href="index.html#intro"
-                class="sidebar-nav__link nav-link"
-                data-target="intro"
-              >
-                Introduction
-              </a>
-            </li>
+        <nav class="sidebar__nav sidebar-nav" aria-label="Guideline navigation">
+          <!-- START HERE -->
+          <details
+            class="nav-group nav-group--start"
+            data-nav-group="start-here"
+          >
+            <summary class="nav-group__summary">
+              <a href="/" class="nav-group__summary-link">Start here</a>
+            </summary>
+          </details>
 
-            <li class="sidebar-nav__item">
-              <a href="file-structure.html" class="sidebar-nav__link nav-link">
-                File structure
-              </a>
-            </li>
+          <!-- PROJECT SETUP -->
+          <details class="nav-group" data-nav-group="project-setup">
+            <summary class="nav-group__summary">Project setup</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  href="environment-setup.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  Environment setup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="file-structure.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  File structure
+                </a>
+              </li>
+            </ul>
+          </details>
 
-            <li class="sidebar-nav__item">
-              <a href="html-standarts.html" class="sidebar-nav__link nav-link">
-                HTML standards
-              </a>
-            </li>
+          <!-- UI -->
+          <details class="nav-group" data-nav-group="ui" open>
+            <summary class="nav-group__summary">UI</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="markup.html" class="sidebar-nav__link nav-link">
+                  Markup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="styling.html" class="sidebar-nav__link nav-link">
+                  Styling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="components.html" class="sidebar-nav__link nav-link">
+                  Components
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="typography.html" class="sidebar-nav__link nav-link">
+                  Typography
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="accessibility.html" class="sidebar-nav__link nav-link">
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </details>
 
-            <li class="sidebar-nav__item">
-              <a href="css-naming.html" class="sidebar-nav__link nav-link">
-                CSS &amp; Naming
-              </a>
-            </li>
+          <!-- ENGINEERING -->
+          <details class="nav-group" data-nav-group="engineering">
+            <summary class="nav-group__summary">Engineering</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  class="sidebar-nav__link nav-link"
+                  href="javascript.html"
+                >
+                  Javascript
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="api-and-data-handling.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  API & Data handling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="performance.html" class="sidebar-nav__link nav-link">
+                  Performance
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="testing.html" class="sidebar-nav__link nav-link">
+                  Testing
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="security.html" class="sidebar-nav__link nav-link">
+                  Security
+                </a>
+              </li>
+            </ul>
+          </details>
 
-            <li class="sidebar-nav__item">
-              <a href="components.html" class="sidebar-nav__link nav-link">
-                Components
-              </a>
-            </li>
-
-            <li class="sidebar-nav__item">
-              <a
-                href="components.html#animations"
-                class="sidebar-nav__link nav-link"
-              >
-                Animations
-              </a>
-            </li>
-
-            <li class="sidebar-nav__item">
-              <a href="performance.html" class="sidebar-nav__link nav-link">
-                Performance
-              </a>
-            </li>
-
-            <li class="sidebar-nav__item">
-              <a href="testing.html" class="sidebar-nav__link nav-link">
-                Testing
-              </a>
-            </li>
-
-            <li class="sidebar-nav__item">
-              <a href="formatting.html" class="sidebar-nav__link nav-link">
-                VS Code setup
-              </a>
-            </li>
-          </ul>
+          <!-- WORKFLOW -->
+          <details class="nav-group" data-nav-group="workflow">
+            <summary class="nav-group__summary">Workflow</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="pr-rules.html" class="sidebar-nav__link nav-link">
+                  PR rules / review checklist
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="documentation.html" class="sidebar-nav__link nav-link">
+                  Documentation rules
+                </a>
+              </li>
+            </ul>
+          </details>
         </nav>
 
         <div class="sidebar__footer">
-          <span class="sidebar__version">v1.0.0</span>
+          <a href="changelog.html" class="sidebar__version">v1.0.0</a>
           <span class="sidebar__lang">EN</span>
         </div>
       </aside>
 
-      <!-- Main content -->
-      <div class="main">
-        <!-- Top bar -->
+      <div class="sidebar-backdrop js-sidebar-backdrop" hidden></div>
+
+      <!-- MAIN -->
+      <main class="main" id="main-content">
         <header class="topbar">
           <button
-            class="topbar__menu-btn"
-            id="menuToggle"
-            aria-label="Toggle navigation"
+            class="topbar__menu-btn js-sidebar-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-controls="primary-sidebar"
+            aria-expanded="false"
           >
-            <!-- simple burger icon -->
             <span></span>
             <span></span>
             <span></span>
           </button>
 
-          <h1 class="topbar__title">Frontend Guidelines</h1>
+          <h1 class="topbar__title">Components</h1>
 
           <div class="topbar__actions">
-            <!-- Theme toggle placeholder -->
             <button
+              type="button"
               class="topbar__action-btn"
               id="themeToggle"
               aria-label="Toggle theme"
+              aria-pressed="false"
             >
               🌗
             </button>
           </div>
         </header>
 
-        <!-- Content area -->
-        <main class="content">
-          <!-- Intro -->
-          <section class="section" id="intro">
-            <h2>Introduction</h2>
+        <div class="content">
+          <!-- OVERVIEW -->
+          <section class="section" id="overview">
+            <h2>Overview</h2>
             <p>
-              This website defines the official frontend guidelines for our
-              company. It is used by all frontend developers in Japan and
-              Uzbekistan to keep HTML, CSS, and JavaScript consistent across
-              projects.
+              Component-based architecture helps us build scalable, maintainable, and reusable user interfaces. This guide documents how we structure components today (HTML + SCSS with BEM + JavaScript) and also includes optional patterns (Web Components, frameworks) for cases where they are justified.
             </p>
+
             <div class="card callout">
-              <h3>Goals</h3>
+  <h3>Current default (today)</h3>
+  <ul>
+    <li><strong>Markup:</strong> server-rendered HTML (partials/includes).</li>
+    <li><strong>Styling:</strong> SCSS with BEM naming and a small set of shared tokens (CSS variables).</li>
+    <li><strong>Behavior:</strong> modular JavaScript, initialized via <code>data-*</code> hooks (no JS selectors based on BEM classes).</li>
+    <li><strong>Component mindset:</strong> reusable sections/blocks with a local folder + README + examples.</li>
+    <li><strong>Optional reference:</strong> Web Components and React/TypeScript are included for future or special-case needs, not as a default requirement.</li>
+  </ul>
+</div>
+
+            <div class=\"card callout\">
+              <h3>Core Principles</h3>
               <ul>
-                <li>Ensure consistent code style and structure.</li>
-                <li>Make onboarding new developers easier.</li>
                 <li>
-                  Share reusable patterns for components, sliders, and
-                  animations.
+                  <strong>Single responsibility:</strong> A component does one
+                  thing and does it well.
+                </li>
+                <li>
+                  <strong>Explicit API:</strong> Clear contract for what can be
+                  customized (variants/modifiers) and what cannot.
+                </li>
+                <li>
+                  <strong>Isolation:</strong> Component styles and scripts don't
+                  break neighboring elements.
+                </li>
+                <li>
+                  <strong>Documentability:</strong> Usage examples and variant
+                  list for each component.
                 </li>
               </ul>
             </div>
           </section>
 
-          <section class="section" id="naming">
-            <h2>Naming – BEM Class Guidelines</h2>
+          <!-- CHOOSING APPROACH -->
+          <section class="section" id="choosing">
+            <h2>Choosing the Right Approach</h2>
             <p>
-              We follow a BEM-inspired naming convention for all components.
-              Class names must be predictable, readable, and consistent across
-              projects. The table below lists recommended block, element, and
-              modifier names for common UI patterns.
+              Most projects should start with the baseline approach: HTML/CSS/JS components with BEM styling and <code>data-*</code> hooks for behavior. Consider Web Components when you need stronger encapsulation. Consider a framework only when you are building an app-like interface with substantial client-side state.
             </p>
 
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">HTML/CSS/JS Only</h3>
+                <p class="component-card__text">
+                  Static sites, WordPress, landing pages
+                </p>
+                <a href="#html-css-js" class="component-card__btn">
+                  View details →
+                </a>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Web Components</h3>
+                <p class="component-card__text">
+                  Framework‑agnostic, reusable UI elements
+                </p>
+                <a href="#web-components" class="component-card__btn">
+                  View details →
+                </a>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Frameworks (React + TypeScript)</h3>
+                <p class="component-card__text">
+                  Large apps, design systems, complex state
+                </p>
+                <a href="#react-ts" class="component-card__btn">
+                  View details →
+                </a>
+              </article>
+            </div>
+
             <div class="card">
-              <div class="naming-table-wrapper">
-                <table class="naming-table">
-                  <thead>
-                    <tr>
-                      <th>Component type</th>
-                      <th>Block</th>
-                      <th>Elements (examples)</th>
-                      <th>Modifiers (examples)</th>
-                      <th>Notes</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!-- Layout / Page -->
-                    <tr>
-                      <td>Page / Layout</td>
-                      <td><code>page</code></td>
-                      <td>
-                        <code>page__header</code>,<br />
-                        <code>page__content</code>,<br />
-                        <code>page__footer</code>
-                      </td>
-                      <td>
-                        <code>page--has-sidebar</code>,<br />
-                        <code>page--dark</code>
-                      </td>
-                      <td>Top-level layout wrapper per page.</td>
-                    </tr>
-
-                    <!-- Site header -->
-                    <tr>
-                      <td>Site header</td>
-                      <td><code>site-header</code></td>
-                      <td>
-                        <code>site-header__inner</code>,<br />
-                        <code>site-header__logo</code>,<br />
-                        <code>site-header__nav</code>,<br />
-                        <code>site-header__actions</code>,<br />
-                        <code>site-header__burger</code>
-                      </td>
-                      <td>
-                        <code>site-header--sticky</code>,<br />
-                        <code>site-header--transparent</code>
-                      </td>
-                      <td>Main global header used across the site.</td>
-                    </tr>
-
-                    <!-- Site footer -->
-                    <tr>
-                      <td>Footer</td>
-                      <td><code>site-footer</code></td>
-                      <td>
-                        <code>site-footer__top</code>,<br />
-                        <code>site-footer__col</code>,<br />
-                        <code>site-footer__title</code>,<br />
-                        <code>site-footer__link</code>,<br />
-                        <code>site-footer__social</code>,<br />
-                        <code>site-footer__bottom</code>,<br />
-                        <code>site-footer__copyright</code>
-                      </td>
-                      <td>
-                        <code>site-footer--dark</code>,<br />
-                        <code>site-footer--minimal</code>
-                      </td>
-                      <td>Global footer with reusable column structure.</td>
-                    </tr>
-
-                    <!-- Main navigation -->
-                    <tr>
-                      <td>Main navigation</td>
-                      <td><code>nav-main</code></td>
-                      <td>
-                        <code>nav-main__list</code>,<br />
-                        <code>nav-main__item</code>,<br />
-                        <code>nav-main__link</code>
-                      </td>
-                      <td>
-                        <code>nav-main__item--active</code>,<br />
-                        <code>nav-main--vertical</code>
-                      </td>
-                      <td>Use <code>__item--active</code> for current page.</td>
-                    </tr>
-
-                    <!-- Mobile nav / hamburger -->
-                    <tr>
-                      <td>Mobile navigation / Hamburger</td>
-                      <td><code>mobile-nav</code></td>
-                      <td>
-                        <code>mobile-nav__overlay</code>,<br />
-                        <code>mobile-nav__panel</code>,<br />
-                        <code>mobile-nav__list</code>,<br />
-                        <code>mobile-nav__item</code>,<br />
-                        <code>mobile-nav__link</code>,<br />
-                        <code>hamburger</code>,<br />
-                        <code>hamburger__line</code>
-                      </td>
-                      <td>
-                        <code>mobile-nav--open</code>,<br />
-                        <code>hamburger--active</code>
-                      </td>
-                      <td>
-                        <code>hamburger</code> is a visual control; state
-                        controlled via <code>--active</code>.
-                      </td>
-                    </tr>
-
-                    <!-- Button -->
-                    <tr>
-                      <td>Button</td>
-                      <td><code>btn</code></td>
-                      <td>
-                        <code>btn__icon</code>,<br />
-                        <code>btn__label</code>
-                      </td>
-                      <td>
-                        <code>btn--primary</code>,<br />
-                        <code>btn--ghost</code>,<br />
-                        <code>btn--outline</code>,<br />
-                        <code>btn--sm</code>,<br />
-                        <code>btn--lg</code>,<br />
-                        <code>btn--full</code>
-                      </td>
-                      <td>Global shared button component.</td>
-                    </tr>
-
-                    <!-- Card (generic) -->
-                    <tr>
-                      <td>Content card</td>
-                      <td><code>card</code></td>
-                      <td>
-                        <code>card__header</code>,<br />
-                        <code>card__title</code>,<br />
-                        <code>card__body</code>,<br />
-                        <code>card__footer</code>,<br />
-                        <code>card__meta</code>
-                      </td>
-                      <td>
-                        <code>card--highlight</code>,<br />
-                        <code>card--outlined</code>,<br />
-                        <code>card--horizontal</code>
-                      </td>
-                      <td>Base block for multiple card-based components.</td>
-                    </tr>
-
-                    <!-- Slider / carousel -->
-                    <tr>
-                      <td>Slider / Carousel</td>
-                      <td><code>slider</code></td>
-                      <td>
-                        <code>slider__track</code>,<br />
-                        <code>slider__slide</code>,<br />
-                        <code>slider__image</code>,<br />
-                        <code>slider__content</code>,<br />
-                        <code>slider__nav</code>,<br />
-                        <code>slider__btn</code>,<br />
-                        <code>slider__pagination</code>,<br />
-                        <code>slider__dot</code>
-                      </td>
-                      <td>
-                        <code>slider--hero</code>,<br />
-                        <code>slider--gallery</code>,<br />
-                        <code>slider__dot--active</code>
-                      </td>
-                      <td>
-                        Combine with Swiper classes:
-                        <code>.swiper</code>, <code>.swiper-slide</code>.
-                      </td>
-                    </tr>
-
-                    <!-- Gallery -->
-                    <tr>
-                      <td>Photo gallery</td>
-                      <td><code>gallery</code></td>
-                      <td>
-                        <code>gallery__list</code>,<br />
-                        <code>gallery__item</code>,<br />
-                        <code>gallery__image</code>,<br />
-                        <code>gallery__caption</code>
-                      </td>
-                      <td>
-                        <code>gallery--grid</code>,<br />
-                        <code>gallery--mosaic</code>,<br />
-                        <code>gallery--slider</code>
-                      </td>
-                      <td>Image grid or lightbox gallery.</td>
-                    </tr>
-
-                    <!-- News list -->
-                    <tr>
-                      <td>News list</td>
-                      <td><code>news-list</code></td>
-                      <td>
-                        <code>news-list__item</code>,<br />
-                        <code>news-list__image</code>,<br />
-                        <code>news-list__content</code>,<br />
-                        <code>news-list__title</code>,<br />
-                        <code>news-list__excerpt</code>,<br />
-                        <code>news-list__meta</code>,<br />
-                        <code>news-list__date</code>
-                      </td>
-                      <td>
-                        <code>news-list--compact</code>,<br />
-                        <code>news-list--cards</code>
-                      </td>
-                      <td>Use for blog / news index pages.</td>
-                    </tr>
-
-                    <!-- Instagram post / feed -->
-                    <tr>
-                      <td>Instagram post</td>
-                      <td><code>insta-post</code></td>
-                      <td>
-                        <code>insta-post__image</code>,<br />
-                        <code>insta-post__info</code>,<br />
-                        <code>insta-post__title</code>,<br />
-                        <code>insta-post__date</code>,<br />
-                        <code>insta-post__likes</code>
-                      </td>
-                      <td>
-                        <code>insta-post--square</code>,<br />
-                        <code>insta-post--story</code>
-                      </td>
-                      <td>Used inside Instagram feed/grid components.</td>
-                    </tr>
-
-                    <tr>
-                      <td>Instagram feed</td>
-                      <td><code>insta-feed</code></td>
-                      <td>
-                        <code>insta-feed__list</code>,<br />
-                        <code>insta-feed__item</code>
-                      </td>
-                      <td>
-                        <code>insta-feed--grid</code>,<br />
-                        <code>insta-feed--masonry</code>
-                      </td>
-                      <td>
-                        Each <code>insta-feed__item</code> usually contains
-                        <code>.insta-post</code>.
-                      </td>
-                    </tr>
-
-                    <!-- Product card -->
-                    <tr>
-                      <td>Product card</td>
-                      <td><code>product-card</code></td>
-                      <td>
-                        <code>product-card__image</code>,<br />
-                        <code>product-card__body</code>,<br />
-                        <code>product-card__title</code>,<br />
-                        <code>product-card__price</code>,<br />
-                        <code>product-card__rating</code>,<br />
-                        <code>product-card__badge</code>,<br />
-                        <code>product-card__actions</code>,<br />
-                        <code>product-card__btn</code>
-                      </td>
-                      <td>
-                        <code>product-card--featured</code>,<br />
-                        <code>product-card--sale</code>,<br />
-                        <code>product-card--compact</code>
-                      </td>
-                      <td>Basic pattern for e-commerce grids and listings.</td>
-                    </tr>
-
-                    <!-- Media object -->
-                    <tr>
-                      <td>Media object</td>
-                      <td><code>media</code></td>
-                      <td>
-                        <code>media__image</code>,<br />
-                        <code>media__content</code>,<br />
-                        <code>media__meta</code>
-                      </td>
-                      <td>
-                        <code>media--reversed</code>,<br />
-                        <code>media--compact</code>
-                      </td>
-                      <td>
-                        Generic image + text pattern for multiple use cases.
-                      </td>
-                    </tr>
-
-                    <!-- Breadcrumbs -->
-                    <tr>
-                      <td>Breadcrumbs</td>
-                      <td><code>breadcrumbs</code></td>
-                      <td>
-                        <code>breadcrumbs__list</code>,<br />
-                        <code>breadcrumbs__item</code>,<br />
-                        <code>breadcrumbs__link</code>,<br />
-                        <code>breadcrumbs__separator</code>
-                      </td>
-                      <td>
-                        <code>breadcrumbs__link--current</code>
-                      </td>
-                      <td>Last item is current page and usually not a link.</td>
-                    </tr>
-
-                    <!-- Pagination -->
-                    <tr>
-                      <td>Pagination</td>
-                      <td><code>pagination</code></td>
-                      <td>
-                        <code>pagination__list</code>,<br />
-                        <code>pagination__item</code>,<br />
-                        <code>pagination__link</code>
-                      </td>
-                      <td>
-                        <code>pagination__link--active</code>,<br />
-                        <code>pagination--compact</code>,<br />
-                        <code>pagination--large</code>
-                      </td>
-                      <td>Use for page navigation on index or search pages.</td>
-                    </tr>
-
-                    <!-- Tabs -->
-                    <tr>
-                      <td>Tabs</td>
-                      <td><code>tabs</code></td>
-                      <td>
-                        <code>tabs__nav</code>,<br />
-                        <code>tabs__btn</code>,<br />
-                        <code>tabs__content</code>,<br />
-                        <code>tabs__panel</code>
-                      </td>
-                      <td>
-                        <code>tabs__btn--active</code>,<br />
-                        <code>tabs__panel--active</code>,<br />
-                        <code>tabs--underline</code>,<br />
-                        <code>tabs--pill</code>
-                      </td>
-                      <td>
-                        Each tab button controls corresponding panel by id.
-                      </td>
-                    </tr>
-
-                    <!-- Accordion -->
-                    <tr>
-                      <td>Accordion</td>
-                      <td><code>accordion</code></td>
-                      <td>
-                        <code>accordion__item</code>,<br />
-                        <code>accordion__header</code>,<br />
-                        <code>accordion__body</code>,<br />
-                        <code>accordion__icon</code>
-                      </td>
-                      <td>
-                        <code>accordion__item--open</code>,<br />
-                        <code>accordion--bordered</code>
-                      </td>
-                      <td>Use modifier on item, not on header/body.</td>
-                    </tr>
-
-                    <!-- Form -->
-                    <tr>
-                      <td>Form</td>
-                      <td><code>form</code></td>
-                      <td>
-                        <code>form__group</code>,<br />
-                        <code>form__label</code>,<br />
-                        <code>form__field</code>,<br />
-                        <code>form__input</code>,<br />
-                        <code>form__textarea</code>,<br />
-                        <code>form__message</code>,<br />
-                        <code>form__error</code>,<br />
-                        <code>form__actions</code>
-                      </td>
-                      <td>
-                        <code>form__field--error</code>,<br />
-                        <code>form__field--success</code>,<br />
-                        <code>form--inline</code>
-                      </td>
-                      <td>Consistent naming for validation and messages.</td>
-                    </tr>
-
-                    <!-- Utilities -->
-                    <tr>
-                      <td>Utilities (non-BEM)</td>
-                      <td><code>u-...</code></td>
-                      <td colspan="2">
-                        <code>u-visually-hidden</code>,<br />
-                        <code>u-text-center</code>,<br />
-                        <code>u-mt-sm</code>, <code>u-mb-lg</code>,<br />
-                        <code>u-flex</code>, <code>u-flex-center</code>
-                      </td>
-                      <td>
-                        Utility classes are prefixed with <code>u-</code> and
-                        are not part of BEM. They must be limited and
-                        documented.
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <p class="naming-note">
-                Rule: one block per component. Elements (<code>__</code>) never
-                appear without their block. Modifiers (<code>--</code>) must not
-                introduce new DOM structure, only visual or behavioral
-                variations.
-              </p>
+              <h3>Decision Tree</h3>
+              <ul>
+                <li>
+                  <strong>Simple static site?</strong> → HTML/CSS/JS with BEM
+                  naming
+                </li>
+                <li>
+                  <strong>Need framework‑agnostic components?</strong> → Web
+                  Components
+                </li>
+                <li>
+                  <strong>Building a large application?</strong> →
+                  Frameworks (React/TypeScript), preferably as islands first
+                </li>
+                <li>
+                  <strong>Already using a framework?</strong> → Follow its
+                  conventions + our naming rules
+                </li>
+              </ul>
             </div>
           </section>
 
-          <section class="section" id="attributes">
-            <h2>Attribute Naming Guidelines</h2>
+          <!-- HTML/CSS/JS COMPONENTS -->
+          <section class="section" id="html-css-js">
+            <h2>HTML/CSS/JS Components Overview</h2>
             <p>
-              Attributes define behavior, state, and accessibility. Class names
-              are used primarily for styling, while <code>data-*</code> and ARIA
-              attributes are used for JavaScript hooks, state, analytics, and
-              a11y. This section defines our standard patterns.
+              For static sites, WordPress, or PHP projects without heavy
+              JavaScript frameworks, component‑based architecture can be
+              implemented through consistent naming, reusable snippets, and
+              organized file structure.
             </p>
 
-            <!-- Основная таблица по форматам data-* -->
             <div class="card">
-              <div class="attr-table-wrapper">
-                <table class="attr-table">
-                  <thead>
-                    <tr>
-                      <th>Purpose</th>
-                      <th>Format</th>
-                      <th>Example</th>
-                      <th>Notes</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>JS hook</td>
-                      <td><code>data-js-*</code></td>
-                      <td>
-                        <code>data-js-modal-open="contact"</code><br />
-                        <code>data-js-slider="hero"</code>
-                      </td>
-                      <td>
-                        Used only for JavaScript bindings. Never rely on classes
-                        for JS behavior.
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>Component ID</td>
-                      <td><code>data-component</code></td>
-                      <td><code>data-component="slider"</code></td>
-                      <td>
-                        Identifies a component root in DOM for initialization
-                        and debugging.
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>Component role</td>
-                      <td><code>data-role</code></td>
-                      <td>
-                        <code>data-role="track"</code>,<br />
-                        <code>data-role="slide"</code>,<br />
-                        <code>data-role="close"</code>
-                      </td>
-                      <td>
-                        Internal sub-elements inside a component. Not used for
-                        styling.
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>State</td>
-                      <td><code>data-state</code></td>
-                      <td>
-                        <code>data-state="open"</code>,<br />
-                        <code>data-state="closed"</code>,<br />
-                        <code>data-state="loading"</code>,<br />
-                        <code>data-state="error"</code>
-                      </td>
-                      <td>
-                        Current state of the component. Must be in sync with
-                        ARIA attributes.
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>Variant</td>
-                      <td><code>data-variant</code></td>
-                      <td>
-                        <code>data-variant="hero"</code>,<br />
-                        <code>data-variant="compact"</code>
-                      </td>
-                      <td>
-                        Describes a functional variation (type) of component
-                        instance.
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>Analytics</td>
-                      <td><code>data-track-*</code></td>
-                      <td>
-                        <code>data-track-click="add_to_cart"</code>,<br />
-                        <code>data-track-view="hero_banner"</code>
-                      </td>
-                      <td>
-                        Used by tracking/analytics only. Must not affect
-                        behavior or styling.
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>API / data binding</td>
-                      <td><code>data-api-*</code></td>
-                      <td>
-                        <code>data-api-id="123"</code>,<br />
-                        <code>data-api-endpoint="/products/123"</code>
-                      </td>
-                      <td>
-                        References to back-end resources or data identifiers
-                        used in JS.
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>Accessibility</td>
-                      <td>ARIA attributes</td>
-                      <td>
-                        <code>aria-expanded="false"</code>,<br />
-                        <code>aria-hidden="true"</code>,<br />
-                        <code>aria-controls="menu-panel"</code>
-                      </td>
-                      <td>
-                        Used strictly for accessibility. Always kept consistent
-                        with
-                        <code>data-state</code>.
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <p class="attr-note">
-                Rule: classes (<code>.class-name</code>) define visuals.
-                Attributes (<code>data-*</code>, ARIA) define behavior, state,
-                and semantics. Do not mix styling and behavior in the same
-                construct.
-              </p>
+              <h3>When to Use HTML/CSS/JS Components</h3>
+              <ul>
+                <li>Marketing websites and landing pages</li>
+                <li>WordPress themes and template parts</li>
+                <li>PHP‑based projects with includes/partials</li>
+                <li>Prototypes and quick MVPs</li>
+                <li>Projects where JavaScript frameworks are overkill</li>
+              </ul>
+              <a
+                href="#modal-html-components"
+                class="btn btn--primary"
+                style="margin-top: 12px"
+              >
+                View BEM examples →
+              </a>
             </div>
 
-            <!-- Примеры паттернов для компонентов -->
-            <div class="card attr-patterns">
-              <h3>Component attribute patterns</h3>
-              <p class="attr-patterns__intro">
-                Standard patterns for frequently used components (modal, slider,
-                accordion). Use these as a reference when adding new behaviors.
-              </p>
+            <div class="card component-card--warning">
+              <h3>⚠️ Common Pitfalls</h3>
+              <ul>
+                <li>
+                  <strong>CSS leakage:</strong> Global selectors break
+                  neighboring components.
+                </li>
+                <li>
+                  <strong>Hidden API:</strong> Undocumented variants and
+                  modifiers appear.
+                </li>
+                <li>
+                  <strong>JS‑CSS coupling:</strong> JavaScript depends on
+                  specific CSS class names.
+                </li>
+              </ul>
+            </div>
+          </section>
 
-              <!-- Modal pattern -->
-              <div class="attr-patterns__block">
-                <h4 class="attr-patterns__title">Modal</h4>
-                <p class="attr-patterns__text">
-                  The trigger button opens a modal identified by
-                  <code>data-js-modal</code>. State is reflected with
-                  <code>data-state</code> and ARIA attributes.
-                </p>
+          <!-- BEM METHODOLOGY -->
+          <section class="section" id="bem">
+            <h2>BEM as Core Contract</h2>
+            <p>
+              BEM (Block‑Element‑Modifier) provides a formal naming convention
+              that turns component thinking into a clear contract:
+              <strong>Block</strong> = component, <strong>Element</strong> =
+              component part, <strong>Modifier</strong> = variant
+              (state/size/appearance).
+            </p>
 
-                <pre><code>&lt;button
-  class="btn btn--primary"
-  type="button"
-  data-js-modal-open="contact"
-/&gt;
+            <div class="card">
+              <h3>BEM Rules</h3>
+              <ul>
+                <li>
+                  <strong>Block:</strong> Stand‑alone component:
+                  <code>.button</code>, <code>.card</code>, <code>.hero</code>
+                </li>
+                <li>
+                  <strong>Element:</strong> Part of a block:
+                  <code>.card__title</code>, <code>.card__meta</code>
+                </li>
+                <li>
+                  <strong>Modifier:</strong> Variant of block/element:
+                  <code>.button--primary</code>, <code>.button--sm</code>,
+                  <code>.is‑disabled</code> (by convention)
+                </li>
+                <li>
+                  <strong>JS hooks:</strong> Use <code>data‑js</code>/<code
+                    >data‑component</code
+                  >
+                  instead of "js‑…" classes to separate behavior from styling.
+                </li>
+              </ul>
+            </div>
 
-&lt;div
-  class="modal"
-  data-component="modal"
-  data-js-modal="contact"
-  data-state="closed"
-  aria-hidden="true"
-&gt;
-  &lt;div class="modal__overlay" data-js-modal-close&gt;&lt;/div&gt;
-  &lt;div class="modal__dialog" role="dialog" aria-modal="true"&gt;
-    &lt;header class="modal__header"&gt;
-      &lt;h2 class="modal__title"&gt;Contact us&lt;/h2&gt;
-      &lt;button
-        class="modal__close"
-        type="button"
-        data-js-modal-close
-        aria-label="Close modal"
-      &gt;✕&lt;/button&gt;
-    &lt;/header&gt;
-    &lt;div class="modal__body"&gt;...&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-              </div>
+            <div class="baseline-accordion">
+              <details class="accordion">
+                <summary class="accordion__summary">HTML Example</summary>
+                <div class="accordion__content">
+                  <pre><code>&lt;button class="button button--primary button--md" type="button"&gt;
+  &lt;span class="button__icon" aria-hidden="true"&gt;…&lt;/span&gt;
+  &lt;span class="button__label"&gt;Submit&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+                </div>
+              </details>
 
-              <!-- Slider pattern -->
-              <div class="attr-patterns__block">
-                <h4 class="attr-patterns__title">Slider / Swiper</h4>
-                <p class="attr-patterns__text">
-                  The slider root is marked with
-                  <code>data-component="slider"</code> and
-                  <code>data-js-slider</code>. Navigation uses dedicated JS
-                  hooks.
-                </p>
+              <details class="accordion">
+                <summary class="accordion__summary">CSS Example</summary>
+                <div class="accordion__content">
+                  <pre><code>.button {
+  display: inline-flex;
+  gap: .5rem;
+  align-items: center;
+}
 
-                <pre><code>&lt;div
-  class="slider swiper"
-  data-component="slider"
-  data-js-slider="hero"
-  data-variant="hero"
-&gt;
-  &lt;div class="slider__track swiper-wrapper" data-role="track"&gt;
-    &lt;div class="slider__slide swiper-slide" data-role="slide"&gt;...&lt;/div&gt;
-    &lt;div class="slider__slide swiper-slide" data-role="slide"&gt;...&lt;/div&gt;
-  &lt;/div&gt;
+.button__icon {
+  width: 1em;
+  height: 1em;
+}
 
-  &lt;button
-    class="slider__btn slider__btn--prev"
-    type="button"
-    data-js-slider-prev="hero"
-    aria-label="Previous slide"
-  &gt;‹&lt;/button&gt;
+.button--primary {
+  background-color: var(--color-primary);
+  color: white;
+}
 
-  &lt;button
-    class="slider__btn slider__btn--next"
-    type="button"
-    data-js-slider-next="hero"
-    aria-label="Next slide"
-  &gt;›&lt;/button&gt;
+.button--md {
+  padding: .75rem 1rem;
+  border-radius: .75rem;
+}</code></pre>
+                </div>
+              </details>
+            </div>
+          </section>
 
-  &lt;div
-    class="slider__pagination swiper-pagination"
-    data-role="pagination"
-  &gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-              </div>
+          <!-- COMPONENT STRUCTURE -->
+          <section class="section" id="structure">
+            <h2>Component Structure & Catalog</h2>
+            <p>
+              The minimum goal is to make components
+              <strong>findable</strong> and <strong>reusable</strong>. Even
+              without a build system, maintain a single "source of truth" for
+              each block.
+            </p>
 
-              <!-- Accordion pattern -->
-              <div class="attr-patterns__block">
-                <h4 class="attr-patterns__title">Accordion</h4>
-                <p class="attr-patterns__text">
-                  Each item tracks its open/closed state via
-                  <code>data-state</code> and <code>aria-expanded</code>. JS
-                  attaches only to <code>data-js-accordion-btn</code>.
-                </p>
+            <div class="card">
+              <h3>Recommended Folder Structure</h3>
+              <pre><code>/components
+  /button
+    button.html            (markup example)
+    button.css             (component styles)
+    button.js              (behavior, if needed)
+    README.md              (variants/modifiers, constraints)
+  /card
+    card.html
+    card.css
+  /modal
+    modal.html
+    modal.css
+    modal.js</code></pre>
+            </div>
 
-                <pre><code>&lt;div class="accordion" data-component="accordion"&gt;
-  &lt;div class="accordion__item" data-state="closed"&gt;
+            <div class="card">
+              <h3>For WordPress (Example)</h3>
+              <pre><code>/template-parts/components
+  /button
+    button.php
+    button.css
+  /card
+    card.php
+    card.css</code></pre>
+            </div>
+
+            <h3>Component Catalog (Minimum)</h3>
+            <ul>
+              <li>
+                One internal page (or Story‑like page) with examples of each
+                component.
+              </li>
+              <li>
+                For each block: variants, modifiers, constraints, "do/don't"
+                examples.
+              </li>
+              <li>
+                Essential: error/empty states for forms and lists (where
+                applicable).
+              </li>
+            </ul>
+          </section>
+
+          <!-- JAVASCRIPT CONTRACT -->
+          <section class="section" id="js-contract">
+            <h2>JavaScript & Contracts</h2>
+            <p>
+              For "simple" websites, the most resilient pattern is
+              <strong>initialization via data‑attributes</strong>. This
+              separates styling (BEM) from behavior and reduces regression risk.
+            </p>
+
+            <div class="card">
+              <h3>Pattern: data‑component + module</h3>
+              <pre><code>&lt;div class="accordion" data-component="accordion"&gt;...&lt;/div&gt;</code></pre>
+              <pre><code>// accordion.js
+export function initAccordion(root) {
+  // root — specific component container
+}
+
+export function initAllAccordions() {
+  document
+    .querySelectorAll('[data-component="accordion"]')
+    .forEach(initAccordion);
+}</code></pre>
+            </div>
+
+            <h3>Conventions</h3>
+            <ul>
+              <li>
+                Avoid "magic" selectors with long chains (<code
+                  >.page .content ...</code
+                >).
+              </li>
+              <li>
+                Emit events outward: <code>CustomEvent</code> for
+                cross‑component integration.
+              </li>
+              <li>
+                States (open/active/disabled) via BEM modifiers or data‑state
+                attributes.
+              </li>
+            </ul>
+          </section>
+
+          <!-- DESIGN TOKENS -->
+          <section class="section" id="tokens">
+            <h2>Consistent Styling: Tokens & Variables</h2>
+            <p>
+              To keep components visually cohesive, we need a shared layer of
+              "design tokens." At a basic level, these can be CSS custom
+              properties used across all blocks.
+            </p>
+
+            <div class="card">
+              <h3>Minimal Token Set (Example)</h3>
+              <pre><code>:root {
+  --color-text: #111;
+  --color-bg: #fff;
+  --color-primary: #2b6cb0;
+
+  --radius-md: 12px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+}</code></pre>
+            </div>
+
+            <ul>
+              <li>
+                <strong>Rule:</strong> Components don't "know" specific colors
+                or spacings—only tokens.
+              </li>
+              <li>
+                <strong>Theming:</strong> If brand/theme changes, update tokens,
+                not rewrite components.
+              </li>
+            </ul>
+          </section>
+
+          <!-- QUALITY -->
+          <section class="section" id="quality">
+            <h2>Quality: A11y, Responsiveness, Performance</h2>
+
+            <h3>Accessibility (Minimum)</h3>
+            <ul>
+              <li>
+                Focus styles must be visible (never remove
+                <code>outline</code> without a replacement).
+              </li>
+              <li>
+                Interactive elements use semantic tags (<code>button</code>,
+                <code>a</code>), not <code>div</code>.
+              </li>
+              <li>
+                Modals/menus: keyboard navigation, proper
+                <code>aria-*</code> attributes.
+              </li>
+            </ul>
+
+            <h3>Responsiveness</h3>
+            <ul>
+              <li>
+                Components must be resilient to varying text length and
+                localization.
+              </li>
+              <li>Check layouts at 320px and on large screens.</li>
+            </ul>
+
+            <h3>Performance</h3>
+            <ul>
+              <li>
+                Avoid JavaScript where CSS suffices (e.g., simple expandable
+                blocks).
+              </li>
+              <li>Lazy‑initialize heavy components (on click/viewport).</li>
+              <li>Images: <code>loading="lazy"</code>, proper sizes.</li>
+            </ul>
+          </section>
+
+          <!-- WHEN TO USE A FRAMEWORK -->
+          <section class="section" id="when-framework">
+            <h2>When to Use a Framework</h2>
+            <p>
+              A framework is not a goal by itself. Start by strengthening the baseline approach (component catalog, tokens, consistent conventions, and modular JS). Consider a framework only when it materially reduces complexity or risk—and prefer adopting it in isolated areas first, rather than rewriting everything.
+            </p>
+
+            <div class="naming-table-wrapper">
+              <table class="naming-table">
+                <thead>
+                  <tr>
+                    <th>Symptom</th>
+                    <th>What's Happening</th>
+                    <th>What to Do</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Complex UI State</td>
+                    <td>
+                      Many interdependent states, growing number of "flags"
+                    </td>
+                    <td>
+                      Consider component framework or Web Components for
+                      "islands"
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>UI Duplication</td>
+                    <td>Identical blocks are copied and diverge</td>
+                    <td>
+                      Start with catalog + tokens; at scale—component library
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Team Growing</td>
+                    <td>Harder to align changes and standards</td>
+                    <td>
+                      Standardize the component catalog and conventions, add documentation/linting
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- REACT + TYPESCRIPT -->
+          <section class="section" id="react-ts">
+            <h2>If Using React + TypeScript (Optional)</h2>
+            <p>
+              This section is an optional reference for projects that choose React/TypeScript. It is not required for the current default approach. If React is introduced, the goal is to keep the same principles (tokens, contracts, documentation) while benefiting from typed props, composition, and tooling.
+            </p>
+
+            <div class="card">
+              <h3>Target Structure (Example)</h3>
+              <pre><code>/ui
+  /Button
+    Button.tsx
+    Button.module.css     (or CSS‑in‑JS / styled)
+    Button.stories.tsx    (if using Storybook)
+    Button.test.tsx
+    index.ts</code></pre>
+            </div>
+
+            <div class="card">
+              <h3>Example: Button in React + TypeScript</h3>
+              <pre><code>type ButtonVariant = "primary" | "secondary";
+type ButtonSize = "sm" | "md" | "lg";
+
+export interface ButtonProps {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  disabled?: boolean;
+  onClick?: () => void;
+  children: React.ReactNode;
+}
+
+export function Button({
+  variant = "primary",
+  size = "md",
+  disabled,
+  onClick,
+  children,
+}: ButtonProps) {
+  return (
     &lt;button
-      class="accordion__header"
+      className={`button button--${variant} button--${size}`}
+      disabled={disabled}
+      onClick={onClick}
       type="button"
-      data-js-accordion-btn
-      aria-expanded="false"
-      aria-controls="acc-panel-1"
     &gt;
-      &lt;span class="accordion__title"&gt;Question 1&lt;/span&gt;
+      {children}
     &lt;/button&gt;
-    &lt;div
-      id="acc-panel-1"
-      class="accordion__body"
-      role="region"
-      aria-hidden="true"
-    &gt;
-      &lt;p&gt;Answer content...&lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-              </div>
+  );
+}</code></pre>
             </div>
+
+            <h3>Practices to Aim For</h3>
+            <ul>
+              <li>
+                <strong>Typed API:</strong> Variants and sizes as union types;
+                avoid "stringly typed".
+              </li>
+              <li>
+                <strong>Documentation:</strong> Storybook (or similar) as single
+                catalog.
+              </li>
+              <li>
+                <strong>Tokens:</strong> Same CSS variables/design tokens for
+                consistent UI.
+              </li>
+              <li>
+                <strong>Tests:</strong> Unit + e2e for critical user flows.
+              </li>
+            </ul>
           </section>
 
-          <section class="section" id="units">
-            <h2>Units & Sizing</h2>
+          <!-- WEB COMPONENTS -->
+          <section class="section" id="web-components">
+            <h2>Web Components Overview</h2>
             <p>
-              This guide defines when to use <strong>rem</strong>,
-              <strong>em</strong>, and <strong>px</strong>. It follows modern
-              CSS architecture practices used in design systems (Material,
-              Polaris, Primer). Mobile-first, scalable, and predictable sizing
-              rules improve consistency and maintainability.
-            </p>
-
-            <div class="component-grid">
-              <!-- REM card -->
-              <article class="component-card">
-                <h3 class="component-card__title">rem (Root-relative)</h3>
-                <p class="component-card__text">
-                  Primary unit for typography, spacing, component sizing,
-                  layout. Independent from nesting and predictable across the
-                  entire UI. Recommended for 90% of sizing.
-                </p>
-
-                <ul class="component-card__list">
-                  <li>
-                    Use for: font-size, padding, margin, gap, layout widths
-                  </li>
-                  <li>1rem = root font-size (default 16px)</li>
-                  <li>Responsive scaling via root font-size</li>
-                </ul>
-
-                <a href="#modal-units-rem" class="component-card__btn"
-                  >Open rem preview</a
-                >
-              </article>
-
-              <!-- EM card -->
-              <article class="component-card">
-                <h3 class="component-card__title">em (Element-relative)</h3>
-                <p class="component-card__text">
-                  Scales with the font-size of the current element. Useful for
-                  internal component scaling but can cause unexpected growth if
-                  nested.
-                </p>
-
-                <ul class="component-card__list">
-                  <li>Use inside components (padding, icons)</li>
-                  <li>1em = computed font-size of the element</li>
-                  <li>Avoid in layout and spacing outside components</li>
-                </ul>
-
-                <a href="#modal-units-em" class="component-card__btn"
-                  >Open em preview</a
-                >
-              </article>
-
-              <!-- PX card -->
-              <article class="component-card">
-                <h3 class="component-card__title">px (Absolute)</h3>
-                <p class="component-card__text">
-                  Pixel-perfect unit for borders, shadows, and breakpoints. Use
-                  where precision overrides scaling.
-                </p>
-
-                <ul class="component-card__list">
-                  <li>Use for: borders, 1px lines, shadows</li>
-                  <li>Safe for breakpoints</li>
-                  <li>Not scalable</li>
-                </ul>
-
-                <a href="#modal-units-px" class="component-card__btn"
-                  >Open px preview</a
-                >
-              </article>
-
-              <article class="component-card component-card--warning">
-                <h3 class="component-card__title">Warning: Using vw units</h3>
-                <p class="component-card__text">
-                  Viewport width units (<code>vw</code>) can cause severe layout
-                  issues on mobile devices, especially iOS Safari and Chrome
-                  Android. Avoid using <code>vw</code>
-                  for typography and container widths unless you explicitly
-                  control scaling.
-                </p>
-
-                <ul class="component-card__list">
-                  <li>Text becomes unreadable on phones when using vw</li>
-                  <li>iOS hides browser UI → viewport jumps → layout shifts</li>
-                  <li>100vw includes scrollbar → horizontal overflow bugs</li>
-                  <li>
-                    Use <strong>rem</strong> for text, <strong>%</strong> for
-                    layout width
-                  </li>
-                  <li>
-                    vw is acceptable only for: fullscreen hero blocks,
-                    animations, clipping
-                  </li>
-                </ul>
-
-                <a href="#modal-units-vw" class="component-card__btn">
-                  Open vw warning preview
-                </a>
-              </article>
-
-              <article class="component-card component-card--warning">
-                <h3 class="component-card__title">
-                  Warning: vh, svh, lvh, dvh
-                </h3>
-                <p class="component-card__text">
-                  Viewport height units can behave inconsistently on mobile
-                  devices. Historically, <code>100vh</code> caused layout jumps
-                  because mobile browser UI (address bar) resizes the viewport.
-                  Modern units (<code>dvh</code>, <code>svh</code>,
-                  <code>lvh</code>) resolve this, but must be used
-                  intentionally.
-                </p>
-
-                <ul class="component-card__list">
-                  <li><code>vh</code> is unstable on mobile (iOS & Android)</li>
-                  <li>
-                    <code>100vh</code> often cuts content or creates extra space
-                  </li>
-                  <li>
-                    <code>dvh</code> is usually the correct modern replacement
-                  </li>
-                  <li>
-                    <code>svh</code> and <code>lvh</code> provide UI-safe
-                    variants
-                  </li>
-                  <li>
-                    Use for fullscreen sections only — never for main layout
-                    height
-                  </li>
-                </ul>
-
-                <a href="#modal-units-vh" class="component-card__btn">
-                  Open vh / dvh preview
-                </a>
-              </article>
-              <article class="component-card">
-                <h3 class="component-card__title">% (Percent)</h3>
-                <p class="component-card__text">
-                  Percent units define size relative to the parent element. They
-                  are ideal for fluid layouts, flexible widths, and responsive
-                  components. Use % whenever an element must scale with its
-                  container instead of the viewport.
-                </p>
-
-                <ul class="component-card__list">
-                  <li>
-                    Best for fluid width layouts (e.g.,
-                    <code>width: 100%</code>)
-                  </li>
-                  <li>Useful in grids, images, media containers</li>
-                  <li>
-                    Avoid using % for height unless parent has a defined height
-                  </li>
-                  <li>
-                    Combine with <code>max-width</code> for controlled scaling
-                  </li>
-                </ul>
-
-                <a href="#modal-units-percent" class="component-card__btn">
-                  Open % usage preview
-                </a>
-              </article>
-            </div>
-          </section>
-          <div id="modal-units-rem" class="preview-modal">
-            <div class="preview-modal__dialog">
-              <header class="preview-modal__header">
-                <h3 class="preview-modal__title">rem – Scalable Layout</h3>
-                <a href="#units" class="preview-modal__close">✕</a>
-              </header>
-
-              <p class="preview-modal__description">
-                rem units scale with the root font-size. This makes components,
-                typography, and spacing predictable and globally responsive.
-              </p>
-
-              <div class="preview-units">
-                <div class="preview-units__block">
-                  <h4 class="preview-units__label">Root: 16px → 1rem</h4>
-                  <div class="preview-units__box preview-units__box--rem">
-                    <span>padding: 1.5rem</span>
-                  </div>
-                </div>
-
-                <div class="preview-units__block">
-                  <h4 class="preview-units__label">Root: 20px → 1rem</h4>
-                  <div class="preview-units__box preview-units__box--rem-large">
-                    <span>scales automatically</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card preview-modal__code">
-                <pre><code>html {
-  font-size: 16px; /* root */
-}
-
-.card {
-  padding: 1.5rem;   /* scalable */
-  border-radius: 0.75rem;
-  font-size: 1rem;
-}
-
-@media (max-width: 480px) {
-  html { font-size: 14px; } /* shrink whole UI */
-}</code></pre>
-              </div>
-            </div>
-          </div>
-          <div id="modal-units-em" class="preview-modal">
-            <div class="preview-modal__dialog">
-              <header class="preview-modal__header">
-                <h3 class="preview-modal__title">em – Component Scaling</h3>
-                <a href="#units" class="preview-modal__close">✕</a>
-              </header>
-
-              <p class="preview-modal__description">
-                em units scale relative to the element’s own font-size. Useful
-                for internal component responsiveness.
-              </p>
-
-              <div class="preview-units">
-                <div class="preview-units__block">
-                  <h4 class="preview-units__label">Base component</h4>
-
-                  <div class="preview-units__button">
-                    <span>Button</span>
-                  </div>
-                </div>
-
-                <div class="preview-units__block">
-                  <h4 class="preview-units__label">
-                    Button enlarged (font-size: 1.25rem)
-                  </h4>
-
-                  <div
-                    class="preview-units__button preview-units__button--large"
-                  >
-                    <span>Button large</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card preview-modal__code">
-                <pre><code>.btn {
-  font-size: 1rem;
-  padding: 0.5em 1.2em; /* scales with font-size */
-}
-
-.btn--large {
-  font-size: 1.25rem;
-}</code></pre>
-              </div>
-            </div>
-          </div>
-          <div id="modal-units-px" class="preview-modal">
-            <div class="preview-modal__dialog">
-              <header class="preview-modal__header">
-                <h3 class="preview-modal__title">px – Precision Use</h3>
-                <a href="#units" class="preview-modal__close">✕</a>
-              </header>
-
-              <p class="preview-modal__description">
-                Use px for fine details such as borders, shadows, and
-                breakpoints. Pixel values should not be used for scalable
-                layout.
-              </p>
-
-              <div class="preview-units">
-                <div class="preview-units__block">
-                  <div class="preview-units__border-box">
-                    <span>1px border</span>
-                  </div>
-                </div>
-
-                <div class="preview-units__block">
-                  <div class="preview-units__shadow-box">
-                    <span>shadow</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card preview-modal__code">
-                <pre><code>.divider {
-  height: 1px;
-  background-color: rgba(255,255,255,0.2);
-}
-
-@media (min-width: 768px) { /* safe breakpoint */
-  .container { max-width: 720px; }
-}</code></pre>
-              </div>
-            </div>
-          </div>
-          <div id="modal-units-vw" class="preview-modal">
-            <div class="preview-modal__dialog">
-              <header class="preview-modal__header">
-                <h3 class="preview-modal__title">vw – Use With Caution</h3>
-                <a href="#units" class="preview-modal__close">✕</a>
-              </header>
-
-              <p class="preview-modal__description">
-                vw units behave unpredictably on mobile: browser UI bars resize
-                the viewport, and 100vw often includes scrollbar width. This
-                preview demonstrates typical failure cases and correct
-                alternatives.
-              </p>
-
-              <div class="preview-vw">
-                <!-- Example 1 — BAD -->
-                <div class="preview-vw__block">
-                  <h4 class="preview-vw__label">Bad: Text sizing with vw</h4>
-
-                  <div class="preview-vw__example preview-vw__example--bad">
-                    <span style="font-size: 5vw">Text 5vw</span>
-                  </div>
-
-                  <p class="preview-vw__text">
-                    On small screens 5vw becomes too small, on large screens too
-                    big. Also affected by mobile UI shrinking/expanding the
-                    viewport.
-                  </p>
-                </div>
-
-                <!-- Example 2 — BAD width overflow -->
-                <div class="preview-vw__block">
-                  <h4 class="preview-vw__label">Bad: 100vw container</h4>
-
-                  <div
-                    class="preview-vw__example preview-vw__example--overflow"
-                  >
-                    <span>100vw box → scrollbar causes overflow</span>
-                  </div>
-
-                  <p class="preview-vw__text">
-                    Because 100vw includes scrollbar width, layouts get
-                    horizontal scroll even when content fits visually.
-                  </p>
-                </div>
-
-                <!-- Example 3 — GOOD use case -->
-                <div class="preview-vw__block">
-                  <h4 class="preview-vw__label">
-                    Good: Hero section using vw/vh
-                  </h4>
-
-                  <div class="preview-vw__example preview-vw__example--good">
-                    <span>Hero block: width:100%; height:100vh</span>
-                  </div>
-
-                  <p class="preview-vw__text">
-                    vw/vh may be used for fullscreen hero blocks, background
-                    shapes, animations, clipping masks — elements not tied to
-                    content readability.
-                  </p>
-                </div>
-              </div>
-
-              <div class="card preview-modal__code">
-                <pre><code>/* Bad: text with vw */
-.title {
-  font-size: 5vw; /* unpredictable */
-}
-
-/* Bad: layout container */
-.container {
-  width: 100vw; /* causes overflow */
-}
-
-/* Good: hero section */
-.hero {
-  min-height: 100vh;
-  width: 100%;
-}</code></pre>
-              </div>
-            </div>
-          </div>
-          <div id="modal-units-vh" class="preview-modal">
-            <div class="preview-modal__dialog">
-              <header class="preview-modal__header">
-                <h3 class="preview-modal__title">
-                  vh vs dvh – Modern Viewport Units
-                </h3>
-                <a href="#units" class="preview-modal__close">✕</a>
-              </header>
-
-              <p class="preview-modal__description">
-                The classic <code>100vh</code> unit is unreliable on mobile
-                because the browser UI bars change the viewport height. Modern
-                CSS provides <code>dvh</code>, <code>svh</code>, and
-                <code>lvh</code> to fix this. Avoid using 100vh on mobile. Use
-                100dvh for fullscreen, stable height. svh = viewport with
-                browser UI visible. lvh = viewport with UI hidden (expanded).
-                dvh = dynamic, reliable — recommended default.
-              </p>
-
-              <div class="preview-vh">
-                <!-- BAD: classic vh -->
-                <div class="preview-vh__block">
-                  <h4 class="preview-vh__label">Bad: 100vh (mobile jump)</h4>
-
-                  <div class="preview-vh__example preview-vh__example--bad">
-                    <span>100vh</span>
-                  </div>
-
-                  <p class="preview-vh__text">
-                    On iOS Safari, 100vh becomes higher when the address bar
-                    hides, causing layout jumps and clipped content.
-                  </p>
-                </div>
-
-                <!-- GOOD: dvh -->
-                <div class="preview-vh__block">
-                  <h4 class="preview-vh__label">
-                    Good: 100dvh (stable viewport)
-                  </h4>
-
-                  <div class="preview-vh__example preview-vh__example--good">
-                    <span>100dvh</span>
-                  </div>
-
-                  <p class="preview-vh__text">
-                    dvh uses the dynamic viewport height: always accurate,
-                    stable, and recommended for fullscreen blocks.
-                  </p>
-                </div>
-
-                <!-- Other units -->
-                <div class="preview-vh__block">
-                  <h4 class="preview-vh__label">svh / lvh</h4>
-
-                  <div class="preview-vh__example preview-vh__example--neutral">
-                    <span>visual viewport variants</span>
-                  </div>
-
-                  <p class="preview-vh__text">
-                    <code>svh</code> = small viewport height (browser UI
-                    visible)<br />
-                    <code>lvh</code> = large viewport height (UI hidden)<br />
-                    Rarely needed — mostly for advanced layouts.
-                  </p>
-                </div>
-              </div>
-
-              <div class="card preview-modal__code">
-                <pre><code>/* Bad */
-.hero {
-  height: 100vh; /* unstable on mobile */
-}
-
-/* Recommended */
-.hero {
-  height: 100dvh; /* dynamic viewport height */
-}
-
-/* Optional advanced usage */
-.hero--safe {
-  min-height: 100svh; /* UI visible */
-  max-height: 100lvh; /* UI hidden */
-}</code></pre>
-              </div>
-            </div>
-          </div>
-
-          <div id="modal-units-percent" class="preview-modal">
-            <div class="preview-modal__dialog">
-              <header class="preview-modal__header">
-                <h3 class="preview-modal__title">% – Relative to Parent</h3>
-                <a href="#units" class="preview-modal__close">✕</a>
-              </header>
-
-              <p class="preview-modal__description">
-                Percent units adapt an element’s width or position based on its
-                parent. They are essential for fluid layout systems and
-                responsive containers. The preview below demonstrates correct
-                and incorrect use cases.
-              </p>
-
-              <div class="preview-percent">
-                <!-- Good: width:100% -->
-                <div class="preview-percent__block">
-                  <h4 class="preview-percent__label">Good: width: 100%</h4>
-                  <div
-                    class="preview-percent__example preview-percent__example--good"
-                  >
-                    <div
-                      class="preview-percent__child preview-percent__child--wide"
-                    ></div>
-                  </div>
-                  <p class="preview-percent__text">
-                    Child expands exactly to the available space of the parent.
-                    Perfect for fluid layouts, responsive grids, and images.
-                  </p>
-                </div>
-
-                <!-- Bad: height with % when parent has no height -->
-                <div class="preview-percent__block">
-                  <h4 class="preview-percent__label">Bad: height: 100%</h4>
-                  <div
-                    class="preview-percent__example preview-percent__example--bad"
-                  >
-                    <div
-                      class="preview-percent__child preview-percent__child--tall"
-                    ></div>
-                  </div>
-                  <p class="preview-percent__text">
-                    height:100% works only if the parent has an explicit height.
-                    Otherwise it collapses or produces unpredictable results.
-                  </p>
-                </div>
-
-                <!-- Good: max-width + % -->
-                <div class="preview-percent__block">
-                  <h4 class="preview-percent__label">Good: max-width + %</h4>
-                  <div
-                    class="preview-percent__example preview-percent__example--neutral"
-                  >
-                    <div
-                      class="preview-percent__child preview-percent__child--controlled"
-                    ></div>
-                  </div>
-                  <p class="preview-percent__text">
-                    Combine % with max-width for controlled fluidity. Ideal for
-                    containers and responsive media.
-                  </p>
-                </div>
-              </div>
-
-              <div class="card preview-modal__code">
-                <pre><code>/* Fluid width */
-.container {
-  width: 100%;
-}
-
-/* Bad: parent needs explicit height */
-.section {
-  height: 100%; /* Only works if parent has height set */
-}
-
-/* Fluid but controlled */
-.media {
-  width: 100%;
-  max-width: 600px;
-}</code></pre>
-              </div>
-            </div>
-          </div>
-
-          <!-- Components -->
-          <section class="section" id="components">
-            <h2>Components</h2>
-            <p>
-              Reusable components must have a clear API (props/options) and
-              documented behavior.
+              Framework‑agnostic custom elements that work anywhere. Ideal for
+              shared UI libraries, design systems, or embedding components in
+              multiple tech stacks.
             </p>
 
             <div class="card">
-              <h3>Buttons</h3>
+              <h3>When to Use Web Components</h3>
               <ul>
-                <li>Use <code>.btn</code> as a base class.</li>
                 <li>
-                  Variants: <code>.btn--primary</code>,
-                  <code>.btn--secondary</code>, <code>.btn--ghost</code>.
+                  Share components across different frameworks (React, Vue,
+                  etc.)
                 </li>
-                <li>Minimum hit area: 44x44px.</li>
+                <li>Build a design system that works in any environment</li>
+                <li>
+                  Need encapsulated styles and behavior without a framework
+                </li>
+                <li>Progressive enhancement for complex UI elements</li>
               </ul>
-
-              <pre><code>&lt;button class="btn btn--primary"&gt;Primary button&lt;/button&gt;
-</code></pre>
+              <a
+                href="#modal-web-component"
+                class="btn btn--primary"
+                style="margin-top: 12px"
+              >
+                View Web Component example →
+              </a>
             </div>
 
             <div class="card">
-              <h3>Cards</h3>
-              <p>Example of a simple card component:</p>
-              <pre><code>&lt;article class="card"&gt;
-  &lt;h3 class="card__title"&gt;Card title&lt;/h3&gt;
-  &lt;p class="card__text"&gt;Short description...&lt;/p&gt;
-&lt;/article&gt;
-</code></pre>
+              <h3>Key Benefits</h3>
+              <ul>
+                <li>
+                  <strong>Framework‑agnostic:</strong> Works with React, Vue,
+                  Angular, or plain HTML
+                </li>
+                <li>
+                  <strong>Encapsulation:</strong> Shadow DOM provides style and
+                  DOM isolation
+                </li>
+                <li>
+                  <strong>Native browser support:</strong> No build step
+                  required for basic usage
+                </li>
+                <li>
+                  <strong>Reusability:</strong> Same component across multiple
+                  projects
+                </li>
+              </ul>
             </div>
           </section>
 
-          <!-- Sliders -->
-          <section class="section" id="sliders">
-            <h2>Sliders & Carousels</h2>
-            <p>
-              We use a unified approach for sliders (e.g. Swiper, Splide). This
-              section should explain how to initialize them and what options are
-              allowed.
-            </p>
+          <!-- CHECKLIST -->
+          <section class="section" id="checklist">
+            <h2>Implementation Checklist</h2>
 
             <div class="card">
-              <h3>General Rules</h3>
+              <h3>Basic (Suitable for current projects)</h3>
               <ul>
                 <li>
-                  Use one official library (e.g. Swiper) across all projects.
+                  Defined block (BEM) and list of modifiers
+                  (variant/size/state).
                 </li>
                 <li>
-                  Initialization code must be in a separate JS module or clearly
-                  named function.
+                  Markup example and constraints documented in README or
+                  catalog.
                 </li>
-                <li>Provide keyboard navigation and focus states.</li>
+                <li>
+                  Styles don't use global selectors and aren't page‑dependent.
+                </li>
+                <li>
+                  JavaScript (if needed) initializes via
+                  <code>data‑component</code>.
+                </li>
+                <li>
+                  States checked: hover/focus/disabled, text overflow, mobile
+                  view.
+                </li>
               </ul>
             </div>
 
             <div class="card">
-              <h3>Example: Swiper Initialization (pseudo)</h3>
-              <pre><code>const slider = new Swiper('.js-main-slider', {
-  loop: true,
-  speed: 600,
-  slidesPerView: 1,
-  navigation: {
-    nextEl: '.js-main-slider-next',
-    prevEl: '.js-main-slider-prev',
-  },
-  pagination: {
-    el: '.js-main-slider-pagination',
-    clickable: true,
-  },
-});
-</code></pre>
+              <h3>Advanced (What to aim for)</h3>
+              <ul>
+                <li>
+                  Using design tokens (CSS variables) instead of hard‑coded
+                  values.
+                </li>
+                <li>Minimum a11y checks (keyboard, aria where needed).</li>
+                <li>
+                  Tests for critical flows (especially forms/modals/navigation).
+                </li>
+                <li>Component catalog that developers actually use.</li>
+              </ul>
             </div>
+          <!-- VITE (FUTURE DIRECTION) -->
+<section class="section" id="vite">
+  <h2>Vite as a Future Direction</h2>
+  <p>
+    Vite is not a framework and does not change our BEM or component principles. It is a build tool that can
+    standardize how we develop and ship SCSS/JS across projects. Today we can work with lightweight tooling
+    (e.g., Live Server + SCSS compilation); Vite becomes valuable when we want the build to be reproducible,
+    consistent, and production-oriented by default.
+  </p>
+
+  <div class="card">
+    <h3>Potential benefits</h3>
+    <ul>
+      <li><strong>Project-standard build:</strong> the build process lives in the repository (not in individual IDE plugins).</li>
+      <li><strong>Production-ready output:</strong> optimized assets (minified CSS/JS) and safer caching through hashed filenames.</li>
+      <li><strong>Better modularity:</strong> encourages splitting JS into modules and keeping component assets close to the component.</li>
+      <li><strong>Clear dev vs. build modes:</strong> consistent commands and predictable behavior across machines.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Costs and trade-offs</h3>
+    <ul>
+      <li><strong>Node/npm upkeep:</strong> versions and dependencies need light maintenance.</li>
+      <li><strong>Small learning curve:</strong> developers must adopt <code>dev</code>/<code>build</code> commands and repo-based configuration.</li>
+      <li><strong>Configuration choices:</strong> we will need to agree on folder layout and how assets are referenced in templates.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Impact on the current approach</h3>
+    <ul>
+      <li><strong>No change to BEM:</strong> BEM remains the CSS naming contract.</li>
+      <li><strong>Component structure becomes easier:</strong> each component can keep its SCSS/JS locally while Vite produces a clean build.</li>
+      <li><strong>Better consistency:</strong> fewer “works on my machine” differences because build rules are shared.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Low-risk adoption path</h3>
+    <ol>
+      <li>Pilot Vite on one small project and document the workflow.</li>
+      <li>Extract a simple starter template (folder structure + commands).</li>
+      <li>Use it for new projects first; avoid mandatory migration of existing projects.</li>
+    </ol>
+  </div>
+</section>
+
           </section>
 
-          <!-- Complex Components Preview -->
-          <section class="section" id="component-previews">
-            <h2>Complex Components Preview</h2>
-            <p>
-              This section provides visual previews of complex frontend patterns
-              such as sliders, media blocks, and responsive layouts. Use these
-              patterns as reference when implementing new components.
-            </p>
-
-            <div class="component-grid">
-              <!-- Slider pattern card -->
-              <article class="component-card">
-                <h3 class="component-card__title">Slider / Carousel</h3>
-                <p class="component-card__text">
-                  Example layout for a responsive hero slider: image area,
-                  navigation arrows, and pagination dots. Mobile-first, with
-                  full-width slides.
-                </p>
-                <a href="#modal-slider" class="component-card__btn"
-                  >Open preview</a
-                >
-              </article>
-
-              <!-- Media block pattern card -->
-              <article class="component-card">
-                <h3 class="component-card__title">
-                  Media block (Video + Text)
-                </h3>
-                <p class="component-card__text">
-                  Layout for a media section with video or embed on one side and
-                  text content on the other, stacked on mobile and side-by-side
-                  from 768px.
-                </p>
-                <a href="#modal-media" class="component-card__btn"
-                  >Open preview</a
-                >
-              </article>
-
-              <!-- Gallery pattern card -->
-              <article class="component-card">
-                <h3 class="component-card__title">Image Gallery</h3>
-                <p class="component-card__text">
-                  Responsive image grid for product photos or case studies.
-                  Single column on mobile, multi-column layout on larger
-                  screens.
-                </p>
-                <a href="#modal-gallery" class="component-card__btn"
-                  >Open preview</a
-                >
-              </article>
-            </div>
-          </section>
-
-          <!-- Modal: Slider preview -->
-          <div id="modal-slider" class="preview-modal">
-            <div class="preview-modal__dialog">
-              <header class="preview-modal__header">
-                <h3 class="preview-modal__title">
-                  Slider / Carousel Pattern (Swiper)
-                </h3>
-                <a
-                  href="#component-previews"
-                  class="preview-modal__close"
-                  aria-label="Close slider preview"
-                >
-                  ✕
-                </a>
-              </header>
-
-              <p class="preview-modal__description">
-                Mobile-first slider layout using Swiper. On mobile (375–767px)
-                each slide takes full width. From 768px and up, slider can be
-                centered with a max width. The example below shows arrows,
-                pagination dots and placeholder content.
-              </p>
-
-              <!-- Visual mockup of slider (Swiper markup) -->
-              <div class="preview-slider">
-                <div class="preview-slider__frame swiper js-preview-swiper">
-                  <div class="preview-slider__track swiper-wrapper">
-                    <div class="preview-slider__slide swiper-slide">
-                      <div class="preview-slider__image"></div>
-                      <div class="preview-slider__content">
-                        <h4 class="preview-slider__title">Main hero slide</h4>
-                        <p class="preview-slider__text">
-                          LCP optimized hero slide.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div class="preview-slider__slide swiper-slide">
-                      <div class="preview-slider__image"></div>
-                      <div class="preview-slider__content">
-                        <h4 class="preview-slider__title">Second slide</h4>
-                        <p class="preview-slider__text">
-                          Mobile-first layout example.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div class="preview-slider__slide swiper-slide">
-                      <div class="preview-slider__image"></div>
-                      <div class="preview-slider__content">
-                        <h4 class="preview-slider__title">Third slide</h4>
-                        <p class="preview-slider__text">
-                          Mobile-first layout example.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <button
-                    class="preview-slider__nav preview-slider__nav--prev swiper-button-prev"
-                  >
-                    ‹
-                  </button>
-                  <button
-                    class="preview-slider__nav preview-slider__nav--next swiper-button-next"
-                  >
-                    ›
-                  </button>
-
-                  <div class="preview-slider__dots swiper-pagination"></div>
-                </div>
-              </div>
-
-              <!-- Code sample (Swiper) -->
-              <div class="card preview-modal__code">
-                <pre><code>&lt;!-- Markup --&gt;
-&lt;div class="hero-slider swiper js-hero-slider"&gt;
-  &lt;div class="hero-slider__track swiper-wrapper"&gt;
-    &lt;div class="hero-slider__slide swiper-slide"&gt;...&lt;/div&gt;
-    &lt;div class="hero-slider__slide swiper-slide"&gt;...&lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;button class="hero-slider__nav hero-slider__nav--prev swiper-button-prev"&gt;&lt;/button&gt;
-  &lt;button class="hero-slider__nav hero-slider__nav--next swiper-button-next"&gt;&lt;/button&gt;
-
-  &lt;div class="hero-slider__pagination swiper-pagination"&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- JS (example) --&gt;
-const heroSlider = new Swiper('.js-hero-slider', {
-  loop: true,
-  speed: 600,
-  slidesPerView: 1,
-  navigation: {
-    nextEl: '.hero-slider__nav--next',
-    prevEl: '.hero-slider__nav--prev',
-  },
-  pagination: {
-    el: '.hero-slider__pagination',
-    clickable: true,
-  },
-});</code></pre>
-              </div>
-            </div>
-          </div>
-
-          <!-- Modal: Media block preview -->
-          <div id="modal-media" class="preview-modal">
-            <div class="preview-modal__dialog">
-              <header class="preview-modal__header">
-                <h3 class="preview-modal__title">
-                  Media Block Pattern (Video + Text)
-                </h3>
-                <a
-                  href="#component-previews"
-                  class="preview-modal__close"
-                  aria-label="Close media preview"
-                >
-                  ✕
-                </a>
-              </header>
-
-              <p class="preview-modal__description">
-                Mobile-first media block: video (or embed) stacked above text on
-                mobile, and displayed side-by-side from 768px and up.
-              </p>
-
-              <div class="preview-media-block">
-                <div class="preview-media-block__media">
-                  <div class="embed-wrapper embed-wrapper--preview">
-                    <div class="embed-wrapper__placeholder">
-                      <span class="embed-wrapper__play">▶</span>
-                      <span class="embed-wrapper__label"
-                        >Video / Embed area</span
-                      >
-                    </div>
-                  </div>
-                </div>
-
-                <div class="preview-media-block__content">
-                  <h4 class="preview-media-block__title">
-                    Responsive media section
-                  </h4>
-                  <p class="preview-media-block__text">
-                    On mobile, the video area is displayed on top, followed by
-                    the text description. From 768px, the layout becomes a
-                    two-column block.
-                  </p>
-                  <ul class="preview-media-block__list">
-                    <li>
-                      Use <code>aspect-ratio</code> to maintain 16:9 on all
-                      devices.
-                    </li>
-                    <li>
-                      Use <code>loading="lazy"</code> for embeds below the fold.
-                    </li>
-                    <li>Never autoplay video with sound.</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="card preview-modal__code">
-                <pre><code>&lt;section class="media-block"&gt;
-  &lt;div class="media-block__media"&gt;...&lt;/div&gt;
-  &lt;div class="media-block__content"&gt;...&lt;/div&gt;
-&lt;/section&gt;</code></pre>
-              </div>
-            </div>
-          </div>
-
-          <!-- Modal: Image gallery preview -->
-          <div id="modal-gallery" class="preview-modal">
-            <div class="preview-modal__dialog">
-              <header class="preview-modal__header">
-                <h3 class="preview-modal__title">Image Gallery Pattern</h3>
-                <a
-                  href="#component-previews"
-                  class="preview-modal__close"
-                  aria-label="Close gallery preview"
-                >
-                  ✕
-                </a>
-              </header>
-
-              <p class="preview-modal__description">
-                Responsive image gallery for product photos or case studies.
-                Single column on small screens, multiple columns from 768px.
-              </p>
-
-              <div class="preview-gallery">
-                <div class="preview-gallery__item"></div>
-                <div class="preview-gallery__item"></div>
-                <div class="preview-gallery__item"></div>
-                <div class="preview-gallery__item"></div>
-                <div class="preview-gallery__item"></div>
-                <div class="preview-gallery__item"></div>
-              </div>
-
-              <div class="card preview-modal__code">
-                <pre><code>.gallery {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 768px) {
-  .gallery {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}</code></pre>
-              </div>
-            </div>
-          </div>
-
-          <!-- Best Practices -->
+          <!-- BEST PRACTICES -->
           <section class="section" id="best-practices">
-            <h2>Best Practices</h2>
+            <h2>Best Practices Summary</h2>
+
+            <div class="perf-grid">
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Consistent Naming</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Use BEM or framework‑convention naming</li>
+                  <li>Stick to one naming pattern project‑wide</li>
+                  <li>Separate styling classes from JS hooks</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Clear API</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Document variants and modifiers</li>
+                  <li>Type component props (TypeScript)</li>
+                  <li>Show "do/don't" examples</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Isolation</h3>
+                  <span class="perf-badge perf-badge--yellow">Important</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Styles don't leak outside component</li>
+                  <li>JavaScript scoped to component</li>
+                  <li>Self‑contained where possible</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Accessibility</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Semantic HTML elements</li>
+                  <li>Keyboard navigation support</li>
+                  <li>ARIA attributes where needed</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Documentation</h3>
+                  <span class="perf-badge perf-badge--yellow">Important</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Component README with examples</li>
+                  <li>Catalog of all components</li>
+                  <li>Usage guidelines</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Performance</h3>
+                  <span class="perf-badge perf-badge--yellow">Important</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Lazy initialization for heavy components</li>
+                  <li>CSS‑only solutions where possible</li>
+                  <li>Optimized assets</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <!-- RESOURCES -->
+          <section class="section" id="resources">
+            <h2>Additional Resources</h2>
+
             <div class="card">
-              <h3>Do</h3>
+              <h3>Related Guidelines</h3>
               <ul>
-                <li>Write self-explanatory class names.</li>
-                <li>Keep components small and reusable.</li>
-                <li>Document any non-standard behavior.</li>
+                <li>
+                  <a href="file-structure.html" style="color: var(--accent)"
+                    >File Structure</a
+                  >
+                  – Project organization and folder patterns
+                </li>
+                <li>
+                  <a href="markup.html" style="color: var(--accent)">Markup</a>
+                  – HTML structure and semantics
+                </li>
+                <li>
+                  <a href="styling.html" style="color: var(--accent)"
+                    >Styling</a
+                  >
+                  – CSS architecture and organization
+                </li>
+                <li>
+                  <a href="accessibility.html" style="color: var(--accent)"
+                    >Accessibility</a
+                  >
+                  – A11y standards and implementation
+                </li>
               </ul>
             </div>
+
             <div class="card">
-              <h3>Don't</h3>
+              <h3>External Resources</h3>
               <ul>
-                <li>Don’t inline large chunks of CSS or JS into HTML.</li>
                 <li>
-                  Don’t use different libraries for the same task in one
-                  project.
+                  <a
+                    href="https://getbem.com/"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                  >
+                    BEM Methodology Official Site
+                  </a>
                 </li>
-                <li>Don’t override guidelines without discussion.</li>
+                <li>
+                  <a
+                    href="https://webcomponents.org/"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                  >
+                    Web Components Guide
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://storybook.js.org/"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                  >
+                    Storybook – UI Component Catalog
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://atomicdesign.bradfrost.com/"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                  >
+                    Atomic Design by Brad Frost
+                  </a>
+                </li>
               </ul>
             </div>
           </section>
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
 
-    <!-- Scripts -->
-    <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <!-- Modal: HTML/CSS/JS Component Examples -->
+    <dialog id="modal-html-components" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">HTML/CSS/JS Component Examples</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close HTML component examples"
+            onclick="document.getElementById('modal-html-components').close()"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <div class="card">
+            <h4>Complete Component Structure</h4>
+            <pre><code>/components
+  /button
+    button.html
+    button.css
+    button.js
+    README.md
+    
+  /card
+    card.html
+    card.css
+    card.js
+    README.md
+    
+  /modal
+    modal.html
+    modal.css
+    modal.js
+    README.md</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>BEM Example: Card Component</h4>
+            <div
+              style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px"
+            >
+              <div>
+                <h5 style="font-size: 13px; margin: 0 0 8px">HTML</h5>
+                <pre><code>&lt;div class="card card--featured"&gt;
+  &lt;div class="card__header"&gt;
+    &lt;h3 class="card__title"&gt;Card Title&lt;/h3&gt;
+    &lt;span class="card__badge"&gt;New&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="card__body"&gt;
+    &lt;p&gt;Card content goes here.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="card__footer"&gt;
+    &lt;button class="button button--primary"&gt;Action&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+              </div>
+              <div>
+                <h5 style="font-size: 13px; margin: 0 0 8px">CSS</h5>
+                <pre><code>.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-3);
+}
+
+.card__title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.card--featured {
+  border-color: var(--color-primary);
+  background: linear-gradient(
+    to bottom right,
+    var(--color-bg),
+    var(--color-bg-alt)
+  );
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>JavaScript Initialization Pattern</h4>
+            <pre><code>// card.js
+export function initCard(cardElement) {
+  const buttons = cardElement.querySelectorAll('.button');
+  
+  buttons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      cardElement.classList.toggle('card--active');
+      
+      // Emit custom event
+      cardElement.dispatchEvent(new CustomEvent('card-toggle', {
+        bubbles: true,
+        detail: { element: cardElement }
+      }));
+    });
+  });
+}
+
+// Initialize all cards on page
+export function initAllCards() {
+  document.querySelectorAll('[data-component="card"]')
+    .forEach(initCard);
+}
+
+// Auto-initialize if script loaded directly
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAllCards);
+} else {
+  initAllCards();
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Web Component Example (kept from original) -->
+    <dialog id="modal-web-component" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Web Component Example</h3>
+          <button
+            type="button"
+            class="preview-modal__close"
+            aria-label="Close web component example"
+            onclick="document.getElementById('modal-web-component').close()"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <div class="card">
+            <h4>Custom Element Implementation</h4>
+            <pre><code>// user-card.js
+class UserCard extends HTMLElement {
+  static observedAttributes = ['name', 'avatar', 'role'];
+  
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+  }
+  
+  connectedCallback() {
+    this.render();
+    this.setupEvents();
+  }
+  
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (oldValue !== newValue) {
+      this.render();
+    }
+  }
+  
+  render() {
+    const name = this.getAttribute('name') || 'Anonymous';
+    const avatar = this.getAttribute('avatar');
+    const role = this.getAttribute('role') || 'User';
+    
+    this.shadowRoot.innerHTML = `
+      &lt;style&gt;
+        :host {
+          display: block;
+          font-family: system-ui;
+          padding: 1rem;
+          border: 1px solid #e5e7eb;
+          border-radius: 0.5rem;
+        }
+        
+        .avatar {
+          width: 64px;
+          height: 64px;
+          border-radius: 50%;
+          margin-bottom: 1rem;
+        }
+        
+        .name {
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin: 0 0 0.25rem 0;
+        }
+        
+        .role {
+          color: #6b7280;
+          margin: 0;
+        }
+      &lt;/style&gt;
+      
+      &lt;div class="card"&gt;
+        ${avatar ? `&lt;img src="${avatar}" alt="${name}" class="avatar"&gt;` : ''}
+        &lt;h3 class="name"&gt;${name}&lt;/h3&gt;
+        &lt;p class="role"&gt;${role}&lt;/p&gt;
+        &lt;slot&gt;&lt;/slot&gt;
+      &lt;/div&gt;
+    `;
+  }
+  
+  setupEvents() {
+    this.shadowRoot.querySelector('.card')
+      .addEventListener('click', () => {
+        this.dispatchEvent(new CustomEvent('user-card-click', {
+          detail: { name: this.getAttribute('name') },
+          bubbles: true
+        }));
+      });
+  }
+}
+
+// Register the custom element
+customElements.define('user-card', UserCard);</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="/assets/js/main.js"></script>
   </body>
 </html>

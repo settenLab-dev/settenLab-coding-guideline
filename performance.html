@@ -2,764 +2,1133 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Frontend Guidelines – Performance</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="description"
+      content="Performance guidelines: budgets, Web Vitals, loading strategy, caching, code-splitting, images, third-party control, and measurement practices."
+    />
+    <meta name="theme-color" content="#0b0f1a" />
 
-    <!-- Google Font (same as index) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta property="og:title" content="Performance — Coding Guideline" />
+    <meta
+      property="og:description"
+      content="Practical patterns to ship fast: budgets, Web Vitals, critical rendering, images, caching, code splitting, and observability."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/Outfit-VariableFont.woff2"
+      crossorigin="anonymous"
     />
 
-    <!-- Main styles -->
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <title>Performance — Coding Guideline</title>
   </head>
+
   <body>
     <div class="bg-gradient"></div>
 
     <div class="app-shell">
-      <!-- Sidebar -->
-      <aside class="sidebar" id="sidebar">
-        <div class="sidebar__header">
-          <div class="sidebar__logo">FG</div>
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="primary-sidebar" aria-label="Primary">
+        <a href="/" class="sidebar__header">
+          <div class="sidebar__logo" aria-hidden="true">S</div>
           <div class="sidebar__title">
-            <span class="sidebar__company">Company Name</span>
-            <span class="sidebar__subtitle">Frontend Guidelines</span>
+            <span class="sidebar__company">Coding Guideline</span>
+            <span class="sidebar__subtitle">settenLab</span>
           </div>
-        </div>
+        </a>
 
-        <nav class="sidebar__nav">
-          <!-- links back to main guideline page -->
-          <a class="nav-link" href="index.html#intro" data-target="">
-            Overview
-          </a>
-          <a class="nav-link" href="index.html#sliders" data-target="">
-            Sliders (Swiper)
-          </a>
-
-          <div class="sidebar__divider"></div>
-
-          <!-- local performance sections -->
-          <a
-            class="nav-link active"
-            href="#perf-intro"
-            data-target="perf-intro"
+        <nav class="sidebar__nav sidebar-nav" aria-label="Guideline navigation">
+          <!-- START HERE -->
+          <details
+            class="nav-group nav-group--start"
+            data-nav-group="start-here"
           >
-            Performance Intro
-          </a>
-          <a class="nav-link" href="#perf-images" data-target="perf-images">
-            Images & Media
-          </a>
+            <summary class="nav-group__summary">
+              <a href="/" class="nav-group__summary-link">Start here</a>
+            </summary>
+          </details>
 
-          <a class="nav-link" href="#perf-js-css" data-target="perf-js-css">
-            JS & CSS
-          </a>
-          <a class="nav-link" href="#perf-network" data-target="perf-network">
-            Network & Caching
-          </a>
-          <a class="nav-link" href="#perf-layout" data-target="perf-images">
-            Layout Stability
-          </a>
-          <a class="nav-link" href="#perf-a11y-seo" data-target="perf-a11y-seo">
-            A11y & SEO
-          </a>
-          <a
-            class="nav-link"
-            href="#perf-checklist"
-            data-target="perf-checklist"
-          >
-            Release Checklist
-          </a>
+          <!-- PROJECT SETUP -->
+          <details class="nav-group" data-nav-group="project-setup">
+            <summary class="nav-group__summary">Project setup</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  href="environment-setup.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  Environment setup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="file-structure.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  File structure
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- UI -->
+          <details class="nav-group" data-nav-group="ui">
+            <summary class="nav-group__summary">UI</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="markup.html" class="sidebar-nav__link nav-link"
+                  >Markup</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="styling.html" class="sidebar-nav__link nav-link"
+                  >Styling</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="components.html" class="sidebar-nav__link nav-link"
+                  >Components</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="typography.html" class="sidebar-nav__link nav-link"
+                  >Typography</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="accessibility.html" class="sidebar-nav__link nav-link">
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- ENGINEERING -->
+          <details class="nav-group" data-nav-group="engineering" open>
+            <summary class="nav-group__summary">Engineering</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="javascript.html">
+                  Javascript
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="api-and-data-handling.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  API & Data handling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="performance.html"
+                  class="sidebar-nav__link nav-link"
+                  aria-current="page"
+                >
+                  Performance
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="testing.html" class="sidebar-nav__link nav-link"
+                  >Testing</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="security.html" class="sidebar-nav__link nav-link"
+                  >Security</a
+                >
+              </li>
+            </ul>
+          </details>
+
+          <!-- WORKFLOW -->
+          <details class="nav-group" data-nav-group="workflow">
+            <summary class="nav-group__summary">Workflow</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="pr-rules.html" class="sidebar-nav__link nav-link">
+                  PR rules / review checklist
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="documentation.html" class="sidebar-nav__link nav-link">
+                  Documentation rules
+                </a>
+              </li>
+            </ul>
+          </details>
         </nav>
 
         <div class="sidebar__footer">
-          <span class="sidebar__version">v1.0.0</span>
+          <a href="changelog.html" class="sidebar__version">v1.0.0</a>
           <span class="sidebar__lang">EN</span>
         </div>
       </aside>
 
-      <!-- Main -->
-      <div class="main">
-        <!-- Top bar -->
+      <div class="sidebar-backdrop js-sidebar-backdrop" hidden></div>
+
+      <!-- MAIN -->
+      <main class="main" id="main-content">
         <header class="topbar">
           <button
-            class="topbar__menu-btn"
-            id="menuToggle"
-            aria-label="Toggle navigation"
+            class="topbar__menu-btn js-sidebar-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-controls="primary-sidebar"
+            aria-expanded="false"
           >
             <span></span>
             <span></span>
             <span></span>
           </button>
 
-          <h1 class="topbar__title">Performance & Lighthouse</h1>
+          <h1 class="topbar__title">Performance</h1>
 
           <div class="topbar__actions">
             <button
               class="topbar__action-btn"
               id="themeToggle"
               aria-label="Toggle theme"
+              aria-pressed="false"
             >
               🌗
             </button>
           </div>
         </header>
 
-        <!-- Content -->
-        <main class="content">
-          <!-- Intro -->
-          <section class="section" id="perf-intro">
-            <h2>Performance Guidelines</h2>
+        <div class="content">
+          <!-- OVERVIEW -->
+          <section class="section" id="overview">
+            <h2>Overview</h2>
             <p>
-              This page describes our company-wide rules for achieving high
-              Lighthouse scores (Performance, Best Practices, SEO,
-              Accessibility). The goal is to keep all projects fast, stable, and
-              mobile-first.
+              Performance is a product requirement. The fastest app is the one
+              that does less work: fewer bytes, fewer requests, less JS
+              execution, and less layout/paint. This guideline standardizes
+              budgets, measurement, and the default implementation patterns that
+              keep performance stable as the codebase grows.
             </p>
 
-            <div class="card perf-kpi">
-              <h3>Target KPIs</h3>
-              <div class="perf-kpi__grid">
-                <div class="perf-kpi__item">
-                  <span class="perf-kpi__label">Performance</span>
-                  <span class="perf-kpi__value">90+</span>
-                </div>
-                <div class="perf-kpi__item">
-                  <span class="perf-kpi__label">Best Practices</span>
-                  <span class="perf-kpi__value">95+</span>
-                </div>
-                <div class="perf-kpi__item">
-                  <span class="perf-kpi__label">SEO</span>
-                  <span class="perf-kpi__value">90+</span>
-                </div>
-                <div class="perf-kpi__item">
-                  <span class="perf-kpi__label">Accessibility</span>
-                  <span class="perf-kpi__value">90+</span>
-                </div>
-              </div>
-              <p class="perf-kpi__note">
-                Scores are measured on mobile (simulated slow network / device)
-                in Lighthouse or PageSpeed Insights.
-              </p>
+            <div class="card callout">
+              <h3>Core Principles</h3>
+              <ul>
+                <li>
+                  <strong>Budget first:</strong> define limits, then enforce
+                  them in CI
+                </li>
+                <li>
+                  <strong>Ship less:</strong> reduce JS, images, and third-party
+                  scripts
+                </li>
+                <li>
+                  <strong>Prioritize the critical path:</strong> render
+                  something meaningful quickly
+                </li>
+                <li>
+                  <strong>Measure in production:</strong> lab metrics alone are
+                  insufficient
+                </li>
+                <li>
+                  <strong>Regressions are bugs:</strong> treat performance drops
+                  like functional failures
+                </li>
+              </ul>
             </div>
           </section>
 
-          <!-- Images & Media -->
-          <section class="section" id="perf-images">
+          <!-- METRICS -->
+          <section class="section" id="metrics">
+            <h2>Metrics We Care About</h2>
+            <p>
+              Use a small set of metrics as the shared language across product,
+              design, and engineering. Web Vitals are a baseline; pair them with
+              app-specific measurements (route timings, API latency).
+            </p>
+
+            <div class="naming-table-wrapper">
+              <table class="naming-table">
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>What it signals</th>
+                    <th>Typical causes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>LCP</td>
+                    <td>Largest content visible</td>
+                    <td>
+                      Slow images/fonts, blocked rendering, long server time
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>INP</td>
+                    <td>Responsiveness to input</td>
+                    <td>Long tasks, heavy JS, expensive re-renders</td>
+                  </tr>
+                  <tr>
+                    <td>CLS</td>
+                    <td>Layout stability</td>
+                    <td>Un-sized media, late fonts, injected banners</td>
+                  </tr>
+                  <tr>
+                    <td>TTFB</td>
+                    <td>Server + network latency</td>
+                    <td>Backend slowness, cache misses, cold starts</td>
+                  </tr>
+                  <tr>
+                    <td>JS long tasks</td>
+                    <td>Main thread contention</td>
+                    <td>Large bundles, synchronous parsing, heavy hydration</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card">
+              <h3>Targets (Example)</h3>
+              <p style="margin: 0; font-size: 13px; color: var(--text-muted)">
+                Final targets depend on traffic mix and device profile. Set your
+                initial budgets using real user data.
+              </p>
+              <ul style="margin: 10px 0 0">
+                <li><strong>LCP:</strong> ≤ 2.5s (p75)</li>
+                <li><strong>INP:</strong> ≤ 200ms (p75)</li>
+                <li><strong>CLS:</strong> ≤ 0.1 (p75)</li>
+                <li><strong>TTFB:</strong> ≤ 800ms (p75)</li>
+              </ul>
+              <a
+                href="#modal-budgets"
+                class="component-card__btn"
+                style="margin-top: 12px; display: inline-block"
+                >View budget template →</a
+              >
+            </div>
+          </section>
+
+          <!-- BUDGETS -->
+          <section class="section" id="budgets">
+            <h2>Performance Budgets</h2>
+            <p>
+              Budgets are enforceable constraints. Without budgets, “performance
+              work” becomes a series of one-off optimizations that regress
+              silently.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Network budget</h3>
+                <p class="component-card__text">
+                  Total bytes, request count, and critical resources (fonts,
+                  hero images).
+                </p>
+                <a href="#modal-budgets" class="component-card__btn"
+                  >Template →</a
+                >
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">JS execution budget</h3>
+                <p class="component-card__text">
+                  Main-thread time and long tasks during initial load and route
+                  changes.
+                </p>
+                <a href="#js" class="component-card__btn">JS guidelines →</a>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">UX budget</h3>
+                <p class="component-card__text">
+                  LCP/INP/CLS targets by device tier, backed by RUM measurement.
+                </p>
+                <a href="#observability" class="component-card__btn"
+                  >RUM setup →</a
+                >
+              </article>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Common Budget Mistakes</h3>
+              <ul style="margin: 0">
+                <li>Budgets exist in a doc but are not enforced in CI.</li>
+                <li>Only measuring desktop on fast networks.</li>
+                <li>Optimizing “average” instead of p75/p95.</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- LOADING STRATEGY -->
+          <section class="section" id="loading">
+            <h2>Loading Strategy</h2>
+            <p>
+              The goal is to reduce time-to-meaningful-render by prioritizing
+              critical resources, deferring non-critical work, and keeping the
+              main thread responsive.
+            </p>
+
+            <div class="baseline-accordion">
+              <details class="accordion" open>
+                <summary class="accordion__summary">
+                  Critical Rendering Path
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Inline only truly critical CSS; avoid large inline styles
+                      that block parsing.
+                    </li>
+                    <li>
+                      Preload hero image and critical font(s) when it materially
+                      improves LCP.
+                    </li>
+                    <li>
+                      Defer non-critical CSS and JS; avoid synchronous
+                      third-party scripts on the critical path.
+                    </li>
+                    <li>
+                      Prefer server-rendered HTML for meaningful first paint
+                      where applicable.
+                    </li>
+                  </ul>
+                  <pre><code>&lt;!-- Example hints --&gt;
+&lt;link rel="preload" as="image" href="/img/hero.webp" /&gt;
+&lt;link rel="preload" as="font" href="/fonts/Outfit.woff2" crossorigin /&gt;
+&lt;script src="/assets/app.js" defer&gt;&lt;/script&gt;</code></pre>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Avoiding Layout Shift
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Always set width/height (or aspect-ratio) for images,
+                      video, and embeds.
+                    </li>
+                    <li>
+                      Reserve space for late-loading UI (toasts, banners, ads).
+                    </li>
+                    <li>
+                      Use <code>font-display: swap</code> for non-critical
+                      fonts; preload only what you must.
+                    </li>
+                    <li>
+                      Do not inject content above the fold after load without
+                      placeholders.
+                    </li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Perceived Performance
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Prefer skeletons for predictable shapes; use spinners only
+                      for short waits.
+                    </li>
+                    <li>
+                      Show something stable quickly, then progressively enhance.
+                    </li>
+                    <li>
+                      Use optimistic UI for safe mutations (with rollback).
+                    </li>
+                  </ul>
+                  <p
+                    style="
+                      font-size: 13px;
+                      color: var(--text-muted);
+                      margin-top: 10px;
+                    "
+                  >
+                    Perceived performance does not replace real performance. Use
+                    it to mask unavoidable latency.
+                  </p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- IMAGES & MEDIA -->
+          <section class="section" id="images">
             <h2>Images &amp; Media</h2>
             <p>
-              Images and media are one of the main reasons for bad performance.
-              Follow these rules for all projects.
+              Images are commonly the largest bytes on the page. Treat them as
+              first-class performance work. Make “the right size, right format,
+              right priority” the default.
             </p>
 
-            <div class="perf-grid">
-              <article class="card perf-card">
-                <div class="perf-card__header">
-                  <h3>Formats</h3>
-                  <span class="perf-badge">Required</span>
-                </div>
-                <ul>
-                  <li>Use <strong>WebP</strong> (or AVIF) for all photos.</li>
-                  <li>Use <strong>SVG</strong> for logos and icons.</li>
-                  <li>
-                    PNG only when transparency is required and SVG is not
-                    possible.
-                  </li>
-                  <li>
-                    JPEG only when WebP/AVIF is not supported by the system.
-                  </li>
-                </ul>
-              </article>
-
-              <!-- Loading strategy -->
-              <article class="card perf-card">
-                <div class="perf-card__header">
-                  <h3>Loading strategy</h3>
-                  <span class="perf-badge perf-badge--green">Required</span>
-                </div>
-                <ul>
-                  <li>
-                    All non-critical images must use
-                    <code>loading="lazy"</code> and
-                    <code>decoding="async"</code>.
-                  </li>
-                  <li>
-                    LCP (hero) images must use
-                    <code>loading="eager"</code> and
-                    <code>fetchpriority="high"</code>.
-                  </li>
-                  <li>
-                    Always set <code>width</code> and <code>height</code> on
-                    <code>&lt;img&gt;</code> to avoid layout shifts (CLS).
-                  </li>
-                </ul>
-
-                <a href="#modal-loading" class="perf-card__preview-btn">
-                  Open loading strategy preview
-                </a>
-              </article>
-
-              <!-- Video & embeds -->
-              <article class="card perf-card">
-                <div class="perf-card__header">
-                  <h3>Video &amp; embeds</h3>
-                  <span class="perf-badge perf-badge--yellow">Recommended</span>
-                </div>
-                <ul>
-                  <li>Always provide a <code>poster</code> for videos.</li>
-                  <li>Never autoplay video with sound.</li>
-                  <li>
-                    Wrap YouTube/Vimeo iframes in a 16:9 container and use
-                    <code>loading="lazy"</code>.
-                  </li>
-                  <li>
-                    Use placeholders for heavy embeds (maps, 3rd party widgets).
-                  </li>
-                </ul>
-
-                <a href="#modal-video" class="perf-card__preview-btn">
-                  Open video & embeds preview
-                </a>
-              </article>
-            </div>
-          </section>
-
-          <!-- JS & CSS -->
-          <section class="section" id="perf-js-css">
-            <h2>JavaScript &amp; CSS</h2>
-            <p>
-              JavaScript and CSS must be minimal, predictable and non-blocking.
-            </p>
-
-            <div class="card perf-card">
-              <div class="perf-card__header">
-                <h3>JavaScript</h3>
-                <span class="perf-badge">Required</span>
-              </div>
-              <ul>
-                <li>
-                  Load project scripts with <code>defer</code>:
-                  <code>&lt;script src="app.js" defer&gt;&lt;/script&gt;</code>.
-                </li>
-                <li>
-                  Do not use blocking scripts in <code>&lt;head&gt;</code>.
-                </li>
-                <li>
-                  Remove unused libraries and legacy plugins (e.g. old jQuery
-                  sliders).
-                </li>
-                <li>
-                  Swiper is the only approved slider library. Do not mix
-                  multiple slider libraries in one project.
-                </li>
-              </ul>
-            </div>
-
-            <div class="card perf-card">
-              <div class="perf-card__header">
-                <h3>CSS</h3>
-                <span class="perf-badge perf-badge--green">Required</span>
-              </div>
-              <ul>
-                <li>Use mobile-first CSS and avoid deep selector nesting.</li>
-                <li>
-                  Do not include entire frameworks if only a small part is used.
-                </li>
-                <li>Minify CSS in production builds.</li>
-                <li>
-                  Avoid heavy filters and shadows on mobile when not necessary
-                  (they can slow down rendering).
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <!-- Network & caching -->
-          <section class="section" id="perf-network">
-            <h2>Network &amp; Caching</h2>
-            <p>
-              Correct caching and compression are required for all public
-              projects.
-            </p>
-
-            <div class="card perf-card">
-              <div class="perf-card__header">
-                <h3>Caching</h3>
-                <span class="perf-badge">Required</span>
-              </div>
-              <ul>
-                <li>
-                  Static assets (CSS, JS, images) must use long-term caching:
-                  <code>Cache-Control: public, max-age=31536000, immutable</code
-                  >.
-                </li>
-                <li>
-                  Use file hashing for versioning (e.g.
-                  <code>app.87ac3d.js</code>).
-                </li>
-                <li>
-                  HTML must not be cached aggressively in production (short
-                  TTL).
-                </li>
-              </ul>
-            </div>
-
-            <div class="card perf-card">
-              <div class="perf-card__header">
-                <h3>Compression</h3>
-                <span class="perf-badge perf-badge--yellow">Recommended</span>
-              </div>
-              <ul>
-                <li>
-                  Enable Brotli compression where available, Gzip as fallback.
-                </li>
-                <li>
-                  Avoid shipping bundles &gt; 200&nbsp;KB uncompressed per
-                  route.
-                </li>
-                <li>
-                  Minimize number of HTTP requests by bundling and code
-                  splitting.
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <section class="section" id="perf-layout">
-            <h2>Layout Stability (CLS) & Modern Scrollbar Handling</h2>
-            <p>
-              Layout shifts caused by scrollbars, dynamic content, or
-              inconsistent default browser styles directly impact CLS and
-              overall Lighthouse performance. This section outlines modern
-              CSS-first techniques to ensure a stable, predictable layout across
-              all devices.
-            </p>
-
-            <div class="perf-grid">
-              <!-- Card 1 — Modern scrollbar handling -->
-              <article class="card perf-card">
-                <div class="perf-card__header">
-                  <h3>Modern Scrollbar Handling</h3>
-                  <span class="perf-badge">Required</span>
-                </div>
-
-                <p class="test-note">
-                  We follow a <strong>CSS-first</strong> approach using the
-                  modern property <code>scrollbar-gutter</code>, which prevents
-                  layout shifts when scrollbars appear/disappear — without
-                  JavaScript.
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Format</h3>
+                <p class="component-card__text">
+                  Prefer AVIF/WebP when supported. Keep JPEG/PNG as fallbacks
+                  where required.
                 </p>
-
-                <ul>
-                  <li>Enable stable scrollbar allocation globally:</li>
-                </ul>
-
-                <pre><code>html {
-  scrollbar-gutter: stable;
-}</code></pre>
-
-                <ul>
-                  <li>
-                    This reserves scrollbar space and eliminates horizontal
-                    jumps.
-                  </li>
-                  <li>
-                    Works perfectly on desktop Chrome/Edge → largest CLS
-                    offenders.
-                  </li>
-                  <li>
-                    On systems with overlay scrollbars (macOS, iOS, Android),
-                    the value is simply ignored with no negative effect.
-                  </li>
-                </ul>
               </article>
 
-              <!-- Card 2 — Scroll Locking: CSS Best Practice -->
-              <article class="card perf-card">
-                <div class="perf-card__header">
-                  <h3>Scroll Locking (Modal / Drawer)</h3>
-                  <span class="perf-badge perf-badge--green">Recommended</span>
-                </div>
-
-                <p class="test-note">
-                  Instead of hiding the scrollbar with
-                  <code>overflow: hidden;</code>, which causes layout jumps,
-                  adopt the principle:
-                  <strong
-                    >preserve scroll width; disable scrolling, not
-                    scrollbar</strong
-                  >.
+              <article class="component-card">
+                <h3 class="component-card__title">Sizing</h3>
+                <p class="component-card__text">
+                  Serve responsive images; avoid sending 2000px assets to 375px
+                  screens.
                 </p>
-
-                <ul>
-                  <li>Use a scroll lock class that keeps scrollbar space:</li>
-                </ul>
-
-                <pre><code>body.is-locked {
-  overflow-y: scroll; /* NOT hidden */
-}</code></pre>
-
-                <ul>
-                  <li>
-                    This prevents jumping layouts when modals or overlays open.
-                  </li>
-                  <li>
-                    Works on all major browsers without needing JS patches.
-                  </li>
-                  <li>
-                    Important: modal backdrop must block pointer events &
-                    wheel/touch scroll.
-                  </li>
-                </ul>
               </article>
 
-              <!-- Card 3 — Reset & Baseline Stability -->
-              <article class="card perf-card">
-                <div class="perf-card__header">
-                  <h3>Reset Styles (Baseline Stability)</h3>
-                  <span class="perf-badge">Required</span>
-                </div>
-
-                <p class="test-note">
-                  To ensure consistent rendering across browsers and eliminate
-                  default unpredictable spacing, apply a controlled reset at the
-                  project root.
+              <article class="component-card">
+                <h3 class="component-card__title">Priority</h3>
+                <p class="component-card__text">
+                  Preload only the true LCP candidate. Lazy-load offscreen
+                  media.
                 </p>
-
-                <ul>
-                  <li>
-                    Use a modern, minimal reset ensuring layout stability:
-                  </li>
-                </ul>
-
-                <pre><code>/* Base Reset */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  margin: 0;
-  padding: 0;
-  scrollbar-gutter: stable;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-}
-
-/* Remove default margins */
-h1, h2, h3, h4, h5, h6,
-p, ul, ol {
-  margin: 0;
-  padding: 0;
-}</code></pre>
-
-                <ul>
-                  <li>
-                    <strong
-                      >Never use big CSS frameworks' resets blindly</strong
-                    >
-                    (older Normalize / Bootstrap resets create heavy overrides).
-                  </li>
-                  <li>
-                    A custom, minimal reset ensures predictability and reduces
-                    CLS.
-                  </li>
-                </ul>
-              </article>
-
-              <!-- Card 4 — Dynamic content stability -->
-              <article class="card perf-card">
-                <div class="perf-card__header">
-                  <h3>Dynamic Content Stability</h3>
-                  <span class="perf-badge perf-badge--yellow">Recommended</span>
-                </div>
-
-                <ul>
-                  <li>Reserve space for any dynamically loaded content:</li>
-                </ul>
-
-                <pre><code>.img-wrapper {
-  aspect-ratio: 16 / 9;
-}</code></pre>
-
-                <ul>
-                  <li>
-                    Use <code>aspect-ratio</code> to prevent layout jumps when
-                    images load.
-                  </li>
-                  <li>Predefine heights for banners, cards, and sliders.</li>
-                  <li>
-                    Avoid inserting elements ABOVE existing content after load.
-                  </li>
-                </ul>
-              </article>
-            </div>
-          </section>
-
-          <!-- A11y & SEO -->
-          <section class="section" id="perf-a11y-seo">
-            <h2>Accessibility &amp; SEO Essentials</h2>
-            <p>
-              Accessibility and SEO affect Lighthouse scores and overall UX.
-            </p>
-
-            <div class="perf-grid">
-              <article class="card perf-card">
-                <div class="perf-card__header">
-                  <h3>Accessibility</h3>
-                  <span class="perf-badge">Required</span>
-                </div>
-                <ul>
-                  <li>
-                    All interactive elements must be reachable via keyboard.
-                  </li>
-                  <li>
-                    Buttons must be real <code>&lt;button&gt;</code>, not
-                    generic divs.
-                  </li>
-                  <li>
-                    All images must have <code>alt</code> attributes (or
-                    <code>alt=""</code>
-                    for decorative images).
-                  </li>
-                  <li>Maintain sufficient color contrast (4.5:1 for text).</li>
-                </ul>
-              </article>
-
-              <article class="card perf-card">
-                <div class="perf-card__header">
-                  <h3>SEO basics</h3>
-                  <span class="perf-badge perf-badge--green">Required</span>
-                </div>
-                <ul>
-                  <li>Exactly one <code>&lt;h1&gt;</code> per page.</li>
-                  <li>Meta description must be present and meaningful.</li>
-                  <li>
-                    Define a canonical URL via
-                    <code>&lt;link rel="canonical" href="..."&gt;</code>.
-                  </li>
-                  <li>Use descriptive, human-readable URLs.</li>
-                </ul>
-              </article>
-            </div>
-          </section>
-
-          <!-- Checklist -->
-          <section class="section" id="perf-checklist">
-            <h2>Pre-release Lighthouse Checklist</h2>
-            <p>
-              Before releasing a page, run a Lighthouse audit (mobile). All
-              items below must be checked.
-            </p>
-
-            <div class="card perf-checklist">
-              <ul class="perf-checklist__list">
-                <li>
-                  ✅ LCP image uses <code>loading="eager"</code>,
-                  <code>fetchpriority="high"</code>, and correct dimensions.
-                </li>
-                <li>
-                  ✅ All other images use <code>loading="lazy"</code> and
-                  <code>decoding="async"</code>.
-                </li>
-                <li>✅ No blocking scripts in <code>&lt;head&gt;</code>.</li>
-                <li>✅ No unused large JS/CSS libraries.</li>
-                <li>
-                  ✅ Fonts loaded as <code>woff2</code> with
-                  <code>font-display: swap</code>.
-                </li>
-                <li>✅ Static assets use long-term caching headers.</li>
-                <li>
-                  ✅ All interactive elements are accessible via keyboard.
-                </li>
-                <li>
-                  ✅ Lighthouse scores (mobile): Performance ≥ 90, Best
-                  Practices ≥ 95, SEO ≥ 90.
-                </li>
-              </ul>
-            </div>
-          </section>
-          <!-- Modal: Image loading strategy preview -->
-          <div id="modal-loading" class="preview-modal">
-            <div class="preview-modal__dialog">
-              <header class="preview-modal__header">
-                <h3 class="preview-modal__title">Image Loading Strategy</h3>
-                <a
-                  href="#perf-images"
-                  class="preview-modal__close"
-                  aria-label="Close loading strategy preview"
+                <a href="#modal-image-playbook" class="component-card__btn"
+                  >Playbook →</a
                 >
-                  ✕
-                </a>
-              </header>
+              </article>
+            </div>
 
-              <p class="preview-modal__description">
-                Visual example of how to treat hero (LCP) images and content
-                images. On mobile, all elements are stacked; from 768px and up
-                the layout is split into hero vs content imagery.
-              </p>
-
-              <div class="preview-loading">
-                <!-- Hero / LCP image side -->
-                <div class="preview-loading__block">
-                  <h4 class="preview-loading__title">Hero (LCP) image</h4>
-                  <div class="preview-loading__hero">
-                    <div class="preview-loading__hero-image">
-                      <span
-                        class="preview-loading__badge preview-loading__badge--primary"
-                      >
-                        LCP • eager • high priority
-                      </span>
-                    </div>
-                    <p class="preview-loading__text">
-                      The first visible hero image should load eagerly and be
-                      prioritized by the browser. Always define width/height and
-                      use modern formats (WebP/AVIF).
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Content / lazy images side -->
-                <div class="preview-loading__block">
-                  <h4 class="preview-loading__title">Content images (lazy)</h4>
-                  <div class="preview-loading__grid">
-                    <div class="preview-loading__thumb">
-                      <span class="preview-loading__badge">lazy + async</span>
-                    </div>
-                    <div class="preview-loading__thumb">
-                      <span class="preview-loading__badge">lazy + async</span>
-                    </div>
-                    <div class="preview-loading__thumb">
-                      <span class="preview-loading__badge">lazy + async</span>
-                    </div>
-                  </div>
-                  <p class="preview-loading__text">
-                    Use lazy loading for all non-critical images below the fold
-                    to improve initial paint and reduce data usage.
-                  </p>
-                </div>
-              </div>
-
-              <div class="card preview-modal__code">
-                <pre><code>&lt;!-- Hero (LCP) image --&gt;
-&lt;img
-  src="/assets/images/hero/home-hero.webp"
-  alt="Main hero visual"
-  width="1600"
-  height="900"
-  loading="eager"
-  fetchpriority="high"
-  decoding="async"
-/&gt;
-
-&lt;!-- Content image (below the fold) --&gt;
-&lt;img
-  src="/assets/images/content/article-01.webp"
-  alt="Dashboard screenshot"
-  width="800"
-  height="600"
+            <div class="card">
+              <h3>Responsive Image Pattern</h3>
+              <pre><code>&lt;img
+  src="/img/product-640.webp"
+  srcset="/img/product-320.webp 320w, /img/product-640.webp 640w, /img/product-1280.webp 1280w"
+  sizes="(max-width: 640px) 320px, (max-width: 1024px) 640px, 1280px"
+  width="640"
+  height="640"
   loading="lazy"
   decoding="async"
+  alt="Product"
 /&gt;</code></pre>
-              </div>
-            </div>
-          </div>
-
-          <!-- Modal: Video & embeds preview -->
-          <div id="modal-video" class="preview-modal">
-            <div class="preview-modal__dialog">
-              <header class="preview-modal__header">
-                <h3 class="preview-modal__title">Video &amp; Embeds</h3>
-                <a
-                  href="#perf-images"
-                  class="preview-modal__close"
-                  aria-label="Close video & embeds preview"
-                >
-                  ✕
-                </a>
-              </header>
-
-              <p class="preview-modal__description">
-                Example of a responsive media block with a local video (using a
-                poster) and a lazy-loaded YouTube embed. Both follow our
-                performance and UX rules.
+              <p
+                style="
+                  margin-top: 12px;
+                  font-size: 13px;
+                  color: var(--text-muted);
+                "
+              >
+                Add <code>fetchpriority="high"</code> or preload only when this
+                image is the LCP element.
               </p>
-
-              <div class="preview-media">
-                <!-- Local video preview -->
-                <div class="preview-media__block">
-                  <h4 class="preview-media__title">Local video</h4>
-                  <div class="preview-media__video">
-                    <div class="preview-media__video-poster">
-                      <span class="preview-media__label"
-                        >poster + muted autoplay</span
-                      >
-                      <span class="preview-media__play">▶</span>
-                    </div>
-                  </div>
-                  <p class="preview-media__text">
-                    Use a <code>poster</code> image and autoplay only when
-                    muted. Provide controls when video is part of main content.
-                  </p>
-                </div>
-
-                <!-- Embed preview -->
-                <div class="preview-media__block">
-                  <h4 class="preview-media__title">YouTube embed</h4>
-                  <div class="embed-wrapper embed-wrapper--preview">
-                    <div class="embed-wrapper__placeholder">
-                      <span class="embed-wrapper__play">▶</span>
-                      <span class="embed-wrapper__label"
-                        >Responsive 16:9 iframe</span
-                      >
-                    </div>
-                  </div>
-                  <p class="preview-media__text">
-                    Always wrap iframe in a fixed aspect-ratio container and use
-                    <code>loading="lazy"</code> for embeds below the fold.
-                  </p>
-                </div>
-              </div>
-
-              <div class="card preview-modal__code">
-                <pre><code>&lt;!-- Local video --&gt;
-&lt;video
-  class="media-video"
-  playsinline
-  muted
-  loop
-  autoplay
-  poster="/assets/images/hero/video-placeholder.webp"
-&gt;
-  &lt;source src="/assets/media/video/hero.webm" type="video/webm" /&gt;
-  &lt;source src="/assets/media/video/hero.mp4" type="video/mp4" /&gt;
-&lt;/video&gt;
-
-&lt;!-- Responsive YouTube embed --&gt;
-&lt;div class="embed-wrapper"&gt;
-  &lt;iframe
-    src="https://www.youtube.com/embed/VIDEO_ID"
-    title="Video title"
-    loading="lazy"
-    allowfullscreen
-    referrerpolicy="strict-origin-when-cross-origin"
-  &gt;&lt;/iframe&gt;
-&lt;/div&gt;</code></pre>
-              </div>
             </div>
-          </div>
-        </main>
-      </div>
+          </section>
+
+          <!-- JS -->
+          <section class="section" id="js">
+            <h2>JavaScript &amp; Bundles</h2>
+            <p>
+              JS costs are paid three times: download, parse/compile, execute.
+              Keeping the main thread free is the simplest way to improve
+              responsiveness (INP) and reduce jank.
+            </p>
+
+            <div class="baseline-accordion">
+              <details class="accordion" open>
+                <summary class="accordion__summary">Code Splitting</summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>Split by route and by large feature boundaries.</li>
+                    <li>
+                      Prefer “load on intent” (hover/visible) for heavy modules.
+                    </li>
+                    <li>
+                      Avoid splitting into too many tiny chunks (request
+                      overhead).
+                    </li>
+                  </ul>
+                  <pre><code>// Example (dynamic import)
+button.addEventListener("click", async () =&gt; {
+  const { openEditor } = await import("./features/editor/index.js");
+  openEditor();
+});</code></pre>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">Avoid Long Tasks</summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Break expensive work into smaller tasks (yield to the
+                      browser).
+                    </li>
+                    <li>Use Web Workers for CPU-heavy computation.</li>
+                    <li>
+                      Do not block input handling with synchronous JSON parsing
+                      on large payloads.
+                    </li>
+                  </ul>
+                  <pre><code>// Yield pattern
+await new Promise(requestAnimationFrame);
+// continue work after the browser paints</code></pre>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Dependencies &amp; Tree-shaking
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Prefer small, modular libraries. Audit bundle impact
+                      before adding dependencies.
+                    </li>
+                    <li>
+                      Import only what you use (avoid “barrel” imports when they
+                      defeat tree-shaking).
+                    </li>
+                    <li>Remove dead code and unused polyfills.</li>
+                  </ul>
+                  <p
+                    style="
+                      font-size: 13px;
+                      color: var(--text-muted);
+                      margin-top: 10px;
+                    "
+                  >
+                    Treat dependency weight as a design decision, not an
+                    implementation detail.
+                  </p>
+                </div>
+              </details>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Anti-patterns</h3>
+              <ul style="margin: 0">
+                <li>Large synchronous initialization at app startup</li>
+                <li>Rendering massive lists without virtualization</li>
+                <li>
+                  Expensive animations driven by JS instead of CSS/compositor
+                </li>
+              </ul>
+              <a
+                href="#modal-audit"
+                class="component-card__btn"
+                style="margin-top: 12px; display: inline-block"
+                >Audit checklist →</a
+              >
+            </div>
+          </section>
+
+          <!-- CSS -->
+          <section class="section" id="css">
+            <h2>CSS &amp; Rendering</h2>
+            <p>
+              Rendering performance is usually a layout/paint problem. Keep DOM
+              small, avoid heavy selectors, and prefer compositor-friendly
+              animations.
+            </p>
+
+            <div class="card">
+              <h3>Rendering Rules</h3>
+              <ul style="margin: 0">
+                <li>
+                  Prefer <code>transform</code> and <code>opacity</code> for
+                  animations; avoid animating layout properties.
+                </li>
+                <li>
+                  Limit nested layout containers; deep DOM increases
+                  style/layout cost.
+                </li>
+                <li>
+                  Use containment where appropriate
+                  (<code>content-visibility</code>, <code>contain</code>).
+                </li>
+              </ul>
+              <pre><code>/* Example: safe animation */
+.modal {
+  transform: translateY(8px);
+  opacity: 0;
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+.modal.is-open {
+  transform: translateY(0);
+  opacity: 1;
+}</code></pre>
+            </div>
+
+            <div class="card">
+              <h3>Large Lists</h3>
+              <ul style="margin: 0">
+                <li>Virtualize long lists (render only what is visible).</li>
+                <li>
+                  Use stable keys and memoization to avoid unnecessary
+                  re-renders.
+                </li>
+                <li>
+                  Defer expensive formatting (dates/currency) until visible.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- CACHING -->
+          <section class="section" id="caching">
+            <h2>Caching &amp; Delivery</h2>
+            <p>
+              Delivery is half of performance. Use correct cache headers,
+              immutable asset URLs, and CDN support. Keep caching rules
+              centralized and documented.
+            </p>
+
+            <div class="naming-table-wrapper">
+              <table class="naming-table">
+                <thead>
+                  <tr>
+                    <th>Asset</th>
+                    <th>Cache policy</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Hashed static assets</td>
+                    <td><code>max-age=31536000, immutable</code></td>
+                    <td>e.g., <code>app.8c1f3.js</code></td>
+                  </tr>
+                  <tr>
+                    <td>HTML</td>
+                    <td>Short TTL or <code>no-cache</code></td>
+                    <td>Allow fast updates</td>
+                  </tr>
+                  <tr>
+                    <td>API responses</td>
+                    <td>Depends on data</td>
+                    <td>Prefer explicit cache keys and invalidation</td>
+                  </tr>
+                  <tr>
+                    <td>Images</td>
+                    <td>Long TTL + versioning</td>
+                    <td>Use CDN image resizing when available</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card">
+              <h3>Service Worker Guidance</h3>
+              <ul style="margin: 0">
+                <li>Use only with a clear offline/latency goal.</li>
+                <li>
+                  Keep caching strategies simple and test upgrades carefully.
+                </li>
+                <li>
+                  Always provide a safe escape hatch (clear cache / hard
+                  reload).
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- THIRD PARTY -->
+          <section class="section" id="third-party">
+            <h2>Third-party Scripts</h2>
+            <p>
+              Third-party scripts are often the largest source of unpredictable
+              performance regressions. Treat them like dependencies with
+              budgets, ownership, and monitoring.
+            </p>
+
+            <div class="card component-card--warning">
+              <h3>Rules</h3>
+              <ul style="margin: 0">
+                <li>
+                  Do not load third-party scripts on the critical path unless
+                  strictly required.
+                </li>
+                <li>Prefer server-side integrations where possible.</li>
+                <li>
+                  Gate scripts by route and user consent (privacy +
+                  performance).
+                </li>
+                <li>
+                  Monitor third-party impact (long tasks, bytes, request
+                  failures).
+                </li>
+              </ul>
+              <pre><code>&lt;!-- Prefer defer/async; avoid document.write --&gt;
+&lt;script src="https://example.com/sdk.js" async&gt;&lt;/script&gt;</code></pre>
+            </div>
+
+            <div class="card">
+              <h3>Ownership</h3>
+              <ul style="margin: 0">
+                <li>
+                  Every third-party tag must have an owner (team/person) and a
+                  purpose.
+                </li>
+                <li>Review tags quarterly; remove what is not used.</li>
+                <li>Document expected impact and load conditions.</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- OBSERVABILITY -->
+          <section class="section" id="observability">
+            <h2>Measurement &amp; Observability</h2>
+            <p>
+              Performance work without measurement is guesswork. Use both lab
+              tools (repeatable) and RUM (real-world). Track changes by release
+              to catch regressions early.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Lab</h3>
+                <p class="component-card__text">
+                  Lighthouse/DevTools: controlled tests for before/after
+                  comparisons.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">RUM</h3>
+                <p class="component-card__text">
+                  Real-user monitoring: p75 Web Vitals, route timings, device
+                  tiers.
+                </p>
+                <a href="#modal-rum" class="component-card__btn">Signals →</a>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Profiling</h3>
+                <p class="component-card__text">
+                  Performance panel + React/Vue profiler for render hotspots and
+                  long tasks.
+                </p>
+              </article>
+            </div>
+
+            <div class="card">
+              <h3>Release Discipline</h3>
+              <ul style="margin: 0">
+                <li>Record baseline before major UI changes.</li>
+                <li>
+                  Attach performance screenshots/traces to PRs when risk is
+                  high.
+                </li>
+                <li>
+                  Track p75 changes by version and route; investigate spikes
+                  within 24h.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- CHECKLIST -->
+          <section class="section" id="checklist">
+            <h2>Implementation Checklist</h2>
+
+            <div class="card">
+              <h3>Before Merging</h3>
+              <ul style="margin: 0">
+                <li>Budget impact checked (bundle, requests, images)</li>
+                <li>
+                  LCP candidate identified and optimized (preload only if
+                  necessary)
+                </li>
+                <li>No new long tasks introduced (profiling if heavy UI)</li>
+                <li>
+                  CLS risks addressed (reserved space, sized media, stable
+                  fonts)
+                </li>
+                <li>Third-party changes documented (owner + route gating)</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>After Release</h3>
+              <ul style="margin: 0">
+                <li>RUM dashboards reviewed for p75 shifts</li>
+                <li>
+                  Error rate and API latency checked (can affect perceived perf)
+                </li>
+                <li>Regressions filed with route + device + version</li>
+              </ul>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>Quality Gates</h3>
+              <ul style="margin: 0">
+                <li>No “one-off” performance fixes without measurement</li>
+                <li>No unbounded lists without virtualization</li>
+                <li>No synchronous third-party scripts on initial route</li>
+                <li>No un-sized media above the fold</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- RESOURCES -->
+          <section class="section" id="resources">
+            <h2>Additional Resources</h2>
+
+            <div class="card">
+              <h3>Related Guidelines</h3>
+              <ul>
+                <li>
+                  <a
+                    href="api-and-data-handling.html"
+                    style="color: var(--accent)"
+                    >API & Data handling</a
+                  >
+                  - caching, retries, and request efficiency
+                </li>
+                <li>
+                  <a href="testing.html" style="color: var(--accent)"
+                    >Testing</a
+                  >
+                  - performance regression checks in CI
+                </li>
+                <li>
+                  <a href="security.html" style="color: var(--accent)"
+                    >Security</a
+                  >
+                  - privacy/consent for third-party scripts and RUM data
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>External Resources</h3>
+              <ul>
+                <li>
+                  <a
+                    href="https://web.dev/vitals/"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >web.dev — Web Vitals</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://developer.chrome.com/docs/devtools/performance/"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >Chrome DevTools — Performance</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/Performance"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >MDN — Web performance</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/GoogleChrome/lighthouse"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >Lighthouse</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </main>
     </div>
 
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/js/main.js" defer></script>
+    <!-- Modal: Budget Template -->
+    <dialog id="modal-budgets" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Performance Budget Template</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close performance budgets preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Example budgets for a typical marketing + app shell route. Adjust by
+            device tier and product needs.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code>// Budgets (example)
+Route: "/" (critical entry)
+  - Total requests: &lt;= 60
+  - Total transfer: &lt;= 900 KB
+  - JS (compressed): &lt;= 220 KB
+  - CSS (compressed): &lt;= 60 KB
+  - Images above the fold: &lt;= 250 KB
+  - Long tasks (&gt;50ms): &lt;= 3 during load
+  - LCP p75: &lt;= 2.5s
+  - INP p75: &lt;= 200ms
+  - CLS p75: &lt;= 0.1
+
+Enforcement (recommended)
+  - Lighthouse CI thresholds
+  - Bundle size limits (build step)
+  - RUM alerts on p75 regressions</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4 style="font-size: 14px; margin: 0 0 8px">Notes</h4>
+            <ul style="margin: 0; font-size: 13px">
+              <li>
+                Separate budgets by route type (marketing, authenticated app,
+                admin).
+              </li>
+              <li>Budgets should be easier to understand than to negotiate.</li>
+              <li>
+                When a budget is exceeded, the PR should explain why and how it
+                will be corrected.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Image Optimization Playbook -->
+    <dialog id="modal-image-playbook" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Image Optimization Playbook</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close image playbook preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Use this playbook when LCP is image-driven or image bytes dominate
+            the route.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code>1) Identify the LCP element
+   - DevTools Performance / Lighthouse
+
+2) Right-size the asset
+   - Provide srcset + sizes
+   - Avoid sending large defaults
+
+3) Choose format
+   - AVIF/WebP where possible
+   - Keep JPEG fallback if needed
+
+4) Priority & loading
+   - LCP image: preload or fetchpriority="high" (only one)
+   - Offscreen images: loading="lazy", decoding="async"
+
+5) CDN strategy
+   - Use CDN transforms (resize, format negotiation)
+   - Cache aggressively with versioned URLs</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: RUM Signals -->
+    <dialog id="modal-rum" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">RUM: Minimum Signals</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close RUM signals preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Collect a small, privacy-aware set of signals that supports triage
+            and regression detection.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code>Capture (recommended)
+  - Web Vitals: LCP, INP, CLS (p75)
+  - Route timings: navigation start - first render - interactive
+  - Device tier: memory/CPU (coarse), viewport, network type
+  - Release/version: git SHA or build number
+  - Errors: JS errors + failed resource loads
+  - API latency (p75) for key endpoints
+
+Privacy rules
+  - No PII in telemetry
+  - Sample successful sessions, always capture failures
+  - Respect consent requirements for analytics</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Audit Checklist -->
+    <dialog id="modal-audit" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Performance Audit Checklist</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close audit checklist preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Quick checklist for debugging a slow route. Start with “bytes and
+            blocking”, then proceed to main-thread work.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code>Network
+  - Are there large images/fonts on the critical path?
+  - Is caching configured (immutable hashed assets)?
+  - Is TTFB high due to server work/cache misses?
+
+Rendering
+  - Is LCP blocked by CSS/JS?
+  - Is there layout shift (missing image sizes, late fonts)?
+
+JavaScript
+  - Are there long tasks during load or interaction?
+  - Is hydration expensive / re-rendering too often?
+  - Can we split code or defer non-critical modules?
+
+Third-party
+  - Any new tags or SDKs on the route?
+  - Do they create long tasks or extra requests?</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="assets/js/main.js"></script>
   </body>
 </html>

@@ -1,0 +1,2707 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="description"
+      content="Web accessibility guidelines: making websites usable for everyone, including people with disabilities."
+    />
+    <meta name="theme-color" content="#0b0f1a" />
+
+    <meta property="og:title" content="Accessibility — Coding Guideline" />
+    <meta
+      property="og:description"
+      content="Comprehensive guide to building accessible web applications that work for everyone."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/Outfit-VariableFont.woff2"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <title>Accessibility — Coding Guideline</title>
+  </head>
+
+  <body>
+    <div class="bg-gradient"></div>
+
+    <div class="app-shell">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="primary-sidebar" aria-label="Primary">
+        <a href="/" class="sidebar__header">
+          <div class="sidebar__logo" aria-hidden="true">S</div>
+          <div class="sidebar__title">
+            <span class="sidebar__company">Coding Guideline</span>
+            <span class="sidebar__subtitle">settenLab</span>
+          </div>
+        </a>
+
+        <nav class="sidebar__nav sidebar-nav" aria-label="Guideline navigation">
+          <!-- START HERE -->
+          <details
+            class="nav-group nav-group--start"
+            data-nav-group="start-here"
+          >
+            <summary class="nav-group__summary">
+              <a href="/" class="nav-group__summary-link">Start here</a>
+            </summary>
+          </details>
+
+          <!-- PROJECT SETUP -->
+          <details class="nav-group" data-nav-group="project-setup">
+            <summary class="nav-group__summary">Project setup</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  href="environment-setup.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  Environment setup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="file-structure.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  File structure
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="javascript.html" class="sidebar-nav__link nav-link">
+                  JavaScript
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- UI -->
+          <details class="nav-group" data-nav-group="ui" open>
+            <summary class="nav-group__summary">UI</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="markup.html" class="sidebar-nav__link nav-link">
+                  Markup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="styling.html" class="sidebar-nav__link nav-link">
+                  Styling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="components.html" class="sidebar-nav__link nav-link">
+                  Components
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="typography.html" class="sidebar-nav__link nav-link">
+                  Typography
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="accessibility.html"
+                  class="sidebar-nav__link nav-link nav-link--active"
+                >
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- ENGINEERING -->
+          <details class="nav-group" data-nav-group="engineering">
+            <summary class="nav-group__summary">Engineering</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="javascript.html">
+                  Javascript
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="api-and-data-handling.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  API & Data handling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="performance.html" class="sidebar-nav__link nav-link">
+                  Performance
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="testing.html" class="sidebar-nav__link nav-link">
+                  Testing
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="security.html" class="sidebar-nav__link nav-link">
+                  Security
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- WORKFLOW -->
+          <details class="nav-group" data-nav-group="workflow">
+            <summary class="nav-group__summary">Workflow</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="pr-rules.html" class="sidebar-nav__link nav-link">
+                  PR rules / review checklist
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="documentation.html" class="sidebar-nav__link nav-link">
+                  Documentation rules
+                </a>
+              </li>
+            </ul>
+          </details>
+        </nav>
+
+        <div class="sidebar__footer">
+          <a href="changelog.html" class="sidebar__version">v1.0.0</a>
+          <span class="sidebar__lang">EN</span>
+        </div>
+      </aside>
+
+      <div class="sidebar-backdrop js-sidebar-backdrop" hidden></div>
+
+      <!-- MAIN -->
+      <main class="main" id="main-content">
+        <header class="topbar">
+          <button
+            class="topbar__menu-btn js-sidebar-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-controls="primary-sidebar"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <h1 class="topbar__title">Accessibility (A11y)</h1>
+
+          <div class="topbar__actions">
+            <button
+              class="topbar__action-btn"
+              id="themeToggle"
+              aria-label="Toggle theme"
+              aria-pressed="false"
+            >
+              🌗
+            </button>
+          </div>
+        </header>
+
+        <div class="content">
+          <!-- PAGE NAVIGATION -->
+          <div class="card card--nav">
+            <h3>On this page</h3>
+            <p>Quick links to accessibility guidelines and standards.</p>
+            <ul class="toc">
+              <li><a href="#philosophy">Accessibility Philosophy</a></li>
+              <li><a href="#standards">Standards & Guidelines</a></li>
+              <li><a href="#semantic-html">Semantic HTML</a></li>
+              <li><a href="#keyboard">Keyboard Navigation</a></li>
+              <li><a href="#aria">ARIA & Screen Readers</a></li>
+              <li><a href="#visual">Visual Accessibility</a></li>
+              <li><a href="#interactive">Interactive Components</a></li>
+              <li><a href="#forms">Accessible Forms</a></li>
+              <li><a href="#testing">Testing & Tools</a></li>
+              <li><a href="#frameworks">Frameworks & Libraries</a></li>
+              <li><a href="#checklist">Implementation Checklist</a></li>
+            </ul>
+          </div>
+          <!-- PHILOSOPHY -->
+          <section class="section" id="philosophy">
+            <h2>Accessibility Philosophy</h2>
+            <p>
+              Accessibility is not a feature—it's a fundamental requirement.
+              Building accessible websites ensures everyone can use your
+              product, regardless of ability or circumstance.
+            </p>
+
+            <div class="card callout">
+              <h3>Core Principles (POUR)</h3>
+              <ul>
+                <li>
+                  <strong>Perceivable</strong>: Information must be presentable
+                  to users in ways they can perceive
+                </li>
+                <li>
+                  <strong>Operable</strong>: Interface components must be
+                  operable by all users
+                </li>
+                <li>
+                  <strong>Understandable</strong>: Information and operation
+                  must be understandable
+                </li>
+                <li>
+                  <strong>Robust</strong>: Content must be robust enough to work
+                  with current and future technologies
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Why Accessibility Matters</h3>
+
+              <div class="perf-grid">
+                <article class="card">
+                  <div class="perf-card__header">
+                    <h4>Inclusion</h4>
+                    <span class="perf-badge perf-badge--green"
+                      >Human Right</span
+                    >
+                  </div>
+                  <p style="margin: 0; font-size: 13px">
+                    15% of the world's population lives with disabilities.
+                    Accessibility ensures digital inclusion for all.
+                  </p>
+                </article>
+
+                <article class="card">
+                  <div class="perf-card__header">
+                    <h4>Legal</h4>
+                    <span class="perf-badge perf-badge--yellow"
+                      >Requirement</span
+                    >
+                  </div>
+                  <p style="margin: 0; font-size: 13px">
+                    WCAG 2.1 is required by law in many countries (ADA, AODA, EN
+                    301 549).
+                  </p>
+                </article>
+
+                <article class="card">
+                  <div class="perf-card__header">
+                    <h4>Business</h4>
+                    <span class="perf-badge perf-badge--yellow"
+                      >Smart Business</span
+                    >
+                  </div>
+                  <p style="margin: 0; font-size: 13px">
+                    Accessible websites have better SEO, reach wider audiences,
+                    and provide better UX for everyone.
+                  </p>
+                </article>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Accessibility Mindset</h3>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                  margin-top: 16px;
+                "
+              >
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #4cd964; margin-bottom: 8px"
+                  >
+                    ✓ Proactive Approach
+                  </h4>
+                  <ul style="font-size: 13px">
+                    <li>"How can we make this accessible from the start?"</li>
+                    <li>"What barriers might users face?"</li>
+                    <li>"Let's test with assistive technology"</li>
+                    <li>"Accessibility is part of our definition of done"</li>
+                    <li>"Everyone owns accessibility"</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #ef4444; margin-bottom: 8px"
+                  >
+                    ✗ Reactive Approach
+                  </h4>
+                  <ul style="font-size: 13px">
+                    <li>"We'll fix it if someone complains"</li>
+                    <li>"It works fine for me"</li>
+                    <li>"Screen readers are edge cases"</li>
+                    <li>"We don't have time for accessibility"</li>
+                    <li>"That's the QA team's responsibility"</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Common Misconceptions</h3>
+              <ul>
+                <li>
+                  <strong>"Accessibility is only for blind people"</strong> -
+                  Accessibility benefits people with visual, auditory, motor,
+                  cognitive, and situational disabilities
+                </li>
+                <li>
+                  <strong>"Accessibility makes sites ugly"</strong> - Good
+                  accessibility often improves design for everyone
+                </li>
+                <li>
+                  <strong>"ARIA will fix everything"</strong> - ARIA should
+                  enhance, not replace, semantic HTML
+                </li>
+                <li>
+                  <strong>"Automated tools catch all issues"</strong> - Manual
+                  testing with real users is essential
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- STANDARDS -->
+          <section class="section" id="standards">
+            <h2>Standards & Guidelines</h2>
+            <p>
+              Follow established standards to ensure compliance and provide the
+              best experience for all users.
+            </p>
+
+            <div class="card">
+              <h3>WCAG 2.1 Compliance Levels</h3>
+
+              <div class="component-grid">
+                <article class="component-card">
+                  <h3 class="component-card__title">Level A</h3>
+                  <p class="component-card__text">Basic accessibility</p>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>Text alternatives for images</li>
+                    <li>Keyboard accessible</li>
+                    <li>No keyboard traps</li>
+                    <li>Basic form labels</li>
+                    <li><strong>Minimum legal requirement</strong></li>
+                  </ul>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">Level AA</h3>
+                  <p class="component-card__text">Standard compliance</p>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>Color contrast 4.5:1</li>
+                    <li>Resizable text to 200%</li>
+                    <li>Consistent navigation</li>
+                    <li>Error identification in forms</li>
+                    <li><strong>Our target standard</strong></li>
+                  </ul>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">Level AAA</h3>
+                  <p class="component-card__text">Enhanced accessibility</p>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>Color contrast 7:1</li>
+                    <li>Sign language for audio</li>
+                    <li>Extended audio description</li>
+                    <li>No timing constraints</li>
+                    <li><strong>Enhanced experience</strong></li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Legal Requirements by Region</h3>
+
+              <div class="naming-table-wrapper">
+                <table class="naming-table">
+                  <thead>
+                    <tr>
+                      <th>Region</th>
+                      <th>Law/Standard</th>
+                      <th>Requirements</th>
+                      <th>Deadline</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>USA</td>
+                      <td>ADA Title III</td>
+                      <td>WCAG 2.1 AA</td>
+                      <td>Ongoing</td>
+                    </tr>
+                    <tr>
+                      <td>EU</td>
+                      <td>Web Accessibility Directive</td>
+                      <td>EN 301 549 (WCAG 2.1 AA)</td>
+                      <td>Public sector: 2021</td>
+                    </tr>
+                    <tr>
+                      <td>Canada</td>
+                      <td>Accessible Canada Act</td>
+                      <td>WCAG 2.1 AA</td>
+                      <td>2025</td>
+                    </tr>
+                    <tr>
+                      <td>UK</td>
+                      <td>Equality Act 2010</td>
+                      <td>WCAG 2.1 AA</td>
+                      <td>Ongoing</td>
+                    </tr>
+                    <tr>
+                      <td>Australia</td>
+                      <td>Disability Discrimination Act</td>
+                      <td>WCAG 2.1 AA</td>
+                      <td>Ongoing</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>WCAG Success Criteria Quick Reference</h3>
+
+              <button
+                class="btn btn--secondary"
+                onclick="document.getElementById('modal-wcag-reference').showModal()"
+              >
+                View WCAG Success Criteria →
+              </button>
+            </div>
+          </section>
+
+          <!-- SEMANTIC HTML -->
+          <section class="section" id="semantic-html">
+            <h2>Semantic HTML</h2>
+            <p>
+              Semantic HTML provides meaning to web content, making it
+              accessible to assistive technologies and improving SEO.
+            </p>
+
+            <div class="card">
+              <h3>Semantic Elements vs Div Soup</h3>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                  margin-top: 16px;
+                "
+              >
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #4cd964; margin-bottom: 8px"
+                  >
+                    ✓ Semantic HTML
+                  </h4>
+                  <pre><code>&lt;header&gt;
+  &lt;nav aria-label="Main navigation"&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;article&gt;
+    &lt;h1&gt;Article Title&lt;/h1&gt;
+    &lt;p&gt;Article content...&lt;/p&gt;
+    
+    &lt;section aria-labelledby="comments-heading"&gt;
+      &lt;h2 id="comments-heading"&gt;Comments&lt;/h2&gt;
+      &lt;div role="feed"&gt;
+        &lt;article role="article"&gt;Comment 1&lt;/article&gt;
+        &lt;article role="article"&gt;Comment 2&lt;/article&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/article&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+  &lt;p&gt;&amp;copy; 2024 Company&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+                </div>
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #ef4444; margin-bottom: 8px"
+                  >
+                    ✗ Div Soup
+                  </h4>
+                  <pre><code>&lt;div class="header"&gt;
+  &lt;div class="nav"&gt;
+    &lt;div class="nav-list"&gt;
+      &lt;div class="nav-item"&gt;
+        &lt;div class="nav-link"&gt;Home&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="nav-item"&gt;
+        &lt;div class="nav-link"&gt;About&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="main"&gt;
+  &lt;div class="content"&gt;
+    &lt;div class="title"&gt;Article Title&lt;/div&gt;
+    &lt;div class="text"&gt;Article content...&lt;/div&gt;
+    
+    &lt;div class="comments-section"&gt;
+      &lt;div class="comments-title"&gt;Comments&lt;/div&gt;
+      &lt;div class="comments-list"&gt;
+        &lt;div class="comment"&gt;Comment 1&lt;/div&gt;
+        &lt;div class="comment"&gt;Comment 2&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="footer"&gt;
+  &lt;div class="copyright"&gt;&amp;copy; 2024 Company&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Essential Semantic Elements</h3>
+
+              <div class="naming-table-wrapper">
+                <table class="naming-table">
+                  <thead>
+                    <tr>
+                      <th>Element</th>
+                      <th>Purpose</th>
+                      <th>Accessibility Benefits</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>&lt;header&gt;</code></td>
+                      <td>Introductory content</td>
+                      <td>Screen readers can skip to main content</td>
+                    </tr>
+                    <tr>
+                      <td><code>&lt;nav&gt;</code></td>
+                      <td>Navigation links</td>
+                      <td>Identified as navigation landmark</td>
+                    </tr>
+                    <tr>
+                      <td><code>&lt;main&gt;</code></td>
+                      <td>Primary content</td>
+                      <td>Main content landmark</td>
+                    </tr>
+                    <tr>
+                      <td><code>&lt;article&gt;</code></td>
+                      <td>Self-contained composition</td>
+                      <td>Treated as independent unit</td>
+                    </tr>
+                    <tr>
+                      <td><code>&lt;section&gt;</code></td>
+                      <td>Thematic grouping</td>
+                      <td>Creates document outline</td>
+                    </tr>
+                    <tr>
+                      <td><code>&lt;aside&gt;</code></td>
+                      <td>Tangentially related content</td>
+                      <td>Identified as complementary landmark</td>
+                    </tr>
+                    <tr>
+                      <td><code>&lt;footer&gt;</code></td>
+                      <td>Closing content</td>
+                      <td>Footer landmark</td>
+                    </tr>
+                    <tr>
+                      <td><code>&lt;figure&gt; + &lt;figcaption&gt;</code></td>
+                      <td>Images with captions</td>
+                      <td>Associates image with description</td>
+                    </tr>
+                    <tr>
+                      <td><code>&lt;time datetime="..."&gt;</code></td>
+                      <td>Machine-readable dates</td>
+                      <td>Screen readers can read dates correctly</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Heading Hierarchy</h3>
+              <p>
+                Proper heading structure creates a document outline for screen
+                readers:
+              </p>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                  margin-top: 16px;
+                "
+              >
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #4cd964; margin-bottom: 8px"
+                  >
+                    ✓ Correct Hierarchy
+                  </h4>
+                  <pre><code>&lt;h1&gt;Page Title&lt;/h1&gt;
+
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;...&lt;/p&gt;
+
+&lt;h2&gt;Main Content&lt;/h2&gt;
+&lt;h3&gt;Subsection 1&lt;/h3&gt;
+&lt;p&gt;...&lt;/p&gt;
+&lt;h3&gt;Subsection 2&lt;/h3&gt;
+&lt;p&gt;...&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;...&lt;/p&gt;</code></pre>
+                  <p
+                    style="
+                      font-size: 12px;
+                      color: var(--text-muted);
+                      margin-top: 8px;
+                    "
+                  >
+                    Screen readers can navigate this structure easily.
+                  </p>
+                </div>
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #ef4444; margin-bottom: 8px"
+                  >
+                    ✗ Incorrect Hierarchy
+                  </h4>
+                  <pre><code>&lt;h1&gt;Page Title&lt;/h1&gt;
+
+&lt;h3&gt;Introduction&lt;/h3&gt; &lt;!-- Skipped h2 --&gt;
+&lt;p&gt;...&lt;/p&gt;
+
+&lt;h4&gt;Main Content&lt;/h4&gt; &lt;!-- Wrong level --&gt;
+&lt;h2&gt;Subsection 1&lt;/h2&gt; &lt;!-- Jumped back --&gt;
+&lt;p&gt;...&lt;/p&gt;
+&lt;h5&gt;Subsection 2&lt;/h5&gt; &lt;!-- Skipped levels --&gt;
+&lt;p&gt;...&lt;/p&gt;
+
+&lt;h6&gt;Conclusion&lt;/h6&gt; &lt;!-- Too deep --&gt;
+&lt;p&gt;...&lt;/p&gt;</code></pre>
+                  <p
+                    style="
+                      font-size: 12px;
+                      color: var(--text-muted);
+                      margin-top: 8px;
+                    "
+                  >
+                    Confusing for screen readers - creates broken document
+                    outline.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- KEYBOARD NAVIGATION -->
+          <section class="section" id="keyboard">
+            <h2>Keyboard Navigation</h2>
+            <p>
+              Many users navigate websites using only a keyboard. Ensure all
+              interactive elements are keyboard accessible.
+            </p>
+
+            <div class="card">
+              <h3>Keyboard Navigation Requirements</h3>
+
+              <div class="component-grid">
+                <article class="component-card">
+                  <h3 class="component-card__title">Focus Order</h3>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>Logical tab order (DOM order)</li>
+                    <li>No keyboard traps</li>
+                    <li>Skip links for navigation</li>
+                    <li>Manage focus in modals</li>
+                  </ul>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">Focus Indicators</h3>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>Visible focus styles</li>
+                    <li>Never remove outline:focus</li>
+                    <li>High contrast focus rings</li>
+                    <li>Custom focus styles allowed</li>
+                  </ul>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">Keyboard Support</h3>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>All interactive elements focusable</li>
+                    <li>Space/Enter for activation</li>
+                    <li>Arrow keys for menus, sliders</li>
+                    <li>Esc to close modals, menus</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Focus Management Patterns</h3>
+
+              <button
+                class="btn btn--secondary"
+                onclick="document.getElementById('modal-focus-management').showModal()"
+              >
+                View Focus Management Examples →
+              </button>
+            </div>
+
+            <div class="card">
+              <h3>Skip Links</h3>
+              <p>Allow keyboard users to skip repetitive navigation:</p>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                  margin-top: 16px;
+                "
+              >
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #4cd964; margin-bottom: 8px"
+                  >
+                    ✓ Good Skip Link
+                  </h4>
+                  <pre><code>&lt;body&gt;
+  &lt;a href="#main-content" 
+     class="skip-link"&gt;
+    Skip to main content
+  &lt;/a&gt;
+  
+  &lt;nav&gt;...&lt;/nav&gt;
+  
+  &lt;main id="main-content" tabindex="-1"&gt;
+    &lt;!-- Main content here --&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+
+/* CSS */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: white;
+  padding: 8px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+}</code></pre>
+                </div>
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #ef4444; margin-bottom: 8px"
+                  >
+                    ✗ Missing Skip Link
+                  </h4>
+                  <pre><code>&lt;body&gt;
+  &lt;nav&gt;
+    &lt;!-- 20 navigation items --&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Services&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Products&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+      &lt;!-- 15 more items... --&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+  
+  &lt;main&gt;
+    &lt;!-- Keyboard users must tab through 
+         all navigation to reach content --&gt;
+  &lt;/main&gt;
+&lt;/body&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Common Keyboard Navigation Issues</h3>
+              <ul>
+                <li>
+                  <strong>Hidden interactive elements</strong> that appear on
+                  hover but aren't keyboard accessible
+                </li>
+                <li>
+                  <strong>Custom elements without proper tabindex</strong>
+                  (<code>div</code> instead of <code>button</code>)
+                </li>
+                <li>
+                  <strong>Focus traps in modals</strong> - can't escape with
+                  keyboard
+                </li>
+                <li>
+                  <strong>Removing focus outlines</strong> with
+                  <code>outline: none</code> without providing alternative
+                </li>
+                <li>
+                  <strong>Non-logical tab order</strong> from CSS positioning
+                  (absolute/fixed)
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- ARIA -->
+          <section class="section" id="aria">
+            <h2>ARIA & Screen Readers</h2>
+            <p>
+              Accessible Rich Internet Applications (ARIA) provides additional
+              semantics for custom widgets and dynamic content.
+            </p>
+
+            <div class="card">
+              <h3>ARIA Principles</h3>
+
+              <div class="perf-grid">
+                <article class="card">
+                  <div class="perf-card__header">
+                    <h4>First Rule of ARIA</h4>
+                    <span class="perf-badge perf-badge--green">Essential</span>
+                  </div>
+                  <p style="margin: 0; font-size: 13px">
+                    <strong>Don't use ARIA if you can use native HTML.</strong>
+                    Prefer semantic elements over ARIA roles.
+                  </p>
+                </article>
+
+                <article class="card">
+                  <div class="perf-card__header">
+                    <h4>Second Rule</h4>
+                    <span class="perf-badge perf-badge--green">Essential</span>
+                  </div>
+                  <p style="margin: 0; font-size: 13px">
+                    <strong>Don't change native semantics.</strong>
+                    Never add ARIA to semantic elements unless absolutely
+                    necessary.
+                  </p>
+                </article>
+
+                <article class="card">
+                  <div class="perf-card__header">
+                    <h4>Third Rule</h4>
+                    <span class="perf-badge perf-badge--yellow">Important</span>
+                  </div>
+                  <p style="margin: 0; font-size: 13px">
+                    <strong
+                      >Make interactive elements keyboard accessible.</strong
+                    >
+                    ARIA doesn't add keyboard behavior.
+                  </p>
+                </article>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Common ARIA Patterns</h3>
+
+              <div class="naming-table-wrapper">
+                <table class="naming-table">
+                  <thead>
+                    <tr>
+                      <th>Pattern</th>
+                      <th>ARIA Usage</th>
+                      <th>Example</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Live Regions</td>
+                      <td><code>aria-live</code></td>
+                      <td>Notifications, chat messages</td>
+                    </tr>
+                    <tr>
+                      <td>Modal Dialogs</td>
+                      <td>
+                        <code>role="dialog"</code>,
+                        <code>aria-modal="true"</code>
+                      </td>
+                      <td>Popup windows, alerts</td>
+                    </tr>
+                    <tr>
+                      <td>Progress Bars</td>
+                      <td>
+                        <code>role="progressbar"</code>,
+                        <code>aria-valuenow</code>
+                      </td>
+                      <td>File uploads, loading indicators</td>
+                    </tr>
+                    <tr>
+                      <td>Tabs</td>
+                      <td>
+                        <code>role="tablist"</code>, <code>role="tab"</code>,
+                        <code>role="tabpanel"</code>
+                      </td>
+                      <td>Tabbed interfaces</td>
+                    </tr>
+                    <tr>
+                      <td>Tooltips</td>
+                      <td><code>role="tooltip"</code></td>
+                      <td>Information popups</td>
+                    </tr>
+                    <tr>
+                      <td>Alerts</td>
+                      <td><code>role="alert"</code></td>
+                      <td>Error messages, success notifications</td>
+                    </tr>
+                    <tr>
+                      <td>Breadcrumbs</td>
+                      <td><code>aria-label="Breadcrumb"</code></td>
+                      <td>Navigation trails</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>ARIA Labels & Descriptions</h3>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                  margin-top: 16px;
+                "
+              >
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #4cd964; margin-bottom: 8px"
+                  >
+                    ✓ Proper ARIA Usage
+                  </h4>
+                  <pre><code>&lt;!-- Button with icon only --&gt;
+&lt;button 
+  aria-label="Close dialog"
+  class="icon-button"&gt;
+  &lt;svg&gt;...&lt;/svg&gt;
+&lt;/button&gt;
+
+&lt;!-- Form field with error --&gt;
+&lt;div class="form-group"&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input 
+    id="email"
+    type="email"
+    aria-invalid="true"
+    aria-describedby="email-error"&gt;
+  &lt;div id="email-error" role="alert"&gt;
+    Please enter a valid email
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Live region for updates --&gt;
+&lt;div 
+  aria-live="polite"
+  aria-atomic="true"&gt;
+  &lt;!-- Dynamic content --&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #ef4444; margin-bottom: 8px"
+                  >
+                    ✗ ARIA Misuse
+                  </h4>
+                  <pre><code>&lt;!-- Redundant ARIA --&gt;
+&lt;nav role="navigation"&gt; &lt;!-- Redundant --&gt;
+  &lt;ul&gt;...&lt;/ul&gt;
+&lt;/nav&gt;
+
+&lt;!-- Overriding semantics --&gt;
+&lt;h1 role="button"&gt;Click me&lt;/h1&gt; &lt;!-- Wrong! --&gt;
+
+&lt;!-- Missing accessible name --&gt;
+&lt;button class="icon-button"&gt;
+  &lt;svg&gt;...&lt;/svg&gt; &lt;!-- No label --&gt;
+&lt;/button&gt;
+
+&lt;!-- Inaccessible dynamic content --&gt;
+&lt;div id="notification"&gt;
+  New message received &lt;!-- Screen reader won't announce --&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- VISUAL -->
+          <section class="section" id="visual">
+            <h2>Visual Accessibility</h2>
+            <p>
+              Visual accessibility ensures content is perceivable by users with
+              visual impairments, color blindness, or low vision.
+            </p>
+
+            <div class="card">
+              <h3>Color Contrast Requirements</h3>
+
+              <div class="component-grid">
+                <article class="component-card">
+                  <h3 class="component-card__title">Normal Text</h3>
+                  <p class="component-card__text">WCAG AA</p>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>4.5:1 contrast ratio</li>
+                    <li>For text ≤ 18pt</li>
+                    <li>For text ≤ 14pt bold</li>
+                    <li>Required for compliance</li>
+                  </ul>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">Large Text</h3>
+                  <p class="component-card__text">WCAG AA</p>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>3:1 contrast ratio</li>
+                    <li>For text ≥ 18pt</li>
+                    <li>For text ≥ 14pt bold</li>
+                    <li>Headers, large print</li>
+                  </ul>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">Enhanced</h3>
+                  <p class="component-card__text">WCAG AAA</p>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>7:1 normal text</li>
+                    <li>4.5:1 large text</li>
+                    <li>Better for low vision</li>
+                    <li>Recommended where possible</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Color & Meaning</h3>
+              <p>Never rely on color alone to convey information:</p>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                  margin-top: 16px;
+                "
+              >
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #4cd964; margin-bottom: 8px"
+                  >
+                    ✓ Accessible Design
+                  </h4>
+                  <pre><code>&lt;!-- Form validation --&gt;
+&lt;div class="form-group"&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input 
+    id="email"
+    type="email"
+    aria-invalid="true"
+    aria-describedby="email-error"&gt;
+  &lt;div id="email-error" role="alert"&gt;
+    &lt;span class="error-icon" aria-hidden="true"&gt;⚠️&lt;/span&gt;
+    &lt;span&gt;Please enter a valid email&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+/* CSS */
+.error-icon {
+  color: #dc2626; /* Red color */
+}
+
+[aria-invalid="true"] {
+  border: 2px solid #dc2626;
+  /* Plus icon, text, and border */
+}</code></pre>
+                  <p
+                    style="
+                      font-size: 12px;
+                      color: var(--text-muted);
+                      margin-top: 8px;
+                    "
+                  >
+                    Uses color, icons, text, and borders to convey error state.
+                  </p>
+                </div>
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #ef4444; margin-bottom: 8px"
+                  >
+                    ✗ Color-Only Design
+                  </h4>
+                  <pre><code>&lt;!-- Form validation --&gt;
+&lt;div class="form-group"&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input id="email" type="email"&gt;
+  &lt;div class="error"&gt;
+    Please enter a valid email
+  &lt;/div&gt;
+&lt;/div&gt;
+
+/* CSS */
+.error {
+  color: #dc2626; /* Only color */
+}
+
+/* For color-blind users:
+   - Can't distinguish error state
+   - No other indicators
+   - Might miss validation errors */</code></pre>
+                  <p
+                    style="
+                      font-size: 12px;
+                      color: var(--text-muted);
+                      margin-top: 8px;
+                    "
+                  >
+                    Relies solely on color - fails for color-blind users.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Responsive Typography</h3>
+
+              <div class="baseline-accordion">
+                <details class="accordion">
+                  <summary class="accordion__summary">
+                    Font Size & Scaling
+                  </summary>
+                  <div class="accordion__content">
+                    <pre><code>/* Use relative units for font sizes */
+:root {
+  /* Base font size in pixels for calculation */
+  font-size: 16px;
+}
+
+/* Good: Relative units */
+body {
+  font-size: 1rem; /* 16px */
+}
+
+h1 {
+  font-size: 2.5rem; /* 40px, scales with root */
+}
+
+.small-text {
+  font-size: 0.875rem; /* 14px */
+}
+
+/* Good: Responsive typography */
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px; /* Scale everything down */
+  }
+}
+
+/* Bad: Fixed pixels */
+.bad-example {
+  font-size: 14px; /* Doesn't scale */
+  line-height: 20px; /* Fixed line height */
+}
+
+/* Good: Responsive line height */
+.good-example {
+  font-size: 1rem;
+  line-height: 1.5; /* Unitless, scales with font */
+}</code></pre>
+                  </div>
+                </details>
+
+                <details class="accordion">
+                  <summary class="accordion__summary">
+                    Text Spacing & Layout
+                  </summary>
+                  <div class="accordion__content">
+                    <pre><code>/* WCAG Text Spacing Success Criterion */
+/* Support 200% zoom and custom spacing */
+
+/* Good: Flexible containers */
+.content {
+  max-width: 65ch; /* Readable line length */
+  /* Allow text to reflow */
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Support text spacing adjustments */
+* {
+  /* These properties should not interfere with:
+     - Line height to at least 1.5 times font size
+     - Spacing following paragraphs to at least 2 times font size
+     - Letter spacing to at least 0.12 times font size
+     - Word spacing to at least 0.16 times font size
+  */
+}
+
+/* Bad: Fixed heights that clip text */
+.bad-container {
+  height: 100px; /* Text gets clipped when zoomed */
+  overflow: hidden;
+}
+
+/* Good: Minimum touch targets */
+button, 
+a,
+input[type="checkbox"],
+input[type="radio"] {
+  min-height: 44px;
+  min-width: 44px;
+}</code></pre>
+                  </div>
+                </details>
+              </div>
+            </div>
+          </section>
+
+          <!-- INTERACTIVE COMPONENTS -->
+          <section class="section" id="interactive">
+            <h2>Interactive Components</h2>
+            <p>
+              Custom interactive components must provide equivalent
+              functionality to native elements for all users.
+            </p>
+
+            <div class="card">
+              <h3>Accessible Component Patterns</h3>
+
+              <button
+                class="btn btn--secondary"
+                onclick="document.getElementById('modal-accessible-components').showModal()"
+              >
+                View Accessible Component Examples →
+              </button>
+            </div>
+
+            <div class="card">
+              <h3>Custom vs Native Elements</h3>
+
+              <div class="naming-table-wrapper">
+                <table class="naming-table">
+                  <thead>
+                    <tr>
+                      <th>Component</th>
+                      <th>Native Element</th>
+                      <th>Custom Implementation Requirements</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Button</td>
+                      <td><code>&lt;button&gt;</code></td>
+                      <td>
+                        <code>role="button"</code>, keyboard events, focus
+                        management
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Checkbox</td>
+                      <td><code>&lt;input type="checkbox"&gt;</code></td>
+                      <td>
+                        <code>role="checkbox"</code>, <code>aria-checked</code>,
+                        Space key
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Radio Button</td>
+                      <td><code>&lt;input type="radio"&gt;</code></td>
+                      <td>
+                        <code>role="radio"</code>, arrow key navigation,
+                        <code>aria-checked</code>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Select/Dropdown</td>
+                      <td><code>&lt;select&gt;</code></td>
+                      <td>
+                        <code>role="listbox"</code>, arrow keys, Esc, Enter,
+                        type-ahead
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Modal Dialog</td>
+                      <td><code>&lt;dialog&gt;</code></td>
+                      <td>
+                        <code>role="dialog"</code>, focus trap, Esc key,
+                        backdrop click
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Tab Interface</td>
+                      <td>None</td>
+                      <td>
+                        <code>role="tablist"</code>, <code>role="tab"</code>,
+                        arrow keys, Home/End
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Tooltip</td>
+                      <td><code>title</code> attribute</td>
+                      <td>
+                        <code>role="tooltip"</code>, mouse+hover, keyboard
+                        focus, timer
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Common Interactive Component Issues</h3>
+              <ul>
+                <li>
+                  <strong
+                    >Clickable <code>&lt;div&gt;</code> instead of
+                    <code>&lt;button&gt;</code></strong
+                  >
+                  - Missing keyboard support and semantics
+                </li>
+                <li>
+                  <strong>Custom selects without proper ARIA</strong> - Screen
+                  readers can't understand the options
+                </li>
+                <li>
+                  <strong>Modals that don't trap focus</strong> - Keyboard users
+                  can tab behind the modal
+                </li>
+                <li>
+                  <strong>Carousels without pause controls</strong> - Difficult
+                  for users who need more time
+                </li>
+                <li>
+                  <strong>Hover-only tooltips</strong> - Keyboard users can't
+                  access the information
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- FORMS -->
+          <section class="section" id="forms">
+            <h2>Accessible Forms</h2>
+            <p>
+              Forms are critical for user interaction and must be accessible to
+              everyone, including screen reader users and keyboard-only users.
+            </p>
+
+            <div class="card">
+              <h3>Form Accessibility Requirements</h3>
+
+              <div class="perf-grid">
+                <article class="card">
+                  <div class="perf-card__header">
+                    <h4>Labels</h4>
+                    <span class="perf-badge perf-badge--green">Essential</span>
+                  </div>
+                  <p style="margin: 0; font-size: 13px">
+                    Every form control must have an associated label. Use
+                    <code>&lt;label&gt;</code> or
+                    <code>aria-label</code>/<code>aria-labelledby</code>.
+                  </p>
+                </article>
+
+                <article class="card">
+                  <div class="perf-card__header">
+                    <h4>Instructions</h4>
+                    <span class="perf-badge perf-badge--green">Essential</span>
+                  </div>
+                  <p style="margin: 0; font-size: 13px">
+                    Provide clear instructions and error messages. Use
+                    <code>aria-describedby</code> for additional information.
+                  </p>
+                </article>
+
+                <article class="card">
+                  <div class="perf-card__header">
+                    <h4>Validation</h4>
+                    <span class="perf-badge perf-badge--yellow">Important</span>
+                  </div>
+                  <p style="margin: 0; font-size: 13px">
+                    Validate inputs and provide helpful error messages. Use
+                    <code>aria-invalid</code> and <code>role="alert"</code>.
+                  </p>
+                </article>
+
+                <article class="card">
+                  <div class="perf-card__header">
+                    <h4>Grouping</h4>
+                    <span class="perf-badge perf-badge--yellow">Important</span>
+                  </div>
+                  <p style="margin: 0; font-size: 13px">
+                    Group related controls with
+                    <code>&lt;fieldset&gt;</code> and
+                    <code>&lt;legend&gt;</code>.
+                  </p>
+                </article>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Accessible Form Example</h3>
+
+              <button
+                class="btn btn--secondary"
+                onclick="document.getElementById('modal-accessible-form').showModal()"
+              >
+                View Complete Accessible Form →
+              </button>
+            </div>
+
+            <div class="card">
+              <h3>Common Form Accessibility Issues</h3>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                  margin-top: 16px;
+                "
+              >
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #ef4444; margin-bottom: 8px"
+                  >
+                    ✗ Inaccessible Forms
+                  </h4>
+                  <pre><code>&lt;!-- Missing labels --&gt;
+&lt;input type="text" placeholder="Name"&gt;
+&lt;input type="email" placeholder="Email"&gt;
+
+&lt;!-- Placeholder as label --&gt;
+&lt;div class="form-group"&gt;
+  &lt;input type="password" 
+         placeholder="Password"&gt;
+&lt;/div&gt;
+
+&lt;!-- Inline error messages --&gt;
+&lt;div class="form-group"&gt;
+  &lt;input type="email" 
+         class="error"&gt;
+  &lt;span style="color: red"&gt;
+    Invalid email
+  &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Poor grouping --&gt;
+&lt;div&gt;
+  &lt;span&gt;Subscription Type&lt;/span&gt;
+  &lt;input type="radio" name="plan"&gt; Basic
+  &lt;input type="radio" name="plan"&gt; Premium
+&lt;/div&gt;</code></pre>
+                </div>
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #4cd964; margin-bottom: 8px"
+                  >
+                    ✓ Accessible Solutions
+                  </h4>
+                  <pre><code>&lt;!-- Proper labels --&gt;
+&lt;label for="name"&gt;Name&lt;/label&gt;
+&lt;input id="name" type="text"&gt;
+
+&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input id="email" type="email"&gt;
+
+&lt;!-- Fieldset grouping --&gt;
+&lt;fieldset&gt;
+  &lt;legend&gt;Subscription Type&lt;/legend&gt;
+  
+  &lt;input type="radio" id="basic" name="plan"&gt;
+  &lt;label for="basic"&gt;Basic&lt;/label&gt;
+  
+  &lt;input type="radio" id="premium" name="plan"&gt;
+  &lt;label for="premium"&gt;Premium&lt;/label&gt;
+&lt;/fieldset&gt;
+
+&lt;!-- Accessible errors --&gt;
+&lt;div class="form-group"&gt;
+  &lt;label for="user-email"&gt;Email&lt;/label&gt;
+  &lt;input id="user-email"
+         type="email"
+         aria-invalid="true"
+         aria-describedby="email-error"&gt;
+  &lt;div id="email-error" role="alert"&gt;
+    Please enter a valid email address
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- TESTING -->
+          <section class="section" id="testing">
+            <h2>Testing & Tools</h2>
+            <p>
+              Comprehensive accessibility testing combines automated tools with
+              manual testing and user feedback.
+            </p>
+
+            <div class="card">
+              <h3>Testing Strategy</h3>
+
+              <div class="component-grid">
+                <article class="component-card">
+                  <h3 class="component-card__title">Automated Testing</h3>
+                  <p class="component-card__text">Fast, repeatable</p>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>axe-core, Lighthouse</li>
+                    <li>WCAG compliance checks</li>
+                    <li>CI/CD integration</li>
+                    <li>Catch ~30% of issues</li>
+                  </ul>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">Manual Testing</h3>
+                  <p class="component-card__text">Essential validation</p>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>Keyboard navigation</li>
+                    <li>Screen reader testing</li>
+                    <li>Color contrast checks</li>
+                    <li>Zoom testing</li>
+                  </ul>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">User Testing</h3>
+                  <p class="component-card__text">Real-world validation</p>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>Users with disabilities</li>
+                    <li>Assistive technology users</li>
+                    <li>Usability testing</li>
+                    <li>Feedback collection</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Testing Tools & Resources</h3>
+
+              <div class="baseline-accordion">
+                <details class="accordion">
+                  <summary class="accordion__summary">
+                    Automated Testing Tools
+                  </summary>
+                  <div class="accordion__content">
+                    <pre><code>// axe-core integration
+npm install axe-core --save-dev
+
+// React Testing Example
+import { render } from '@testing-library/react';
+import { axe } from 'jest-axe';
+
+test('component should have no accessibility violations', async () => {
+  const { container } = render(&lt;MyComponent /&gt;);
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+// Lighthouse CI
+// .github/workflows/lighthouse.yml
+name: Lighthouse CI
+on: [push]
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: npm install && npm run build
+      - uses: treosh/lighthouse-ci-action@v7
+        with:
+          urls: |
+            http://localhost:3000
+          configPath: './lighthouserc.json'</code></pre>
+                  </div>
+                </details>
+
+                <details class="accordion">
+                  <summary class="accordion__summary">
+                    Manual Testing Checklist
+                  </summary>
+                  <div class="accordion__content">
+                    <pre><code># Keyboard Navigation Test
+- [ ] Tab through all interactive elements
+- [ ] Enter/Space activates buttons and links
+- [ ] Arrow keys work for menus, sliders, radios
+- [ ] Escape closes modals and menus
+- [ ] No keyboard traps
+- [ ] Focus order follows visual order
+- [ ] Skip links work
+
+# Screen Reader Test (NVDA/JAWS/VoiceOver)
+- [ ] Page has descriptive title
+- [ ] Landmarks identified (header, main, nav, footer)
+- [ ] Images have alt text
+- [ ] Form fields have labels
+- [ ] Error messages announced
+- [ ] Dynamic content announced (aria-live)
+- [ ] Custom widgets have proper ARIA
+
+# Visual Test
+- [ ] Text zoom to 200% works
+- [ ] Color contrast passes WCAG AA
+- [ ] No information conveyed by color alone
+- [ ] Focus indicators visible
+- [ ] No flashing content (3 times/sec)
+- [ ] Text reflows properly on zoom
+
+# Mobile/Tablet Test
+- [ ] Touch targets ≥ 44px
+- [ ] No horizontal scrolling required
+- [ ] Gestures have alternatives
+- [ ] Orientation changes supported</code></pre>
+                  </div>
+                </details>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Browser DevTools for Accessibility</h3>
+
+              <div class="naming-table-wrapper">
+                <table class="naming-table">
+                  <thead>
+                    <tr>
+                      <th>Tool</th>
+                      <th>Purpose</th>
+                      <th>How to Access</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Accessibility Tree</td>
+                      <td>View computed accessibility properties</td>
+                      <td>Elements panel → Accessibility</td>
+                    </tr>
+                    <tr>
+                      <td>Color Contrast</td>
+                      <td>Check text contrast ratios</td>
+                      <td>Styles panel → Color picker</td>
+                    </tr>
+                    <tr>
+                      <td>Lighthouse Audit</td>
+                      <td>Comprehensive accessibility audit</td>
+                      <td>Lighthouse panel → Generate report</td>
+                    </tr>
+                    <tr>
+                      <td>Screen Reader Emulation</td>
+                      <td>Test with simulated screen reader</td>
+                      <td>Settings → Experiments → Screen reader</td>
+                    </tr>
+                    <tr>
+                      <td>Keyboard Shortcuts</td>
+                      <td>Test keyboard navigation</td>
+                      <td>Tab, Shift+Tab, Arrow keys</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- FRAMEWORKS -->
+          <section class="section" id="frameworks">
+            <h2>Frameworks & Libraries</h2>
+            <p>
+              Modern frameworks and libraries can help or hinder accessibility.
+              Choose tools that support accessible development.
+            </p>
+
+            <div class="card">
+              <h3>Framework-Specific Accessibility</h3>
+
+              <div class="baseline-accordion">
+                <details class="accordion">
+                  <summary class="accordion__summary">
+                    React Accessibility
+                  </summary>
+                  <div class="accordion__content">
+                    <pre><code>// React Accessibility Patterns
+import React, { useRef, useEffect } from 'react';
+
+// Focus management
+function Modal({ isOpen, onClose }) {
+  const modalRef = useRef();
+  
+  useEffect(() => {
+    if (isOpen) {
+      // Focus trap
+      modalRef.current.focus();
+    }
+  }, [isOpen]);
+  
+  // Handle keyboard events
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') onClose();
+    if (e.key === 'Tab') {
+      // Implement focus trap
+    }
+  };
+  
+  return isOpen ? (
+    &lt;div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      onKeyDown={handleKeyDown}
+      tabIndex={-1}
+      ref={modalRef}
+    &gt;
+      &lt;h2 id="modal-title"&gt;Modal Title&lt;/h2&gt;
+      {/* Modal content */}
+    &lt;/div&gt;
+  ) : null;
+}
+
+// Accessible forms
+function LoginForm() {
+  const [error, setError] = useState('');
+  
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;label htmlFor="email"&gt;Email&lt;/label&gt;
+      &lt;input
+        id="email"
+        type="email"
+        aria-describedby={error ? "email-error" : undefined}
+        aria-invalid={!!error}
+      /&gt;
+      {error && (
+        &lt;div id="email-error" role="alert"&gt;
+          {error}
+        &lt;/div&gt;
+      )}
+    &lt;/form&gt;
+  );
+}</code></pre>
+                  </div>
+                </details>
+
+                <details class="accordion">
+                  <summary class="accordion__summary">
+                    Vue Accessibility
+                  </summary>
+                  <div class="accordion__content">
+                    <pre><code>// Vue 3 Accessibility Patterns
+&lt;template&gt;
+  &lt;!-- Semantic template structure --&gt;
+  &lt;header role="banner"&gt;
+    &lt;nav aria-label="Main navigation"&gt;
+      &lt;ul&gt;
+        &lt;li v-for="item in navItems" :key="item.id"&gt;
+          &lt;a :href="item.url"&gt;{{ item.text }}&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;!-- Accessible form --&gt;
+    &lt;form @submit.prevent="handleSubmit"&gt;
+      &lt;label for="username"&gt;Username&lt;/label&gt;
+      &lt;input
+        id="username"
+        v-model="username"
+        :aria-invalid="hasError"
+        :aria-describedby="error ? 'username-error' : undefined"
+      &gt;
+      &lt;div
+        v-if="error"
+        id="username-error"
+        role="alert"
+        class="error-message"
+      &gt;
+        {{ error }}
+      &lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/main&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import { ref, computed } from 'vue';
+
+const username = ref('');
+const error = ref('');
+
+const hasError = computed(() =&gt; error.value.length &gt; 0);
+&lt;/script&gt;</code></pre>
+                  </div>
+                </details>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Accessibility-First Libraries</h3>
+
+              <div class="naming-table-wrapper">
+                <table class="naming-table">
+                  <thead>
+                    <tr>
+                      <th>Library</th>
+                      <th>Framework</th>
+                      <th>Focus</th>
+                      <th>Features</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>React Aria</td>
+                      <td>React</td>
+                      <td>Accessibility primitives</td>
+                      <td>Hooks for accessible UI patterns</td>
+                    </tr>
+                    <tr>
+                      <td>Headless UI</td>
+                      <td>React/Vue</td>
+                      <td>Unstyled accessible components</td>
+                      <td>Focus management, keyboard nav</td>
+                    </tr>
+                    <tr>
+                      <td>Reakit</td>
+                      <td>React</td>
+                      <td>Accessible component system</td>
+                      <td>WAI-ARIA compliant components</td>
+                    </tr>
+                    <tr>
+                      <td>Material-UI</td>
+                      <td>React</td>
+                      <td>Material Design with a11y</td>
+                      <td>Accessible components, theming</td>
+                    </tr>
+                    <tr>
+                      <td>Vuetify</td>
+                      <td>Vue</td>
+                      <td>Material Design for Vue</td>
+                      <td>Accessible components, a11y support</td>
+                    </tr>
+                    <tr>
+                      <td>Angular CDK</td>
+                      <td>Angular</td>
+                      <td>Component Dev Kit</td>
+                      <td>Accessibility utilities, a11y support</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Framework Accessibility Pitfalls</h3>
+              <ul>
+                <li>
+                  <strong>SPA routing without focus management</strong> - Screen
+                  readers don't know content changed
+                </li>
+                <li>
+                  <strong
+                    >Client-side rendering without server-side fallbacks</strong
+                  >
+                  - Empty content for screen readers during loading
+                </li>
+                <li>
+                  <strong>Virtual DOM breaking native focus</strong> - Focus
+                  lost after re-renders
+                </li>
+                <li>
+                  <strong>Component libraries without proper ARIA</strong> -
+                  Looks good but inaccessible
+                </li>
+                <li>
+                  <strong>Over-reliance on CSS-in-JS</strong> - Can break user
+                  style sheets and preferences
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- CHECKLIST -->
+          <section class="section" id="checklist">
+            <h2>Implementation Checklist</h2>
+
+            <div class="card">
+              <h3>Accessibility Review Checklist</h3>
+              <ul style="margin: 0">
+                <li>✓ Semantic HTML used appropriately</li>
+                <li>✓ All images have appropriate alt text</li>
+                <li>✓ Color contrast meets WCAG AA (4.5:1)</li>
+                <li>✓ Keyboard navigation works completely</li>
+                <li>✓ Focus indicators visible on all interactive elements</li>
+                <li>✓ Form fields have associated labels</li>
+                <li>✓ Error messages are clear and accessible</li>
+                <li>
+                  ✓ ARIA used correctly (or not at all if native HTML works)
+                </li>
+                <li>✓ Page has logical heading structure</li>
+                <li>✓ Content scales to 200% without breaking</li>
+                <li>✓ No keyboard traps</li>
+                <li>✓ Dynamic content announced to screen readers</li>
+                <li>✓ No flashing content (≤ 3 flashes per second)</li>
+                <li>✓ Language attribute set on html element</li>
+                <li>✓ Page title is descriptive and unique</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>New Feature Accessibility Checklist</h3>
+              <ul style="margin: 0">
+                <li>✓ Accessibility considered in design phase</li>
+                <li>✓ Keyboard interaction designed</li>
+                <li>✓ Screen reader support planned</li>
+                <li>✓ Color contrast checked in designs</li>
+                <li>✓ Accessible HTML structure planned</li>
+                <li>✓ ARIA patterns identified if needed</li>
+                <li>✓ Focus management strategy defined</li>
+                <li>✓ Testing plan includes accessibility</li>
+                <li>✓ Documentation includes accessibility notes</li>
+                <li>✓ Code review includes accessibility check</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Ongoing Maintenance</h3>
+              <ul style="margin: 0">
+                <li>✓ Regular automated accessibility scans</li>
+                <li>✓ Manual keyboard testing with new features</li>
+                <li>✓ Screen reader testing for major changes</li>
+                <li>✓ Color contrast checks during design updates</li>
+                <li>✓ Accessibility training for new team members</li>
+                <li>✓ Monitor accessibility issue reports</li>
+                <li>✓ Keep up with WCAG updates and best practices</li>
+                <li>✓ Test with real users with disabilities periodically</li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal: WCAG Reference -->
+    <dialog id="modal-wcag-reference" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">
+            WCAG 2.1 Success Criteria Quick Reference
+          </h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close WCAG reference"
+            onclick="document.getElementById('modal-wcag-reference').close()"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <div class="card">
+            <h4>Perceivable (Guideline 1)</h4>
+            <div class="naming-table-wrapper">
+              <table class="naming-table">
+                <thead>
+                  <tr>
+                    <th>Code</th>
+                    <th>Description</th>
+                    <th>Level</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1.1.1 Non-text Content</td>
+                    <td>Provide text alternatives for non-text content</td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>1.2.1 Audio-only and Video-only</td>
+                    <td>Provide alternatives for time-based media</td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>1.3.1 Info and Relationships</td>
+                    <td>
+                      Programmatically determine information and relationships
+                    </td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>1.3.2 Meaningful Sequence</td>
+                    <td>Present content in a meaningful order</td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>1.3.3 Sensory Characteristics</td>
+                    <td>Don't rely solely on sensory characteristics</td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>1.4.1 Use of Color</td>
+                    <td>
+                      Don't use color as the only visual means of conveying
+                      information
+                    </td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>1.4.3 Contrast (Minimum)</td>
+                    <td>
+                      Text and images of text have contrast ratio of at least
+                      4.5:1
+                    </td>
+                    <td>AA</td>
+                  </tr>
+                  <tr>
+                    <td>1.4.4 Resize Text</td>
+                    <td>
+                      Text can be resized up to 200% without loss of content or
+                      function
+                    </td>
+                    <td>AA</td>
+                  </tr>
+                  <tr>
+                    <td>1.4.10 Reflow</td>
+                    <td>
+                      Content can be presented without loss of information or
+                      functionality
+                    </td>
+                    <td>AA</td>
+                  </tr>
+                  <tr>
+                    <td>1.4.11 Non-text Contrast</td>
+                    <td>
+                      Visual presentation of UI components and graphical objects
+                      have contrast ratio of at least 3:1
+                    </td>
+                    <td>AA</td>
+                  </tr>
+                  <tr>
+                    <td>1.4.12 Text Spacing</td>
+                    <td>
+                      No loss of content or functionality when text spacing is
+                      adjusted
+                    </td>
+                    <td>AA</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>Operable (Guideline 2)</h4>
+            <div class="naming-table-wrapper">
+              <table class="naming-table">
+                <thead>
+                  <tr>
+                    <th>Code</th>
+                    <th>Description</th>
+                    <th>Level</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2.1.1 Keyboard</td>
+                    <td>
+                      All functionality operable through a keyboard interface
+                    </td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>2.1.2 No Keyboard Trap</td>
+                    <td>Keyboard focus not trapped in any component</td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>2.1.4 Character Key Shortcuts</td>
+                    <td>
+                      If character key shortcuts exist, they can be turned off
+                      or remapped
+                    </td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>2.2.1 Timing Adjustable</td>
+                    <td>Users can turn off, adjust, or extend time limits</td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>2.3.1 Three Flashes or Below</td>
+                    <td>
+                      Web pages do not contain anything that flashes more than
+                      three times per second
+                    </td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>2.4.1 Bypass Blocks</td>
+                    <td>
+                      Provide a way to bypass blocks of content repeated on
+                      multiple pages
+                    </td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>2.4.2 Page Titled</td>
+                    <td>
+                      Web pages have titles that describe topic or purpose
+                    </td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>2.4.3 Focus Order</td>
+                    <td>
+                      Navigable in a sequence that preserves meaning and
+                      operability
+                    </td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>2.4.4 Link Purpose (In Context)</td>
+                    <td>
+                      Purpose of each link can be determined from link text
+                      alone or from link text and programmatically determined
+                      link context
+                    </td>
+                    <td>A</td>
+                  </tr>
+                  <tr>
+                    <td>2.4.6 Headings and Labels</td>
+                    <td>Headings and labels describe topic or purpose</td>
+                    <td>AA</td>
+                  </tr>
+                  <tr>
+                    <td>2.4.7 Focus Visible</td>
+                    <td>
+                      Any keyboard operable user interface has a mode of
+                      operation where keyboard focus indicator is visible
+                    </td>
+                    <td>AA</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Focus Management -->
+    <dialog id="modal-focus-management" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Focus Management Examples</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close focus management examples"
+            onclick="document.getElementById('modal-focus-management').close()"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <div class="card">
+            <h4>Modal Focus Management</h4>
+            <pre><code>// React Modal with Focus Management
+import React, { useEffect, useRef } from 'react';
+
+function Modal({ isOpen, onClose, title, children }) {
+  const modalRef = useRef();
+  const closeButtonRef = useRef();
+  const previousFocus = useRef();
+  
+  useEffect(() => {
+    if (isOpen) {
+      // Save currently focused element
+      previousFocus.current = document.activeElement;
+      
+      // Focus the modal
+      modalRef.current.focus();
+      
+      // Trap focus inside modal
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') {
+          onClose();
+        }
+        
+        if (e.key === 'Tab') {
+          const focusableElements = modalRef.current.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          );
+          
+          const firstElement = focusableElements[0];
+          const lastElement = focusableElements[focusableElements.length - 1];
+          
+          if (e.shiftKey) {
+            // Shift + Tab
+            if (document.activeElement === firstElement) {
+              lastElement.focus();
+              e.preventDefault();
+            }
+          } else {
+            // Tab
+            if (document.activeElement === lastElement) {
+              firstElement.focus();
+              e.preventDefault();
+            }
+          }
+        }
+      };
+      
+      document.addEventListener('keydown', handleKeyDown);
+      
+      // Return focus on close
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+        if (previousFocus.current) {
+          previousFocus.current.focus();
+        }
+      };
+    }
+  }, [isOpen, onClose]);
+  
+  if (!isOpen) return null;
+  
+  return (
+    &lt;div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      tabIndex={-1}
+      ref={modalRef}
+      className="modal"
+    &gt;
+      &lt;div className="modal-content"&gt;
+        &lt;div className="modal-header"&gt;
+          &lt;h2 id="modal-title"&gt;{title}&lt;/h2&gt;
+          &lt;button
+            ref={closeButtonRef}
+            onClick={onClose}
+            aria-label="Close modal"
+            className="close-button"
+          &gt;
+            &lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div className="modal-body"&gt;
+          {children}
+        &lt;/div&gt;
+        &lt;div className="modal-footer"&gt;
+          &lt;button onClick={onClose}&gt;Cancel&lt;/button&gt;
+          &lt;button onClick={handleConfirm}&gt;Confirm&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>Dynamic Content Focus Management</h4>
+            <pre><code>// Focus management for dynamically added content
+function Notification({ message, type = 'info', onDismiss }) {
+  const notificationRef = useRef();
+  
+  useEffect(() => {
+    // Focus the notification when it appears
+    notificationRef.current.focus();
+    
+    // Announce to screen readers
+    const announceToScreenReader = () => {
+      // Using aria-live region
+      const liveRegion = document.getElementById('a11y-live-region');
+      if (liveRegion) {
+        liveRegion.textContent = `${type} notification: ${message}`;
+        setTimeout(() => {
+          liveRegion.textContent = '';
+        }, 1000);
+      }
+    };
+    
+    announceToScreenReader();
+    
+    // Auto-dismiss after 5 seconds
+    const timer = setTimeout(() => {
+      onDismiss();
+    }, 5000);
+    
+    return () => clearTimeout(timer);
+  }, [message, type, onDismiss]);
+  
+  return (
+    &lt;div
+      ref={notificationRef}
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      tabIndex={-1}
+      className={`notification notification--${type}`}
+    &gt;
+      &lt;div className="notification-content"&gt;
+        &lt;span className="notification-icon" aria-hidden="true"&gt;
+          {type === 'success' ? '✓' : type === 'error' ? '✗' : 'ℹ'}
+        &lt;/span&gt;
+        &lt;span className="notification-message"&gt;{message}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;button
+        onClick={onDismiss}
+        aria-label="Dismiss notification"
+        className="notification-dismiss"
+      &gt;
+        &lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Accessible Components -->
+    <dialog id="modal-accessible-components" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Accessible Component Examples</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close accessible components examples"
+            onclick="document.getElementById('modal-accessible-components').close()"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <div class="card">
+            <h4>Accessible Tab Interface</h4>
+            <pre><code>// Accessible Tabs Component
+import React, { useState, useEffect, useRef } from 'react';
+
+function Tabs({ tabs }) {
+  const [activeTab, setActiveTab] = useState(0);
+  const tablistRef = useRef();
+  
+  const handleKeyDown = (e) => {
+    const tabCount = tabs.length;
+    
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+        e.preventDefault();
+        setActiveTab((prev) =&gt; (prev + 1) % tabCount);
+        break;
+        
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        e.preventDefault();
+        setActiveTab((prev) =&gt; (prev - 1 + tabCount) % tabCount);
+        break;
+        
+      case 'Home':
+        e.preventDefault();
+        setActiveTab(0);
+        break;
+        
+      case 'End':
+        e.preventDefault();
+        setActiveTab(tabCount - 1);
+        break;
+        
+      default:
+        break;
+    }
+  };
+  
+  useEffect(() => {
+    // Focus the active tab when it changes
+    const activeTabElement = tablistRef.current?.querySelector(
+      `[role="tab"][aria-selected="true"]`
+    );
+    if (activeTabElement) {
+      activeTabElement.focus();
+    }
+  }, [activeTab]);
+  
+  return (
+    &lt;div className="tabs"&gt;
+      &lt;div
+        ref={tablistRef}
+        role="tablist"
+        aria-label="Product information tabs"
+        onKeyDown={handleKeyDown}
+      &gt;
+        {tabs.map((tab, index) =&gt; (
+          &lt;button
+            key={tab.id}
+            id={`tab-${tab.id}`}
+            role="tab"
+            aria-selected={activeTab === index}
+            aria-controls={`panel-${tab.id}`}
+            tabIndex={activeTab === index ? 0 : -1}
+            onClick={() =&gt; setActiveTab(index)}
+            className={`tab ${activeTab === index ? 'active' : ''}`}
+          &gt;
+            {tab.label}
+            {tab.notification && (
+              &lt;span className="sr-only"&gt;
+                , has notification
+              &lt;/span&gt;
+            )}
+          &lt;/button&gt;
+        ))}
+      &lt;/div&gt;
+      
+      {tabs.map((tab, index) =&gt; (
+        &lt;div
+          key={tab.id}
+          id={`panel-${tab.id}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${tab.id}`}
+          hidden={activeTab !== index}
+          tabIndex={0}
+          className="tabpanel"
+        &gt;
+          {activeTab === index && tab.content}
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+
+// CSS for screen reader only content
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Accessible Form -->
+    <dialog id="modal-accessible-form" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Complete Accessible Form Example</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close accessible form example"
+            onclick="document.getElementById('modal-accessible-form').close()"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <div class="card">
+            <h4>Registration Form with Full Accessibility</h4>
+            <pre><code>&lt;form 
+  id="registration-form"
+  novalidate
+  aria-label="Registration form"
+  onsubmit="return validateForm()"
+&gt;
+  &lt;!-- Personal Information Fieldset --&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Personal Information&lt;/legend&gt;
+    
+    &lt;div class="form-group"&gt;
+      &lt;label for="full-name"&gt;
+        Full Name &lt;span class="required" aria-hidden="true"&gt;*&lt;/span&gt;
+        &lt;span class="sr-only"&gt;(required)&lt;/span&gt;
+      &lt;/label&gt;
+      &lt;input
+        type="text"
+        id="full-name"
+        name="fullName"
+        required
+        aria-required="true"
+        aria-describedby="name-instructions"
+        autocomplete="name"
+      &gt;
+      &lt;div id="name-instructions" class="instruction-text"&gt;
+        Enter your full legal name
+      &lt;/div&gt;
+      &lt;div id="name-error" role="alert" class="error-message" hidden&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+      &lt;label for="email"&gt;
+        Email Address &lt;span class="required" aria-hidden="true"&gt;*&lt;/span&gt;
+        &lt;span class="sr-only"&gt;(required)&lt;/span&gt;
+      &lt;/label&gt;
+      &lt;input
+        type="email"
+        id="email"
+        name="email"
+        required
+        aria-required="true"
+        aria-describedby="email-instructions"
+        autocomplete="email"
+      &gt;
+      &lt;div id="email-instructions" class="instruction-text"&gt;
+        We'll send a confirmation email to this address
+      &lt;/div&gt;
+      &lt;div id="email-error" role="alert" class="error-message" hidden&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  
+  &lt;!-- Account Security Fieldset --&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Account Security&lt;/legend&gt;
+    
+    &lt;div class="form-group"&gt;
+      &lt;label for="password"&gt;
+        Password &lt;span class="required" aria-hidden="true"&gt;*&lt;/span&gt;
+        &lt;span class="sr-only"&gt;(required)&lt;/span&gt;
+      &lt;/label&gt;
+      &lt;div class="password-wrapper"&gt;
+        &lt;input
+          type="password"
+          id="password"
+          name="password"
+          required
+          aria-required="true"
+          aria-describedby="password-requirements password-error"
+          autocomplete="new-password"
+        &gt;
+        &lt;button
+          type="button"
+          class="toggle-password"
+          aria-label="Show password"
+          aria-pressed="false"
+          onclick="togglePasswordVisibility('password', this)"
+        &gt;
+          &lt;span class="show-text"&gt;Show&lt;/span&gt;
+          &lt;span class="hide-text"&gt;Hide&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div id="password-requirements" class="instruction-text"&gt;
+        Must be at least 8 characters with uppercase, lowercase, and number
+      &lt;/div&gt;
+      &lt;div id="password-error" role="alert" class="error-message" hidden&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+      &lt;label for="confirm-password"&gt;
+        Confirm Password &lt;span class="required" aria-hidden="true"&gt;*&lt;/span&gt;
+        &lt;span class="sr-only"&gt;(required)&lt;/span&gt;
+      &lt;/label&gt;
+      &lt;input
+        type="password"
+        id="confirm-password"
+        name="confirmPassword"
+        required
+        aria-required="true"
+        aria-describedby="confirm-password-error"
+        autocomplete="new-password"
+      &gt;
+      &lt;div id="confirm-password-error" role="alert" class="error-message" hidden&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  
+  &lt;!-- Preferences Fieldset --&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Preferences&lt;/legend&gt;
+    
+    &lt;div class="form-group"&gt;
+      &lt;p id="communication-preference"&gt;How would you like to be contacted?&lt;/p&gt;
+      &lt;div role="group" aria-labelledby="communication-preference"&gt;
+        &lt;input type="checkbox" id="contact-email" name="contactMethod" value="email"&gt;
+        &lt;label for="contact-email"&gt;Email&lt;/label&gt;
+        
+        &lt;input type="checkbox" id="contact-sms" name="contactMethod" value="sms"&gt;
+        &lt;label for="contact-sms"&gt;Text Message&lt;/label&gt;
+        
+        &lt;input type="checkbox" id="contact-phone" name="contactMethod" value="phone"&gt;
+        &lt;label for="contact-phone"&gt;Phone Call&lt;/label&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+      &lt;label for="newsletter"&gt;
+        &lt;input type="checkbox" id="newsletter" name="newsletter"&gt;
+        Subscribe to newsletter
+      &lt;/label&gt;
+      &lt;div class="instruction-text"&gt;
+        Monthly updates about new features and tips
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  
+  &lt;!-- Form Actions --&gt;
+  &lt;div class="form-actions"&gt;
+    &lt;button type="submit" class="btn-primary"&gt;
+      Create Account
+    &lt;/button&gt;
+    &lt;button type="button" class="btn-secondary" onclick="resetForm()"&gt;
+      Reset Form
+    &lt;/button&gt;
+    &lt;a href="/login" class="btn-link"&gt;Already have an account?&lt;/a&gt;
+  &lt;/div&gt;
+  
+  &lt;!-- Global Error Summary --&gt;
+  &lt;div
+    id="form-errors"
+    role="alert"
+    aria-live="assertive"
+    class="error-summary"
+    hidden
+    tabindex="-1"
+  &gt;
+    &lt;h2&gt;There are errors in your form&lt;/h2&gt;
+    &lt;ul id="error-list"&gt;&lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

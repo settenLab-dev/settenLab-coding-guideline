@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta
+      content="Environment setup: Git configuration, repository creation, naming conventions, and recommended project automation."
+      name="description"
+    />
+    <meta content="#0b0f1a" name="theme-color" />
+    <meta content="Environment setup — Coding Guideline" property="og:title" />
+    <meta
+      content="Git workflow, repository naming, and baseline quality gates for consistent version control."
+      property="og:description"
+    />
+    <meta content="website" property="og:type" />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="/apple-touch-icon.png" rel="apple-touch-icon" />
+    <link
+      as="font"
+      crossorigin="anonymous"
+      href="/assets/fonts/Outfit-VariableFont.woff2"
+      rel="preload"
+      type="font/woff2"
+    />
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    <style data-doc-utilities="true">
+      /* Docs-only utilities: modal dialog */
+      .doc-dialog {
+        width: min(920px, calc(100vw - 32px));
+        border: 1px solid rgba(156, 163, 175, 0.25);
+        border-radius: 16px;
+        background: rgba(11, 15, 26, 0.98);
+        color: inherit;
+        padding: 0;
+      }
+      .doc-dialog::backdrop {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .doc-dialog__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(156, 163, 175, 0.2);
+      }
+      .doc-dialog__title {
+        font-size: 14px;
+        margin: 0;
+      }
+      .doc-dialog__close {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        border: 1px solid rgba(156, 163, 175, 0.25);
+        background: rgba(156, 163, 175, 0.08);
+        color: inherit;
+        cursor: pointer;
+      }
+      .doc-dialog__body {
+        padding: 16px;
+        max-height: min(70vh, 720px);
+        overflow: auto;
+      }
+      .doc-dialog__body pre {
+        margin: 12px 0;
+      }
+      .doc-dialog-trigger {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(59, 130, 246, 0.35);
+        background: rgba(59, 130, 246, 0.15);
+        color: inherit;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .doc-pill {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        background: rgba(59, 130, 246, 0.2);
+        color: #93c5fd;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+      }
+    </style>
+    <title>Environment setup — Coding Guideline</title>
+  </head>
+  <body>
+    <div class="bg-gradient"></div>
+    <div class="app-shell">
+      <!-- SIDEBAR -->
+      <aside aria-label="Primary" class="sidebar" id="primary-sidebar">
+        <a class="sidebar__header" href="/">
+          <div aria-hidden="true" class="sidebar__logo">S</div>
+          <div class="sidebar__title">
+            <span class="sidebar__company">Coding Guideline</span>
+            <span class="sidebar__subtitle">settenLab</span>
+          </div>
+        </a>
+        <nav aria-label="Guideline navigation" class="sidebar__nav sidebar-nav">
+          <!-- START HERE -->
+          <details
+            class="nav-group nav-group--start"
+            data-nav-group="start-here"
+          >
+            <summary class="nav-group__summary">
+              <a class="nav-group__summary-link" href="/">Start here</a>
+            </summary>
+          </details>
+          <!-- PROJECT SETUP -->
+          <details class="nav-group" data-nav-group="project-setup" open="">
+            <summary class="nav-group__summary">Project setup</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  class="sidebar-nav__link nav-link"
+                  href="environment-setup.html"
+                >
+                  Environment setup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  class="sidebar-nav__link nav-link"
+                  href="file-structure.html"
+                >
+                  File structure
+                </a>
+              </li>
+            </ul>
+          </details>
+          <!-- UI -->
+          <details class="nav-group" data-nav-group="ui">
+            <summary class="nav-group__summary">UI</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="markup.html">
+                  Markup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="styling.html">
+                  Styling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="components.html">
+                  Components
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="typography.html">
+                  Typography
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="accessibility.html">
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </details>
+          <!-- ENGINEERING -->
+          <details class="nav-group" data-nav-group="engineering">
+            <summary class="nav-group__summary">Engineering</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="javascript.html">
+                  Javascript
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  class="sidebar-nav__link nav-link"
+                  href="api-and-data-handling.html"
+                >
+                  API & Data handling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="performance.html">
+                  Performance
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="testing.html">
+                  Testing
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="security.html">
+                  Security
+                </a>
+              </li>
+            </ul>
+          </details>
+          <!-- WORKFLOW -->
+          <details class="nav-group" data-nav-group="workflow">
+            <summary class="nav-group__summary">Workflow</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="pr-rules.html">
+                  PR rules / review checklist
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="documentation.html">
+                  Documentation rules
+                </a>
+              </li>
+            </ul>
+          </details>
+        </nav>
+        <div class="sidebar__footer">
+          <a class="sidebar__version" href="changelog.html">v1.0.0</a>
+          <span class="sidebar__lang">EN</span>
+        </div>
+      </aside>
+      <div class="sidebar-backdrop js-sidebar-backdrop" hidden=""></div>
+      <!-- MAIN -->
+      <main class="main" id="main-content">
+        <header class="topbar">
+          <button
+            aria-controls="primary-sidebar"
+            aria-expanded="false"
+            aria-label="Open navigation"
+            class="topbar__menu-btn js-sidebar-toggle"
+            type="button"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <h1 class="topbar__title">Environment setup</h1>
+          <div class="topbar__actions">
+            <!-- Theme toggle placeholder -->
+            <button
+              aria-label="Toggle theme"
+              aria-pressed="false"
+              class="topbar__action-btn"
+              id="themeToggle"
+            >
+              🌗
+            </button>
+          </div>
+        </header>
+        <div class="content">
+          <!-- OVERVIEW -->
+          <section class="section" id="overview">
+            <h2>Overview</h2>
+            <p>
+              This page establishes the foundation for consistent version
+              control and development practices. The primary goal is to achieve
+              predictable Git workflows and reliable code formatting across the
+              entire team.
+            </p>
+            <div class="card callout">
+              <h3>Primary Goal</h3>
+              <p style="margin-bottom: 12px">
+                <strong
+                  >Achieve consistency in version control from day one.</strong
+                >
+                Your team should commit, branch, and format code
+                predictably—regardless of individual editor preferences.
+              </p>
+              <ul>
+                <li>
+                  Every developer commits with proper identity and line endings
+                </li>
+                <li>Repositories follow consistent naming patterns</li>
+                <li>Branches and commits are structured and reviewable</li>
+                <li>Code formatting is automated and editor-agnostic</li>
+              </ul>
+            </div>
+          </section>
+          <!-- SETUP FLOW -->
+          <section class="section" id="flow">
+            <h2>Setup Flow</h2>
+            <p>
+              Follow this sequence to establish a consistent foundation.
+              Critical steps ensure team alignment; recommended steps improve
+              quality of life.
+            </p>
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">
+                  1. Git workflow
+                  <span
+                    style="
+                      display: inline-block;
+                      padding: 2px 8px;
+                      border-radius: 999px;
+                      font-size: 10px;
+                      background: rgba(239, 68, 68, 0.2);
+                      color: #fca5a5;
+                      border: 1px solid rgba(239, 68, 68, 0.3);
+                      margin-left: 8px;
+                    "
+                    >CRITICAL</span
+                  >
+                </h3>
+                <p class="component-card__text">
+                  Workflow, access, and local Git baseline (identity, line
+                  endings).
+                </p>
+              </article>
+              <article class="component-card">
+                <h3 class="component-card__title">
+                  2. Repo baseline
+                  <span
+                    style="
+                      display: inline-block;
+                      padding: 2px 8px;
+                      border-radius: 999px;
+                      font-size: 10px;
+                      background: rgba(239, 68, 68, 0.2);
+                      color: #fca5a5;
+                      border: 1px solid rgba(239, 68, 68, 0.3);
+                      margin-left: 8px;
+                    "
+                    >CRITICAL</span
+                  >
+                </h3>
+                <p class="component-card__text">
+                  Minimal repository baseline (README, ignore rules if
+                  applicable, lockfile if applicable).
+                </p>
+              </article>
+              <article class="component-card">
+                <h3 class="component-card__title">
+                  3. Naming &amp; branching
+                  <span
+                    style="
+                      display: inline-block;
+                      padding: 2px 8px;
+                      border-radius: 999px;
+                      font-size: 10px;
+                      background: rgba(239, 68, 68, 0.2);
+                      color: #fca5a5;
+                      border: 1px solid rgba(239, 68, 68, 0.3);
+                      margin-left: 8px;
+                    "
+                    >CRITICAL</span
+                  >
+                </h3>
+                <p class="component-card__text">
+                  Naming conventions and branch strategy for parallel work.
+                </p>
+              </article>
+              <article class="component-card">
+                <h3 class="component-card__title">
+                  4. Editor &amp; tooling
+                  <span
+                    style="
+                      display: inline-block;
+                      padding: 2px 8px;
+                      border-radius: 999px;
+                      font-size: 10px;
+                      background: rgba(59, 130, 246, 0.2);
+                      color: #93c5fd;
+                      border: 1px solid rgba(59, 130, 246, 0.3);
+                      margin-left: 8px;
+                    "
+                    >RECOMMENDED</span
+                  >
+                </h3>
+                <p class="component-card__text">
+                  Recommended editor/tooling defaults; flexibility is allowed.
+                </p>
+              </article>
+              <article class="component-card">
+                <h3 class="component-card__title">
+                  5. Quality gates
+                  <span
+                    style="
+                      display: inline-block;
+                      padding: 2px 8px;
+                      border-radius: 999px;
+                      font-size: 10px;
+                      background: rgba(59, 130, 246, 0.2);
+                      color: #93c5fd;
+                      border: 1px solid rgba(59, 130, 246, 0.3);
+                      margin-left: 8px;
+                    "
+                    >OPTIONAL</span
+                  >
+                </h3>
+                <p class="component-card__text">
+                  Optional automation: pre-commit hooks and/or CI where it adds
+                  value.
+                </p>
+              </article>
+            </div>
+          </section>
+          <!-- GIT CONFIGURATION -->
+          <section class="section" id="git">
+            <h2>1. Git (Workflow Baseline)</h2>
+            <p>
+              This section describes the expected Git workflow: who initializes
+              the repository, how contributors join, and how parallel work is
+              organized. Tool installation details are intentionally out of
+              scope.
+            </p>
+            <div class="card">
+              <h3>Baseline: Task Owner Responsibilities</h3>
+              <ul>
+                <li>
+                  Create (or select) the repository and define the default
+                  branch (<code>main</code>).
+                </li>
+                <li>
+                  Establish the initial repo baseline (README, ignore rules if
+                  applicable, lockfile if applicable).
+                </li>
+                <li>
+                  Publish naming and branching expectations for the task
+                  (pages/features ownership, shared foundations).
+                </li>
+                <li>Link to PR rules for review and merge requirements.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Baseline: How Contributors Join</h3>
+              <ul>
+                <li>Request / receive access to the repository.</li>
+                <li>
+                  Clone the repository and start from the latest default branch.
+                </li>
+                <li>
+                  Work only in a feature branch; the default branch is kept
+                  clean.
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Branch Strategy for Parallel Work</h3>
+              <ul>
+                <li>
+                  <strong>One task (or deliverable) = one branch.</strong>
+                  Example: one developer creates specific pages while another
+                  works on different pages.
+                </li>
+                <li>
+                  Use a dedicated “base” branch/PR for shared foundations
+                  (layout, routing, header/footer) before page-specific branches
+                  to reduce conflicts.
+                </li>
+                <li>
+                  Keep branches small and reviewable; open PRs early if
+                  coordination is required.
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Local Git Settings (Expected)</h3>
+              <ul>
+                <li>
+                  Configure commit identity (<code>user.name</code>,
+                  <code>user.email</code>) so authorship is correct.
+                </li>
+                <li>
+                  Align line endings to avoid noisy diffs (CRLF/LF). Prefer
+                  repo-level rules (<code>.gitattributes</code>) when present.
+                </li>
+                <li>
+                  SSH authentication is recommended for convenience and
+                  security.
+                </li>
+              </ul>
+            </div>
+            <div class="card component-card--warning">
+              <h3>Common Pitfall</h3>
+              <p>
+                If line endings are not aligned, Git may show “entire file
+                changed” diffs even when content did not meaningfully change.
+                Fixing this early prevents painful reviews and merge conflicts.
+              </p>
+            </div>
+          </section>
+          <!-- REPOSITORY -->
+          <section class="section" id="repo">
+            <h2>2. Repository Setup</h2>
+            <p>
+              Repository setup varies by project size. The goal is to provide
+              just enough structure for clean collaboration without forcing a
+              single template across all projects.
+            </p>
+            <div class="card">
+              <h3>Always (Any Project)</h3>
+              <ul>
+                <li>
+                  <code>README.md</code>: what the project is, how to
+                  run/build/deploy, and key commands or links.
+                </li>
+                <li>
+                  A clear default branch (<code>main</code>) and a PR-based
+                  workflow (see PR rules).
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>If Applicable (Based on Stack / Tooling)</h3>
+              <ul>
+                <li>
+                  <code>.gitignore</code>: include only what the project
+                  actually generates (e.g., dependency folders, build outputs,
+                  IDE files, local env files).
+                </li>
+                <li>
+                  Lockfile: <code>package-lock.json</code>,
+                  <code>pnpm-lock.yaml</code>, or <code>yarn.lock</code> (only
+                  if a package manager is used).
+                </li>
+                <li>
+                  Tooling configs (Prettier / ESLint / Stylelint / TypeScript)
+                  when the repo uses those tools.
+                </li>
+              </ul>
+              <p style="margin-top: 10px">
+                Small static landing pages may not need a
+                <code>.gitignore</code> if no generated files are produced. If
+                you install dependencies or generate outputs, add a minimal
+                ignore file.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Recommended</h3>
+              <ul>
+                <li>
+                  <code>.gitattributes</code> to standardize line endings and
+                  treat binaries correctly (reduces noisy diffs across OSes).
+                </li>
+                <li>
+                  Documented ownership for shared code (layout/components) vs
+                  feature-specific areas to minimize conflicts.
+                </li>
+              </ul>
+            </div>
+          </section>
+          <!-- NAMING CONVENTIONS -->
+          <section class="section" id="naming">
+            <h2>3. Naming Conventions</h2>
+            <p>
+              Consistent naming makes repositories searchable and predictable
+              across teams. These conventions reduce cognitive load and improve
+              collaboration.
+            </p>
+            <div class="card">
+              <h3>Repository Names</h3>
+              <p>Use kebab-case with explicit scope:</p>
+              <ul>
+                <li><code>client-product-frontend</code></li>
+                <li><code>brand-campaign-landing</code></li>
+                <li><code>company-docs-site</code></li>
+              </ul>
+              <p
+                style="
+                  margin-top: 12px;
+                  font-size: 13px;
+                  color: var(--text-muted);
+                "
+              >
+                ❌ Avoid vague names: <code>new-site</code>,
+                <code>project2024</code>, <code>website</code>
+              </p>
+            </div>
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Branch Names</h3>
+                <p class="component-card__text" style="margin-bottom: 8px">
+                  Use type prefixes:
+                </p>
+                <ul class="component-card__list" style="font-size: 12px">
+                  <li><code>feat/hero-carousel</code></li>
+                  <li><code>fix/header-zindex</code></li>
+                  <li><code>chore/setup-eslint</code></li>
+                  <li><code>docs/api-guide</code></li>
+                </ul>
+              </article>
+              <article class="component-card">
+                <h3 class="component-card__title">Commit Messages</h3>
+                <p class="component-card__text" style="margin-bottom: 8px">
+                  Imperative mood + conventional prefixes:
+                </p>
+                <ul class="component-card__list" style="font-size: 12px">
+                  <li><code>feat: add pricing section</code></li>
+                  <li><code>fix: prevent layout shift</code></li>
+                  <li><code>chore: configure prettier</code></li>
+                  <li><code>docs: update deployment</code></li>
+                </ul>
+              </article>
+              <article class="component-card">
+                <h3 class="component-card__title">Files &amp; Folders</h3>
+                <p class="component-card__text" style="margin-bottom: 8px">
+                  Kebab-case, descriptive nouns:
+                </p>
+                <ul class="component-card__list" style="font-size: 12px">
+                  <li><code>hero-banner.js</code></li>
+                  <li><code>pricing-card.css</code></li>
+                  <li><code>components/accordion/</code></li>
+                  <li><code>utils/format-date.js</code></li>
+                </ul>
+              </article>
+            </div>
+            <div class="card">
+              <h3>Project Structure (Flexible)</h3>
+              <p>
+                Project size and requirements vary (from small landing pages to
+                full applications), so folder structure may differ. Where it
+                helps consistency, we reuse familiar directories such as
+                <code>assets/</code> and <code>components/</code>. Introduce
+                additional folders only when the project needs them.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Commit Message Format</h3>
+              <p style="margin-bottom: 8px">
+                Structure: <code>type: short description (under 72 chars)</code>
+              </p>
+              <ul>
+                <li><strong>feat:</strong> new feature</li>
+                <li><strong>fix:</strong> bug fix</li>
+                <li><strong>chore:</strong> tooling, refactors, maintenance</li>
+                <li><strong>docs:</strong> documentation updates</li>
+                <li>
+                  <strong>refactor:</strong> code improvement without feature
+                  changes
+                </li>
+              </ul>
+              <pre><code>feat: add pricing section with CTA
+fix: prevent layout shift on hero image
+chore: configure stylelint and prettier
+docs: update deployment instructions</code></pre>
+            </div>
+          </section>
+          <!-- EDITOR SETUP -->
+          <section class="section" id="editor">
+            <h2>4. Editor Setup</h2>
+            <p>
+              Use any editor you're productive in. The key is configuring it to
+              respect project conventions defined in
+              <code>.editorconfig</code> and project config files.
+            </p>
+            <div class="card callout">
+              <h3>Key Principle</h3>
+              <p style="margin-bottom: 0">
+                Editor choice is personal. We provide recommended defaults (VS
+                Code settings, formatters, and linters) to keep output
+                consistent across the team. You may use different editors or
+                equivalent tooling as long as the resulting code matches the
+                repository standards (and any enabled CI checks).
+              </p>
+            </div>
+            <div class="baseline-accordion">
+              <details class="accordion">
+                <summary class="accordion__summary">💠 VS Code Setup</summary>
+                <div class="accordion__content">
+                  <p style="margin-bottom: 12px">
+                    Popular choice with excellent extension ecosystem.
+                  </p>
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Recommended Extensions:
+                  </h4>
+                  <ul>
+                    <li>Prettier - Code formatter</li>
+                    <li>ESLint</li>
+                    <li>Stylelint</li>
+                    <li>EditorConfig for VS Code</li>
+                    <li>Path Intellisense</li>
+                    <li>Auto Rename Tag</li>
+                  </ul>
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Workspace Settings:
+                  </h4>
+                  <p
+                    style="
+                      font-size: 13px;
+                      color: var(--text-muted);
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Save in <code>.vscode/settings.json</code> (commit to
+                    repository):
+                  </p>
+                  <pre><code>{
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  }
+}</code></pre>
+                </div>
+              </details>
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  🧠 WebStorm / IntelliJ Setup
+                </summary>
+                <div class="accordion__content">
+                  <p style="margin-bottom: 12px">
+                    Powerful IDE with built-in tools and excellent refactoring
+                    support.
+                  </p>
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Configuration:
+                  </h4>
+                  <ul>
+                    <li>
+                      Enable Prettier in: Preferences → Languages &amp;
+                      Frameworks → JavaScript → Prettier
+                    </li>
+                    <li>Set "On save" action for automatic formatting</li>
+                    <li>
+                      Enable ESLint in: Preferences → Languages &amp; Frameworks
+                      → JavaScript → Code Quality Tools → ESLint
+                    </li>
+                    <li>
+                      EditorConfig is supported natively (reads
+                      <code>.editorconfig</code> automatically)
+                    </li>
+                    <li>
+                      Configure file watchers for SCSS compilation if needed
+                    </li>
+                  </ul>
+                </div>
+              </details>
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  ⚡ Sublime Text / Vim / Other
+                </summary>
+                <div class="accordion__content">
+                  <p style="margin-bottom: 12px">
+                    Lightweight and fast editors. Require manual plugin setup.
+                  </p>
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Sublime Text:
+                  </h4>
+                  <ul>
+                    <li>Install EditorConfig package via Package Control</li>
+                    <li>Install JsPrettier for formatting</li>
+                    <li>Install SublimeLinter with ESLint/Stylelint plugins</li>
+                  </ul>
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Vim / Neovim:
+                  </h4>
+                  <ul>
+                    <li>Install <code>editorconfig-vim</code> plugin</li>
+                    <li>Use ALE or COC for linting and formatting</li>
+                    <li>Configure to run Prettier on save</li>
+                  </ul>
+                  <h4 style="font-size: 14px; margin: 16px 0 8px">
+                    Any Editor:
+                  </h4>
+                  <ul>
+                    <li>Run Prettier via command line or watch script</li>
+                    <li>Integrate ESLint/Stylelint with available plugins</li>
+                    <li>
+                      Ensure line endings match <code>.editorconfig</code>
+                    </li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+            <div class="card">
+              <h3>SCSS Workflow (Team Recommendation)</h3>
+              <p>
+                Our team uses
+                <strong>Live Sass Compiler by Glenn Marks</strong> for VS Code,
+                but this is <strong>optional and editor-specific</strong>. Any
+                SCSS compiler that outputs standard CSS is acceptable.
+              </p>
+              <div
+                style="
+                  margin-top: 16px;
+                  padding: 14px;
+                  background: rgba(156, 163, 175, 0.1);
+                  border-radius: 12px;
+                  border: 1px solid rgba(156, 163, 175, 0.2);
+                "
+              >
+                <h4 style="font-size: 14px; margin: 0 0 8px">
+                  If You Use SCSS:
+                </h4>
+                <ul style="margin: 0">
+                  <li>Write styles in <code>.scss</code> files</li>
+                  <li>
+                    Compile to <code>/assets/css/</code> or project CSS
+                    directory
+                  </li>
+                  <li>Commit compiled CSS to repository</li>
+                  <li>Don't manually edit compiled CSS</li>
+                </ul>
+                <h4 style="font-size: 14px; margin: 16px 0 8px">
+                  Alternative Compilers:
+                </h4>
+                <ul style="margin: 0">
+                  <li>Dart Sass CLI (official, recommended)</li>
+                  <li>Build tools: Webpack, Vite, Parcel</li>
+                  <li>WebStorm built-in file watchers</li>
+                  <li>Any SCSS compiler that outputs standard CSS</li>
+                </ul>
+              </div>
+              <div
+                style="
+                  margin-top: 16px;
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  flex-wrap: wrap;
+                "
+              >
+                <span class="doc-pill">Recommended</span>
+                <button
+                  class="doc-dialog-trigger"
+                  data-dialog-open="glennMarksSettingsDialog"
+                  type="button"
+                >
+                  Open VS Code <code>.vscode/settings.json</code> (Live Sass
+                  Compiler)
+                </button>
+                <span style="font-size: 13px; color: var(--text-muted)"
+                  >Outputs compiled CSS to <code>/assets/css/</code> to match
+                  the project file structure.</span
+                >
+              </div>
+            </div>
+          </section>
+          <!-- AUTOMATION -->
+          <section class="section" id="automation">
+            <h2>5. Quality Gates</h2>
+            <p>
+              Automate formatting and linting to enforce consistency without
+              manual effort. Quality gates should run
+              <strong>locally (pre-commit)</strong> and
+              <strong>remotely (CI)</strong> so issues are caught before code
+              review and never reach production.
+            </p>
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">
+                  Pre-commit hooks
+                  <span
+                    style="
+                      display: inline-block;
+                      padding: 2px 8px;
+                      border-radius: 999px;
+                      font-size: 10px;
+                      background: rgba(239, 68, 68, 0.2);
+                      color: #fca5a5;
+                      border: 1px solid rgba(239, 68, 68, 0.3);
+                      margin-left: 8px;
+                    "
+                    >RECOMMENDED</span
+                  >
+                </h3>
+                <p class="component-card__text">
+                  Optional local automation to catch issues before a commit.
+                </p>
+              </article>
+              <article class="component-card">
+                <h3 class="component-card__title">
+                  CI checks
+                  <span
+                    style="
+                      display: inline-block;
+                      padding: 2px 8px;
+                      border-radius: 999px;
+                      font-size: 10px;
+                      background: rgba(239, 68, 68, 0.2);
+                      color: #fca5a5;
+                      border: 1px solid rgba(239, 68, 68, 0.3);
+                      margin-left: 8px;
+                    "
+                    >OPTIONAL</span
+                  >
+                </h3>
+                <p class="component-card__text">
+                  Run checks on PRs when CI is enabled for a repository.
+                </p>
+              </article>
+              <article class="component-card">
+                <h3 class="component-card__title">
+                  Branch protection
+                  <span>RECOMMENDED</span>
+                </h3>
+                <p class="component-card__text">
+                  Protect the default branch and require reviews/checks as
+                  needed.
+                </p>
+              </article>
+              <article class="component-card">
+                <h3 class="component-card__title">
+                  PR template
+                  <span>RECOMMENDED</span>
+                </h3>
+                <p class="component-card__text">
+                  A lightweight PR template to keep reviews consistent.
+                </p>
+              </article>
+            </div>
+            <div class="card">
+              <h3>Recommended Baseline Tooling</h3>
+              <p style="margin-bottom: 10px">
+                The exact tooling depends on the project type. For static sites,
+                you can keep it minimal; for larger codebases, standard ize on
+                Prettier + ESLint + Stylelint.
+              </p>
+              <div class="baseline-accordion">
+                <details class="accordion">
+                  <summary class="accordion__summary">
+                    Minimal (static projects)
+                  </summary>
+                  <div class="accordion__content">
+                    <p style="margin-bottom: 10px">
+                      Use <strong>Prettier</strong> as the only formatter. This
+                      is the fastest path to consistent diffs.
+                    </p>
+                    <pre><code># Install
+npm i -D prettier
+
+# Run
+npx prettier . --check
+npx prettier . --write</code></pre>
+                    <p
+                      style="
+                        font-size: 13px;
+                        color: var(--text-muted);
+                        margin: 12px 0 0;
+                      "
+                    >
+                      Tip: If you do not use Node tooling, enforce consistency
+                      via
+                      <code>.editorconfig</code> and manual formatting rules,
+                      but you will lose automation.
+                    </p>
+                  </div>
+                </details>
+                <details class="accordion">
+                  <summary class="accordion__summary">
+                    Team Standard (Prettier + ESLint + Stylelint)
+                  </summary>
+                  <div class="accordion__content">
+                    <p style="margin-bottom: 10px">
+                      Recommended for any project with JavaScript and CSS/SCSS.
+                      Keeps rules enforceable and predictable across editors.
+                    </p>
+                    <pre><code># Install
+npm i -D prettier eslint stylelint lint-staged husky
+
+# (Optional) for SCSS
+npm i -D stylelint-scss</code></pre>
+                    <h4 style="font-size: 14px; margin: 16px 0 8px">
+                      Suggested npm scripts
+                    </h4>
+                    <pre><code>{
+  "scripts": {
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "lint:js": "eslint .",
+    "lint:css": "stylelint \"**/*.{css,scss}\"",
+    "lint": "npm run lint:js &amp;&amp; npm run lint:css"
+  }
+}</code></pre>
+                  </div>
+                </details>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Pre-commit Hooks (Husky + lint-staged)</h3>
+              <p>
+                Recommended: keep hooks fast. Run checks only on staged files
+                (not the entire repository) to avoid slowing down commits.
+              </p>
+              <div class="baseline-accordion">
+                <details class="accordion">
+                  <summary class="accordion__summary">Setup commands</summary>
+                  <div class="accordion__content">
+                    <pre><code># One-time setup
+npm i -D husky lint-staged
+npx husky init
+
+# Then edit .husky/pre-commit to run lint-staged</code></pre>
+                  </div>
+                </details>
+                <details class="accordion">
+                  <summary class="accordion__summary">
+                    Example lint-staged config
+                  </summary>
+                  <div class="accordion__content">
+                    <p
+                      style="
+                        font-size: 13px;
+                        color: var(--text-muted);
+                        margin-bottom: 8px;
+                      "
+                    >
+                      Put in <code>package.json</code> or
+                      <code>.lintstagedrc</code>:
+                    </p>
+                    <pre><code>{
+  "lint-staged": {
+    "*.{html,md,css,scss,js,json}": [
+      "prettier --write"
+    ],
+    "*.{js}": [
+      "eslint --fix"
+    ],
+    "*.{css,scss}": [
+      "stylelint --fix"
+    ]
+  }
+}</code></pre>
+                  </div>
+                </details>
+                <details class="accordion">
+                  <summary class="accordion__summary">
+                    What to enforce (baseline)
+                  </summary>
+                  <div class="accordion__content">
+                    <ul>
+                      <li>Formatting: Prettier on all text files</li>
+                      <li>Linting: ESLint for JS, Stylelint for CSS/SCSS</li>
+                      <li>
+                        No commit of build outputs unless the project requires
+                        it
+                      </li>
+                      <li>Fail fast: block commits when checks fail</li>
+                    </ul>
+                  </div>
+                </details>
+              </div>
+            </div>
+            <div class="card">
+              <h3>CI Example (GitHub Actions)</h3>
+              <p>
+                If CI is enabled for a repository, it should run the same checks
+                as local scripts to avoid drift. For reproducible results, use
+                lockfiles and a pinned Node version. CI is not yet standardized
+                across all projects—enable it when the project benefits from
+                automated gates.
+              </p>
+              <pre><code># .github/workflows/ci.yml
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint</code></pre>
+              <p
+                style="
+                  font-size: 13px;
+                  color: var(--text-muted);
+                  margin: 12px 0 0;
+                "
+              >
+                If you use pnpm or yarn, switch the install step accordingly.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Branch Protection (Recommended Settings)</h3>
+              <ul style="margin-bottom: 0">
+                <li>Require PRs (no direct pushes to <code>main</code>)</li>
+                <li>Require status checks to pass before merging</li>
+                <li>Require at least 1 reviewer approval</li>
+                <li>Require conversation resolution</li>
+                <li>
+                  Enable “Dismiss stale approvals” when new commits are pushed
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>PR Template (Baseline)</h3>
+              <p
+                style="
+                  font-size: 13px;
+                  color: var(--text-muted);
+                  margin-bottom: 8px;
+                "
+              >
+                Create <code>.github/pull_request_template.md</code>:
+              </p>
+              <pre><code>## What changed
+- 
+
+## Why
+- 
+
+## How to test
+1. 
+
+## Screenshots / recordings (UI changes)
+- 
+
+## Risk
+- Low / Medium / High
+
+## Checklist
+- [ ] Formatting/linting pass
+- [ ] Tested locally
+- [ ] No secrets committed</code></pre>
+            </div>
+            <div class="card callout">
+              <h3>Quick Verification Checklist</h3>
+              <ul style="margin-bottom: 0">
+                <li>
+                  <strong>Git identity set:</strong>
+                  <code>git config --global user.name</code>
+                </li>
+                <li>
+                  <strong>Line endings OK:</strong> no “entire file changed”
+                  diffs
+                </li>
+                <li>
+                  <strong>Repo has baseline files:</strong>
+                  <code>README.md</code>, <code>.gitignore</code>,
+                  <code>.editorconfig</code>
+                </li>
+                <li>
+                  <strong>Formatter works:</strong>
+                  <code>npm run format</code> (or equivalent)
+                </li>
+                <li>
+                  <strong>Hooks active:</strong> commit fails when rules fail
+                </li>
+                <li>
+                  <strong>CI matches local:</strong> same scripts in pipeline
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <!-- RECOMMENDED (VS Code): Live Sass Compiler (Glenn Marks) workspace settings -->
+    <dialog
+      aria-labelledby="glennMarksDialogTitle"
+      class="doc-dialog"
+      id="glennMarksSettingsDialog"
+    >
+      <form method="dialog">
+        <header class="doc-dialog__header">
+          <h2 class="doc-dialog__title" id="glennMarksDialogTitle">
+            Recommended: <code>.vscode/settings.json</code> for Live Sass
+            Compiler (Glenn Marks)
+          </h2>
+          <button
+            aria-label="Close dialog"
+            class="doc-dialog__close"
+            type="submit"
+          >
+            ×
+          </button>
+        </header>
+        <div class="doc-dialog__body">
+          <p style="margin-top: 0">
+            This is a <strong>project-level</strong> (workspace) configuration.
+            It keeps SCSS source files in <code>/assets/scss/</code> and writes
+            compiled CSS to <code>/assets/css/</code>.
+          </p>
+          <div class="card callout" style="margin: 12px 0">
+            <h3 style="margin-top: 0">Copy &amp; paste</h3>
+            <p style="margin-bottom: 0">
+              Save as <code>.vscode/settings.json</code> in the repository root.
+              Commit it if your team uses VS Code.
+            </p>
+          </div>
+          <pre><code>{
+  "liveServer.settings.port": 5501,
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "expanded",
+      "extensionName": ".css",
+      "savePath": "/assets/css",
+      "generateMap": true
+    },
+    {
+      "format": "compressed",
+      "extensionName": ".min.css",
+      "savePath": "/assets/css",
+      "generateMap": false
+    }
+  ],
+  "liveSassCompile.settings.excludeList": [
+    "**/node_modules/**",
+    "**/.vscode/**",
+    "**/.history/**"
+  ],
+  "liveSassCompile.settings.autoprefix": [
+    "&gt; 1%",
+    "last 2 versions"
+  ]
+}</code></pre>
+          <p style="margin: 0; font-size: 13px; color: var(--text-muted)">
+            Start compilation: Command Palette →
+            <code>Live Sass: Watch Sass</code><br />
+            Stop compilation: Command Palette →
+            <code>Live Sass: Stop Watching Sass</code>
+          </p>
+          <hr
+            style="
+              margin: 16px 0;
+              border: none;
+              border-top: 1px solid rgba(156, 163, 175, 0.2);
+            "
+          />
+          <p style="margin: 0; font-size: 13px; color: var(--text-muted)">
+            Notes:
+            <br />
+            • Do not edit <code>/assets/css/style.css</code> manually—treat it
+            as a build output.
+            <br />
+            • If your project uses CI/CD, you may replace this workflow with
+            Dart Sass CLI or a bundler.
+          </p>
+        </div>
+      </form>
+    </dialog>
+    <script src="/assets/js/main.js"></script>
+    <script>
+      (function () {
+        var dialog = document.getElementById("glennMarksSettingsDialog");
+        if (!dialog) return;
+
+        function closeIfBackdropClick(event) {
+          var rect = dialog.getBoundingClientRect();
+          var isInDialog =
+            event.clientX >= rect.left &&
+            event.clientX <= rect.right &&
+            event.clientY >= rect.top &&
+            event.clientY <= rect.bottom;
+          if (!isInDialog) dialog.close();
+        }
+
+        document.addEventListener("click", function (e) {
+          var btn = e.target.closest(
+            "[data-dialog-open='glennMarksSettingsDialog']"
+          );
+          if (btn) {
+            if (typeof dialog.showModal === "function") dialog.showModal();
+            else dialog.setAttribute("open", "open");
+          }
+        });
+
+        dialog.addEventListener("click", closeIfBackdropClick);
+      })();
+    </script>
+  </body>
+</html>

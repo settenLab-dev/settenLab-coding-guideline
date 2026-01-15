@@ -1,0 +1,2826 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="description"
+      content="JavaScript coding guidelines: best practices, patterns, and conventions for modern web development."
+    />
+    <meta name="theme-color" content="#0b0f1a" />
+
+    <meta property="og:title" content="JavaScript — Coding Guideline" />
+    <meta
+      property="og:description"
+      content="Comprehensive JavaScript guidelines for writing clean, maintainable, and scalable code."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/Outfit-VariableFont.woff2"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <title>JavaScript — Coding Guideline</title>
+  </head>
+
+  <body>
+    <div class="bg-gradient"></div>
+
+    <div class="app-shell">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="primary-sidebar" aria-label="Primary">
+        <a href="/" class="sidebar__header">
+          <div class="sidebar__logo" aria-hidden="true">S</div>
+          <div class="sidebar__title">
+            <span class="sidebar__company">Coding Guideline</span>
+            <span class="sidebar__subtitle">settenLab</span>
+          </div>
+        </a>
+
+        <nav class="sidebar__nav sidebar-nav" aria-label="Guideline navigation">
+          <!-- START HERE -->
+          <details
+            class="nav-group nav-group--start"
+            data-nav-group="start-here"
+          >
+            <summary class="nav-group__summary">
+              <a href="/" class="nav-group__summary-link">Start here</a>
+            </summary>
+          </details>
+
+          <!-- PROJECT SETUP -->
+          <details class="nav-group" data-nav-group="project-setup" open>
+            <summary class="nav-group__summary">Project setup</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  href="environment-setup.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  Environment setup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="file-structure.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  File structure
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- UI -->
+          <details class="nav-group" data-nav-group="ui">
+            <summary class="nav-group__summary">UI</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="markup.html" class="sidebar-nav__link nav-link">
+                  Markup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="styling.html" class="sidebar-nav__link nav-link">
+                  Styling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="components.html" class="sidebar-nav__link nav-link">
+                  Components
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="typography.html" class="sidebar-nav__link nav-link">
+                  Typography
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="accessibility.html" class="sidebar-nav__link nav-link">
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- ENGINEERING -->
+          <details class="nav-group" data-nav-group="engineering" open>
+            <summary class="nav-group__summary">Engineering</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="javascript.html">
+                  Javascript
+                </a>
+              </li>
+
+              <li class="nav-group__item">
+                <a
+                  href="api-and-data-handling.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  API & Data handling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="performance.html" class="sidebar-nav__link nav-link">
+                  Performance
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="testing.html" class="sidebar-nav__link nav-link">
+                  Testing
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="security.html" class="sidebar-nav__link nav-link">
+                  Security
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- WORKFLOW -->
+          <details class="nav-group" data-nav-group="workflow">
+            <summary class="nav-group__summary">Workflow</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="pr-rules.html" class="sidebar-nav__link nav-link">
+                  PR rules / review checklist
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="documentation.html" class="sidebar-nav__link nav-link">
+                  Documentation rules
+                </a>
+              </li>
+            </ul>
+          </details>
+        </nav>
+
+        <div class="sidebar__footer">
+          <a href="changelog.html" class="sidebar__version">v1.0.0</a>
+          <span class="sidebar__lang">EN</span>
+        </div>
+      </aside>
+
+      <div class="sidebar-backdrop js-sidebar-backdrop" hidden></div>
+
+      <!-- MAIN -->
+      <main class="main" id="main-content">
+        <header class="topbar">
+          <button
+            class="topbar__menu-btn js-sidebar-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-controls="primary-sidebar"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <h1 class="topbar__title">JavaScript Guidelines</h1>
+
+          <div class="topbar__actions">
+            <button
+              class="topbar__action-btn"
+              id="themeToggle"
+              aria-label="Toggle theme"
+              aria-pressed="false"
+            >
+              🌗
+            </button>
+          </div>
+        </header>
+
+        <div class="content">
+          <!-- PAGE NAVIGATION -->
+          <div class="card card--nav">
+            <h3>On this page</h3>
+            <p>Quick links to the key JavaScript guidelines on this page.</p>
+            <ul class="toc">
+              <li><a href="#overview">Overview</a></li>
+              <li><a href="#variables">Variables & Data Types</a></li>
+              <li><a href="#functions">Functions</a></li>
+              <li><a href="#async">Async Programming</a></li>
+              <li><a href="#modules">Modules & Imports</a></li>
+              <li><a href="#objects">Objects & Arrays</a></li>
+              <li><a href="#classes">Classes & OOP</a></li>
+              <li><a href="#libraries">Libraries & Dependencies</a></li>
+              <li><a href="#error-handling">Error Handling</a></li>
+              <li><a href="#performance">Performance</a></li>
+              <li><a href="#security">Security</a></li>
+              <li><a href="#tooling">Tooling & Linting</a></li>
+              <li><a href="#resources">Additional Resources</a></li>
+              <li><a href="#vite">Vite (Future Direction)</a></li>
+            </ul>
+          </div>
+          <!-- OVERVIEW -->
+          <section class="section" id="overview">
+            <h2>Overview</h2>
+            <p>
+              This guide covers modern JavaScript best practices for writing
+              clean, maintainable, and scalable code. We follow ES6+ standards
+              and prioritize readability, performance, and developer experience.
+            </p>
+
+            <div class="card">
+              <h3>Current Default (Today)</h3>
+              <ul>
+                <li>
+                  <strong>Language level:</strong> ES6+ (modern syntax),
+                  browser-first
+                </li>
+                <li>
+                  <strong>Approach:</strong> Vanilla JavaScript with small
+                  modules; no framework required
+                </li>
+                <li>
+                  <strong>DOM hooks:</strong> Prefer
+                  <code>data-*</code> attributes over styling classes
+                </li>
+                <li>
+                  <strong>Goal:</strong> Keep code readable and
+                  component-friendly as the codebase grows
+                </li>
+              </ul>
+            </div>
+
+            <div class="card callout">
+              <h3>Core Principles</h3>
+              <ul>
+                <li>Write self-documenting code with meaningful names</li>
+                <li>Prefer const over let, avoid var</li>
+                <li>Prefer ES modules (strict mode by default)</li>
+                <li>Follow single responsibility principle</li>
+                <li>Write pure functions when possible</li>
+                <li>Handle errors gracefully</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- VARIABLES & DATA TYPES -->
+          <section class="section" id="variables">
+            <h2>Variables & Data Types</h2>
+
+            <div class="card">
+              <h3>Declaration</h3>
+              <ul>
+                <li>
+                  Use <code>const</code> by default, <code>let</code> when
+                  reassignment is needed
+                </li>
+                <li>Never use <code>var</code></li>
+                <li>Initialize variables when declaring them</li>
+                <li>Use meaningful, descriptive names</li>
+              </ul>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                  margin-top: 16px;
+                "
+              >
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #4cd964; margin-bottom: 8px"
+                  >
+                    ✓ Good
+                  </h4>
+                  <pre><code>const userCount = 42;
+let isLoading = true;
+
+const MAX_RETRIES = 3;
+const API_BASE_URL = 'https://api.example.com';
+
+function calculateTotal(items) {
+  // ...
+}</code></pre>
+                </div>
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #ef4444; margin-bottom: 8px"
+                  >
+                    ✗ Bad
+                  </h4>
+                  <pre><code>var count = 42;
+var flag = true;
+let a = 3;
+let b = 'test';
+
+function calc(x) {
+  // ...
+}</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Naming Conventions</h3>
+              <table class="naming-table">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Convention</th>
+                    <th>Example</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Variables</td>
+                    <td>camelCase</td>
+                    <td><code>userCount, isLoading</code></td>
+                  </tr>
+                  <tr>
+                    <td>Constants</td>
+                    <td>UPPER_SNAKE_CASE</td>
+                    <td><code>MAX_RETRIES, API_BASE_URL</code></td>
+                  </tr>
+                  <tr>
+                    <td>Functions</td>
+                    <td>camelCase</td>
+                    <td><code>getUserData, calculateTotal</code></td>
+                  </tr>
+                  <tr>
+                    <td>Classes</td>
+                    <td>PascalCase</td>
+                    <td><code>UserProfile, DataService</code></td>
+                  </tr>
+                  <tr>
+                    <td>Private (convention)</td>
+                    <td>_leadingUnderscore</td>
+                    <td><code>_internalMethod, _privateField</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card">
+              <h3>Type Checking & Coercion</h3>
+              <p>Use strict equality checks and explicit type conversion:</p>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                  margin-top: 16px;
+                "
+              >
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #4cd964; margin-bottom: 8px"
+                  >
+                    ✓ Good
+                  </h4>
+                  <pre><code>// Strict equality
+if (count === 0) { }
+
+// Type checking
+if (typeof value === 'string') { }
+
+// Explicit conversion
+const num = Number(input);
+const str = String(number);
+const bool = Boolean(value);</code></pre>
+                </div>
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #ef4444; margin-bottom: 8px"
+                  >
+                    ✗ Bad
+                  </h4>
+                  <pre><code>// Loose equality
+if (count == 0) { }
+
+// Implicit conversion
+const num = +input;
+const str = '' + number;
+
+// Wrong type check
+if (value != null) { }</code></pre>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- FUNCTIONS -->
+          <section class="section" id="functions">
+            <h2>Functions</h2>
+
+            <div class="card">
+              <h3>Function Declarations</h3>
+              <ul>
+                <li>
+                  Prefer arrow functions for callbacks and short functions
+                </li>
+                <li>
+                  Use function declarations for named functions and hoisting
+                </li>
+                <li>Keep functions small and focused (max 20-30 lines)</li>
+                <li>Avoid side effects when possible</li>
+              </ul>
+
+              <button
+                class="btn btn--secondary"
+                onclick="document.getElementById('modal-function-examples').showModal()"
+              >
+                View Function Examples →
+              </button>
+            </div>
+
+            <div class="card">
+              <h3>Parameters & Defaults</h3>
+              <ul>
+                <li>Limit parameters to 3 or fewer (use objects for more)</li>
+                <li>
+                  Use default parameters instead of conditional assignments
+                </li>
+                <li>Destructure object parameters for clarity</li>
+                <li>Use rest parameters for variable arguments</li>
+              </ul>
+
+              <pre><code>// Good parameter patterns
+function createUser({ 
+  name, 
+  email, 
+  age = 18, 
+  ...otherProps 
+}) {
+  return { name, email, age, ...otherProps };
+}
+
+// Default parameters
+function fetchData(url, options = {}) {
+  const { timeout = 5000, retries = 3 } = options;
+  // ...
+}</code></pre>
+            </div>
+
+            <div class="card">
+              <h3>Error Handling</h3>
+              <p>Always handle errors gracefully in async functions:</p>
+
+              <pre><code>// Async/await with try-catch
+async function getUserData(userId) {
+  try {
+    const response = await fetch(`/api/users/${userId}`);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    throw new ApiError('USER_FETCH_FAILED', { userId, cause: error });
+  }
+}
+
+// Custom error classes
+class ApiError extends Error {
+  constructor(code, details = {}) {
+    super(`API Error: ${code}`);
+    this.name = 'ApiError';
+    this.code = code;
+    this.details = details;
+  }
+}</code></pre>
+            </div>
+          </section>
+
+          <!-- ASYNC PROGRAMMING -->
+          <section class="section" id="async">
+            <h2>Async Programming</h2>
+
+            <div class="card">
+              <h3>Promises vs Async/Await</h3>
+              <ul>
+                <li>Use async/await for most cases (cleaner syntax)</li>
+                <li>Use Promises directly for parallel operations</li>
+                <li>Always handle promise rejections</li>
+                <li>Avoid mixing async/await with .then() chains</li>
+              </ul>
+
+              <button
+                class="btn btn--secondary"
+                onclick="document.getElementById('modal-async-examples').showModal()"
+              >
+                View Async Patterns →
+              </button>
+            </div>
+
+            <div class="card">
+              <h3>Error Handling Patterns</h3>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                  margin-top: 16px;
+                "
+              >
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #4cd964; margin-bottom: 8px"
+                  >
+                    ✓ Good
+                  </h4>
+                  <pre><code>// Async/await with try-catch
+async function fetchData() {
+  try {
+    const data = await api.get();
+    return process(data);
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+}
+
+// Promise.all with error handling
+async function loadAll() {
+  try {
+    const [users, posts] = await Promise.all([
+      fetchUsers(),
+      fetchPosts()
+    ]);
+    return { users, posts };
+  } catch (error) {
+    // Handle partial failures
+  }
+}</code></pre>
+                </div>
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #ef4444; margin-bottom: 8px"
+                  >
+                    ✗ Bad
+                  </h4>
+                  <pre><code>// Unhandled promise
+async function risky() {
+  const data = await fetch(); // No error handling
+  return data;
+}
+
+// Nested promises
+fetchUser()
+  .then(user => {
+    fetchPosts(user.id)
+      .then(posts => {
+        // Pyramid of doom
+      });
+  });</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Performance Considerations</h3>
+              <ul>
+                <li>
+                  Use <code>Promise.all()</code> for parallel independent
+                  operations
+                </li>
+                <li>
+                  Use <code>Promise.allSettled()</code> when all promises should
+                  complete
+                </li>
+                <li>Implement timeout patterns for long-running operations</li>
+                <li>Consider lazy loading for non-critical async operations</li>
+              </ul>
+
+              <pre><code>// Parallel execution with timeout
+async function fetchWithTimeout(url, timeout = 5000) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    return response.json();
+  } catch (error) {
+    clearTimeout(timeoutId);
+    throw error;
+  }
+}</code></pre>
+            </div>
+          </section>
+
+          <!-- MODULES & IMPORTS -->
+          <section class="section" id="modules">
+            <h2>Modules & Imports</h2>
+
+            <div class="card">
+              <h3>ES Modules Syntax</h3>
+              <ul>
+                <li>Use named exports for utilities and constants</li>
+                <li>Use default exports for single-purpose modules</li>
+                <li>
+                  Group imports logically (built-ins, externals, internals)
+                </li>
+                <li>Avoid circular dependencies</li>
+              </ul>
+
+              <pre><code>// utils/math.js - Named exports
+export const PI = 3.14159;
+
+export function sum(a, b) {
+  return a + b;
+}
+
+export function average(numbers) {
+  return sum(...numbers) / numbers.length;
+}
+
+// services/api.js - Default export
+export default class ApiService {
+  // ...
+}
+
+// main.js - Import patterns
+import { PI, sum } from './utils/math.js';
+import ApiService from './services/api.js';
+import { debounce } from 'lodash-es';</code></pre>
+            </div>
+
+            <div class="card">
+              <h3>Tree Shaking & Optimization</h3>
+              <p>Structure modules for optimal bundling:</p>
+
+              <ul>
+                <li>Use named exports to enable tree shaking</li>
+                <li>Avoid side effects in module root</li>
+                <li>Split large modules into focused ones</li>
+                <li>Use dynamic imports for code splitting</li>
+              </ul>
+
+              <pre><code>// Dynamic import for code splitting
+async function loadFeature(featureName) {
+  try {
+    const module = await import(`./features/${featureName}.js`);
+    return module.default;
+  } catch (error) {
+    console.error(`Failed to load ${featureName}:`, error);
+    return null;
+  }
+}
+
+// Barrel exports (index.js)
+export { Button } from './button.js';
+export { Input } from './input.js';
+export { Modal } from './modal.js';</code></pre>
+            </div>
+          </section>
+
+          <!-- OBJECTS & ARRAYS -->
+          <section class="section" id="objects">
+            <h2>Objects & Arrays</h2>
+
+            <div class="card">
+              <h3>Modern Syntax Features</h3>
+              <ul>
+                <li>Use object destructuring for cleaner code</li>
+                <li>Use spread operator for copying and merging</li>
+                <li>Use computed property names for dynamic keys</li>
+                <li>Prefer Object methods over for...in loops</li>
+              </ul>
+
+              <button
+                class="btn btn--secondary"
+                onclick="document.getElementById('modal-object-examples').showModal()"
+              >
+                View Object Patterns →
+              </button>
+            </div>
+
+            <div class="card">
+              <h3>Array Methods</h3>
+              <p>Prefer functional array methods over loops:</p>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                  margin-top: 16px;
+                "
+              >
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #4cd964; margin-bottom: 8px"
+                  >
+                    ✓ Good (Functional)
+                  </h4>
+                  <pre><code>// Transform array
+const prices = items
+  .filter(item => item.inStock)
+  .map(item => item.price * 1.2)
+  .reduce((sum, price) => sum + price, 0);
+
+// Find elements
+const user = users.find(u => u.id === userId);
+const activeUsers = users.filter(u => u.isActive);
+
+// Check conditions
+const allValid = values.every(v => v > 0);
+const anyValid = values.some(v => v > 0);</code></pre>
+                </div>
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #ef4444; margin-bottom: 8px"
+                  >
+                    ✗ Bad (Imperative)
+                  </h4>
+                  <pre><code>// Manual loops
+let prices = 0;
+for (let i = 0; i < items.length; i++) {
+  if (items[i].inStock) {
+    prices += items[i].price * 1.2;
+  }
+}
+
+let user = null;
+for (let i = 0; i < users.length; i++) {
+  if (users[i].id === userId) {
+    user = users[i];
+    break;
+  }
+}</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Immutability Patterns</h3>
+              <p>Avoid mutating objects and arrays directly:</p>
+
+              <pre><code>// Immutable updates
+const updatedUser = {
+  ...user,
+  profile: {
+    ...user.profile,
+    email: 'new@email.com'
+  }
+};
+
+const newArray = [...array, newItem];
+const filteredArray = array.filter(item => item.keep);
+
+// Object operations
+const { password, ...userWithoutPassword } = user;
+const merged = { ...defaults, ...overrides };
+
+// Array operations
+const [first, second, ...rest] = array;
+const newArray = array.map(item => ({ ...item, updated: true }));</code></pre>
+            </div>
+          </section>
+
+          <!-- CLASSES & OOP -->
+          <section class="section" id="classes">
+            <h2>Classes & OOP</h2>
+
+            <div class="card">
+              <h3>Class Structure</h3>
+              <ul>
+                <li>
+                  Use classes when you need inheritance or multiple instances
+                </li>
+                <li>Prefer composition over inheritance</li>
+                <li>Use private fields (#) for true privacy</li>
+                <li>Keep classes focused and cohesive</li>
+              </ul>
+
+              <pre><code>// Good class example
+class UserService {
+  #apiClient;
+  #cache = new Map();
+
+  constructor(apiClient) {
+    this.#apiClient = apiClient;
+  }
+
+  async getUser(id) {
+    // Check cache first
+    if (this.#cache.has(id)) {
+      return this.#cache.get(id);
+    }
+
+    // Fetch from API
+    const user = await this.#apiClient.fetchUser(id);
+    this.#cache.set(id, user);
+    return user;
+  }
+
+  clearCache() {
+    this.#cache.clear();
+  }
+}
+
+// Usage
+const service = new UserService(apiClient);
+const user = await service.getUser(123);</code></pre>
+            </div>
+
+            <div class="card">
+              <h3>Inheritance vs Composition</h3>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                  margin-top: 16px;
+                "
+              >
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #4cd964; margin-bottom: 8px"
+                  >
+                    ✓ Composition
+                  </h4>
+                  <pre><code>class Logger {
+  log(message) {
+    console.log(`[LOG] ${message}`);
+  }
+}
+
+class ApiService {
+  constructor(logger) {
+    this.logger = logger;
+  }
+
+  async fetch() {
+    this.logger.log('Fetching data...');
+    // ...
+  }
+}
+
+const service = new ApiService(new Logger());</code></pre>
+                </div>
+                <div>
+                  <h4
+                    style="font-size: 14px; color: #ef4444; margin-bottom: 8px"
+                  >
+                    ✗ Deep Inheritance
+                  </h4>
+                  <pre><code>class Animal {}
+class Mammal extends Animal {}
+class Dog extends Mammal {}
+class ServiceDog extends Dog {}
+// Fragile base class problem</code></pre>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- LIBRARIES & DEPENDENCIES -->
+          <section class="section" id="libraries">
+            <h2>Libraries & Dependencies</h2>
+
+            <div class="card">
+              <h3>Philosophy: Build vs Buy</h3>
+              <p>Every dependency is a trade-off. Consider these questions:</p>
+
+              <div class="component-grid" style="margin-top: 16px">
+                <article class="component-card">
+                  <h3 class="component-card__title">Build Your Own</h3>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>Simple, focused functionality needed</li>
+                    <li>Custom behavior specific to your app</li>
+                    <li>Learning opportunity for the team</li>
+                    <li>Bundle size is critical</li>
+                    <li>Long-term maintenance control</li>
+                  </ul>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">Use a Library</h3>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>Complex problem (dates, charts, animations)</li>
+                    <li>Industry-standard solution exists</li>
+                    <li>Accessibility requirements</li>
+                    <li>Cross-browser compatibility needed</li>
+                    <li>Time-to-market is critical</li>
+                  </ul>
+                </article>
+              </div>
+
+              <div
+                class="card"
+                style="margin-top: 16px; background: var(--surface-secondary)"
+              >
+                <h4>Decision Framework</h4>
+                <pre><code>IF (problem is complex) AND 
+    (library is well-maintained) AND 
+    (bundle size < 50KB gzipped) AND
+    (solves multiple use cases) THEN
+  USE library
+ELSE IF (functionality is simple) OR
+    (custom behavior needed) OR
+    (bundle size critical) OR
+    (learning opportunity) THEN
+  BUILD custom
+END</code></pre>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>jQuery: Legacy Context</h3>
+              <div class="card component-card--warning">
+                <h4>⚠️ jQuery in Modern Projects</h4>
+                <p style="margin-bottom: 0">
+                  <strong>Avoid jQuery in new projects.</strong> Most jQuery
+                  functionality is now available natively:
+                </p>
+              </div>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                  margin-top: 16px;
+                "
+              >
+                <div>
+                  <h5 style="font-size: 14px">jQuery Pattern</h5>
+                  <pre><code>$('.button').on('click', () => {
+  $(this).toggleClass('active');
+  $.ajax({ url: '/api' });
+});
+
+$('.items').each(function() {
+  $(this).find('.child');
+});</code></pre>
+                </div>
+                <div>
+                  <h5 style="font-size: 14px">Modern Native Equivalent</h5>
+                  <pre><code>// DOM selection
+document.querySelectorAll('.button')
+  .forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.target.classList.toggle('active');
+      fetch('/api');
+    });
+  });
+
+// Iteration
+document.querySelectorAll('.items')
+  .forEach(item => {
+    item.querySelector('.child');
+  });</code></pre>
+                </div>
+              </div>
+
+              <div style="margin-top: 16px">
+                <h4>When jQuery Might Still Make Sense</h4>
+                <ul>
+                  <li>Maintaining legacy codebase (migration in progress)</li>
+                  <li>
+                    Prototyping quickly (though modern alternatives exist)
+                  </li>
+                  <li>Specific plugins with no modern equivalent</li>
+                </ul>
+                <p
+                  style="
+                    font-size: 13px;
+                    color: var(--text-muted);
+                    margin-top: 8px;
+                  "
+                >
+                  <strong>Migration path:</strong> Use <code>cash-dom</code> or
+                  <code>umbrella-js</code> as lighter jQuery alternatives if
+                  needed.
+                </p>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Modern Library Principles</h3>
+
+              <div class="perf-grid">
+                <article class="card">
+                  <div class="perf-card__header">
+                    <h4>Tree-shakable</h4>
+                    <span class="perf-badge perf-badge--green">Essential</span>
+                  </div>
+                  <p style="margin: 0; font-size: 13px">
+                    Import only what you use. Prefer ES modules over CommonJS.
+                  </p>
+                </article>
+
+                <article class="card">
+                  <div class="perf-card__header">
+                    <h4>Types / Documentation</h4>
+                    <span class="perf-badge perf-badge--yellow">Preferred</span>
+                  </div>
+                  <p style="margin: 0; font-size: 13px">
+                    Prefer libraries with clear docs and stable APIs. If types
+                    are available, use them; TypeScript adoption can be phased
+                    in later.
+                  </p>
+                </article>
+
+                <article class="card">
+                  <div class="perf-card__header">
+                    <h4>Framework Agnostic</h4>
+                    <span class="perf-badge perf-badge--yellow">Preferred</span>
+                  </div>
+                  <p style="margin: 0; font-size: 13px">
+                    Works with any framework (React, Vue, Svelte) or vanilla JS.
+                  </p>
+                </article>
+
+                <article class="card">
+                  <div class="perf-card__header">
+                    <h4>Zero Dependencies</h4>
+                    <span class="perf-badge perf-badge--yellow">Preferred</span>
+                  </div>
+                  <p style="margin: 0; font-size: 13px">
+                    Minimal external dependencies reduces vulnerability surface.
+                  </p>
+                </article>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Real-World Library Analysis</h3>
+
+              <div class="baseline-accordion">
+                <details class="accordion">
+                  <summary class="accordion__summary">
+                    Case Study: Splide.js (Swiper/Slider)
+                  </summary>
+                  <div class="accordion__content">
+                    <div style="margin-bottom: 16px">
+                      <h5 style="font-size: 14px; margin-bottom: 8px">
+                        When to Use Splide:
+                      </h5>
+                      <ul style="font-size: 13px; margin-bottom: 16px">
+                        <li>Complex carousels with multiple slides visible</li>
+                        <li>Touch/swipe gestures required on mobile</li>
+                        <li>Lazy loading of images in slider</li>
+                        <li>Autoplay with pause on hover/interaction</li>
+                        <li>
+                          Thumbnail navigation synchronized with main slider
+                        </li>
+                      </ul>
+
+                      <h5 style="font-size: 14px; margin-bottom: 8px">
+                        What Splide Adds:
+                      </h5>
+                      <pre><code>// Bundle impact (Splide.js v4.1):
+- Core: ~17KB gzipped
+- CSS: ~5KB gzipped
+- Total: ~22KB
+
+// Features you get:
+- Touch/swipe gestures
+- Keyboard navigation
+- Accessibility (ARIA labels)
+- Responsive breakpoints
+- Lazy loading
+- Autoplay
+- Pagination
+- Navigation arrows
+- Thumbnails sync</code></pre>
+                    </div>
+
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 16px;
+                      "
+                    >
+                      <div>
+                        <h6
+                          style="
+                            font-size: 13px;
+                            color: #4cd964;
+                            margin-bottom: 8px;
+                          "
+                        >
+                          ✓ Good Use Case
+                        </h6>
+                        <pre><code>// Product image gallery
+import Splide from '@splidejs/splide';
+
+const gallery = new Splide('#gallery', {
+  type       : 'fade',
+  rewind     : true,
+  pagination : false,
+  arrows     : true,
+});
+
+const thumbnails = new Splide('#thumbnails', {
+  fixedWidth  : 100,
+  gap         : 10,
+  rewind      : true,
+  pagination  : false,
+  arrows      : false,
+  isNavigation: true,
+});
+
+gallery.sync(thumbnails);
+gallery.mount();</code></pre>
+                        <p
+                          style="
+                            font-size: 12px;
+                            color: var(--text-muted);
+                            margin-top: 8px;
+                          "
+                        >
+                          <strong>Justified:</strong> Complex gallery with sync,
+                          touch, lazy loading
+                        </p>
+                      </div>
+
+                      <div>
+                        <h6
+                          style="
+                            font-size: 13px;
+                            color: #ef4444;
+                            margin-bottom: 8px;
+                          "
+                        >
+                          ✗ Unnecessary Use
+                        </h6>
+                        <pre><code>// Simple image slideshow
+import Splide from '@splidejs/splide';
+
+const slider = new Splide('.slider', {
+  type      : 'slide',
+  perPage   : 1,
+  autoplay  : true,
+  interval  : 3000,
+});
+
+slider.mount();
+
+// Could be replaced with:
+function simpleSlider(selector) {
+  const slides = document.querySelectorAll(selector);
+  let current = 0;
+  
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 3000);
+}</code></pre>
+                        <p
+                          style="
+                            font-size: 12px;
+                            color: var(--text-muted);
+                            margin-top: 8px;
+                          "
+                        >
+                          <strong>Overkill:</strong> 22KB for basic auto-advance
+                        </p>
+                      </div>
+                    </div>
+
+                    <div
+                      class="card"
+                      style="
+                        margin-top: 16px;
+                        background: var(--surface-secondary);
+                      "
+                    >
+                      <h6 style="font-size: 13px; margin-bottom: 8px">
+                        🚨 Common Pitfalls with Slider Libraries:
+                      </h6>
+                      <ul style="font-size: 12px; margin: 0">
+                        <li>
+                          <strong>Performance:</strong> Initializing on many
+                          elements
+                        </li>
+                        <li>
+                          <strong>CLS (Cumulative Layout Shift):</strong> Slider
+                          height not reserved
+                        </li>
+                        <li>
+                          <strong>Accessibility:</strong> Forgetting keyboard
+                          nav/ARIA
+                        </li>
+                        <li>
+                          <strong>Mobile:</strong> Touch conflicts with page
+                          scroll
+                        </li>
+                        <li>
+                          <strong>SEO:</strong> Content in sliders not indexed
+                          properly
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </details>
+
+                <details class="accordion">
+                  <summary class="accordion__summary">
+                    Case Study: Lodash (Utility Library)
+                  </summary>
+                  <div class="accordion__content">
+                    <div style="margin-bottom: 16px">
+                      <h5 style="font-size: 14px; margin-bottom: 8px">
+                        The Lodash Problem:
+                      </h5>
+                      <pre><code>// Common pattern (BAD):
+import _ from 'lodash';
+
+// Bundle impact: 70KB+ for full library
+// When you only need:
+_.debounce()    // ~2KB
+_.throttle()    // ~2KB  
+_.cloneDeep()   // ~5KB
+// Total needed: ~9KB
+// Total imported: 70KB 😱</code></pre>
+
+                      <h5 style="font-size: 14px; margin-bottom: 8px">
+                        Modern Solution:
+                      </h5>
+                      <pre><code>// Tree-shakable imports (GOOD):
+import debounce from 'lodash/debounce';
+import throttle from 'lodash/throttle';
+import cloneDeep from 'lodash/cloneDeep';
+
+// Or even better - lodash-es:
+import { debounce, throttle, cloneDeep } from 'lodash-es';
+
+// Native alternatives:
+// debounce/throttle → 20 lines of code
+// cloneDeep → structuredClone() (modern browsers)</code></pre>
+                    </div>
+
+                    <div
+                      class="card"
+                      style="background: var(--surface-secondary)"
+                    >
+                      <h6 style="font-size: 13px; margin-bottom: 8px">
+                        📊 Decision Matrix: Lodash Functions
+                      </h6>
+                      <table
+                        style="
+                          width: 100%;
+                          font-size: 12px;
+                          border-collapse: collapse;
+                        "
+                      >
+                        <thead>
+                          <tr>
+                            <th
+                              style="
+                                text-align: left;
+                                padding: 4px;
+                                border-bottom: 1px solid var(--border-color);
+                              "
+                            >
+                              Function
+                            </th>
+                            <th
+                              style="
+                                text-align: left;
+                                padding: 4px;
+                                border-bottom: 1px solid var(--border-color);
+                              "
+                            >
+                              Build Custom
+                            </th>
+                            <th
+                              style="
+                                text-align: left;
+                                padding: 4px;
+                                border-bottom: 1px solid var(--border-color);
+                              "
+                            >
+                              Use Lodash
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td style="padding: 4px">debounce/throttle</td>
+                            <td style="padding: 4px">✅ Simple cases</td>
+                            <td style="padding: 4px">✅ Edge cases needed</td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 4px">cloneDeep</td>
+                            <td style="padding: 4px">✅ structuredClone()</td>
+                            <td style="padding: 4px">🟡 Legacy browsers</td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 4px">get/set (object paths)</td>
+                            <td style="padding: 4px">🟡 Simple paths only</td>
+                            <td style="padding: 4px">
+                              ✅ Complex nested paths
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 4px">array utilities</td>
+                            <td style="padding: 4px">✅ Native methods work</td>
+                            <td style="padding: 4px">❌ Rarely needed</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </details>
+
+                <details class="accordion">
+                  <summary class="accordion__summary">
+                    Case Study: UI Framework Components
+                  </summary>
+                  <div class="accordion__content">
+                    <div style="margin-bottom: 16px">
+                      <h5 style="font-size: 14px; margin-bottom: 8px">
+                        Modal/Modal Library Decision:
+                      </h5>
+
+                      <div
+                        style="
+                          display: grid;
+                          grid-template-columns: 1fr 1fr;
+                          gap: 16px;
+                        "
+                      >
+                        <div>
+                          <h6 style="font-size: 13px; margin-bottom: 8px">
+                            Build Custom Modal
+                          </h6>
+                          <pre><code>// ~50 lines of code
+// Bundle: 0KB extra
+// Features:
+// - Open/close
+// - Esc key close
+// - Focus trap
+// - Basic animations
+
+// Pros:
+// - Full control
+// - No dependencies
+// - Perfect fit for design
+// Cons:
+// - Time to build
+// - Accessibility testing
+// - Browser compatibility</code></pre>
+                        </div>
+
+                        <div>
+                          <h6 style="font-size: 13px; margin-bottom: 8px">
+                            Use Library (e.g., Micromodal)
+                          </h6>
+                          <pre><code>// Micromodal.js: 3KB gzipped
+// Features:
+// - Accessibility ready
+// - Focus management
+// - Animation hooks
+// - Browser tested
+
+// Pros:
+// - Accessibility built-in
+// - Battle-tested
+// - Quick implementation
+// Cons:
+// - 3KB added
+// - Less customization
+// - Another dependency</code></pre>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 16px">
+                      <h6 style="font-size: 13px; margin-bottom: 8px">
+                        🎯 When to Choose UI Libraries:
+                      </h6>
+                      <ul style="font-size: 12px; margin: 0">
+                        <li>
+                          <strong>Yes:</strong> Complex widgets (date pickers,
+                          rich text editors)
+                        </li>
+                        <li>
+                          <strong>Yes:</strong> Accessibility-critical
+                          components (modals, tooltips)
+                        </li>
+                        <li>
+                          <strong>Maybe:</strong> Common components (buttons,
+                          inputs) if design system needed
+                        </li>
+                        <li>
+                          <strong>No:</strong> Simple components (accordion,
+                          tabs) that are easy to build
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Library-Specific Anti-Patterns</h3>
+
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                  margin-top: 12px;
+                "
+              >
+                <div>
+                  <h4 style="font-size: 14px; margin-bottom: 8px">
+                    Splide/Swiper Anti-Patterns:
+                  </h4>
+                  <ul style="font-size: 13px">
+                    <li>
+                      <strong>Initializing on hidden elements</strong> - causes
+                      layout shifts
+                    </li>
+                    <li>
+                      <strong>Multiple instances</strong> - one per page is
+                      usually enough
+                    </li>
+                    <li>
+                      <strong>Forgetting destroy()</strong> - memory leaks in
+                      SPA
+                    </li>
+                    <li>
+                      <strong>Over-configuring</strong> - use defaults when
+                      possible
+                    </li>
+                    <li>
+                      <strong>Ignoring SSR/hydration</strong> — can break when
+                      markup is server-rendered and JavaScript enhances it
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 style="font-size: 14px; margin-bottom: 8px">
+                    Fix Strategies:
+                  </h4>
+                  <ul style="font-size: 13px">
+                    <li>
+                      <strong>Lazy initialize:</strong> Only when element is
+                      visible
+                    </li>
+                    <li>
+                      <strong>Shared config:</strong> Reuse configuration
+                      objects
+                    </li>
+                    <li>
+                      <strong>Cleanup:</strong> Always call destroy() in your
+                      component teardown/unmount
+                    </li>
+                    <li>
+                      <strong>Conditional loading:</strong> Dynamic import for
+                      heavy libraries
+                    </li>
+                    <li>
+                      <strong>Monitoring:</strong> Track bundle size impact in
+                      CI
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <pre
+                style="margin-top: 12px; font-size: 12px"
+              ><code>// GOOD: Conditional Splide loading
+async function loadSliderIfNeeded() {
+  const element = document.getElementById('product-gallery');
+  if (!element || window.innerWidth < 768) return;
+  
+  // Only load on desktop for complex gallery
+  const Splide = await import('@splidejs/splide');
+  
+  new Splide.default(element, {
+    // minimal config
+    perPage: 3,
+    gap: '20px',
+  }).mount();
+}
+
+// BAD: Always loading
+import Splide from '@splidejs/splide'; // 22KB always</code></pre>
+            </div>
+
+            <div class="card">
+              <h3>Library Performance Budget</h3>
+              <p>Set and enforce limits for library usage:</p>
+
+              <div class="component-grid" style="margin-top: 16px">
+                <article class="component-card">
+                  <h3 class="component-card__title">Green Zone (< 50KB)</h3>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>Essential utilities (date-fns, axios)</li>
+                    <li>Critical UI (modals, tooltips)</li>
+                    <li>Performance helpers (debounce, throttle)</li>
+                    <li>No approval needed</li>
+                  </ul>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">Yellow Zone (50-150KB)</h3>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>Complex UI (Splide, chart libraries)</li>
+                    <li>State management (Zustand, Jotai)</li>
+                    <li>Form handling libraries</li>
+                    <li>Team lead approval required</li>
+                  </ul>
+                </article>
+
+                <article class="component-card">
+                  <h3 class="component-card__title">Red Zone (> 150KB)</h3>
+                  <ul class="component-card__list" style="font-size: 12px">
+                    <li>Full UI frameworks (Material-UI)</li>
+                    <li>Monolithic libraries (full Lodash)</li>
+                    <li>Heavy visualization (D3, Three.js)</li>
+                    <li>Architecture review required</li>
+                  </ul>
+                </article>
+              </div>
+
+              <div
+                style="
+                  margin-top: 16px;
+                  padding: 12px;
+                  background: var(--surface-secondary);
+                  border-radius: 8px;
+                "
+              >
+                <h4 style="font-size: 14px; margin-bottom: 8px">
+                  📈 Performance Monitoring Setup:
+                </h4>
+                <pre style="font-size: 12px; margin: 0"><code>// package.json
+"scripts": {
+  "analyze": "source-map-explorer 'dist/**/*.js'",
+  "budget": "webpack-bundle-analyzer dist/stats.json",
+  "check-size": "bundlesize"
+}
+
+// bundlesize.config.js
+module.exports = [
+  {
+    path: 'dist/*.js',
+    maxSize: '200KB', // Initial load budget
+  },
+  {
+    path: 'dist/chunk-vendors*.js',
+    maxSize: '150KB', // Vendor budget
+  }
+];
+
+// CI/CD check
+- Bundle size < 200KB gzipped
+- Vendor chunk < 150KB  
+- Each new library < 30KB
+- Total dependencies < 50</code></pre>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Dependency Health Checklist</h3>
+              <ul>
+                <li>
+                  <strong>Maintenance</strong>
+                  <ul style="margin: 4px 0 8px 20px; font-size: 13px">
+                    <li>✓ Updates in last 6 months</li>
+                    <li>✓ Active issue/PR discussions</li>
+                    <li>✓ Multiple maintainers</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Security</strong>
+                  <ul style="margin: 4px 0 8px 20px; font-size: 13px">
+                    <li>✓ No critical vulnerabilities (npm audit)</li>
+                    <li>✓ Security policy documented</li>
+                    <li>✓ Responsible disclosure process</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Documentation</strong>
+                  <ul style="margin: 4px 0 8px 20px; font-size: 13px">
+                    <li>✓ Clear getting started guide</li>
+                    <li>✓ API reference</li>
+                    <li>✓ Examples for common use cases</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Community</strong>
+                  <ul style="margin: 4px 0 8px 20px; font-size: 13px">
+                    <li>✓ GitHub stars trending up</li>
+                    <li>✓ StackOverflow questions answered</li>
+                    <li>✓ Discord/community channels active</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Red Flags (Avoid These Libraries)</h3>
+              <ul>
+                <li>
+                  <strong>No updates in 2+ years</strong> - Likely abandoned
+                </li>
+                <li><strong>Single maintainer</strong> - Bus factor = 1</li>
+                <li>
+                  <strong>Monolithic structure</strong> - Can't tree-shake
+                </li>
+                <li>
+                  <strong>Many dependencies</strong> - Increases vulnerability
+                  surface
+                </li>
+                <li>
+                  <strong>Poor TypeScript support</strong> - Modern projects
+                  need types
+                </li>
+                <li>
+                  <strong>License issues</strong> - GPL in MIT project, etc.
+                </li>
+                <li><strong>Browser-only</strong> - No SSR/Node.js support</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Maintenance Strategy</h3>
+              <ul>
+                <li>
+                  <strong>Regular Updates</strong>
+                  <p style="font-size: 13px; margin: 4px 0 8px 0">
+                    Use Dependabot or Renovate for automated updates. Review
+                    weekly.
+                  </p>
+                </li>
+                <li>
+                  <strong>Deprecation Plan</strong>
+                  <p style="font-size: 13px; margin: 4px 0 8px 0">
+                    For each dependency, know:
+                    <br />1. Why we chose it <br />2. Migration path to
+                    alternative <br />3. Removal impact
+                  </p>
+                </li>
+                <li>
+                  <strong>Bundle Monitoring</strong>
+                  <p style="font-size: 13px; margin: 4px 0 0 0">
+                    Track bundle size in CI. Set budget (e.g., max 200KB initial
+                    load).
+                  </p>
+                </li>
+              </ul>
+
+              <pre><code>// package.json scripts for maintenance
+"scripts": {
+  "audit": "npm audit",
+  "outdated": "npm outdated",
+  "bundle-size": "bundlesize",
+  "check-licenses": "license-checker",
+  "update-deps": "npm update --save"
+}</code></pre>
+            </div>
+          </section>
+
+          <!-- ERROR HANDLING -->
+          <section class="section" id="error-handling">
+            <h2>Error Handling</h2>
+
+            <div class="card">
+              <h3>Custom Error Classes</h3>
+              <p>Create specific error types for better handling:</p>
+
+              <pre><code>// Base application error
+class AppError extends Error {
+  constructor(message, code = 'APP_ERROR', details = {}) {
+    super(message);
+    this.name = this.constructor.name;
+    this.code = code;
+    this.details = details;
+    this.timestamp = new Date().toISOString();
+    
+    // Capture stack trace
+    Error.captureStackTrace?.(this, this.constructor);
+  }
+}
+
+// Specific error types
+class ValidationError extends AppError {
+  constructor(field, message) {
+    super(`Validation failed: ${message}`, 'VALIDATION_ERROR', { field });
+  }
+}
+
+class NetworkError extends AppError {
+  constructor(url, status) {
+    super(`Network request failed`, 'NETWORK_ERROR', { url, status });
+  }
+}
+
+// Usage
+try {
+  throw new ValidationError('email', 'Invalid email format');
+} catch (error) {
+  if (error instanceof ValidationError) {
+    console.error(`Field ${error.details.field}: ${error.message}`);
+  }
+}</code></pre>
+            </div>
+
+            <div class="card">
+              <h3>Global Error Handling</h3>
+
+              <pre><code>// Window error handler
+window.addEventListener('error', (event) => {
+  console.error('Global error:', event.error);
+  logToService(event.error);
+  // Prevent default browser error display if needed
+  event.preventDefault();
+});
+
+// Unhandled promise rejection
+window.addEventListener('unhandledrejection', (event) => {
+  console.error('Unhandled promise rejection:', event.reason);
+  logToService(event.reason);
+  event.preventDefault();
+});
+
+// Async error boundary
+async function withErrorBoundary(operation, fallback) {
+  try {
+    return await operation();
+  } catch (error) {
+    console.error('Operation failed:', error);
+    return fallback?.(error) ?? null;
+  }
+}</code></pre>
+            </div>
+          </section>
+
+          <!-- PERFORMANCE -->
+          <section class="section" id="performance">
+            <h2>Performance</h2>
+
+            <div class="card">
+              <h3>Optimization Patterns</h3>
+              <ul>
+                <li>Avoid unnecessary DOM operations</li>
+                <li>Use debouncing/throttling for frequent events</li>
+                <li>Implement lazy loading for non-critical resources</li>
+                <li>Cache expensive computations</li>
+              </ul>
+
+              <button
+                class="btn btn--secondary"
+                onclick="document.getElementById('modal-performance-examples').showModal()"
+              >
+                View Performance Examples →
+              </button>
+            </div>
+
+            <div class="card">
+              <h3>Memory Management</h3>
+
+              <pre><code>// Event listener cleanup
+class Component {
+  constructor() {
+    this.handleResize = this.handleResize.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  mount() {
+    window.addEventListener('resize', this.handleResize);
+    this.element.addEventListener('click', this.handleClick);
+  }
+
+  unmount() {
+    window.removeEventListener('resize', this.handleResize);
+    this.element.removeEventListener('click', this.handleClick);
+    this.element = null;
+  }
+
+  handleResize() {
+    // Throttled resize handler
+  }
+
+  handleClick() {
+    // ...
+  }
+}
+
+// Weak references for caching
+const cache = new WeakMap();
+
+function getExpensiveValue(obj) {
+  if (!cache.has(obj)) {
+    const value = computeExpensiveValue(obj);
+    cache.set(obj, value);
+  }
+  return cache.get(obj);
+}</code></pre>
+            </div>
+          </section>
+
+          <!-- SECURITY -->
+          <section class="section" id="security">
+            <h2>Security</h2>
+
+            <div class="card">
+              <h3>XSS Prevention</h3>
+              <ul>
+                <li>Always escape user input before rendering</li>
+                <li>Use Content Security Policy (CSP)</li>
+                <li>Sanitize HTML with DOMPurify or similar</li>
+                <li>Avoid <code>innerHTML</code> with user content</li>
+              </ul>
+
+              <pre><code>// Safe HTML rendering
+function renderUserContent(text) {
+  const element = document.createElement('div');
+  element.textContent = text; // Automatically escaped
+  return element;
+}
+
+// With DOMPurify
+import DOMPurify from 'dompurify';
+
+function renderRichContent(html) {
+  const clean = DOMPurify.sanitize(html, {
+    ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'a'],
+    ALLOWED_ATTR: ['href', 'title']
+  });
+  element.innerHTML = clean;
+}
+
+// URL validation
+function isValidUrl(string) {
+  try {
+    const url = new URL(string);
+    return ['http:', 'https:'].includes(url.protocol);
+  } catch {
+    return false;
+  }
+}</code></pre>
+            </div>
+          </section>
+
+          <!-- TOOLING & LINTING -->
+          <section class="section" id="tooling">
+            <h2>Tooling & Linting</h2>
+
+            <div class="card">
+              <h3>ESLint Configuration</h3>
+              <p>Recommended ESLint rules for modern JavaScript:</p>
+
+              <pre><code>// .eslintrc.js
+module.exports = {
+  env: {
+    browser: true,
+    es2022: true,
+    node: true,
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:import/recommended',
+    'plugin:prettier/recommended',
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  rules: {
+    // Best practices
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'no-debugger': 'warn',
+    'no-alert': 'error',
+    
+    // Variables
+    'prefer-const': 'error',
+    'no-var': 'error',
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    
+    // Functions
+    'arrow-body-style': ['error', 'as-needed'],
+    'prefer-arrow-callback': 'error',
+    
+    // Objects & Arrays
+    'prefer-object-spread': 'error',
+    'prefer-destructuring': ['error', { object: true, array: false }],
+    
+    // Async
+    'no-async-promise-executor': 'error',
+    'no-await-in-loop': 'error',
+    'require-await': 'error',
+    
+    // Imports
+    'import/order': ['error', {
+      groups: [
+        'builtin',
+        'external',
+        'internal',
+        'parent',
+        'sibling',
+        'index',
+      ],
+      'newlines-between': 'always',
+    }],
+  },
+};</code></pre>
+            </div>
+
+            <div class="card">
+              <h3>Prettier Configuration</h3>
+
+              <pre><code>// .prettierrc
+{
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "printWidth": 80,
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
+  "endOfLine": "lf"
+}</code></pre>
+            </div>
+          </section>
+
+          <!-- RESOURCES -->
+          <section class="section" id="resources">
+            <h2>Additional Resources</h2>
+
+            <div class="card">
+              <h3>Library Evaluation Tools</h3>
+              <ul>
+                <li>
+                  <a
+                    href="https://bundlephobia.com"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >BundlePhobia</a
+                  >
+                  - Check package bundle size impact
+                </li>
+                <li>
+                  <a
+                    href="https://npmtrends.com"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >npm trends</a
+                  >
+                  - Compare package download trends
+                </li>
+                <li>
+                  <a
+                    href="https://snyk.io/advisor"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >Snyk Advisor</a
+                  >
+                  - Package health and security scores
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/you-dont-need/You-Dont-Need"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >You Don't Need</a
+                  >
+                  - Guides for replacing libraries with native code
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>External Resources</h3>
+              <ul>
+                <li>
+                  <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >MDN JavaScript Guide</a
+                  >
+                  - Comprehensive JavaScript documentation
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/airbnb/javascript"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >Airbnb JavaScript Style Guide</a
+                  >
+                  - Popular JavaScript style guide
+                </li>
+                <li>
+                  <a
+                    href="https://javascript.info/"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >The Modern JavaScript Tutorial</a
+                  >
+                  - In-depth modern JavaScript concepts
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/ryanmcdermott/clean-code-javascript"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >Clean Code JavaScript</a
+                  >
+                  - Clean code principles adapted for JavaScript
+                </li>
+                <li>
+                  <a
+                    href="https://patterns.dev/"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >JavaScript Patterns</a
+                  >
+                  - Design patterns for JavaScript
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Recommended Books</h3>
+              <ul>
+                <li>
+                  <em>JavaScript: The Definitive Guide</em> by David Flanagan
+                </li>
+                <li><em>You Don't Know JS Yet</em> by Kyle Simpson</li>
+                <li><em>Eloquent JavaScript</em> by Marijn Haverbeke</li>
+                <li>
+                  <em>JavaScript: The Good Parts</em> by Douglas Crockford
+                </li>
+                <li><em>Clean Code in JavaScript</em> by James Padolsey</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- VITE (FUTURE DIRECTION) -->
+          <section class="section" id="vite">
+            <h2>Vite (Future Direction)</h2>
+
+            <div class="card">
+              <h3>Why Consider Vite</h3>
+              <p>
+                Vite is a modern frontend build tool that improves the developer
+                experience for JavaScript modules and styles (SCSS/PostCSS),
+                while producing optimized production bundles. It does not
+                require adopting a framework.
+              </p>
+              <ul>
+                <li>
+                  <strong>Faster iteration:</strong> modern dev server and
+                  incremental updates
+                </li>
+                <li>
+                  <strong>Cleaner module workflow:</strong> native ES module
+                  imports for component scripts
+                </li>
+                <li>
+                  <strong>Production build:</strong> consistent bundling,
+                  minification, and cache-friendly asset output
+                </li>
+                <li>
+                  <strong>Scales with complexity:</strong> easier to keep JS/CSS
+                  organized as a component library grows
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Trade-offs</h3>
+              <ul>
+                <li>
+                  <strong>Node toolchain:</strong> adds dependency management
+                  (npm) and build config to the repo
+                </li>
+                <li>
+                  <strong>Team onboarding:</strong> requires consistent scripts
+                  and version discipline
+                </li>
+                <li>
+                  <strong>Migration effort:</strong> best introduced on new work
+                  first, not as a forced rewrite
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>How This Affects Our Current JavaScript Practices</h3>
+              <ul>
+                <li>
+                  These guidelines still apply: naming, immutability, error
+                  handling, and modular structure.
+                </li>
+                <li>
+                  ES modules become the default for component scripts
+                  (imports/exports instead of global scripts).
+                </li>
+                <li>
+                  Bundle/performance budgets remain relevant; the measurement
+                  tools may change (e.g., Rollup/Vite visualizers).
+                </li>
+              </ul>
+            </div>
+
+            <div class="card" style="background: var(--surface-secondary)">
+              <h3>Adoption Path (Low Risk)</h3>
+              <ol style="margin: 0; padding-left: 18px">
+                <li>Pilot on one small project with SCSS + modular JS.</li>
+                <li>
+                  Create a starter template (scripts, folder conventions,
+                  linting).
+                </li>
+                <li>
+                  Use it for new work; migrate older projects only when the ROI
+                  is clear.
+                </li>
+              </ol>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal: Function Examples -->
+    <dialog id="modal-function-examples" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Function Patterns & Examples</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close function examples"
+            onclick="document.getElementById('modal-function-examples').close()"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <div class="card">
+            <h4>Arrow Functions vs Function Declarations</h4>
+            <pre><code>// Arrow functions (anonymous, good for callbacks)
+const multiply = (a, b) => a * b;
+const greet = name => `Hello, ${name}`;
+
+// Function declarations (hoisted, named)
+function calculateTotal(price, tax) {
+  return price + (price * tax);
+}
+
+// Methods in objects
+const calculator = {
+  add: (a, b) => a + b,
+  subtract(a, b) {
+    return a - b;
+  }
+};</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>Higher-Order Functions</h4>
+            <pre><code>// Function that returns a function
+function createMultiplier(factor) {
+  return function(number) {
+    return number * factor;
+  };
+}
+
+const double = createMultiplier(2);
+const triple = createMultiplier(3);
+
+console.log(double(5)); // 10
+console.log(triple(5)); // 15
+
+// Function that accepts functions as arguments
+function processArray(array, processor) {
+  const result = [];
+  for (const item of array) {
+    result.push(processor(item));
+  }
+  return result;
+}
+
+const numbers = [1, 2, 3, 4];
+const squared = processArray(numbers, x => x * x);</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>Pure Functions</h4>
+            <pre><code>// Pure function (no side effects, same output for same input)
+function calculateTax(amount, rate) {
+  return amount * rate;
+}
+
+// Impure function (has side effects)
+let taxRate = 0.1;
+function calculateTaxImpure(amount) {
+  return amount * taxRate; // Depends on external state
+}
+
+// Pure function with object
+function updateUser(user, updates) {
+  return {
+    ...user,
+    ...updates,
+    updatedAt: new Date().toISOString()
+  };
+}
+
+const user = { name: 'John', age: 30 };
+const updated = updateUser(user, { age: 31 });
+// Original user unchanged, new object created</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Async Examples -->
+    <dialog id="modal-async-examples" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Async Patterns & Examples</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close async examples"
+            onclick="document.getElementById('modal-async-examples').close()"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <div class="card">
+            <h4>Promise Patterns</h4>
+            <pre><code>// Creating promises
+function delay(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+function fetchWithRetry(url, retries = 3) {
+  return new Promise((resolve, reject) => {
+    const attempt = (n) => {
+      fetch(url)
+        .then(resolve)
+        .catch(error => {
+          if (n > 0) {
+            console.log(`Retrying... (${n} attempts left)`);
+            attempt(n - 1);
+          } else {
+            reject(error);
+          }
+        });
+    };
+    attempt(retries);
+  });
+}
+
+// Promise utilities
+const timeout = (promise, ms) => {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Timeout')), ms);
+    })
+  ]);
+};</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>Async/Await Patterns</h4>
+            <pre><code>// Sequential vs parallel execution
+async function sequentialFetch() {
+  const user = await fetchUser();
+  const posts = await fetchPosts(user.id); // Waits for user first
+  const comments = await fetchComments(posts[0].id);
+  return { user, posts, comments };
+}
+
+async function parallelFetch() {
+  const [user, posts, comments] = await Promise.all([
+    fetchUser(),
+    fetchPosts(),
+    fetchComments()
+  ]);
+  return { user, posts, comments }; // All fetched in parallel
+}
+
+// Async iteration
+async function processItems(items) {
+  const results = [];
+  for (const item of items) {
+    // Process sequentially
+    const result = await processItem(item);
+    results.push(result);
+  }
+  return results;
+}
+
+// Async generator
+async function* asyncGenerator() {
+  let i = 0;
+  while (i < 3) {
+    await delay(1000);
+    yield i++;
+  }
+}</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>Real-world Async Patterns</h4>
+            <pre><code>// Rate limiting with queues
+class RateLimiter {
+  constructor(requestsPerSecond) {
+    this.queue = [];
+    this.interval = 1000 / requestsPerSecond;
+    this.processing = false;
+  }
+
+  async add(request) {
+    return new Promise((resolve) => {
+      this.queue.push({ request, resolve });
+      if (!this.processing) this.process();
+    });
+  }
+
+  async process() {
+    this.processing = true;
+    while (this.queue.length > 0) {
+      const { request, resolve } = this.queue.shift();
+      const result = await request();
+      resolve(result);
+      await delay(this.interval);
+    }
+    this.processing = false;
+  }
+}
+
+// Concurrent request management
+async function fetchWithConcurrency(urls, maxConcurrent = 5) {
+  const results = [];
+  const executing = new Set();
+  
+  for (const url of urls) {
+    const promise = fetch(url).then(res => res.json());
+    results.push(promise);
+    executing.add(promise);
+    
+    promise.then(() => executing.delete(promise));
+    
+    if (executing.size >= maxConcurrent) {
+      await Promise.race(executing);
+    }
+  }
+  
+  return Promise.all(results);
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Object Examples -->
+    <dialog id="modal-object-examples" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Object & Array Patterns</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close object examples"
+            onclick="document.getElementById('modal-object-examples').close()"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <div class="card">
+            <h4>Modern Object Syntax</h4>
+            <pre><code>// Property shorthand
+const name = 'John';
+const age = 30;
+const user = { name, age }; // { name: 'John', age: 30 }
+
+// Computed property names
+const key = 'status';
+const value = 'active';
+const obj = { [key]: value, [`${key}Code`]: 1 };
+
+// Method shorthand
+const calculator = {
+  add(a, b) {
+    return a + b;
+  },
+  multiply: (a, b) => a * b
+};
+
+// Object destructuring
+const { name: userName, age: userAge, ...rest } = user;
+const { coordinates: { x, y } } = complexObject;</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>Array Methods & Patterns</h4>
+            <pre><code>// Chaining array methods
+const products = [
+  { id: 1, name: 'Laptop', price: 999, category: 'electronics' },
+  { id: 2, name: 'Mouse', price: 25, category: 'electronics' },
+  { id: 3, name: 'Desk', price: 450, category: 'furniture' }
+];
+
+const electronicsTotal = products
+  .filter(p => p.category === 'electronics')
+  .map(p => p.price * 1.2) // Add 20% tax
+  .reduce((sum, price) => sum + price, 0);
+
+// Finding and grouping
+const cheapest = products.reduce((min, p) => 
+  p.price < min.price ? p : min
+);
+
+const byCategory = products.reduce((groups, product) => {
+  const category = product.category;
+  if (!groups[category]) groups[category] = [];
+  groups[category].push(product);
+  return groups;
+}, {});</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>Immutability Patterns</h4>
+            <pre><code>// Updating nested objects immutably
+const state = {
+  user: {
+    name: 'John',
+    profile: {
+      email: 'john@example.com',
+      settings: { theme: 'light' }
+    }
+  }
+};
+
+// Update nested property
+const newState = {
+  ...state,
+  user: {
+    ...state.user,
+    profile: {
+      ...state.user.profile,
+      settings: {
+        ...state.user.profile.settings,
+        theme: 'dark'
+      }
+    }
+  }
+};
+
+// Using utility functions
+function updateIn(obj, path, value) {
+  const [key, ...rest] = path;
+  if (rest.length === 0) {
+    return { ...obj, [key]: value };
+  }
+  return {
+    ...obj,
+    [key]: updateIn(obj[key] || {}, rest, value)
+  };
+}
+
+const updated = updateIn(state, ['user', 'profile', 'settings', 'theme'], 'dark');</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Performance Examples -->
+    <dialog id="modal-performance-examples" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">
+            Performance Optimization Patterns
+          </h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close performance examples"
+            onclick="document.getElementById('modal-performance-examples').close()"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <div class="card">
+            <h4>Debouncing & Throttling</h4>
+            <pre><code>// Debounce implementation
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Throttle implementation
+function throttle(func, limit) {
+  let inThrottle;
+  return function(...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+}
+
+// Usage
+const handleResize = debounce(() => {
+  console.log('Window resized');
+  updateLayout();
+}, 250);
+
+window.addEventListener('resize', handleResize);
+
+const handleScroll = throttle(() => {
+  console.log('Scrolling');
+  checkPosition();
+}, 100);
+
+window.addEventListener('scroll', handleScroll);</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>Memoization & Caching</h4>
+            <pre><code>// Simple memoization
+function memoize(fn) {
+  const cache = new Map();
+  return function(...args) {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    const result = fn.apply(this, args);
+    cache.set(key, result);
+    return result;
+  };
+}
+
+// Expensive calculation
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+const memoizedFib = memoize(fibonacci);
+
+// Usage with cache clearing
+function createCachedApiCall(apiFunc) {
+  const cache = new Map();
+  const maxSize = 100;
+  
+  return async function(key) {
+    if (cache.has(key)) {
+      console.log('Cache hit:', key);
+      return cache.get(key);
+    }
+    
+    console.log('Cache miss:', key);
+    const result = await apiFunc(key);
+    
+    // LRU cache eviction
+    if (cache.size >= maxSize) {
+      const firstKey = cache.keys().next().value;
+      cache.delete(firstKey);
+    }
+    
+    cache.set(key, result);
+    return result;
+  };
+}</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>Lazy Loading & Code Splitting</h4>
+            <pre><code>// Lazy loading images
+function lazyLoadImages() {
+  const images = document.querySelectorAll('img[data-src]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+        observer.unobserve(img);
+      }
+    });
+  }, { rootMargin: '50px' });
+
+  images.forEach(img => observer.observe(img));
+}
+
+// Dynamic imports for code splitting
+async function loadFeature(feature) {
+  const features = {
+    analytics: () => import('./analytics.js'),
+    charts: () => import('./charts.js'),
+    editor: () => import('./editor.js')
+  };
+
+  if (features[feature]) {
+    try {
+      const module = await features[feature]();
+      return module.default;
+    } catch (error) {
+      console.error(`Failed to load ${feature}:`, error);
+      return null;
+    }
+  }
+}
+
+// Virtual scrolling
+class VirtualList {
+  constructor(container, itemHeight, totalItems, renderItem) {
+    this.container = container;
+    this.itemHeight = itemHeight;
+    this.totalItems = totalItems;
+    this.renderItem = renderItem;
+    this.visibleItems = Math.ceil(container.clientHeight / itemHeight);
+    this.buffer = 5;
+    
+    this.container.style.position = 'relative';
+    this.container.style.height = `${totalItems * itemHeight}px`;
+    
+    this.render();
+    container.addEventListener('scroll', () => this.render());
+  }
+
+  render() {
+    const scrollTop = this.container.scrollTop;
+    const start = Math.max(0, Math.floor(scrollTop / this.itemHeight) - this.buffer);
+    const end = Math.min(this.totalItems, start + this.visibleItems + this.buffer * 2);
+    
+    // Render only visible items
+    // ...
+  }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Library Evaluation -->
+    <dialog id="modal-library-evaluation" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Library Evaluation Checklist</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close library evaluation"
+            onclick="document.getElementById('modal-library-evaluation').close()"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <div class="card">
+            <h4>Before Adding a Library</h4>
+            <ul>
+              <li>✓ Can we implement this natively?</li>
+              <li>✓ Is the bundle size justified?</li>
+              <li>✓ Does it solve a real problem?</li>
+              <li>✓ Are there simpler alternatives?</li>
+              <li>✓ Will it be used in multiple places?</li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>Technical Evaluation</h4>
+            <pre><code>// Check these metrics:
+1. Bundle size (BundlePhobia)
+   https://bundlephobia.com/package/library-name
+
+2. Weekly downloads & trends
+   https://npmtrends.com/library-vs-alternative
+
+3. GitHub metrics
+   - Stars (popularity)
+   - Recent commits (maintained)
+   - Open issues (health)
+   - Contributors (community)
+
+4. Documentation quality
+   - Examples
+   - API reference
+   - Migration guides
+
+5. Browser support
+   - ES modules support
+   - Polyfills needed
+   - IE11 support (if required)</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>Security & Maintenance</h4>
+            <ul>
+              <li>✓ Regular security updates</li>
+              <li>✓ No critical vulnerabilities (npm audit)</li>
+              <li>✓ Active maintainers</li>
+              <li>✓ Clear versioning (semver)</li>
+              <li>✓ Backward compatibility policy</li>
+              <li>✓ Deprecation policy</li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>Integration Considerations</h4>
+            <pre><code>// Test integration before committing:
+1. Import size impact
+   import { testImport } from 'library';
+   console.log('Library loaded');
+
+2. Tree shaking compatibility
+   // Check if unused exports are removed
+
+3. TypeScript support
+   // Types included or @types/package available
+
+4. Framework compatibility
+   // Works with React 18+, Vue 3, etc.
+
+5. Build tool compatibility
+   // Works with Vite, Webpack, Rollup
+
+6. SSR compatibility
+   // Works with Next.js, Nuxt, SvelteKit</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4>Example: Evaluating date-fns vs moment.js</h4>
+            <div
+              style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px"
+            >
+              <div>
+                <h5 style="font-size: 13px">date-fns ✓</h5>
+                <ul style="font-size: 12px">
+                  <li>Modular (tree-shakable)</li>
+                  <li>Immutable</li>
+                  <li>Small bundle (~300KB total)</li>
+                  <li>Active maintenance</li>
+                  <li>TypeScript native</li>
+                </ul>
+              </div>
+              <div>
+                <h5 style="font-size: 13px">moment.js ✗</h5>
+                <ul style="font-size: 12px">
+                  <li>Monolithic (~4MB minified)</li>
+                  <li>Mutable</li>
+                  <li>Large bundle size</li>
+                  <li>Legacy mode</li>
+                  <li>No tree shaking</li>
+                </ul>
+              </div>
+            </div>
+            <p
+              style="font-size: 12px; margin-top: 8px; color: var(--text-muted)"
+            >
+              Decision: Use date-fns for new projects, migrate existing from
+              moment.js
+            </p>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

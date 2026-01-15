@@ -1,0 +1,424 @@
+/* =========================================
+   RESET / BASELINE
+   ========================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px; /* baseline for rem; keep readable on mobile */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+
+  /* Prevent a white flash before theme tokens apply */
+  background-color: var(--bg-gradient-start, #050816);
+
+  /* Helps native controls follow the theme */
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Links */
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+/* Lists */
+
+ul,
+ol {
+  margin: 0;
+  padding-left: 1.25em;
+}
+
+/* Media */
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Form controls */
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Focus */
+
+:focus-visible {
+  outline: 2px solid var(--accent, #5ac8fa);
+  outline-offset: 2px;
+}
+
+/* Scrollbar (optional) */
+
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb, rgba(255, 255, 255, 0.2))
+    var(--scroll-track, transparent);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb, rgba(255, 255, 255, 0.2));
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scroll-track, transparent);
+}
+
+/* =========================================
+   TOKENS
+   ========================================= */
+
+/* Progressive enhancement: enables smooth interpolation of theme colors */
+@property --bg-gradient-start {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #050816;
+}
+
+@property --bg-gradient-end {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #15172b;
+}
+
+@property --accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #5ac8fa;
+}
+
+@property --accent-soft {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(90, 200, 250, 0.25);
+}
+
+@property --text-main {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f5f6fa;
+}
+
+@property --text-muted {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #a5a9c3;
+}
+
+@property --border-glass {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(255, 255, 255, 0.18);
+}
+
+@property --glass-bg {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(15, 17, 35, 0.72);
+}
+
+@property --glass-bg-soft {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(25, 27, 55, 0.62);
+}
+
+:root {
+  /* Core palette (Dark is default) */
+  --bg-gradient-start: #050816;
+  --bg-gradient-end: #15172b;
+
+  --accent: #5ac8fa;
+  --accent-soft: rgba(90, 200, 250, 0.25);
+  --accent-border: rgba(90, 200, 250, 0.5);
+
+  --text-main: #f5f6fa;
+  --text-muted: #a5a9c3;
+
+  /* Surfaces / glass */
+  --border-glass: rgba(255, 255, 255, 0.18);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  --glass-bg: rgba(15, 17, 35, 0.72);
+  --glass-bg-soft: rgba(25, 27, 55, 0.62);
+  --surface-strong: rgba(10, 12, 28, 0.9);
+  --surface-strong-soft: rgba(10, 12, 28, 0.55);
+
+  /* Shadows */
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.4);
+  --shadow-elev-1: 0 8px 22px rgba(0, 0, 0, 0.35);
+  --shadow-elev-2: 10px 0 35px rgba(0, 0, 0, 0.6);
+
+  /* UI */
+  --nav-hover-bg: rgba(255, 255, 255, 0.06);
+  --nav-active-bg: rgba(90, 200, 250, 0.1);
+  --dot-muted: rgba(255, 255, 255, 0.18);
+
+  --chevron: rgba(255, 255, 255, 0.35);
+  --chevron-strong: rgba(255, 255, 255, 0.55);
+
+  --overlay-backdrop: rgba(0, 0, 0, 0.55);
+
+  /* Background glows (used in _layout.updated.scss) */
+  --glow-dark-a: rgba(90, 200, 250, 0.35);
+  --glow-dark-b: rgba(255, 107, 129, 0.25);
+  --glow-light-a: rgba(0, 122, 255, 0.14);
+  --glow-light-b: rgba(255, 107, 129, 0.12);
+
+  /* Scrollbar */
+  --scroll-thumb: rgba(255, 255, 255, 0.2);
+  --scroll-track: transparent;
+
+  /* Shape / motion */
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --transition-fast: 0.18s ease-out;
+  --transition-med: 0.24s ease-out;
+
+  /* Theme switch (used only when data-theme-animate="true") */
+  --theme-duration: 320ms;
+  --theme-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+:root[data-theme="light"] {
+  /* Let UA paint inputs correctly */
+  color-scheme: light;
+
+  /* Core palette */
+  --bg-gradient-start: #f6f7ff;
+  --bg-gradient-end: #e9ecff;
+
+  --accent: #007aff;
+  --accent-soft: rgba(0, 122, 255, 0.18);
+  --accent-border: rgba(0, 122, 255, 0.45);
+
+  --text-main: #0e1222;
+  --text-muted: #4b516a;
+
+  /* Surfaces / glass */
+  --border-glass: rgba(0, 0, 0, 0.12);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-bg-soft: rgba(255, 255, 255, 0.62);
+  --surface-strong: rgba(255, 255, 255, 0.85);
+  --surface-strong-soft: rgba(255, 255, 255, 0.6);
+
+  /* Shadows */
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.12);
+  --shadow-elev-1: 0 8px 22px rgba(0, 0, 0, 0.12);
+  --shadow-elev-2: 10px 0 35px rgba(0, 0, 0, 0.18);
+
+  /* UI */
+  --nav-hover-bg: rgba(0, 0, 0, 0.04);
+  --nav-active-bg: rgba(0, 122, 255, 0.1);
+  --dot-muted: rgba(0, 0, 0, 0.18);
+
+  --chevron: rgba(0, 0, 0, 0.35);
+  --chevron-strong: rgba(0, 0, 0, 0.55);
+
+  --overlay-backdrop: rgba(10, 12, 28, 0.22);
+
+  /* Scrollbar */
+  --scroll-thumb: rgba(0, 0, 0, 0.18);
+  --scroll-track: transparent;
+}
+
+/* =========================================
+   THEME SWITCH ANIMATION (on demand)
+   ========================================= */
+
+/*
+  JS should set document.documentElement.dataset.themeAnimate = "true";
+  then remove it after ~320ms.
+*/
+:root[data-theme-animate="true"] {
+  transition: --bg-gradient-start var(--theme-duration) var(--theme-ease),
+    --bg-gradient-end var(--theme-duration) var(--theme-ease),
+    --accent var(--theme-duration) var(--theme-ease),
+    --accent-soft var(--theme-duration) var(--theme-ease),
+    --text-main var(--theme-duration) var(--theme-ease),
+    --text-muted var(--theme-duration) var(--theme-ease),
+    --border-glass var(--theme-duration) var(--theme-ease),
+    --glass-bg var(--theme-duration) var(--theme-ease),
+    --glass-bg-soft var(--theme-duration) var(--theme-ease),
+    --scroll-thumb var(--theme-duration) var(--theme-ease);
+}
+
+:root[data-theme-animate="true"]
+  :where(
+    body,
+    .bg-gradient,
+    .sidebar,
+    .topbar,
+    .nav-group,
+    .nav-link,
+    .sidebar-backdrop,
+    .card,
+    .section,
+    .accordion
+  ) {
+  transition: background-color var(--theme-duration) var(--theme-ease),
+    color var(--theme-duration) var(--theme-ease),
+    border-color var(--theme-duration) var(--theme-ease),
+    box-shadow var(--theme-duration) var(--theme-ease),
+    fill var(--theme-duration) var(--theme-ease),
+    stroke var(--theme-duration) var(--theme-ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  :root {
+    --theme-duration: 0ms;
+  }
+
+  :root[data-theme-animate="true"]
+    :where(
+      body,
+      .bg-gradient,
+      .sidebar,
+      .topbar,
+      .nav-group,
+      .nav-link,
+      .sidebar-backdrop,
+      .card,
+      .section,
+      .accordion
+    ) {
+    transition: none !important;
+  }
+}
+
+/* Nice text selection */
+::selection {
+  background: var(--accent-soft);
+  color: var(--text-main);
+}
+
+/* =========================================
+   TYPOGRAPHY
+   ========================================= */
+
+@font-face {
+  font-family: "Outfit";
+  src: url("../fonts/Outfit-VariableFont.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+body {
+  font-family: "Outfit", system-ui, sans-serif;
+  color: var(--text-main);
+
+  /* Fallback background if .bg-gradient is missing */
+  background-color: var(--bg-gradient-start);
+  background-image: radial-gradient(
+      1100px 650px at 12% 10%,
+      var(--accent-soft),
+      transparent 55%
+    ),
+    linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: "JetBrains Mono", "SF Mono", Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+.section > p,
+.card p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* =========================================
+   MOBILE READABILITY
+   ========================================= */
+
+@media (max-width: 420px) {
+  .section > p,
+  .card p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  pre,
+  code {
+    font-size: 13.5px;
+  }
+}

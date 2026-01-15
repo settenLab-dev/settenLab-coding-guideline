@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="description"
+      content="Documentation rules for web development: repo docs structure, component docs, environments, build/deploy, SEO, analytics, operations, and Nulab backlog workflow."
+    />
+    <meta name="theme-color" content="#0b0f1a" />
+
+    <meta
+      property="og:title"
+      content="Documentation rules — Web development — Coding Guideline"
+    />
+    <meta
+      property="og:description"
+      content="Documentation standards for modern web apps: where docs live, what to document, component and UI docs, env/build/deploy, SEO/analytics, and backlog workflow."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/Outfit-VariableFont.woff2"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <title>Documentation rules — Coding Guideline</title>
+  </head>
+
+  <body>
+    <div class="bg-gradient"></div>
+
+    <div class="app-shell">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="primary-sidebar" aria-label="Primary">
+        <a href="/" class="sidebar__header">
+          <div class="sidebar__logo" aria-hidden="true">S</div>
+          <div class="sidebar__title">
+            <span class="sidebar__company">Coding Guideline</span>
+            <span class="sidebar__subtitle">settenLab</span>
+          </div>
+        </a>
+
+        <nav class="sidebar__nav sidebar-nav" aria-label="Guideline navigation">
+          <!-- START HERE -->
+          <details
+            class="nav-group nav-group--start"
+            data-nav-group="start-here"
+          >
+            <summary class="nav-group__summary">
+              <a href="/" class="nav-group__summary-link">Start here</a>
+            </summary>
+          </details>
+
+          <!-- PROJECT SETUP -->
+          <details class="nav-group" data-nav-group="project-setup">
+            <summary class="nav-group__summary">Project setup</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  href="environment-setup.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  Environment setup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="file-structure.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  File structure
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- UI -->
+          <details class="nav-group" data-nav-group="ui">
+            <summary class="nav-group__summary">UI</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="markup.html" class="sidebar-nav__link nav-link"
+                  >Markup</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="styling.html" class="sidebar-nav__link nav-link"
+                  >Styling</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="components.html" class="sidebar-nav__link nav-link"
+                  >Components</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="typography.html" class="sidebar-nav__link nav-link"
+                  >Typography</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="accessibility.html" class="sidebar-nav__link nav-link">
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- ENGINEERING -->
+          <details class="nav-group" data-nav-group="engineering">
+            <summary class="nav-group__summary">Engineering</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="javascript.html">
+                  Javascript
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="api-and-data-handling.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  API & Data handling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="performance.html" class="sidebar-nav__link nav-link"
+                  >Performance</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="testing.html" class="sidebar-nav__link nav-link"
+                  >Testing</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="security.html" class="sidebar-nav__link nav-link"
+                  >Security</a
+                >
+              </li>
+            </ul>
+          </details>
+
+          <!-- WORKFLOW -->
+          <details class="nav-group" data-nav-group="workflow" open>
+            <summary class="nav-group__summary">Workflow</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="pr-rules.html" class="sidebar-nav__link nav-link">
+                  PR rules / review checklist
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="documentation.html"
+                  class="sidebar-nav__link nav-link"
+                  aria-current="page"
+                >
+                  Documentation rules
+                </a>
+              </li>
+            </ul>
+          </details>
+        </nav>
+
+        <div class="sidebar__footer">
+          <a href="changelog.html" class="sidebar__version">v1.0.0</a>
+          <span class="sidebar__lang">EN</span>
+        </div>
+      </aside>
+
+      <div class="sidebar-backdrop js-sidebar-backdrop" hidden></div>
+
+      <!-- MAIN -->
+      <main class="main" id="main-content">
+        <header class="topbar">
+          <button
+            class="topbar__menu-btn js-sidebar-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-controls="primary-sidebar"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <h1 class="topbar__title">Documentation rules (Web development)</h1>
+
+          <div class="topbar__actions">
+            <button
+              class="topbar__action-btn"
+              id="themeToggle"
+              aria-label="Toggle theme"
+              aria-pressed="false"
+            >
+              🌗
+            </button>
+          </div>
+        </header>
+
+        <div class="content">
+          <!-- OVERVIEW -->
+          <section class="section" id="overview">
+            <h2>Overview</h2>
+            <p>
+              For web projects, documentation exists to keep the delivery loop
+              short: run locally, ship safely, debug production issues quickly,
+              and maintain UI consistency. Docs should be
+              <strong>actionable</strong>, <strong>searchable</strong>, and
+              updated in the same PR that changes behavior.
+            </p>
+
+            <div class="card callout">
+              <h3>Core Principles</h3>
+              <ul>
+                <li>
+                  <strong>Docs are part of the deliverable:</strong> changes
+                  without docs are incomplete
+                </li>
+                <li>
+                  <strong>Closest to the code:</strong> keep technical docs
+                  versioned with the repo
+                </li>
+                <li>
+                  <strong>Single source of truth:</strong> avoid duplicated
+                  instructions and competing pages
+                </li>
+                <li>
+                  <strong>Examples &gt; prose:</strong> prefer snippets,
+                  screenshots, and checklists
+                </li>
+                <li>
+                  <strong>Operational readiness:</strong> “how to debug” is as
+                  important as “how to build”
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- WHAT TO DOCUMENT -->
+          <section class="section" id="what-to-document">
+            <h2>What to Document (Web)</h2>
+            <p>
+              Document the things that repeatedly slow teams down: local setup,
+              environment variables, component usage, API contracts,
+              build/deploy steps, and operational runbooks.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Local development</h3>
+                <p class="component-card__text">
+                  Node version, package manager, scripts, env vars, mock data,
+                  proxy settings, known pitfalls.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">UI &amp; components</h3>
+                <p class="component-card__text">
+                  Component API, usage examples, variants, accessibility notes,
+                  and design tokens.
+                </p>
+                <a href="#ui-components" class="component-card__btn"
+                  >Component docs →</a
+                >
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Build / deploy / ops</h3>
+                <p class="component-card__text">
+                  Build output, hosting/CDN, cache headers, release steps,
+                  monitoring, and rollback.
+                </p>
+                <a href="#ops" class="component-card__btn">Runbooks →</a>
+              </article>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ What not to document</h3>
+              <ul style="margin: 0">
+                <li>Duplicate task lists (keep the backlog list in Nulab)</li>
+                <li>
+                  Ephemeral Slack/Chat decisions (capture as ADRs when they
+                  matter)
+                </li>
+                <li>
+                  Implementation details that are obvious in code (unless they
+                  are a known trap)
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- WHERE DOCS LIVE -->
+          <section class="section" id="where">
+            <h2>Where Documentation Lives</h2>
+            <p>
+              Prefer a predictable structure. Repo docs should answer 80% of
+              questions without external links. If you use a wiki, keep an index
+              in the repo that points to canonical pages.
+            </p>
+
+            <div class="card">
+              <h3>Recommended Structure (Web app)</h3>
+              <pre><code>/
+  README.md
+  docs/
+    getting-started.md
+    ui/
+      components/           /* component pages / usage */
+      design-tokens.md
+      accessibility.md
+    engineering/
+      api-contracts.md
+      error-handling.md
+      performance-budgets.md
+      security-baseline.md
+    operations/
+      releases.md
+      runbooks.md
+      troubleshooting.md
+    workflow/
+      nulab-backlog-policy.md
+      pr-checklist.md
+    architecture/
+      overview.md
+      adr/
+        0001-title.md</code></pre>
+
+              <a
+                href="#modal-readme-template"
+                class="component-card__btn"
+                style="margin-top: 12px; display: inline-block"
+                >README template →</a
+              >
+            </div>
+
+            <div class="card">
+              <h3>Ownership</h3>
+              <ul style="margin: 0">
+                <li>
+                  Every doc has an owner (team/role). If the owner changes,
+                  update the header or docs index.
+                </li>
+                <li>Docs with no owner are effectively unmaintained.</li>
+                <li>
+                  For “must-not-break” docs (setup, releases), validate at least
+                  quarterly.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- STYLE -->
+          <section class="section" id="style">
+            <h2>Style &amp; Quality Bar</h2>
+            <p>
+              The quality bar is “a new developer can follow it without asking
+              questions”. If a doc requires tribal knowledge, it is not done.
+            </p>
+
+            <div class="baseline-accordion">
+              <details class="accordion" open>
+                <summary class="accordion__summary">Structure</summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Start with <strong>goal</strong> and
+                      <strong>prerequisites</strong>, then steps.
+                    </li>
+                    <li>
+                      Use headings that match search intent (“How to run”, “How
+                      to deploy”, “Troubleshooting”).
+                    </li>
+                    <li>
+                      Prefer checklists and tables for repeatable procedures.
+                    </li>
+                    <li>
+                      Link to related docs rather than duplicating content.
+                    </li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">Examples</summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Include exact commands
+                      (<code>npm</code>/<code>pnpm</code>/<code>yarn</code>) and
+                      expected outputs when helpful.
+                    </li>
+                    <li>
+                      For UI changes, include screenshots for key states
+                      (loading/empty/error).
+                    </li>
+                    <li>
+                      For API changes, include request/response examples and
+                      error handling notes.
+                    </li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">Freshness</summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Update docs in the same PR that changes behavior, configs,
+                      routes, or environment variables.
+                    </li>
+                    <li>
+                      Avoid fake timestamps; instead keep docs accurate via PR
+                      review discipline.
+                    </li>
+                    <li>
+                      For operational docs, re-run the steps periodically
+                      (quarterly minimum).
+                    </li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- UI/COMPONENT DOCS -->
+          <section class="section" id="ui-components">
+            <h2>UI &amp; Component Documentation</h2>
+            <p>
+              In web development, UI drift is one of the biggest long-term
+              costs. Component docs should make it easy to reuse the right
+              patterns and avoid copy/paste forks.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Component API</h3>
+                <p class="component-card__text">
+                  Props/slots, variants, defaults, and examples for common
+                  cases.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Accessibility notes</h3>
+                <p class="component-card__text">
+                  Keyboard behavior, focus management, ARIA, reduced motion,
+                  contrast considerations.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Do / Don’t</h3>
+                <p class="component-card__text">
+                  Correct usage patterns and common anti-patterns with short
+                  explanations.
+                </p>
+                <a href="#modal-component-template" class="component-card__btn"
+                  >Template →</a
+                >
+              </article>
+            </div>
+
+            <div class="card">
+              <h3>Minimum for a new shared component</h3>
+              <ul style="margin: 0">
+                <li>
+                  One canonical implementation location (no duplicates across
+                  features).
+                </li>
+                <li>Usage examples for typical scenarios and edge cases.</li>
+                <li>
+                  Accessibility behavior documented (keyboard/focus/ARIA).
+                </li>
+                <li>
+                  Performance considerations (virtualization for lists,
+                  memoization, etc.).
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- ENGINEERING DOCS -->
+          <section class="section" id="engineering-docs">
+            <h2>Engineering Docs (Web)</h2>
+            <p>
+              Keep “how the app works” concise and practical. The goal is to
+              reduce bug cycles and simplify change.
+            </p>
+
+            <div class="naming-table-wrapper">
+              <table class="naming-table">
+                <thead>
+                  <tr>
+                    <th>Doc</th>
+                    <th>Must include</th>
+                    <th>Why it matters</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>API contracts</td>
+                    <td>Endpoints, schemas, auth, error categories</td>
+                    <td>Prevents contract drift and fragile UI code</td>
+                  </tr>
+                  <tr>
+                    <td>Error handling</td>
+                    <td>Standard error object + UI states</td>
+                    <td>Consistent user experience, easier debugging</td>
+                  </tr>
+                  <tr>
+                    <td>Performance budgets</td>
+                    <td>Bundle limits, Web Vitals targets, audit steps</td>
+                    <td>Prevents silent regressions</td>
+                  </tr>
+                  <tr>
+                    <td>Security baseline</td>
+                    <td>Auth/storage rules, redaction, headers/CSP</td>
+                    <td>Safer defaults and better reviews</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- OPS -->
+          <section class="section" id="ops">
+            <h2>Operations, Releases &amp; Troubleshooting</h2>
+            <p>
+              Web apps fail in production for predictable reasons: bad env vars,
+              caching mistakes, API issues, third-party outages, and
+              regressions. Runbooks should make diagnosis quick and repeatable.
+            </p>
+
+            <div class="baseline-accordion">
+              <details class="accordion" open>
+                <summary class="accordion__summary">
+                  Release documentation
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>Build command and artifact location.</li>
+                    <li>Environment variables required per environment.</li>
+                    <li>
+                      CDN/cache header expectations (hashed assets vs HTML).
+                    </li>
+                    <li>Rollback steps (previous release / feature flag).</li>
+                  </ul>
+                  <a
+                    href="#modal-runbook-template"
+                    class="component-card__btn"
+                    style="margin-top: 12px; display: inline-block"
+                    >Runbook template →</a
+                  >
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Troubleshooting requirements
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Where to find logs/metrics (RUM, errors, API latency).
+                    </li>
+                    <li>
+                      How to reproduce locally (flags, test accounts, mock
+                      endpoints).
+                    </li>
+                    <li>
+                      Known failure modes (CORS, cache poisoning, auth refresh
+                      loops).
+                    </li>
+                    <li>
+                      Escalation path (who owns hosting/CDN/API integrations).
+                    </li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- SEO/ANALYTICS -->
+          <section class="section" id="seo-analytics">
+            <h2>SEO &amp; Analytics Documentation</h2>
+            <p>
+              For many web projects, SEO and analytics are critical
+              requirements. Document them so they remain correct through
+              refactors and redesigns.
+            </p>
+
+            <div class="card">
+              <h3>SEO checklist to document (as applicable)</h3>
+              <ul style="margin: 0">
+                <li>
+                  Routing strategy (SPA/SSR/SSG), canonical URLs, redirects.
+                </li>
+                <li>
+                  Metadata rules (title/description, OpenGraph, structured
+                  data).
+                </li>
+                <li>Sitemap/robots policy and generation process.</li>
+                <li>Internationalization: hreflang rules if used.</li>
+              </ul>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>Analytics rules</h3>
+              <ul style="margin: 0">
+                <li>
+                  Event names and payload schema must be documented (avoid
+                  “mystery events”).
+                </li>
+                <li>Consent/Privacy rules: what is allowed to be collected.</li>
+                <li>Third-party tags must have an owner and route gating.</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- ADRs -->
+          <section class="section" id="adrs">
+            <h2>ADRs (Architecture Decision Records)</h2>
+            <p>
+              ADRs capture <strong>why</strong> major decisions were made:
+              framework choices, routing strategy, auth model, caching approach,
+              build tooling, or design system architecture.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">When to write</h3>
+                <p class="component-card__text">
+                  Decisions that are expensive to reverse or likely to be
+                  revisited.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Where</h3>
+                <p class="component-card__text">
+                  <code>docs/architecture/adr/</code>, versioned with the
+                  repository.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Template</h3>
+                <p class="component-card__text">
+                  Use a consistent structure: context, decision, alternatives,
+                  consequences.
+                </p>
+                <a href="#modal-adr-template" class="component-card__btn"
+                  >ADR template →</a
+                >
+              </article>
+            </div>
+          </section>
+
+          <!-- CHANGELOG -->
+          <section class="section" id="changelog">
+            <h2>Changelog &amp; Release Notes</h2>
+            <p>
+              Keep release notes outcome-driven. For web apps, include “what
+              changed”, “who is affected”, and “any migration/rollout notes”.
+            </p>
+
+            <div class="card">
+              <h3>Entry format (example)</h3>
+              <pre><code>### Added
+- New checkout confirmation screen (mobile-first)
+
+### Fixed
+- Prevented token refresh loop on 401 responses
+
+### Changed
+- Updated image pipeline: AVIF/WebP with responsive sizes (improves LCP)</code></pre>
+            </div>
+          </section>
+
+          <!-- BACKLOG (NULAB) -->
+          <section class="section" id="backlog">
+            <h2>Backlog (Nulab) Workflow Rules</h2>
+            <p>
+              This section defines how developers and reviewers update tasks in
+              Nulab (Backlog): ownership, status transitions, and mandatory
+              comments. The backlog list itself stays in Nulab; this page
+              defines the policy.
+            </p>
+
+            <div class="card">
+              <h3>Policy summary</h3>
+              <ul style="margin: 0">
+                <li>
+                  <strong>Creator</strong> ensures the task is understandable
+                  (context + acceptance criteria).
+                </li>
+                <li>
+                  <strong>Assignee</strong> keeps status accurate and posts
+                  updates (start / blocked / handoff / done).
+                </li>
+                <li>
+                  <strong>Close</strong> only after DoD: PR linked, tests green,
+                  verification notes.
+                </li>
+                <li>
+                  <strong>Re-open</strong> only with a reason + reproduction
+                  steps + expected vs actual.
+                </li>
+              </ul>
+
+              <a
+                href="#modal-nulab-policy"
+                class="component-card__btn"
+                style="margin-top: 12px; display: inline-block"
+                >View full policy &amp; templates →</a
+              >
+            </div>
+
+            <div class="naming-table-wrapper">
+              <table class="naming-table">
+                <thead>
+                  <tr>
+                    <th>Topic</th>
+                    <th>Rule</th>
+                    <th>Owner</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Opening tasks</td>
+                    <td>Anyone can open if they fill the minimum template</td>
+                    <td>Creator</td>
+                  </tr>
+                  <tr>
+                    <td>Status updates</td>
+                    <td>
+                      Move tasks through: Todo → In Progress → In Review → Done
+                    </td>
+                    <td>Assignee</td>
+                  </tr>
+                  <tr>
+                    <td>Progress comments</td>
+                    <td>Required: Start / Blocked / Handoff / Done</td>
+                    <td>Assignee</td>
+                  </tr>
+                  <tr>
+                    <td>Closing tasks</td>
+                    <td>PR + verification notes required for code changes</td>
+                    <td>Assignee</td>
+                  </tr>
+                  <tr>
+                    <td>Reopening tasks</td>
+                    <td>Must include reason + reproduction steps</td>
+                    <td>Reviewer / QA / Creator</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Common pitfalls</h3>
+              <ul style="margin: 0">
+                <li>Tasks stay “In Progress” with no updates for days.</li>
+                <li>Closing tasks without PR/test/verification notes.</li>
+                <li>Re-opening tasks without reproducible steps.</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- CHECKLIST -->
+          <section class="section" id="checklist">
+            <h2>Documentation Checklist (Web)</h2>
+
+            <div class="card">
+              <h3>When a PR changes behavior</h3>
+              <ul style="margin: 0">
+                <li>
+                  README or docs index updated (if entrypoint or scripts
+                  change).
+                </li>
+                <li>
+                  New environment variables documented (name, purpose, default,
+                  environment scope).
+                </li>
+                <li>Component docs updated (if UI API changes).</li>
+                <li>Runbooks updated (if deploy/ops behavior changes).</li>
+                <li>
+                  SEO/analytics docs updated (if routing/metadata/events
+                  change).
+                </li>
+              </ul>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>Quality gates</h3>
+              <ul style="margin: 0">
+                <li>No duplicated sources of truth (link instead of copy).</li>
+                <li>Commands verified (copy/paste works).</li>
+                <li>Clear ownership and escalation path for ops docs.</li>
+                <li>
+                  Templates provided for recurring formats (PR notes, runbooks,
+                  components).
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- RESOURCES -->
+          <section class="section" id="resources">
+            <h2>Related Guidelines</h2>
+            <div class="card">
+              <ul style="margin: 0">
+                <li>
+                  <a href="pr-rules.html" style="color: var(--accent)"
+                    >PR rules / review checklist</a
+                  >
+                  — evidence, scope, review quality
+                </li>
+                <li>
+                  <a href="performance.html" style="color: var(--accent)"
+                    >Performance</a
+                  >
+                  — budgets, Web Vitals, audit discipline
+                </li>
+                <li>
+                  <a href="security.html" style="color: var(--accent)"
+                    >Security</a
+                  >
+                  — safe storage, headers/CSP, redaction
+                </li>
+                <li>
+                  <a
+                    href="api-and-data-handling.html"
+                    style="color: var(--accent)"
+                    >API & Data handling</a
+                  >
+                  — contracts, validation, caching
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal: README Template -->
+    <dialog id="modal-readme-template" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">README Template (Web)</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close README template preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Keep README short: how to run + links to deeper docs.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code># Project name
+
+## Quick start
+- Requirements: Node X, package manager (pnpm/npm/yarn)
+- Install: ...
+- Run: ...
+- Build: ...
+- Test: ...
+
+## Environment variables
+- Copy .env.example → .env
+- List required variables + purpose + defaults
+
+## Architecture (links)
+- docs/architecture/overview.md
+- docs/engineering/api-contracts.md
+
+## UI / Design system (links)
+- docs/ui/components/
+- docs/ui/accessibility.md
+
+## Operations
+- docs/operations/releases.md
+- docs/operations/troubleshooting.md
+
+## Backlog workflow (Nulab)
+- docs/workflow/nulab-backlog-policy.md</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Component Doc Template -->
+    <dialog id="modal-component-template" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Component Doc Template</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close component template preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Use for shared components (design system or common UI).
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code># Component: &lt;Name&gt;
+
+## Purpose
+What problem it solves; where it should be used.
+
+## API
+Props/slots/events, defaults, constraints.
+
+## Variants
+List variants and when to use each.
+
+## Examples
+- Basic
+- With validation/errors
+- Disabled/loading
+- Responsive notes
+
+## Accessibility
+Keyboard behavior, focus handling, ARIA, reduced motion.
+
+## Do / Don’t
+Short, practical guidance.
+
+## Notes
+Performance considerations, known pitfalls, links.</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: ADR Template -->
+    <dialog id="modal-adr-template" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">ADR Template</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close ADR template preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <div class="card preview-modal__code">
+            <pre><code># ADR 0001: Title
+
+## Status
+Proposed | Accepted | Deprecated | Superseded
+
+## Context
+What problem are we solving? Constraints (SEO, perf, security, team skills)?
+
+## Decision
+What did we decide?
+
+## Alternatives
+What else did we consider and why not?
+
+## Consequences
+Tradeoffs, risks, follow-ups, migration plan.
+
+## Links
+PRs, docs, discussions, metrics.</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Runbook Template -->
+    <dialog id="modal-runbook-template" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Runbook Template (Web)</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close runbook template preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Use for production issues and operational procedures.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code># Runbook: &lt;Incident/Procedure&gt;
+
+## Symptoms
+What users/monitoring shows.
+
+## Impact
+Who is affected, severity, scope.
+
+## Quick checks
+- Verify env vars
+- Check CDN cache behavior
+- Check API status / error rates
+- Check third-party tags/outages
+
+## Diagnosis steps
+Exact steps, links to dashboards, log queries.
+
+## Mitigation / Containment
+Feature flags, rollback, rate limiting, temporary changes.
+
+## Resolution
+Permanent fix summary + PR links.
+
+## Post-incident
+Follow-ups, tests to add, docs updates, owners.</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Nulab Backlog Policy -->
+    <dialog id="modal-nulab-policy" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Nulab Backlog Workflow Policy</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close Nulab policy preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Keep work traceable. Status and comments should explain “what is
+            happening” without needing chat.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code>Ownership
+  - Creator:
+    * Writes clear title, context, acceptance criteria
+    * Links spec/design/logs
+  - Assignee:
+    * Keeps status accurate
+    * Posts updates: Start / Blocked / Handoff / Done
+    * Links PR + verification notes
+    * Closes only when DoD is met
+
+Who opens / who closes
+  - Open: anyone who can fill the minimum template
+  - Close: assignee (PO/Creator accepts if required)
+
+Status flow (recommended)
+  Todo → In Progress → In Review → Done
+  + Blocked / Rework / Reopened as needed
+
+Re-open rules
+  - Must include: reason + reproduction steps + expected vs actual
+  - Assign an owner and next step</code></pre>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h4 style="font-size: 14px; margin: 0 0 8px">Comment templates</h4>
+            <pre><code>Start
+  - Plan:
+  - Links:
+  - Risks/Dependencies:
+
+Blocked
+  - Blocked by:
+  - Needed from:
+  - Next step / ETA:
+
+Handoff / Reassign
+  - Done so far:
+  - Remaining:
+  - How to test/continue:
+  - Links (PR/branch/docs):
+
+Done / Ready for acceptance
+  - PR:
+  - How to verify:
+  - Screenshots (if UI):
+  - Migration notes:
+  - Deploy/release:</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

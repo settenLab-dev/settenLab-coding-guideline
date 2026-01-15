@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="description"
+      content="Security guidelines: threat modeling, auth/session, input validation, secure storage, secrets, headers, CSP, dependency security, logging, and incident readiness."
+    />
+    <meta name="theme-color" content="#0b0f1a" />
+
+    <meta property="og:title" content="Security — Coding Guideline" />
+    <meta
+      property="og:description"
+      content="Security-by-default patterns for modern web apps: auth, storage, validation, headers, CSP, secrets, dependency hygiene, and safe logging."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/Outfit-VariableFont.woff2"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <title>Security — Coding Guideline</title>
+  </head>
+
+  <body>
+    <div class="bg-gradient"></div>
+
+    <div class="app-shell">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="primary-sidebar" aria-label="Primary">
+        <a href="/" class="sidebar__header">
+          <div class="sidebar__logo" aria-hidden="true">S</div>
+          <div class="sidebar__title">
+            <span class="sidebar__company">Coding Guideline</span>
+            <span class="sidebar__subtitle">settenLab</span>
+          </div>
+        </a>
+
+        <nav class="sidebar__nav sidebar-nav" aria-label="Guideline navigation">
+          <!-- START HERE -->
+          <details
+            class="nav-group nav-group--start"
+            data-nav-group="start-here"
+          >
+            <summary class="nav-group__summary">
+              <a href="/" class="nav-group__summary-link">Start here</a>
+            </summary>
+          </details>
+
+          <!-- PROJECT SETUP -->
+          <details class="nav-group" data-nav-group="project-setup">
+            <summary class="nav-group__summary">Project setup</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a
+                  href="environment-setup.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  Environment setup
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="file-structure.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  File structure
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- UI -->
+          <details class="nav-group" data-nav-group="ui">
+            <summary class="nav-group__summary">UI</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="markup.html" class="sidebar-nav__link nav-link"
+                  >Markup</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="styling.html" class="sidebar-nav__link nav-link"
+                  >Styling</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="components.html" class="sidebar-nav__link nav-link"
+                  >Components</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="typography.html" class="sidebar-nav__link nav-link"
+                  >Typography</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="accessibility.html" class="sidebar-nav__link nav-link">
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- ENGINEERING -->
+          <details class="nav-group" data-nav-group="engineering" open>
+            <summary class="nav-group__summary">Engineering</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a class="sidebar-nav__link nav-link" href="javascript.html">
+                  Javascript
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="api-and-data-handling.html"
+                  class="sidebar-nav__link nav-link"
+                >
+                  API & Data handling
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="performance.html" class="sidebar-nav__link nav-link"
+                  >Performance</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a href="testing.html" class="sidebar-nav__link nav-link"
+                  >Testing</a
+                >
+              </li>
+              <li class="nav-group__item">
+                <a
+                  href="security.html"
+                  class="sidebar-nav__link nav-link"
+                  aria-current="page"
+                >
+                  Security
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- WORKFLOW -->
+          <details class="nav-group" data-nav-group="workflow">
+            <summary class="nav-group__summary">Workflow</summary>
+            <ul class="nav-group__list">
+              <li class="nav-group__item">
+                <a href="pr-rules.html" class="sidebar-nav__link nav-link">
+                  PR rules / review checklist
+                </a>
+              </li>
+              <li class="nav-group__item">
+                <a href="documentation.html" class="sidebar-nav__link nav-link">
+                  Documentation rules
+                </a>
+              </li>
+            </ul>
+          </details>
+        </nav>
+
+        <div class="sidebar__footer">
+          <a href="changelog.html" class="sidebar__version">v1.0.0</a>
+          <span class="sidebar__lang">EN</span>
+        </div>
+      </aside>
+
+      <div class="sidebar-backdrop js-sidebar-backdrop" hidden></div>
+
+      <!-- MAIN -->
+      <main class="main" id="main-content">
+        <header class="topbar">
+          <button
+            class="topbar__menu-btn js-sidebar-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-controls="primary-sidebar"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <h1 class="topbar__title">Security</h1>
+
+          <div class="topbar__actions">
+            <button
+              class="topbar__action-btn"
+              id="themeToggle"
+              aria-label="Toggle theme"
+              aria-pressed="false"
+            >
+              🌗
+            </button>
+          </div>
+        </header>
+
+        <div class="content">
+          <!-- OVERVIEW -->
+          <section class="section" id="overview">
+            <h2>Overview</h2>
+            <p>
+              Security is a reliability discipline. We assume requests can be
+              tampered with, data can be malformed, dependencies can be
+              compromised, and secrets can leak. This guideline provides default
+              patterns that reduce risk, increase auditability, and prevent
+              common classes of web vulnerabilities.
+            </p>
+
+            <div class="card callout">
+              <h3>Core Principles</h3>
+              <ul>
+                <li>
+                  <strong>Assume untrusted input:</strong> validate at
+                  boundaries (client and server)
+                </li>
+                <li>
+                  <strong>Least privilege:</strong> access only what you need,
+                  for as long as you need
+                </li>
+                <li>
+                  <strong>Secure by default:</strong> safe configuration is the
+                  default configuration
+                </li>
+                <li>
+                  <strong>Defense in depth:</strong> multiple layers (auth +
+                  validation + headers + monitoring)
+                </li>
+                <li>
+                  <strong>Auditability:</strong> actions must be attributable
+                  and diagnosable
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- THREAT MODEL -->
+          <section class="section" id="threat-model">
+            <h2>Threat Modeling (Minimum)</h2>
+            <p>
+              Every feature that touches identity, money, content creation, file
+              upload, or third-party integrations requires basic threat
+              modeling. The goal is to identify “what can go wrong” before
+              implementation choices harden into production risk.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Assets</h3>
+                <p class="component-card__text">
+                  What are we protecting? Accounts, tokens, PII, payment data,
+                  internal admin actions.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Entry points</h3>
+                <p class="component-card__text">
+                  Forms, query params, webhooks, file uploads, URL routing,
+                  third-party callbacks.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Trust boundaries</h3>
+                <p class="component-card__text">
+                  Browser ↔ API ↔ services ↔ databases ↔ external providers.
+                </p>
+                <a href="#modal-threat-template" class="component-card__btn"
+                  >Template →</a
+                >
+              </article>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ High-risk Features</h3>
+              <ul style="margin: 0">
+                <li>Authentication and account recovery</li>
+                <li>Admin panels and privileged operations</li>
+                <li>Payments, invoices, coupons, and pricing logic</li>
+                <li>File upload, rich text, and user-generated HTML</li>
+                <li>Webhooks and third-party OAuth integrations</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- AUTH -->
+          <section class="section" id="auth">
+            <h2>Authentication &amp; Sessions</h2>
+            <p>
+              Authentication is the primary security control for most
+              applications. Centralize token/session policy and avoid “ad hoc”
+              auth logic in UI code.
+            </p>
+
+            <div class="naming-table-wrapper">
+              <table class="naming-table">
+                <thead>
+                  <tr>
+                    <th>Topic</th>
+                    <th>Rule</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Session storage</td>
+                    <td>Prefer httpOnly cookies</td>
+                    <td>
+                      Mitigates token theft via XSS compared to localStorage
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Cookie flags</td>
+                    <td>
+                      <code>Secure</code>, <code>HttpOnly</code>,
+                      <code>SameSite</code>
+                    </td>
+                    <td>
+                      Use <code>Lax</code> by default;
+                      <code>None</code> requires <code>Secure</code>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Token refresh</td>
+                    <td>Centralize in API client</td>
+                    <td>No refresh logic inside components</td>
+                  </tr>
+                  <tr>
+                    <td>Logout</td>
+                    <td>Server invalidation</td>
+                    <td>Clear server session / revoke refresh tokens</td>
+                  </tr>
+                  <tr>
+                    <td>MFA</td>
+                    <td>Enable for admin</td>
+                    <td>Strongly recommended for privileged accounts</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="baseline-accordion">
+              <details class="accordion" open>
+                <summary class="accordion__summary">CSRF</summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>Cookie-based auth requires CSRF mitigation.</li>
+                    <li>
+                      Use <code>SameSite</code> + CSRF tokens for state-changing
+                      requests.
+                    </li>
+                    <li>
+                      Do not rely on “custom headers” alone unless you control
+                      all clients.
+                    </li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">
+                  Authorization (Permissions)
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Enforce permissions on the server. Client checks are UX
+                      only.
+                    </li>
+                    <li>
+                      Prefer explicit permission sets over role name string
+                      comparisons.
+                    </li>
+                    <li>Log privileged actions (who, what, when, where).</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">Account Recovery</summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>Recovery links must be single-use and short-lived.</li>
+                    <li>
+                      Rate-limit recovery attempts per IP and per account
+                      identifier.
+                    </li>
+                    <li>
+                      Never disclose whether an email/phone is registered.
+                    </li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- INPUT VALIDATION -->
+          <section class="section" id="validation">
+            <h2>Input Validation &amp; Output Encoding</h2>
+            <p>
+              Validate at every trust boundary. Defensive validation prevents
+              injection issues and reduces unexpected behavior from malformed
+              inputs.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Client-side validation</h3>
+                <p class="component-card__text">
+                  Improves UX, but never replaces server validation.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Server-side validation</h3>
+                <p class="component-card__text">
+                  Enforce types, ranges, and business rules. Reject unknown
+                  fields.
+                </p>
+                <a href="#modal-validation" class="component-card__btn"
+                  >Rules →</a
+                >
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Output encoding</h3>
+                <p class="component-card__text">
+                  Prevent XSS: encode for the target context (HTML, attributes,
+                  URLs).
+                </p>
+              </article>
+            </div>
+
+            <div class="card">
+              <h3>XSS Rules</h3>
+              <ul style="margin: 0">
+                <li>
+                  Avoid rendering raw HTML. If unavoidable, sanitize with a
+                  vetted allowlist sanitizer.
+                </li>
+                <li>
+                  Never interpolate untrusted strings into
+                  <code>&lt;script&gt;</code>, styles, or event handlers.
+                </li>
+                <li>
+                  Use framework-safe templating; avoid manual string
+                  concatenation for DOM.
+                </li>
+              </ul>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Injection Hotspots</h3>
+              <ul style="margin: 0">
+                <li>SQL/ORM dynamic queries built from user input</li>
+                <li>Template rendering and Markdown-to-HTML pipelines</li>
+                <li>
+                  Shell execution (build tools, image processing) and path
+                  handling
+                </li>
+                <li>CSV/Excel export formulas (CSV injection)</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- SECRETS -->
+          <section class="section" id="secrets">
+            <h2>Secrets &amp; Configuration</h2>
+            <p>
+              Secrets must never be committed to source control, shipped to
+              browsers, or logged. Prefer short-lived credentials and automated
+              rotation where possible.
+            </p>
+
+            <div class="card">
+              <h3>Rules</h3>
+              <ul style="margin: 0">
+                <li>
+                  All secrets live in a secret manager or CI/CD environment
+                  variables.
+                </li>
+                <li>
+                  Do not expose secrets to client bundles; anything in JS
+                  delivered to the browser is public.
+                </li>
+                <li>
+                  Use separate credentials per environment (dev/staging/prod).
+                </li>
+                <li>Rotate on suspicion, not only on schedule.</li>
+              </ul>
+              <a
+                href="#modal-secrets"
+                class="component-card__btn"
+                style="margin-top: 12px; display: inline-block"
+                >Secret handling checklist →</a
+              >
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Red Flags</h3>
+              <ul style="margin: 0">
+                <li>API keys used directly from the browser</li>
+                <li>Secrets passed in query parameters</li>
+                <li>Credentials embedded in build artifacts or config files</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- STORAGE -->
+          <section class="section" id="storage">
+            <h2>Secure Storage</h2>
+            <p>
+              Treat local storage as hostile. Assume XSS can read it, browser
+              extensions can access it, and shared devices can expose it.
+            </p>
+
+            <div class="naming-table-wrapper">
+              <table class="naming-table">
+                <thead>
+                  <tr>
+                    <th>Data type</th>
+                    <th>Preferred storage</th>
+                    <th>Avoid</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Session tokens</td>
+                    <td>httpOnly cookies</td>
+                    <td>localStorage/sessionStorage</td>
+                  </tr>
+                  <tr>
+                    <td>Short-lived UI state</td>
+                    <td>In-memory</td>
+                    <td>Persisting unnecessarily</td>
+                  </tr>
+                  <tr>
+                    <td>PII / sensitive payloads</td>
+                    <td>Server-side</td>
+                    <td>Long client caching</td>
+                  </tr>
+                  <tr>
+                    <td>Offline cache</td>
+                    <td>Service worker + explicit scopes</td>
+                    <td>“Cache everything” strategies</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card">
+              <h3>Practical Guidance</h3>
+              <ul style="margin: 0">
+                <li>
+                  Persist only what you must, for the shortest time needed.
+                </li>
+                <li>Encrypt at rest on the server for high-risk data.</li>
+                <li>
+                  Consider device trust: shared devices require shorter sessions
+                  and explicit logout.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- HEADERS & CSP -->
+          <section class="section" id="headers">
+            <h2>Security Headers &amp; CSP</h2>
+            <p>
+              Security headers reduce exploitability even when other layers
+              fail. Apply them at the edge (CDN/reverse proxy) where possible to
+              ensure consistency across deployments.
+            </p>
+
+            <div class="card">
+              <h3>Recommended Headers (Baseline)</h3>
+              <pre><code>Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: geolocation=(), camera=(), microphone=()
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-site
+Cross-Origin-Embedder-Policy: require-corp</code></pre>
+              <p
+                style="
+                  margin-top: 12px;
+                  font-size: 13px;
+                  color: var(--text-muted);
+                "
+              >
+                Some headers (COEP/COOP/CORP) can break third-party embeds;
+                validate with product requirements.
+              </p>
+            </div>
+
+            <div class="baseline-accordion">
+              <details class="accordion" open>
+                <summary class="accordion__summary">
+                  Content Security Policy (CSP)
+                </summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Use CSP to reduce XSS impact; start with report-only mode.
+                    </li>
+                    <li>
+                      Avoid <code>'unsafe-inline'</code> and
+                      <code>'unsafe-eval'</code> in production.
+                    </li>
+                    <li>
+                      Prefer nonces/hashes for inline scripts if unavoidable.
+                    </li>
+                  </ul>
+                  <pre><code>Content-Security-Policy:
+  default-src 'self';
+  script-src 'self' 'nonce-...';
+  style-src 'self';
+  img-src 'self' data: https:;
+  connect-src 'self' https://api.example.com;
+  frame-ancestors 'none';</code></pre>
+                </div>
+              </details>
+
+              <details class="accordion">
+                <summary class="accordion__summary">Clickjacking</summary>
+                <div class="accordion__content">
+                  <ul style="font-size: 13px; margin: 0">
+                    <li>
+                      Use <code>frame-ancestors</code> in CSP (preferred) or
+                      <code>X-Frame-Options</code> as fallback.
+                    </li>
+                    <li>
+                      Allow framing only when required (e.g., trusted partner
+                      embed).
+                    </li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- DEPENDENCIES -->
+          <section class="section" id="dependencies">
+            <h2>Dependency Security</h2>
+            <p>
+              Most modern breaches are supply-chain related. Minimize dependency
+              surface area and keep vulnerability management continuous.
+            </p>
+
+            <div class="component-grid">
+              <article class="component-card">
+                <h3 class="component-card__title">Policy</h3>
+                <p class="component-card__text">
+                  Review new dependencies; document why they exist and their
+                  bundle/security impact.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Updates</h3>
+                <p class="component-card__text">
+                  Patch regularly; prioritize critical CVEs. Avoid large
+                  “frozen” dependency periods.
+                </p>
+              </article>
+
+              <article class="component-card">
+                <h3 class="component-card__title">Tooling</h3>
+                <p class="component-card__text">
+                  Use lockfiles, automated scanning, and CI checks for known
+                  vulnerabilities.
+                </p>
+                <a href="#modal-deps" class="component-card__btn"
+                  >Checklist →</a
+                >
+              </article>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ Anti-patterns</h3>
+              <ul style="margin: 0">
+                <li>
+                  Copy-pasting unreviewed snippets from the internet into
+                  security-sensitive code
+                </li>
+                <li>Shipping heavy SDKs for trivial use-cases</li>
+                <li>Disabling TLS verification “temporarily”</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- LOGGING -->
+          <section class="section" id="logging">
+            <h2>Logging, Telemetry &amp; Privacy</h2>
+            <p>
+              Logs are a security asset and a security risk. They must support
+              incident response without leaking secrets or personal data.
+            </p>
+
+            <div class="card">
+              <h3>Safe Logging Rules</h3>
+              <ul style="margin: 0">
+                <li>
+                  Never log secrets: tokens, passwords, session IDs, API keys.
+                </li>
+                <li>
+                  Redact PII when possible (email, phone, address, payment
+                  details).
+                </li>
+                <li>
+                  Prefer structured logs: <code>event</code>,
+                  <code>requestId</code>, <code>userId</code> (internal),
+                  <code>severity</code>.
+                </li>
+                <li>
+                  Log privileged actions and security-relevant events (login,
+                  logout, permission changes).
+                </li>
+              </ul>
+              <pre><code>{
+  "event": "auth.login.failed",
+  "requestId": "abc123",
+  "ip": "203.0.113.10",
+  "reason": "invalid_credentials"
+}</code></pre>
+              <p
+                style="
+                  margin-top: 12px;
+                  font-size: 13px;
+                  color: var(--text-muted);
+                "
+              >
+                Ensure IPs and identifiers are handled per your privacy and
+                retention policy.
+              </p>
+            </div>
+
+            <div class="card component-card--warning">
+              <h3>⚠️ What Not To Do</h3>
+              <ul style="margin: 0">
+                <li>Logging full request/response bodies by default</li>
+                <li>
+                  Sending PII to analytics providers without explicit consent
+                </li>
+                <li>Keeping logs indefinitely without retention controls</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- INCIDENTS -->
+          <section class="section" id="incidents">
+            <h2>Incident Readiness</h2>
+            <p>
+              Security incidents are inevitable; chaotic response is optional.
+              Establish a minimum playbook that makes containment and triage
+              fast.
+            </p>
+
+            <div class="card">
+              <h3>Minimum Playbook</h3>
+              <ol style="margin: 0">
+                <li>
+                  <strong>Identify:</strong> severity, affected systems,
+                  reproduction, timeline
+                </li>
+                <li>
+                  <strong>Contain:</strong> disable endpoints, revoke tokens,
+                  block abusive IPs, feature flags
+                </li>
+                <li>
+                  <strong>Eradicate:</strong> patch root cause, rotate secrets,
+                  remove malicious payloads
+                </li>
+                <li>
+                  <strong>Recover:</strong> restore services, monitor for
+                  recurrence
+                </li>
+                <li>
+                  <strong>Learn:</strong> postmortem, preventive controls,
+                  tests, documentation updates
+                </li>
+              </ol>
+              <a
+                href="#modal-incident"
+                class="component-card__btn"
+                style="margin-top: 12px; display: inline-block"
+                >Incident checklist →</a
+              >
+            </div>
+
+            <div class="card">
+              <h3>Security Regression Gates</h3>
+              <ul style="margin: 0">
+                <li>Access control tests for privileged endpoints</li>
+                <li>Input validation tests for known exploit patterns</li>
+                <li>CI dependency scan required for merge</li>
+                <li>Secret scanning enabled for repositories</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- SUMMARY -->
+          <section class="section" id="best-practices">
+            <h2>Best Practices Summary</h2>
+
+            <div class="perf-grid">
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Auth &amp; Sessions</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>httpOnly cookies</li>
+                  <li>Central refresh policy</li>
+                  <li>Server-side authorization</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Validation</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Validate at boundaries</li>
+                  <li>Sanitize untrusted HTML</li>
+                  <li>Encode output correctly</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Secrets</h3>
+                  <span class="perf-badge perf-badge--green">Essential</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>No secrets in client</li>
+                  <li>Rotate and segment</li>
+                  <li>No secret logging</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Headers &amp; CSP</h3>
+                  <span class="perf-badge perf-badge--yellow">Important</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>HSTS + nosniff</li>
+                  <li>CSP (report-only → enforce)</li>
+                  <li>Clickjacking protections</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Dependencies</h3>
+                  <span class="perf-badge perf-badge--yellow">Important</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Minimize surface area</li>
+                  <li>Automated scanning</li>
+                  <li>Patch discipline</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <div class="perf-card__header">
+                  <h3>Incident Readiness</h3>
+                  <span class="perf-badge perf-badge--yellow">Important</span>
+                </div>
+                <ul style="margin: 0; font-size: 13px">
+                  <li>Containment plan</li>
+                  <li>Secret rotation</li>
+                  <li>Postmortems</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <!-- RESOURCES -->
+          <section class="section" id="resources">
+            <h2>Additional Resources</h2>
+
+            <div class="card">
+              <h3>Related Guidelines</h3>
+              <ul>
+                <li>
+                  <a
+                    href="api-and-data-handling.html"
+                    style="color: var(--accent)"
+                    >API & Data handling</a
+                  >
+                  - safe request patterns, redaction, error categorization
+                </li>
+                <li>
+                  <a href="performance.html" style="color: var(--accent)"
+                    >Performance</a
+                  >
+                  - third-party gating, RUM privacy considerations
+                </li>
+                <li>
+                  <a href="testing.html" style="color: var(--accent)"
+                    >Testing</a
+                  >
+                  - security regression tests and CI gates
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>External Resources</h3>
+              <ul>
+                <li>
+                  <a
+                    href="https://owasp.org/www-project-top-ten/"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >OWASP Top 10</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >MDN — Content Security Policy</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://cheatsheetseries.owasp.org/"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >OWASP Cheat Sheet Series</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/Security"
+                    target="_blank"
+                    rel="noopener"
+                    style="color: var(--accent)"
+                    >MDN — Web security</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal: Threat Modeling Template -->
+    <dialog id="modal-threat-template" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Threat Model Template</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close threat model template preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Minimal template for small features. Store the result in the PR
+            description or in docs.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code>// Threat model (minimal)
+Feature:
+Actors:
+Assets:
+Entry points:
+Trust boundaries:
+Abuse cases:
+  - What happens if input is malformed?
+  - What happens if a user is not authorized?
+  - What happens if tokens leak?
+Mitigations:
+  - Validation
+  - Authorization
+  - Rate limits
+  - Logging / alerting
+Open questions:</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Validation Rules -->
+    <dialog id="modal-validation" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Validation Rules</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close validation rules preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Apply these rules at API boundaries. The server is authoritative;
+            client validation is UX.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code>Server validation (baseline)
+  - Reject unknown fields (allowlist)
+  - Enforce type + range + length
+  - Normalize (trim, lowercase, canonical formats)
+  - Validate identifiers as opaque strings (do not trust numeric IDs)
+  - Rate-limit expensive endpoints
+  - Return safe error messages (no stack traces)
+
+Output encoding
+  - HTML: escape special chars
+  - Attributes: escape + avoid untrusted concatenation
+  - URLs: encode components
+  - JS contexts: avoid string interpolation entirely</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Secret Handling Checklist -->
+    <dialog id="modal-secrets" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Secret Handling Checklist</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close secret handling checklist preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Use this checklist whenever adding credentials, webhooks, or
+            third-party integrations.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code>Secrets checklist
+  - Stored in secret manager / CI variables (not in repo)
+  - Separate by environment (dev/staging/prod)
+  - Not present in client bundles or public config
+  - Rotatable without redeploy (if possible)
+  - Redaction in logs and error reporting
+  - Access limited to required services
+  - Rotation plan documented</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Dependency Checklist -->
+    <dialog id="modal-deps" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Dependency Security Checklist</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close dependency checklist preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Evaluate new packages and keep maintenance continuous.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code>New dependency review
+  - Purpose documented
+  - Bundle impact measured (if client-side)
+  - License acceptable
+  - Maintainer activity and community health reasonable
+  - No obvious security red flags (typosquatting, suspicious downloads)
+  - Lockfile committed and verified
+
+Ongoing
+  - Automated vulnerability scanning in CI
+  - Regular patch cadence
+  - Deprecation plan for unused packages</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal: Incident Checklist -->
+    <dialog id="modal-incident" class="preview-modal">
+      <div class="preview-modal__dialog">
+        <header class="preview-modal__header">
+          <h3 class="preview-modal__title">Incident Checklist</h3>
+          <button
+            class="preview-modal__close"
+            aria-label="Close incident checklist preview"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div class="preview-modal__body">
+          <p class="preview-modal__description">
+            Minimal checklist for a first response. Tailor to your org’s
+            compliance requirements.
+          </p>
+
+          <div class="card preview-modal__code">
+            <pre><code>Incident first response
+  1) Assign incident lead + comms owner
+  2) Determine severity and scope (affected users, systems)
+  3) Contain (feature flags, revoke tokens, block abusive sources)
+  4) Preserve evidence (logs, traces, timestamps)
+  5) Rotate secrets if compromise is possible
+  6) Patch and validate in staging
+  7) Monitor for recurrence
+  8) Postmortem with action items and owners</code></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
