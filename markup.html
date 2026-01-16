@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="telephone=no" name="format-detection" />
@@ -248,8 +250,8 @@
             <div class="card">
               <h3>Baseline Template</h3>
               <pre><code>&lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
+&lt;html lang="ja"&gt;
+  &lt;head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
 
@@ -554,8 +556,9 @@
                       <code>alt=""</code> for decorative images
                     </li>
                     <li>
-                      Prefer modern formats (WebP/AVIF) with fallbacks when
-                      necessary
+                      Prefer AVIF as the primary format, and provide WebP
+                      fallbacks when necessary (e.g., via the &lt;picture&gt;
+                      element).
                     </li>
                     <li>
                       Use <code>width</code>/<code>height</code> attributes to
@@ -565,19 +568,36 @@
                       Use <code>loading="lazy"</code> for below-the-fold images
                     </li>
                   </ul>
-                  <pre><code>&lt;img
-  src="./assets/images/pages/home/hero-main-960w.webp"
-  srcset="
-    /assets/images/pages/home/hero-main-640w.webp 640w,
-    /assets/images/pages/home/hero-main-960w.webp 960w,
-    /assets/images/pages/home/hero-main-1280w.webp 1280w
-  "
-  sizes="(max-width: 768px) 92vw, 960px"
-  width="960"
-  height="540"
-  alt="Screenshot of the documentation layout"
-  loading="lazy"
-/&gt;</code></pre>
+                  <pre><code>
+&lt;picture&gt;
+  &lt;source
+    type="image/avif"
+    srcset="
+      /assets/images/pages/home/hero-main-640w.avif 640w,
+      /assets/images/pages/home/hero-main-960w.avif 960w,
+      /assets/images/pages/home/hero-main-1280w.avif 1280w
+    "
+    sizes="(max-width: 768px) 92vw, 960px"
+  /&gt;
+  &lt;source
+    type="image/webp"
+    srcset="
+      /assets/images/pages/home/hero-main-640w.webp 640w,
+      /assets/images/pages/home/hero-main-960w.webp 960w,
+      /assets/images/pages/home/hero-main-1280w.webp 1280w
+    "
+    sizes="(max-width: 768px) 92vw, 960px"
+  /&gt;
+  &lt;img
+    src="/assets/images/pages/home/hero-main-960w.webp"
+    width="960"
+    height="540"
+    alt="Screenshot of the documentation layout"
+    loading="lazy"
+  /&gt;
+&lt;/picture&gt;
+
+</code></pre>
                 </div>
               </details>
               <details class="accordion">
@@ -896,11 +916,16 @@
                   <span class="perf-badge perf-badge--yellow">Important</span>
                 </div>
                 <ul style="margin: 0; font-size: 13px">
-                  <li>Prefer <code>type="module"</code></li>
-                  <li>Defer non-critical scripts</li>
-                  <li>Don’t block rendering with sync scripts</li>
+                  <li>Prefer <code>type="module"</code> for app code</li>
+                  <li>
+                    Load external scripts in <code>&lt;head&gt;</code> with
+                    <code>defer</code> (or <code>async</code> for independent
+                    third-party scripts)
+                  </li>
+                  <li>Avoid synchronous scripts that block rendering</li>
                 </ul>
               </article>
+
               <article class="card">
                 <div class="perf-card__header">
                   <h3>Fonts</h3>
